@@ -326,12 +326,13 @@ header h1 {
     }
 
     .main-container2 {
-        width: calc(100% - 20px);
-        padding: 0 10px;
-        box-sizing: border-box;
         display: flex;
         flex-direction: row; /* Оставляем горизонтальный вид */
         justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
     }
 	
     .content-wrapper {
@@ -347,6 +348,8 @@ header h1 {
 
     .carousel-container {
         width: 65%;
+        padding: 0 10px;
+        box-sizing: border-box;
     }
 
     .ribbon-container {
@@ -364,7 +367,7 @@ header h1 {
   }
 
     header {
-        width: calc(100% - 20px); /* Убираем padding */
+        width: 100%; /* Убираем padding */
         padding: 0 10px;
         box-sizing: border-box;
     }
@@ -430,12 +433,7 @@ header h1 {
     }
     
     /* Изменение высоты header */
-    header {
-        width: 100%;
-        padding: 0 10px;
-        box-sizing: border-box; /* Включаем padding в ширину */
-    }
-    
+
 header h1 {
     font-size: clamp(1.5rem, 5vw, 3rem); /* Уменьшается на маленьких экранах */
     text-align: center;
@@ -459,8 +457,8 @@ header p {
     
     /* Адаптация блока с фоновым изображением (.bgsec) */
     .bgsec {
-        width: calc(100% - 20px); /* Полная ширина с учётом padding */
-        padding: 30px 10px;
+        width: 100%;
+        padding: 0 10px;
         box-sizing: border-box;
     }
     
