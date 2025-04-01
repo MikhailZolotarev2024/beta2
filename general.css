@@ -316,7 +316,7 @@ header h1 {
 			
 			
     .main-container {
-        flex-direction: column;
+        flex-direction: raw;
         align-items: stretch;
         width: 100%;
         padding: 0 10px; /* Немного отступа для предотвращения конфликтов */
