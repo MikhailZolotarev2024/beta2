@@ -315,22 +315,26 @@ header h1 {
 			
 			
 			
-.main-container {
-    flex-direction: row; /* Важно! Блоки всегда рядом, даже на мобилке */
-    flex-wrap: nowrap;   /* Запрещаем перенос на новую строку */
-    gap: 10px;           /* Уменьшаем расстояние между блоками для экономии места */
-    padding: 10px;       /* Небольшой отступ слева и справа */
-  }
+    .main-container {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        padding: 0 10px; /* Немного отступа для предотвращения конфликтов */
+    }
 
-  .content-wrapper {
-    width: 55%;          /* Слегка уменьшаем, чтобы влез виджет */
-    padding: 15px;       /* Уменьшаем паддинги */
-  }
-
-  .news-widget {
-    width: 45%;          /* Чуть увеличиваем, чтобы удобнее было читать новости */
-    padding: 10px;
-  }
+    .main-container2 {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+	
+    .content-wrapper, .ribbon-container, .news-widget {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
 
   /* Уменьшаем шрифты и отступы, чтобы всё помещалось на маленьких экранах */
   .content-wrapper h2, .news-widget h2 {
@@ -351,11 +355,11 @@ header h1 {
     padding: 10px;
   }
 
-  header {
-    padding: 20px;
-    height: auto;
-    min-height: 20vh; /* Уменьшаем высоту для экономии места */
-  }
+    header {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box; /* Включаем padding в ширину */
+    }
 
   header h1 {
     font-size: 1.2rem;
@@ -375,7 +379,11 @@ header h1 {
 			
 			
 			
-			
+    .carousel-container {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
 			
 			
 			
@@ -419,8 +427,9 @@ header h1 {
     
     /* Изменение высоты header */
     header {
-        height: 30vh;          /* Уменьшаем высоту для мобильных */
-		width:100%;
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box; /* Включаем padding в ширину */
     }
     
 header h1 {
@@ -446,7 +455,9 @@ header p {
     
     /* Адаптация блока с фоновым изображением (.bgsec) */
     .bgsec {
-        padding: 30px 10px;     /* Уменьшаем отступы */
+        width: 100%;
+        padding: 30px 10px;
+        box-sizing: border-box;
     }
     
     .bgsec h1 {
@@ -456,11 +467,9 @@ header p {
     .bgsec p {
         font-size: 1rem;       /* Корректировка размера параграфа */
     }
-    
+
     /* Корректировка отступов основного содержимого */
-    main {
-        padding: 60px 10px 20px;
-    }
+
 	
 .logo-img, .header h1 {
     mix-blend-mode: normal; /* Убираем наложение */
@@ -468,9 +477,25 @@ header p {
 body {
         animation: none;
     }
-	
+
+
+    .card {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    /* Контактная форма */
+    .contact-form {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+
+
 }
-		}
+		
 		
 
         @media (min-width: 769px) {
