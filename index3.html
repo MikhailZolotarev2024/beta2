@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Отзывы клиентов о нашей работе. Мы ценим ваше мнение!">
+    <meta name="keywords" content="отзывы, клиенты, доверие, анонимные решения">
+    <meta name="author" content="Анонимные Решения">
+    <title>Отзывы клиентов | Анонимные Решения</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="general.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.0.3/showdown.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+
+.section-one,.section-two {
+    width: 80%; /* Делаем шире */
+    max-width: 900px; /* Чтобы на больших экранах не было слишком широко */
+    background: rgba(40, 50, 60, 0.5);
+    padding: 0px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	text-align:center;
+	margin: 0 auto;
+}
+
+
+}
+.section-two{
+margin-top:8vh;
+}
+
+        .review-form input,
+        .review-form textarea {
+            width: 90%;
+            padding: 10px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+			
+        }
+
+
+
+
+
+
+
+
+
+        .review-form button {
+            margin-top: 10px;
+            background: linear-gradient(90deg, #76c7c0, #4c9e94);
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .review-form button:hover {
+            background: linear-gradient(90deg, #5aa69e, #3b7d74);
+        }
+
+.review-list {
+    display: flex;
+    flex-wrap: wrap;
+	
+    justify-content: center;
+    gap: 0px; /* Расстояние между карточками */
+}
+
+.review {
+    width: 90%; /* Две карточки в ряд */
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+	min-width:400px;
+}
+
+
+
+.review strong {
+    display: block;
+    color: #ffffff;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.review p {
+    color: #d0d8e0;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.review small {
+    display: block;
+    color: #a0a0a0;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    text-align: right;
+}
+        @media (max-width: 768px) {
+            .review-form input, .review-form textarea {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="particles-js"></div>
+<nav class="navbar">
+	<div class="logo-container">
+    <img src="logo.png" alt="Логотип" class="logo-img" loading="lazy">
+    <div class="logo-text">
+        <span>Confidential</span>
+        <span>Solutions</span>
+    </div>
+</div>
+        <ul>
+            <li><a href="index4.html">Юридический Раздел</a></li>
+            <li><a href="index3.html">Отзывы</a></li>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="index2.html">Проверка криптоактивов</a></li>
+            <li><a href="#contact">Связаться</a></li>
+        </ul>
+    </nav>
+	<div class="menu-icon" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    <div class="menu-dropdown">
+        <a href="index4.html">Юридический Раздел</a>
+        <a href="index3.html">Отзывы</a>
+        <a href="index.html">Главная</a>
+        <a href="index2.html">Проверка криптоактивов</a>
+        <a href="#contact">Связаться</a>
+    </div>
+    <header>
+        <h1>Анонимные Решения</h1>
+        <p>Эффективность. Конфиденциальность. Результат.</p>
+    </header>
+
+    <section class="section-one">
+        <h2>Добавить отзыв</h2>
+        <div class="review-form">
+            <input type="text" id="reviewName" placeholder="Ваше имя" required>
+            <textarea id="reviewText" placeholder="Ваш отзыв" required></textarea>
+            <button onclick="addReview()">Оставить отзыв</button>
+        </div>
+    </section>
+
+<section class="section-two">
+    <h2>Отзывы наших клиентов</h2>
+    <div class="review-list">
+        <!-- Сюда добавляются отзывы -->
+    </div>
+</section>
+
+    <footer>
+        <p>© 2025 Анонимные Решения. Все права защищены.</p>
+    </footer>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script src="script.js"></script>
+<script src="review.js"></script>
+</body>
+</html>

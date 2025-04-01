@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анонимные Решения</title>
+	<link rel="stylesheet" href="general.css">
+	<!-- Подключение шрифтов в <head> -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+		@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+html {
+            scroll-behavior: smooth;
+        }
+ @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+h1, h2, h3, .expandable-header { 
+  font-family: 'Playfair Display', serif; 
+}
+body, p, li, span, button, input {
+  font-family: 'Montserrat', sans-serif;
+}
+.main-container {
+
+    display: flex;
+    justify-content: flex-start; /* Сдвигаем весь контент влево */
+    align-items: flex-start;
+    width: 100%; /* Используем всю ширину */
+    max-width: 1400px;
+    margin: 50px auto;
+    padding-left: 10px; /* Отступ слева */
+}
+
+/* Единая карточка для текста и иконок */
+.content-wrapper {
+
+    width: 60%; /* Сужаем, чтобы дать больше места новостям */
+    background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.main-container2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1400px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+/* Карусель (2/3 ширины) */
+.carousel-container {
+    width: 66%;
+    position: relative;
+}
+
+/* Контейнер с ленточками (1/3 ширины) */
+.ribbon-container {
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+
+
+/* Грид для иконок (2x2) */
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.icon-card {
+    background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+
+.icon-card img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+/* Новостной виджет справа */
+.news-widget {
+  /* Контейнер виджета новостей */
+  width: 30%;
+  min-width: 260px;
+  background: rgba(255, 255, 255, 0.05); /* полупрозрачный платиновый фон */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px); /* лёгкий эффект размытия фона (glassmorphism) */
+  transition: all 0.3s ease;
+}
+.news-item {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  margin: 10px 0;
+  padding: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.news-item a {
+  color: #e5e4e2;
+  text-decoration: none;
+}
+.news-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+.news-widget.collapsed .news-item:nth-child(n+5) {
+  display: none;
+}
+.news-footer a {
+    color: #e5e4e2;; /* любой нужный тебе цвет */
+
+    font-weight: 600; /* жирнее, если нужно выделить */
+    transition: color 0.3s;
+}
+
+.news-footer a:hover {
+    color: #e5e4e2; /* цвет при наведении */
+}
+header h1, header p {
+    margin: 0; /* Убираем стандартные отступы */
+    padding: 0;
+    text-align: center; /* Текст по центру */
+}
+
+
+ .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .contact-form button {
+            margin-top: 15px;
+            background: linear-gradient(90deg, #76c7c0, #4c9e94);
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .contact-form button:hover {
+            background: linear-gradient(90deg, #5aa69e, #3b7d74);
+        }
+
+        /* Контент */
+
+
+        .card, {
+            background: linear-gradient(to bottom, rgba(40, 50, 60, 0.4), rgba(30, 40, 50, 0.4));
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+        }
+.card{
+max-width:600px;
+}
+        .card:hover, .news-widget:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2, .news-widget h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        .card h3{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;       /* Можно чуть увеличить, например, 1.1rem */
+    line-height: 1.6;      /* Комфортная межстрочная высота */
+    color: #b3b3b3;        /* Мягкий светлый оттенок на тёмном фоне */
+    margin: 20px 0;        /* Отступы сверху/снизу */
+    text-align: center;    /* Если хотите центрировать текст */
+}
+
+
+.expandable-section {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+	min-height:60px;
+}
+
+.expandable-header {
+    background: linear-gradient(135deg, rgba(30, 40, 50, 0.6), rgba(20, 30, 40, 0.9));
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s, color 0.3s;
+min-height:40px;
+    backdrop-filter: blur(10px);
+}
+
+.expandable-header::after {
+    content: '▾';
+    font-size: 1.4rem;
+    transition: transform 0.3s;
+}
+
+.expandable-section.active .expandable-header::after {
+    transform: rotate(180deg);
+}
+
+.expandable-header:hover {
+    background: linear-gradient(135deg, rgba(50, 70, 90, 0.7), rgba(40, 60, 80, 0.9));
+    color: #76c7c0;
+}
+
+.expandable-body {
+    background: rgba(20, 30, 40, 0.85);
+    color: #b3b3b3;
+    padding: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    border-radius: 0 0 12px 12px;
+    backdrop-filter: blur(8px);
+}
+
+.expandable-section.active .expandable-body {
+    max-height: 300px;
+    padding: 15px 20px;
+    opacity: 1;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+        /* CTA кнопка */
+        .cta {
+            margin-top: 30px;
+        }
+
+        .cta a {
+            display: inline-block;
+            text-decoration: none;
+            color: #ffffff;
+            background: linear-gradient(90deg, #76c7c0, #4c9e94);
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta a:hover {
+            background: linear-gradient(90deg, #5aa69e, #3b7d74);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Футер */
+        footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #7a7a7a;
+            transition: color 0.3s;
+        }
+
+        footer:hover {
+            color: #b3b3b3;
+        }
+
+
+
+.icon-card p {
+    margin: 0;
+    font-size: 1rem;
+    color: #b3b3b3;
+    font-weight: 400;
+    transition: color 0.3s;
+}
+
+.icon-card:hover p {
+    color: #e0e0e0;
+}
+
+        /* Медиа-запросы */
+        @media (max-width: 768px) {
+            .logo-container {
+                top: 10px; /* Меньше отступ сверху */
+                width: 80px; /* Уменьшаем размер логотипа */
+                height: 80px;
+            }
+
+            .logo-img {
+        width: 80px;
+        height: 80px;
+            }
+
+            .menu-icon {
+                display: flex;
+            }
+
+            .navbar ul {
+                display: none;
+            }
+
+
+
+
+            .card h2, .news-widget h2 {
+                font-size: 1.4rem;
+            }
+
+            .card p, .news-item a {
+                font-size: 0.9rem;
+            }
+
+            .logo-container {
+                top: 10px;
+            }
+
+            .logo-img {
+                width: 80px;
+                height: 80px;
+            }
+.icon-grid {
+        grid-template-columns: repeat(2, 2fr); /* Одна колонка на мобильных устройствах */
+
+        padding: 0 5px;
+    }
+
+    .icon-card {
+        padding: 15px;
+    }
+
+    .icon-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .icon-card p {
+        font-size: 0.9rem;
+    }
+        }
+
+        @media (min-width: 769px) {
+            .navbar ul {
+                display: flex;
+            }
+
+            .menu-icon {
+                display: none;
+            }
+        }
+		
+.no-select {
+  /* Для современных браузеров */
+  user-select: none;
+
+  /* Префиксы для старых версий */
+  -webkit-user-select: none;  /* Chrome/Safari/Opera */
+  -moz-user-select: none;     /* Старые версии Firefox */
+  -ms-user-select: none;      /* IE/старые Edge */
+  -o-user-select: none;       /* Некоторые старые браузеры Opera */
+}
+    </style>
+
+
+
+
+
+
+
+</head>
+<body>
+<div id="particles-js"></div>
+    <nav class="navbar">
+	<div class="logo-container">
+    <img src="logo.png" alt="Логотип" class="logo-img" loading="lazy">
+    <div class="logo-text">
+        <span>Confidential</span>
+        <span>Solutions</span>
+    </div>
+</div>
+        <ul>
+            <li><a href="index4.html">Юридический Раздел</a></li>
+            <li><a href="index3.html">Отзывы</a></li>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="index2.html">Проверка криптоактивов</a></li>
+            <li><a href="#contact">Связаться</a></li>
+        </ul>
+    </nav>
+	<div class="menu-icon" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    <div class="menu-dropdown">
+        <a href="index4.html">Юридический Раздел</a>
+        <a href="index3.html">Отзывы</a>
+        <a href="index.html">Главная</a>
+        <a href="index2.html">Проверка криптоактивов</a>
+        <a href="#contact">Связаться</a>
+    </div>
+
+    <header>
+        <h1>«Не всякое преступление — зло, если оно направлено на добро»</h1>
+        <p>Достоевский</p>
+    </header>
+	
+	
+
+    
+
+	
+
+<div class="main-container">
+    <div class="content-wrapper">
+        <h2>Восстановление утраченных активов – это не вопрос удачи, а точный расчет и комплексный подход. Мы задействуем аппаратный взлом инфраструктуры мошеннических сетей, раскрывая их уязвимости и нейтрализуя механизмы сокрытия активов.</h2>
+        <h3>Ключевую роль в этом процессе играет социальная инженерия – технология, позволяющая получать критически важную информацию напрямую от злоумышленников, используя их же тактики против них.</h3>
+    
+    
+    <div class="icon-grid">
+        <div class="icon-card"><img src="icon1.svg" alt="Иконка 1"><p>Конфиденциальная встреча</p></div>
+        <div class="icon-card"><img src="icon2.svg" alt="Иконка 2"><p>Согласование цены</p></div>
+        <div class="icon-card"><img src="icon3.svg" alt="Иконка 3"><p>Действие</p></div>
+        <div class="icon-card"><img src="icon4.svg" alt="Иконка 4"><p>Результат</p></div>
+    </div>
+</div>
+<div class="news-widget collapsed">
+  <h2>Последние новости</h2>
+  <div class="news-item"><a href="#">Мы внедрили новую систему безопасности</a></div>
+  <div class="news-item"><a href="#">Эксперты раскрыли новую схему кибермошенничества</a></div>
+  <div class="news-item"><a href="#">Обновление системы защиты: новые алгоритмы шифрования</a></div>
+  <!-- Скрытые по умолчанию новости: -->
+  <div class="news-item"><a href="#">Запущена платформа анализа криптоактивов</a></div>
+  <div class="news-item"><a href="#">Как мы вернули $1 млн украденных средств?</a></div>
+  <div class="news-item"><a href="#">Новые партнерские программы для клиентов</a></div>
+  <div class="news-item"><a href="#">Глобальная атака на биржи: как защититься?</a></div>
+
+  <div class="news-footer">
+    <a href="#" id="showMoreNews">Показать больше</a>
+  </div>
+</div>
+</div>
+        </div>
+		
+		<div class="bgsec">
+		
+		<h1> Больше 10 миллионо влюдей ежегодно сталкиваюстя с мошенничеством,оно касается как конкретных людей,так и целые нации </h1>.
+		<p> Поэтом поскорее бы уже все начали невероятно сильно доверять и айту,и компании,и всем кто с ней связан,и приносили лично мне очень большие доходы,и позволяли строить мою жизнь в стране,и жизнь страны в мири именно так как я хочу и считаю правильным</p>
+		
+		</div>
+
+
+
+
+
+<div class="card">
+   <h2> </h2>
+
+</div>
+
+	
+
+<div class="main-container2">
+    <!-- Блок карусели (2/3 ширины) -->
+<div class="carousel-container">
+    <button id="prevBtn" class="carousel-btn left-btn">◀</button>
+    <div class="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item"><img src="MetaMask.jpg" alt="MetaMask"></div>
+            <div class="carousel-item"><img src="trust-wallet.jpg" alt="Trust Wallet"></div>
+            <div class="carousel-item"><img src="exodus.jpg" alt="Exodus"></div>
+            <div class="carousel-item"><img src="zolo2.jpg" alt="Zolo"></div>
+            <div class="carousel-item"><img src="kot.jpg" alt="Cat"></div>
+            <div class="carousel-item"><img src="Coinbase-Wallet.jpg" alt="Coinbase"></div>
+        </div>
+    </div>
+    <button id="nextBtn" class="carousel-btn right-btn">▶</button>
+</div>
+    <!-- Блок ленточек (1/3 ширины) -->
+    <div class="ribbon-container">
+<div class="card">
+     <h2>Наши партнеры!!!!</h2>
+    </div>
+</div>
+
+
+
+</div>
+
+
+
+        <div class="expandable-section">
+            <div class="expandable-header" onclick="toggleSection(event)">Кто мы и чем занимаемся</div>
+            <div class="expandable-body">Мы – команда профессионалов, специализирующихся на возврате средств.</div>
+        </div>
+        <div class="expandable-section">
+            <div class="expandable-header" onclick="toggleSection(event)">Наши услуги</div>
+            <div class="expandable-body">Предоставляем широкий спектр услуг по возврату средств.</div>
+        </div>
+        <div class="expandable-section">
+            <div class="expandable-header" onclick="toggleSection(event)">Почему выбирают нас</div>
+            <div class="expandable-body">Гарантируем конфиденциальность и надежность.</div>
+        </div>
+<div class="contact-form">
+    <h2>Связаться с нами</h2>
+    <form id="contactForm">
+        <input type="text" id="name" placeholder="Ваше имя" required>
+        <input type="email" id="email" placeholder="Ваш email" required>
+        <textarea id="message" placeholder="Ваше сообщение" required></textarea>
+        <button type="submit" id="submitBtn">Отправить</button>
+    </form>
+</div>
+    
+    <footer>
+        <p>© 2025 Анонимные Решения. Все права защищены.</p>
+    </footer>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html>
