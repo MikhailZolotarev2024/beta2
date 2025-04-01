@@ -316,35 +316,43 @@ header h1 {
 			
 			
     .main-container {
-        flex-direction: raw;
-        align-items: stretch;
+        display: flex;
+        flex-direction: row; /* Оставляем горизонтальный вид */
+        justify-content: space-between;
+        align-items: flex-start;
         width: 100%;
-        padding: 0 10px; /* Немного отступа для предотвращения конфликтов */
+        padding: 0 10px;
+        box-sizing: border-box;
     }
 
     .main-container2 {
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
+        width: calc(100% - 20px);
         padding: 0 10px;
         box-sizing: border-box;
+        display: flex;
+        flex-direction: row; /* Оставляем горизонтальный вид */
+        justify-content: space-between;
     }
 	
-    .content-wrapper, .ribbon-container, .news-widget {
-        width: 100%;
+    .content-wrapper {
+        width: 65%;
         padding: 0 10px;
         box-sizing: border-box;
     }
 
-  /* Уменьшаем шрифты и отступы, чтобы всё помещалось на маленьких экранах */
-  .content-wrapper h2, .news-widget h2 {
-    font-size: 1rem;
-    margin-bottom: 10px;
-  }
+    .news-widget {
+        width: 35%;
+        min-width: 260px;
+    }
 
-  .content-wrapper p, .news-item a, .icon-card p {
-    font-size: 0.85rem;
-  }
+    .carousel-container {
+        width: 65%;
+    }
+
+    .ribbon-container {
+        width: 35%;
+    }
+
 
   .icon-grid {
     grid-template-columns: 1fr; /* Одну колонку иконок на мобильном */
@@ -356,9 +364,9 @@ header h1 {
   }
 
     header {
-        width: 100%;
+        width: calc(100% - 20px); /* Убираем padding */
         padding: 0 10px;
-        box-sizing: border-box; /* Включаем padding в ширину */
+        box-sizing: border-box;
     }
 
   header h1 {
@@ -379,11 +387,7 @@ header h1 {
 			
 			
 			
-    .carousel-container {
-        width: 100%;
-        padding: 0 10px;
-        box-sizing: border-box;
-    }
+
 			
 			
 			
@@ -455,7 +459,7 @@ header p {
     
     /* Адаптация блока с фоновым изображением (.bgsec) */
     .bgsec {
-        width: 100%;
+        width: calc(100% - 20px); /* Полная ширина с учётом padding */
         padding: 30px 10px;
         box-sizing: border-box;
     }
