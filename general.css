@@ -315,7 +315,6 @@ header h1 {
     margin: 0 auto; /* Центрирование */
     padding: 0 10px; /* Отступы по бокам */
     box-sizing: border-box;
-	display:flex;
 }
 
 /* Внутренние элементы, чтобы они не вылазили за пределы .container */
