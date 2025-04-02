@@ -329,33 +329,31 @@ header, .bgsec, .main-container, .main-container2 {
 
     .container {
         width: 100%; /* Просто 100% ширины */
-        padding: 0 10px;
+        padding: 0px;
         box-sizing: border-box;
     }
+
 
     .main-container {
         display: flex;
+        flex-direction: row; /* Горизонтальное расположение */
         justify-content: space-between;
-        align-items: flex-start;
         width: 100%;
     }
 
-    /* Контент и новостной виджет */
     .content-wrapper {
-        flex-grow: 1; /* Позволяет блоку растягиваться */
-        min-width: 60%; /* Минимальная ширина, чтобы не становился слишком узким */
-        background: rgba(255, 255, 255, 0.06);
+        min-width: 300px;           /* Минимально допустимая ширина */
+        width: 64%;                 /* Желаемая ширина (примерно две трети экрана) */
+        max-width: 65%;             /* Максимально допустимая ширина */
         padding: 20px;
         box-sizing: border-box;
+        flex-grow: 1;               /* Позволяет блоку растягиваться, если есть место */
     }
 
     .news-widget {
-        flex-grow: 0;
-        min-width: 200px; /* Минимальная ширина — теперь можно сделать даже меньше 260px */
-        max-width: 35%; /* Не превышает 35% от контейнера */
-        width: 260px; /* Желаемая ширина */
-        background: rgba(255, 255, 255, 0.05);
-        padding: 20px;
+        min-width: 200px;           /* Минимальная ширина */
+        width: 260px;               /* Желаемая ширина */
+        max-width: 35%;             /* Максимальная ширина */
         box-sizing: border-box;
     }
 
