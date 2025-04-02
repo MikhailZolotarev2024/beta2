@@ -315,6 +315,7 @@ header h1 {
     margin: 0 auto; /* Центрирование */
     padding: 0 10px; /* Отступы по бокам */
     box-sizing: border-box;
+	display:flex;
 }
 
 /* Внутренние элементы, чтобы они не вылазили за пределы .container */
@@ -325,45 +326,59 @@ header, .bgsec, .main-container, .main-container2 {
 
 /* 📱 МОБИЛЬНЫЕ УСТРОЙСТВА */
 @media (max-width: 768px) {
-    header, .bgsec, .main-container2 {
-        width: calc(100% + 260px); /* Добавляем ширину news-widget */
+
+
+    .container {
+        width: 100%; /* Просто 100% ширины */
         padding: 0 10px;
         box-sizing: border-box;
     }
-    .container {
-        width: 100%; /* Ширина экрана */
-        padding: 0 10px; /* Немного отступа по бокам */
-    }
-
-
 
     .main-container {
         display: flex;
-        flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
         width: 100%;
     }
 
+    /* Контент и новостной виджет */
     .content-wrapper {
-        width: 65%;
+        flex-grow: 1; /* Позволяет блоку растягиваться */
+        min-width: 60%; /* Минимальная ширина, чтобы не становился слишком узким */
+        background: rgba(255, 255, 255, 0.06);
+        padding: 20px;
         box-sizing: border-box;
     }
 
     .news-widget {
-        width: 35%;
-        min-width: 260px;
+        flex-grow: 0;
+        min-width: 200px; /* Минимальная ширина — теперь можно сделать даже меньше 260px */
+        max-width: 35%; /* Не превышает 35% от контейнера */
+        width: 260px; /* Желаемая ширина */
+        background: rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        box-sizing: border-box;
     }
 
+    /* Другие блоки подстраиваются под новую ширину */
+    header, .bgsec, .main-container2 {
+        width: 100%; /* Просто 100%, без увеличения ширины */
+        box-sizing: border-box;
+    }
 
+    .bgsec {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
 
     .main-container2 {
-
+        width: 100%;
         display: flex;
         flex-direction: row; /* Если тебе нужно горизонтально */
         justify-content: space-between;
-
-
+        padding: 0 10px;
+        box-sizing: border-box;
     }
 
     .carousel-container {
@@ -384,11 +399,7 @@ header, .bgsec, .main-container, .main-container2 {
     padding: 10px;
   }
 
-    header {
-        width: 100%; /* Убираем padding */
-        padding: 0 10px;
-        box-sizing: border-box;
-    }
+
 
   header h1 {
     font-size: 1.2rem;
