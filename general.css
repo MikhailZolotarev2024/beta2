@@ -315,7 +315,6 @@ header h1 {
     margin: 0 auto; /* Центрирование */
     padding: 0 10px; /* Отступы по бокам */
     box-sizing: border-box;
-    display:flex;
 }
 
 /* Внутренние элементы, чтобы они не вылазили за пределы .container */
@@ -326,17 +325,17 @@ header, .bgsec, .main-container, .main-container2 {
 
 /* 📱 МОБИЛЬНЫЕ УСТРОЙСТВА */
 @media (max-width: 768px) {
-
+    header, .bgsec, .main-container2 {
+        width: calc(100% + 260px); /* Добавляем ширину news-widget */
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
     .container {
         width: 100%; /* Ширина экрана */
         padding: 0 10px; /* Немного отступа по бокам */
     }
 
-    header {
-        width: 100%;
-        padding: 0 10px;
-        box-sizing: border-box;
-    }
+
 
     .main-container {
         display: flex;
@@ -356,19 +355,15 @@ header, .bgsec, .main-container, .main-container2 {
         min-width: 260px;
     }
 
-    .bgsec {
-        width: 100%;
-        padding: 20px;
-        box-sizing: border-box;
-    }
+
 
     .main-container2 {
-        width: 100%;
+
         display: flex;
         flex-direction: row; /* Если тебе нужно горизонтально */
         justify-content: space-between;
-        padding: 0 10px;
-        box-sizing: border-box;
+
+
     }
 
     .carousel-container {
