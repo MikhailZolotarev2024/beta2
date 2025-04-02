@@ -328,44 +328,52 @@ header, .bgsec, .main-container, .main-container2 {
 
 
     .container {
-        width: 100%; /* Просто 100% ширины */
-        padding: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        max-width: 1400px;
+        padding: 0;
         box-sizing: border-box;
     }
 
-
+    /* Контейнер контента и новостей */
     .main-container {
         display: flex;
-        flex-direction: row; /* Горизонтальное расположение */
+        flex-direction: row; /* Оставляем горизонтальное расположение */
         justify-content: space-between;
+        align-items: flex-start;
         width: 100%;
+        box-sizing: border-box;
     }
 
+    /* Контент */
     .content-wrapper {
-        min-width: 300px;           /* Минимально допустимая ширина */
-        width: 64%;                 /* Желаемая ширина (примерно две трети экрана) */
-        max-width: 65%;             /* Максимально допустимая ширина */
+        width: 65%; /* Уменьшаем, чтобы было место для news-widget */
+        min-width: 300px; /* Минимальная ширина */
+        max-width: 100%;
         padding: 20px;
         box-sizing: border-box;
-        flex-grow: 1;               /* Позволяет блоку растягиваться, если есть место */
     }
 
+    /* Новостной виджет */
     .news-widget {
-        min-width: 200px;           /* Минимальная ширина */
-        width: 260px;               /* Желаемая ширина */
-        max-width: 35%;             /* Максимальная ширина */
+        width: 260px; /* Ширина виджета */
+        min-width: 260px;
+        max-width: 260px;
         box-sizing: border-box;
     }
 
-    /* Другие блоки подстраиваются под новую ширину */
+    /* Растягиваем все элементы до ширины основного контейнера */
     header, .bgsec, .main-container2 {
-        width: 100%; /* Просто 100%, без увеличения ширины */
+        width: 100%;
+        max-width: 100%;
         box-sizing: border-box;
     }
 
     .bgsec {
         width: 100%;
-        padding: 20px;
+        padding: 0px;
         box-sizing: border-box;
     }
 
