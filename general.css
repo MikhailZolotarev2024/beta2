@@ -374,6 +374,25 @@ header, .bgsec, .main-container, .main-container2 {
         width: 100vw;
     }
 
+    body {
+        font-size: 12px;
+    }
+
+    h1, h2, h3 {
+        font-size: 1em;
+    }
+
+    p {
+        font-size: 0.7em;
+    }
+
+
+
+
+
+
+
+
 
   .icon-grid {
     grid-template-columns: 1fr; /* Одну колонку иконок на мобильном */
