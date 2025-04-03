@@ -393,6 +393,7 @@ header, .bgsec, .main-container, .main-container2 {
     font-size: 11px; /* Принудительно задать одинаковый размер */
     line-height: 1.4;
     text-decoration: none;
+	font-family: 'Montserrat', sans-serif !important;
 }
 
 
