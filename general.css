@@ -333,19 +333,23 @@ header, .bgsec, .main-container, .main-container2 {
     }
 
     /* Основная область (две колонки) */
-    .main-container {
+   .main-container {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-        width: 100vw; /* Убедись, что он занимает всю ширину */
-        max-width: 100vw; /* Убираем ограничение */
-        transform: scale(0.85); /* Уменьшение масштаба */
-        transform-origin: top left;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        width: 100vw;
+        max-width: 100vw;
         box-sizing: border-box;
-        margin: 0; /* Убираем любые внешние отступы */
-        padding: 0; /* Убираем любые внутренние отступы */
-    }
+        margin: 0;
+        padding: 0;
+
+        /* Оставляем уменьшение */
+        transform: scale(0.85);
+        transform-origin: top left;
+
+        /* Важно! Добавляем этот стиль */
+        overflow-x: hidden; /* Убирает горизонтальный скролл */
 
     /* Левая колонка */
     .content-wrapper {
