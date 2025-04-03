@@ -305,7 +305,7 @@ header h1 {
 
 .container {
     max-width: 1400px; /* То же самое, что у твоего main-container */
-    width: 100vw;
+    width: 100%;
     margin: 0 auto; /* Центрирование */
     padding: 0 10px; /* Отступы по бокам */
     box-sizing: border-box;
@@ -326,7 +326,7 @@ header, .bgsec, .main-container, .main-container2 {
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
-        max-width: 1400px;
+        max-width: !00%;
         padding: 0;
         box-sizing: border-box;
     }
@@ -338,14 +338,15 @@ header, .bgsec, .main-container, .main-container2 {
         justify-content: space-between;
         align-items: flex-start;
         width: 100%;
+		max-width:100%
         box-sizing: border-box;
     }
 
     /* Контент */
     .content-wrapper {
-        width: 65%; /* Уменьшаем, чтобы было место для news-widget */
+        width: 64%; /* Уменьшаем, чтобы было место для news-widget */
         min-width: 63%; /* Минимальная ширина */
-        max-width: 100%;
+        max-width: 65%;
         padding: 20px;
         box-sizing: border-box;
     }
@@ -354,7 +355,7 @@ header, .bgsec, .main-container, .main-container2 {
     .news-widget {
         width: 33%; /* Ширина виджета */
         min-width: 30%;
-        max-width: 100%;
+        max-width: 34%%;
         box-sizing: border-box;
     }
 
