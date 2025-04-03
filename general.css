@@ -403,11 +403,18 @@ header, .bgsec, .main-container, .main-container2 {
 
   .icon-card {
     padding: 4px;
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
   }
 
+    .icon-img {
+        width: 20px;
+        height: 20px;
+    }
 
+    .icon-card p {
+        font-size: 0.9rem;
+    }
 
 
 
