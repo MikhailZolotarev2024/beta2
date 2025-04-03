@@ -320,14 +320,12 @@ header, .bgsec, .main-container, .main-container2 {
 /* 📱 МОБИЛЬНЫЕ УСТРОЙСТВА */
 @media (max-width: 768px) {
 
-html, body {
-    overflow-x: hidden;
-}
+
     .container {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        width: 100vw;
+        width: 100%;
         max-width: 1400px;
         padding: 0;
         box-sizing: border-box;
@@ -346,7 +344,7 @@ html, body {
     /* Контент */
     .content-wrapper {
         width: 65%; /* Уменьшаем, чтобы было место для news-widget */
-        min-width: 300px; /* Минимальная ширина */
+        min-width: 63%; /* Минимальная ширина */
         max-width: 100%;
         padding: 20px;
         box-sizing: border-box;
@@ -354,9 +352,9 @@ html, body {
 
     /* Новостной виджет */
     .news-widget {
-        width: 260px; /* Ширина виджета */
-        min-width: 260px;
-        max-width: 260px;
+        width: 33%; /* Ширина виджета */
+        min-width: 30%;
+        max-width: 100%;
         box-sizing: border-box;
     }
 
@@ -368,7 +366,7 @@ html, body {
     }
 
     .bgsec {
-        width: 100vw;
+        width: 100%;
         padding: 0px;
         box-sizing: border-box;
     }
