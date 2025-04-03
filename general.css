@@ -321,59 +321,63 @@ header, .bgsec, .main-container, .main-container2 {
 @media (max-width: 768px) {
 
 
+
+    /* Основной контейнер */
     .container {
-        max-width: 100vw; /* Растягиваем на всю доступную ширину экрана */
-        width: 100vw; /* Делаем контейнер таким же широким, как экран */
-        margin: 0;
+        max-width: 100vw; /* Позволяет использовать всю ширину экрана */
+        width: 100vw;
         padding: 0;
-        box-sizing: border-box;
+        margin: 0 auto;
+        overflow-x: hidden;
     }
 
+    /* Основная область (две колонки) */
     .main-container {
         display: flex;
-        flex-direction: row; /* Сохраняем горизонтальное расположение */
+        flex-direction: row; /* Располагаем колонки рядом */
         justify-content: space-between;
         align-items: flex-start;
-        width: 100vw; /* Растягиваем на всю доступную ширину экрана */
+        width: 100vw;
         max-width: 100vw;
-        padding: 0;
+        transform: scale(0.6); /* Уменьшаем масштаб до 75% */
+        transform-origin: top left; /* Начинаем уменьшение с верхнего левого угла */
         box-sizing: border-box;
     }
 
+    /* Левая колонка */
     .content-wrapper {
-        width: 66vw; /* Примерно 2/3 экрана */
-        max-width: 66vw;
+        width: 60vw; /* Примерно 60% ширины экрана */
+        max-width: 60vw;
         box-sizing: border-box;
     }
 
+    /* Правая колонка */
     .news-widget {
-        width: 33vw; /* Примерно 1/3 экрана */
-        max-width: 33vw;
+        width: 35vw; /* Примерно 35% ширины экрана */
+        max-width: 35vw;
         box-sizing: border-box;
     }
 
-    .main-container2 {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+    /* Хедер и другие блоки */
+    header, .bgsec, footer {
         width: 100vw;
         max-width: 100vw;
         padding: 0;
         box-sizing: border-box;
     }
 
-    .carousel-container, .ribbon-container {
-        width: 48%; /* Две колонки рядом */
-        box-sizing: border-box;
+    /* Шрифты и отступы */
+    body {
+        font-size: 12px; /* Уменьшаем общий размер шрифта */
     }
 
-    .bgsec, header, footer {
-        width: 100vw;
-        max-width: 100vw;
-        padding: 0;
-        box-sizing: border-box;
+    h1, h2, h3 {
+        font-size: 0.9em; /* Соразмерно уменьшаем заголовки */
     }
 
+    p {
+        font-size: 0.5em; /* Делаем текст чуть меньше */
+    }
 
 
   .icon-grid {
@@ -387,13 +391,7 @@ header, .bgsec, .main-container, .main-container2 {
 
 
 
-  header h1 {
-    font-size: 1.2rem;
-  }
 
-  header p {
-    font-size: 0.9rem;
-  }
 
   /* Navbar оптимизация */
   .navbar {
@@ -449,14 +447,9 @@ header, .bgsec, .main-container, .main-container2 {
     
     /* Изменение высоты header */
 
-header h1 {
-    font-size: clamp(1.5rem, 5vw, 3rem); /* Уменьшается на маленьких экранах */
-    text-align: center;
-}
 
-header p {
-    font-size: clamp(1rem, 3vw, 1.5rem);
-}
+
+
     
     /* Адаптация логотипа */
     .logo-container {
@@ -473,11 +466,11 @@ header p {
     /* Адаптация блока с фоновым изображением (.bgsec) */
 
     .bgsec h1 {
-        font-size: 2rem;       /* Корректировка размера заголовка */
+        font-size: 1rem;       /* Корректировка размера заголовка */
     }
     
     .bgsec p {
-        font-size: 1rem;       /* Корректировка размера параграфа */
+        font-size: 0.5rem;       /* Корректировка размера параграфа */
     }
 
     /* Корректировка отступов основного содержимого */
