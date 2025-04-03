@@ -380,20 +380,22 @@ header, .bgsec, .main-container, .main-container2 {
         font-size: 12px;
     }
 
-    h1, h2, h3 {
-        font-size: 1em;
+    .content-wrapper, .news-widget {
+        font-size: 12px; /* Установим одинаковый базовый размер */
     }
 
-    p, a {
-        font-size: 0.7em;
-    }
-
+    /* Применение одинаковых стилей для текста внутри блоков */
+    .content-wrapper h1, .content-wrapper h2, .content-wrapper p,
+    .news-widget h1, .news-widget h2, .news-widget p,
     .news-widget a {
-        font-size: 0.7em;
+        font-size: 0.85em; /* Примерно 10px (если базовый размер 12px) */
+        line-height: 1.4; /* Улучшает читаемость */
     }
 
-.news-widget h2 {
-        font-size: 1em;
+    /* Дополнительно можно подправить ссылки внутри news-widget */
+    .news-widget a {
+        font-size: 0.85em; /* Примерно 10px */
+        text-decoration: none;
     }
 
 
