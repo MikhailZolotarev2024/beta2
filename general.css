@@ -388,9 +388,13 @@ header, .bgsec, .main-container, .main-container2 {
         font-size: 0.7em;
     }
 
+    .news-widget a {
+        font-size: 0.7em;
+    }
 
-
-
+.news-widget h2 {
+        font-size: 1em;
+    }
 
 
 
