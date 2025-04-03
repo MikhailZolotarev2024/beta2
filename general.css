@@ -382,7 +382,7 @@ header, .bgsec, .main-container, .main-container2 {
         font-size: 1em;
     }
 
-    p {
+    p, a {
         font-size: 0.7em;
     }
 
@@ -400,7 +400,9 @@ header, .bgsec, .main-container, .main-container2 {
   }
 
   .icon-card {
-    padding: 10px;
+    padding: 4px;
+    width: 15px;
+    height: 15px;
   }
 
 
