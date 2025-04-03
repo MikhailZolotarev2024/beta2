@@ -333,37 +333,28 @@ header, .bgsec, .main-container, .main-container2 {
     }
 
     /* Основная область (две колонки) */
-   .main-container {
+    .main-container {
         display: flex;
-        flex-direction: raw;
-        justify-content: flex-start;
-        align-items: stretch;
+        flex-direction: row; /* Меняем на row, чтобы элементы стояли в ряд */
+        justify-content: space-between;
+        align-items: flex-start;
         width: 100vw;
         max-width: 100vw;
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+        overflow-x: hidden;
+    }
 
-        /* Оставляем уменьшение */
-        transform: scale(0.85);
-        transform-origin: top left;
-
-        /* Важно! Добавляем этот стиль */
-        overflow-x: hidden; /* Убирает горизонтальный скролл */
-
-    /* Левая колонка */
     .content-wrapper {
-        width: 65vw; /* Примерно 2/3 экрана */
-        padding: 0;
-        margin: 0;
+        width: 65%; /* Примерно 2/3 экрана */
+        padding: 10px;
         box-sizing: border-box;
     }
 
-    /* Правая колонка (новостной виджет) */
     .news-widget {
-        width: 35vw; /* Примерно 1/3 экрана */
-        padding: 0;
-        margin: 0;
+        width: 35%; /* Примерно 1/3 экрана */
+        padding: 10px;
         box-sizing: border-box;
         background-color: rgba(255, 255, 255, 0.05);
     }
