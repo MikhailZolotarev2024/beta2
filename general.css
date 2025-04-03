@@ -335,7 +335,7 @@ header, .bgsec, .main-container, .main-container2 {
     /* Основная область (две колонки) */
    .main-container {
         display: flex;
-        flex-direction: column;
+        flex-direction: raw;
         justify-content: flex-start;
         align-items: stretch;
         width: 100vw;
