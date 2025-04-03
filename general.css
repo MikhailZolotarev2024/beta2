@@ -378,22 +378,22 @@ header, .bgsec, .main-container, .main-container2 {
 
 
 
-    .content-wrapper h2{
-	font-size:9px;
-	}
+.content-wrapper, .news-widget {
+    font-size: 9px; /* Базовый размер шрифта */
+    font-family: 'Montserrat', sans-serif; /* Чтобы был единый стиль */
+}
 
-    /* Дополнительно можно подправить ссылки внутри news-widget */
-    .news-widget a {
-        font-size: 9px; /* Примерно 10px */
-        text-decoration: none;
-    }
+.content-wrapper h2, .news-widget a {
+    font-size: 9px; /* Принудительно задать одинаковый размер */
+    line-height: 1.4;
+    text-decoration: none;
+}
 
-    .news-widget h2 {
-        font-size: 12px; /* Примерно 10px */
-        text-decoration: none;
-    }
-
-
+ .news-widget h2 {
+    font-size: 11px; /* Принудительно задать одинаковый размер */
+    line-height: 1.4;
+    text-decoration: none;
+}
 
 
   .icon-grid {
