@@ -247,10 +247,73 @@ header h1 {
             font-weight: 400;
             transition: color 0.3s;
         }
+.main-container {
 
+    display: flex;
+    justify-content: flex-start; /* Сдвигаем весь контент влево */
+    align-items: flex-start;
+    width: 100%; /* Используем всю ширину */
+    max-width: 1400px;
+    margin: 50px auto;
+    padding-left: 10px; /* Отступ слева */
+}
 
+/* Единая карточка для текста и иконок */
+.content-wrapper {
 
+    width: 60%; /* Сужаем, чтобы дать больше места новостям */
+    background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+.news-widget h2{
+	        font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #ffffff;
+}
 
+.news-widget {
+  /* Контейнер виджета новостей */
+  width: 30%;
+  min-width: 28%;
+  background: rgba(255, 255, 255, 0.05); /* полупрозрачный платиновый фон */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px); /* лёгкий эффект размытия фона (glassmorphism) */
+  transition: all 0.3s ease;
+}
+.news-item {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  margin: 10px 0;
+  padding: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.news-item a {
+  color: #e5e4e2;
+  text-decoration: none;
+}
+.news-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+.news-widget.collapsed .news-item:nth-child(n+5) {
+  display: none;
+}
+.news-footer a {
+    color: #e5e4e2;; /* любой нужный тебе цвет */
+
+    font-weight: 600; /* жирнее, если нужно выделить */
+    transition: color 0.3s;
+}
+
+.news-footer a:hover {
+    color: #e5e4e2; /* цвет при наведении */
+}
 
 
 
