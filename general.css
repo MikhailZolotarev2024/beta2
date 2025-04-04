@@ -118,7 +118,7 @@
 			
 			
 			
-			
+@media (min-width: 769px) {
             .logo-container {
                 top: 10px; /* Меньше отступ сверху */
                 width: 80px; /* Уменьшаем размер логотипа */
@@ -211,7 +211,7 @@ body {
 		
 		
 
-        @media (min-width: 769px) {
+
             .navbar ul {
                 display: flex;
             }
@@ -220,7 +220,7 @@ body {
                 display: none;
             }
 
-        }
+        
 html {
             scroll-behavior: smooth;
         }
