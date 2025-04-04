@@ -451,23 +451,7 @@ html {
                 transform: scale(1);
             }
         }
-        body {
-			position: relative;
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(45deg, #020326, #020324 50%, #020326);
-    background-size: 400% 400%;
-    animation: gradientAnimation 6s ease-in-out infinite;
-            color: #e5e4e2;
-            line-height: 1.4;
-            display: block; /* Убираем flex, чтобы не центрировало */
-            text-align: left; /* Выравниваем текст влево */
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            width:100%;
-            padding: 0;
-        }
+
 		
 		
 .container {
@@ -827,3 +811,22 @@ body {
 .news-widget.collapsed .news-item:nth-child(n+5) {
   display: none;
 }
+
+
+        body {
+			position: relative;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(45deg, #020326, #020324 50%, #020326);
+    background-size: 400% 400%;
+    animation: gradientAnimation 6s ease-in-out infinite;
+            color: #e5e4e2;
+            line-height: 1.4;
+            display: block; /* Убираем flex, чтобы не центрировало */
+            text-align: left; /* Выравниваем текст влево */
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            width:100%;
+            padding: 0;
+        }
