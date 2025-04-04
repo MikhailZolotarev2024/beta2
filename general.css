@@ -588,6 +588,7 @@ html {
     width: 100%; /* Используем всю ширину */
     max-width: 100%;
     margin: 50px auto;
+	overflow-y: hidden;
 /* Отступ слева */
 }
 
