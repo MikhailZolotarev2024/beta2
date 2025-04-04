@@ -320,10 +320,8 @@ header h1 {
 
 
 
-.bgsec h1, .bgsec p {
-    max-width: 800px;
-    margin: 0 auto;
-}
+
+
 
 
 
@@ -465,7 +463,7 @@ html {
 }
 
 .carousel-item {
-    min-width: 250px; /* Ширина одного элемента */
+
     height: 350px; /* Высота элемента */
     background: #fff;
     border-radius: 10px;
@@ -822,3 +820,6 @@ header {
     animation: gradientAnimation 6s ease-in-out infinite;
         }
 		
+*, *::before, *::after {
+    box-sizing: border-box;
+}
