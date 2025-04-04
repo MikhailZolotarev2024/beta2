@@ -1,5 +1,223 @@
 
+@media (max-width: 768px) {
 
+
+
+    /* Основной контейнер */
+    .container {
+        max-width: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0 auto;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+
+    /* Основная область (две колонки) */
+    .main-container {
+        display: flex;
+        flex-direction: row; /* Меняем на row, чтобы элементы стояли в ряд */
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    .content-wrapper {
+        width: 65%; /* Примерно 2/3 экрана */
+        padding: 6px;
+        box-sizing: border-box;
+		margin: 3px;
+    }
+
+    .news-widget {
+        width: 35%; /* Примерно 1/3 экрана */
+        padding: 6px;
+		margin: 3px;
+        box-sizing: border-box;
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Хедер и другие блоки */
+    header, .bgsec, footer {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    /* Убираем любые ограничения на ширину */
+    .main-container2 {
+        max-width: 100vw;
+        width: 100vw;
+    }
+
+
+
+.content-wrapper, .news-widget {
+    font-size: 9px; /* Базовый размер шрифта */
+    font-family: 'Montserrat', sans-serif; /* Чтобы был единый стиль */
+}
+
+.content-wrapper h2, .news-widget a {
+    font-size: 9px; /* Принудительно задать одинаковый размер */
+    line-height: 1.4;
+    text-decoration: none;
+}
+
+ .news-widget h2 {
+    font-size: 11px; /* Принудительно задать одинаковый размер */
+    line-height: 1.4;
+    text-decoration: none;
+	font-family: 'Montserrat', sans-serif !important;
+}
+
+
+  .icon-grid {
+    grid-template-columns: 2fr; /* Одну колонку иконок на мобильном */
+    gap: 10px;
+  }
+
+  .icon-card {
+    padding: 4px;
+    width: 20px;
+    height: 20px;
+  }
+
+    .icon-img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .icon-card p {
+        font-size: 0.9rem;
+    }
+
+
+
+
+			
+			
+			
+			
+			
+			
+
+			
+			
+			
+			
+			
+			
+			
+            .logo-container {
+                top: 10px; /* Меньше отступ сверху */
+                width: 80px; /* Уменьшаем размер логотипа */
+                height: 80px;
+            }
+
+            .logo-img {
+        width: 80px;
+        height: 80px;
+            }
+
+            .menu-icon {
+                display: flex;
+            }
+
+            .navbar ul {
+                display: none;
+            }
+            .logo-container {
+                top: 10px;
+            }
+
+            .logo-img {
+                width: 80px;
+                height: 80px;
+            }
+			
+    /* Адаптация новостного виджета */
+
+    /* Корректировка высоты контейнера с частицами */
+    #particles-js {
+        height: 100vh;         /* Высота равная видимой части экрана */
+    }
+    
+    /* Изменение высоты header */
+
+
+
+
+    
+    /* Адаптация логотипа */
+    .logo-container {
+        width: 60px;
+        height: 60px;
+        top: 10px;             /* Меньше отступ сверху */
+    }
+    
+    .logo-img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    /* Адаптация блока с фоновым изображением (.bgsec) */
+
+    .bgsec h1 {
+        font-size: 1rem;       /* Корректировка размера заголовка */
+    }
+    
+    .bgsec p {
+        font-size: 0.5rem;       /* Корректировка размера параграфа */
+    }
+
+    /* Корректировка отступов основного содержимого */
+
+	
+.logo-img, .header h1 {
+    mix-blend-mode: normal; /* Убираем наложение */
+}
+body {
+        animation: none;
+    }
+
+
+    .card {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    /* Контактная форма */
+    .contact-form {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+
+
+}
+		
+		
+
+        @media (min-width: 769px) {
+            .navbar ul {
+                display: flex;
+            }
+
+            .menu-icon {
+                display: none;
+            }
+
+    }
+        }
 html {
             scroll-behavior: smooth;
         }
@@ -23,12 +241,18 @@ html {
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-
+            width:100%;
             padding: 0;
         }
 		
 		
+.container {
 
+    width: 100%;
+    margin: 0; /* Убираем центрирование */
+    padding: 0;
+    box-sizing: border-box;
+}
 
 		
 		
@@ -50,7 +274,7 @@ html {
     height: 7vh;
     background: linear-gradient(to bottom, #010221, rgba(30, 40, 50, 0.4));
     z-index: 1000;
-    padding: 15px 20px;
+    padding:0px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -216,6 +440,7 @@ html {
 
 
 header {
+    width:100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -253,9 +478,9 @@ header h1 {
     justify-content: flex-start; /* Сдвигаем весь контент влево */
     align-items: flex-start;
     width: 100%; /* Используем всю ширину */
-    max-width: 1400px;
+    max-width: 100%;
     margin: 50px auto;
-    padding-left: 10px; /* Отступ слева */
+/* Отступ слева */
 }
 
 /* Единая карточка для текста и иконок */
@@ -366,245 +591,87 @@ header h1 {
     margin: 0 auto;
 }
 
-.container {
-    max-width: 1400px; /* То же самое, что у твоего main-container */
-    width: 100%;
-    margin: 0 auto; /* Центрирование */
-    padding: 0 10px; /* Отступы по бокам */
-    box-sizing: border-box;
-}
+
 
 /* Внутренние элементы, чтобы они не вылазили за пределы .container */
-header, .bgsec, .main-container, .main-container2 {
-    width: 100%;
+.bgsec, .main-container, .main-container2 {
+    width: 100vw;
     box-sizing: border-box;
 }
 
-/* 📱 МОБИЛЬНЫЕ УСТРОЙСТВА */
-@media (max-width: 768px) {
 
 
 
-    /* Основной контейнер */
-    .container {
-        max-width: 100vw;
-        width: 100vw;
-        padding: 0;
-        margin: 0 auto;
-        overflow-x: hidden;
-        box-sizing: border-box;
-    }
 
-    /* Основная область (две колонки) */
-    .main-container {
-        display: flex;
-        flex-direction: row; /* Меняем на row, чтобы элементы стояли в ряд */
-        justify-content: space-between;
-        align-items: flex-start;
-        width: 100vw;
-        max-width: 100vw;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-    }
 
-    .content-wrapper {
-        width: 65%; /* Примерно 2/3 экрана */
-        padding: 6px;
-        box-sizing: border-box;
-		margin: 3px;
-    }
+/*  Шрифты  */
 
-    .news-widget {
-        width: 35%; /* Примерно 1/3 экрана */
-        padding: 6px;
-		margin: 3px;
-        box-sizing: border-box;
-        background-color: rgba(255, 255, 255, 0.05);
-    }
-
-    /* Хедер и другие блоки */
-    header, .bgsec, footer {
-        width: 100vw;
-        max-width: 100vw;
-        padding: 0;
-        box-sizing: border-box;
-    }
+.content-wrapper {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #e5e4e2;
 }
 
-    /* Убираем любые ограничения на ширину */
-    .main-container2 {
-        max-width: 100vw;
-        width: 100vw;
-    }
-
-
-
-.content-wrapper, .news-widget {
-    font-size: 9px; /* Базовый размер шрифта */
-    font-family: 'Montserrat', sans-serif; /* Чтобы был единый стиль */
+.content-wrapper h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
-.content-wrapper h2, .news-widget a {
-    font-size: 9px; /* Принудительно задать одинаковый размер */
-    line-height: 1.4;
-    text-decoration: none;
+.content-wrapper h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
 }
 
- .news-widget h2 {
-    font-size: 11px; /* Принудительно задать одинаковый размер */
-    line-height: 1.4;
-    text-decoration: none;
-	font-family: 'Montserrat', sans-serif !important;
+.content-wrapper p {
+    margin-bottom: 10px;
+}
+
+/* news-widget */
+.news-widget {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: #e5e4e2;
+}
+
+.news-widget h2 {
+    font-size: 26px;
+    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 15px;
+}
+
+.news-widget a {
+    color: #76c7c0;
+    transition: color 0.3s;
+}
+
+.news-widget a:hover {
+    color: #e5e4e2;
+}
+
+/* bgsec */
+.bgsec {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    color: #ffffff;
+}
+
+.bgsec h1 {
+    font-size: 40px;
+    font-weight: 700;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+.bgsec p {
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
 
-  .icon-grid {
-    grid-template-columns: 2fr; /* Одну колонку иконок на мобильном */
-    gap: 10px;
-  }
-
-  .icon-card {
-    padding: 4px;
-    width: 20px;
-    height: 20px;
-  }
-
-    .icon-img {
-        width: 20px;
-        height: 20px;
-    }
-
-    .icon-card p {
-        font-size: 0.9rem;
-    }
-
-
-
-  /* Navbar оптимизация */
-  .navbar {
-    padding: 5px 10px;
-  }
-			
-			
-			
-			
-			
-			
-
-			
-			
-			
-			
-			
-			
-			
-            .logo-container {
-                top: 10px; /* Меньше отступ сверху */
-                width: 80px; /* Уменьшаем размер логотипа */
-                height: 80px;
-            }
-
-            .logo-img {
-        width: 80px;
-        height: 80px;
-            }
-
-            .menu-icon {
-                display: flex;
-            }
-
-            .navbar ul {
-                display: none;
-            }
-            .logo-container {
-                top: 10px;
-            }
-
-            .logo-img {
-                width: 80px;
-                height: 80px;
-            }
-			
-    /* Адаптация новостного виджета */
-
-    /* Корректировка высоты контейнера с частицами */
-    #particles-js {
-        height: 100vh;         /* Высота равная видимой части экрана */
-    }
-    
-    /* Изменение высоты header */
-
-
-
-
-    
-    /* Адаптация логотипа */
-    .logo-container {
-        width: 60px;
-        height: 60px;
-        top: 10px;             /* Меньше отступ сверху */
-    }
-    
-    .logo-img {
-        width: 60px;
-        height: 60px;
-    }
-    
-    /* Адаптация блока с фоновым изображением (.bgsec) */
-
-    .bgsec h1 {
-        font-size: 1rem;       /* Корректировка размера заголовка */
-    }
-    
-    .bgsec p {
-        font-size: 0.5rem;       /* Корректировка размера параграфа */
-    }
-
-    /* Корректировка отступов основного содержимого */
-
-	
-.logo-img, .header h1 {
-    mix-blend-mode: normal; /* Убираем наложение */
-}
-body {
-        animation: none;
-    }
-
-
-    .card {
-        width: 100%;
-        padding: 0 10px;
-        box-sizing: border-box;
-    }
-
-    /* Контактная форма */
-    .contact-form {
-        width: 100%;
-        padding: 0 10px;
-        box-sizing: border-box;
-    }
-
-
-
-}
-		
-		
-
-        @media (min-width: 769px) {
-            .navbar ul {
-                display: flex;
-            }
-
-            .menu-icon {
-                display: none;
-            }
-			    .container {
-        max-width: 1400px;
-        margin: 0 auto;
-    }
-        }
         /* Контент */
 
 
