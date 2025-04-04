@@ -816,12 +816,14 @@ header {
 
 
         body {
-		min-height:100vw;
-        max-width: 100vw;
-        width: 100vw;
-        padding: 0;
-        margin: 0 auto;
-        overflow-x: hidden;
-        box-sizing: border-box;
+    min-height: 100vh; /* Высота охватывает весь экран */
+    width: 100%; /* Вместо 100vw */
+    margin: 0; /* Убираем auto */
+    padding: 0;
+    overflow-x: hidden; /* Чтобы не было горизонтального скроллинга */
+    box-sizing: border-box;
+    background: linear-gradient(45deg, #020326, #020324 50%, #020326);
+    background-size: 400% 400%;
+    animation: gradientAnimation 6s ease-in-out infinite;
         }
 		
