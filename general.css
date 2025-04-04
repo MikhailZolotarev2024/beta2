@@ -11,6 +11,10 @@
         margin: 0 auto;
         overflow-x: hidden;
         box-sizing: border-box;
+        background: linear-gradient(45deg, #020326, #020324 50%, #020326);
+        background-size: 400% 400%;
+        animation: gradientAnimation 6s ease-in-out infinite;
+        color: #e5e4e2;
     }
 
     /* Основная область (две колонки) */
