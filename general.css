@@ -104,6 +104,19 @@
   .navbar {
     padding: 5px 10px;
   }
+  
+  .bgsec h1 {
+    font-size: 12px;
+    font-weight: 700;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+.bgsec p {
+    font-size: 8px;
+    margin-bottom: 8px;
+}
+  
   }
 			
 			
@@ -130,13 +143,7 @@
         height: 80px;
             }
 
-            .menu-icon {
-                display: flex;
-            }
 
-            .navbar ul {
-                display: none;
-            }
             .logo-container {
                 top: 10px;
             }
@@ -187,23 +194,6 @@
 .logo-img, .header h1 {
     mix-blend-mode: normal; /* Убираем наложение */
 }
-body {
-        animation: none;
-    }
-
-
-    .card {
-        width: 100%;
-        padding: 0 10px;
-        box-sizing: border-box;
-    }
-
-    /* Контактная форма */
-    .contact-form {
-        width: 100%;
-        padding: 0 10px;
-        box-sizing: border-box;
-    }
 
 
 
@@ -212,96 +202,18 @@ body {
 		
 
 
-            .navbar ul {
-                display: flex;
-            }
-
-            .menu-icon {
-                display: none;
-            }
 
         
-html {
-            scroll-behavior: smooth;
-        }
- @keyframes fadeInScale {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        body {
-			position: relative;
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(45deg, #020326, #020324 50%, #020326);
-    background-size: 400% 400%;
-    animation: gradientAnimation 6s ease-in-out infinite;
-            color: #e5e4e2;
-            line-height: 1.4;
-            display: block; /* Убираем flex, чтобы не центрировало */
-            text-align: left; /* Выравниваем текст влево */
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            width:100%;
-            padding: 0;
-        }
-		
-		
-.container {
 
-    width: 100%;
-    margin: 0; /* Убираем центрирование */
-    padding: 0;
-    box-sizing: border-box;
-}
 
 		
 		
 		
 		
-@keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    25% { background-position: 50% 100%; }
-    50% { background-position: 100% 50%; }
-    75% { background-position: 50% 0%; }
-    100% { background-position: 0% 50%; }
-}
-      /* Навигация */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 7vh;
-    background: linear-gradient(to bottom, #010221, rgba(30, 40, 50, 0.4));
-    z-index: 1000;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s;
-    margin-bottom: 0; /* Убираем лишний отступ */
-	backdrop-filter: blur(10px);
-}
 
 
 
-        .navbar ul {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-            margin: 0;
-            padding: 0;
-            align-items: center;
-        }
 
-        .navbar ul li {
-            position: relative;
-            padding: 5px;
-        }
 
         .navbar ul li a {
             color: #d0d8e0;
@@ -314,64 +226,6 @@ html {
 
 
 
-        .navbar ul li:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: -15px;
-            top: 50%;
-            transform: translateY(-50%) rotate(45deg);
-            width: 8px;
-            height: 1px;
-            transition: background 0.3s;
-        }
-
-        .navbar ul li:hover:not(:last-child)::after {
-            background: #76c7c0;
-        }
-
-.menu-icon {
-            display: none;
-            cursor: pointer;
-            flex-direction: column;
-            gap: 5px;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1002;
-        }
-
-        .menu-icon div {
-            width: 30px;
-            height: 3px;
-            background: #ffffff;
-            border-radius: 3px;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        .menu-icon.active div:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
-
-        .menu-icon.active div:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-icon.active div:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
-        }
-
-        .menu-dropdown {
-            display: none;
-            position: fixed;
-            top: 60px;
-            right: 20px;
-            background: rgba(13, 17, 23, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            padding: 10px;
-            z-index: 1001;
-        }
 
         .menu-dropdown a {
             display: block;
@@ -383,79 +237,6 @@ html {
             transition: background 0.3s, color 0.3s;
         }
 
-        .menu-dropdown a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: #76c7c0;
-        }
-.menu-dropdown.active {
-  display: block;
-}
-        /* Логотип */
-        .logo-container {
-    position: absolute;
-    left: 20px; /* Отступ слева */
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-
-        }
-
-        .logo-img {
-			max-height: 100%;
-			mix-blend-mode:overlay;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-.logo-text {
-    display: flex;
-    flex-direction: column;
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-    line-height: 1.2;
-    text-align: center;
-}
-
-.logo-text span {
-    position: relative;
-    padding: 2px 0;
-	line-height: 1.1;
-    display: flex;
-    justify-content: center; /* Центрирование текста */
-    align-items: center;
-}
-
-.logo-text span:first-child::after {
-    content: "";
-    display: block;
-    width: 80%; /* Длина полоски (можно менять) */
-    height: 0.5px; /* Тоньше линия */
-    background-color: rgba(255, 255, 255, 0.7); /* Чуть мягче цвет */
-    position: absolute;
-    bottom: -1px; /* Регулирует расстояние до второго слова */
-    left: 50%;
-    transform: translateX(-50%); /* Центрирует линию */
-}
-
-
-
-
-header {
-    width:100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    margin: 0;
-    padding: 0;
-    background: url('logo2.png') no-repeat center/cover;
-    position: relative;
-    background-color: rgba(2, 3, 38, 0.5); /* Синий цвет с прозрачностью */
-    background-blend-mode: overlay; /* Наложение синего цвета поверх фона */
-}
 header h1 {
 			mix-blend-mode:overlay;
             font-size: 1.8rem;
@@ -475,27 +256,7 @@ header h1 {
             font-weight: 400;
             transition: color 0.3s;
         }
-.main-container {
 
-    display: flex;
-    justify-content: flex-start; /* Сдвигаем весь контент влево */
-    align-items: flex-start;
-    width: 100%; /* Используем всю ширину */
-    max-width: 100%;
-    margin: 50px auto;
-/* Отступ слева */
-}
-
-/* Единая карточка для текста и иконок */
-.content-wrapper {
-
-    width: 60%; /* Сужаем, чтобы дать больше места новостям */
-    background: rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-}
 .news-widget h2{
 	        font-size: 28px;
             font-weight: 600;
@@ -503,24 +264,7 @@ header h1 {
             color: #ffffff;
 }
 
-.news-widget {
-  /* Контейнер виджета новостей */
-  width: 30%;
-  min-width: 28%;
-  background: rgba(255, 255, 255, 0.05); /* полупрозрачный платиновый фон */
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(5px); /* лёгкий эффект размытия фона (glassmorphism) */
-  transition: all 0.3s ease;
-}
-.news-item {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  margin: 10px 0;
-  padding: 15px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
+
 .news-item a {
   color: #e5e4e2;
   text-decoration: none;
@@ -547,22 +291,7 @@ header h1 {
 
 
 
-.bgsec {
-    position: relative;
-    width: 100%; /* Растягиваем на всю ширину экрана */
-    max-width: none; /* Убираем максимальную ширину */
-    margin: 40px auto; /* Центрируем */
-    padding: 50px 20px;
-    background: url('logo3.png') no-repeat center center/cover;
-    opacity: 0.6;
-    border-radius: 0; /* Убираем скругления, если они есть */
-    text-align: center;
-	display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-	left:0;
-}
+
 
 
         .bgsec h1 {
@@ -597,10 +326,6 @@ header h1 {
 
 
 /* Внутренние элементы, чтобы они не вылазили за пределы .container */
-.bgsec, .main-container, .main-container2 {
-    width: 100vw;
-    box-sizing: border-box;
-}
 
 
 
@@ -679,35 +404,11 @@ header h1 {
 
 
 
-.dynamic-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 50vh; /* Высота на половину экрана (можно поменять) */
-    background: url('image.png') no-repeat center center/cover;
-    z-index: -1;
-}
-.news-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 40vh; /* Подстроит новостной блок по центру фона */
-	margin-bottom:10vh;
-}
 
 
 
-#particles-js {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 300vh; /* Базовая высота */
-    z-index: -1;
-    pointer-events: none;
-}
+
+
 
 
 
@@ -717,29 +418,66 @@ header h1 {
 
 
 /* Общий контейнер карусели */
-.carousel-container {
-    position: relative;
-    width: 80%;
-    max-width: 1200px;
-    margin: 50px auto;
-    display: flex;
-    align-items: center;
-}
 
-/* Область, в которой прокручиваются элементы */
-.carousel {
-    overflow: hidden;
-    width: 100%;
-}
-
-/* Лента с изображениями */
-.carousel-inner {
-    display: flex;
-    gap: 20px; /* Расстояние между элементами */
-    transition: transform 0.5s ease-in-out;
-}
 
 /* Элементы карусели */
+
+
+.carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Левая кнопка */
+.left-btn {
+    left: 0;
+}
+
+/* Правая кнопка */
+.right-btn {
+    right: 0;
+}
+
+}
+
+
+
+
+html {
+            scroll-behavior: smooth;
+        }
+ @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        body {
+			position: relative;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(45deg, #020326, #020324 50%, #020326);
+    background-size: 400% 400%;
+    animation: gradientAnimation 6s ease-in-out infinite;
+            color: #e5e4e2;
+            line-height: 1.4;
+            display: block; /* Убираем flex, чтобы не центрировало */
+            text-align: left; /* Выравниваем текст влево */
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            width:100%;
+            padding: 0;
+        }
+		
+		
+.container {
+
+    width: 100%;
+    margin: 0; /* Убираем центрирование */
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .carousel-item {
     min-width: 250px; /* Ширина одного элемента */
     height: 350px; /* Высота элемента */
@@ -765,7 +503,7 @@ header h1 {
     width: 50px; /* Узкая кнопка */
     background: rgba(0, 0, 0, 0.5);
     color: white;
-    font-size: 24px;
+
     border: none;
     cursor: pointer;
     transition: background 0.3s;
@@ -774,18 +512,318 @@ header h1 {
     justify-content: center;
 }
 
-.carousel-btn:hover {
-    background: rgba(0, 0, 0, 0.8);
+.carousel-container {
+    position: relative;
+    width: 80%;
+    max-width: 1200px;
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
 }
 
-/* Левая кнопка */
-.left-btn {
+/* Область, в которой прокручиваются элементы */
+.carousel {
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Лента с изображениями */
+.carousel-inner {
+    display: flex;
+    gap: 20px; /* Расстояние между элементами */
+    transition: transform 0.5s ease-in-out;
+}
+
+#particles-js {
+    position: absolute;
+    top: 0;
     left: 0;
+    width: 100%;
+    height: 300vh; /* Базовая высота */
+    z-index: -1;
+    pointer-events: none;
 }
 
-/* Правая кнопка */
-.right-btn {
-    right: 0;
+.news-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 40vh; /* Подстроит новостной блок по центру фона */
+	margin-bottom:10vh;
 }
 
+.bgsec, .main-container, .main-container2 {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.bgsec {
+    position: relative;
+    width: 100%; /* Растягиваем на всю ширину экрана */
+    max-width: none; /* Убираем максимальную ширину */
+    margin: 40px auto; /* Центрируем */
+    padding: 50px 20px;
+    background: url('logo3.png') no-repeat center center/cover;
+    opacity: 0.6;
+    border-radius: 0; /* Убираем скругления, если они есть */
+    text-align: center;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	left:0;
+}
+
+.news-widget {
+  /* Контейнер виджета новостей */
+  width: 30%;
+  min-width: 28%;
+  background: rgba(255, 255, 255, 0.05); /* полупрозрачный платиновый фон */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px); /* лёгкий эффект размытия фона (glassmorphism) */
+  transition: all 0.3s ease;
+}
+.news-item {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  margin: 10px 0;
+  padding: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.main-container {
+
+    display: flex;
+    justify-content: flex-start; /* Сдвигаем весь контент влево */
+    align-items: flex-start;
+    width: 100%; /* Используем всю ширину */
+    max-width: 100%;
+    margin: 50px auto;
+/* Отступ слева */
+}
+
+/* Единая карточка для текста и иконок */
+.content-wrapper {
+
+    width: 60%; /* Сужаем, чтобы дать больше места новостям */
+    background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.menu-dropdown.active {
+  display: block;
+}
+        /* Логотип */
+        .logo-container {
+    position: absolute;
+    left: 20px; /* Отступ слева */
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+
+        }
+
+        .logo-img {
+			max-height: 100%;
+			mix-blend-mode:overlay;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.logo-text span {
+    position: relative;
+    padding: 2px 0;
+	line-height: 1.1;
+    display: flex;
+    justify-content: center; /* Центрирование текста */
+    align-items: center;
+}
+
+.logo-text span:first-child::after {
+    content: "";
+    display: block;
+    width: 80%; /* Длина полоски (можно менять) */
+    height: 0.5px; /* Тоньше линия */
+    background-color: rgba(255, 255, 255, 0.7); /* Чуть мягче цвет */
+    position: absolute;
+    bottom: -1px; /* Регулирует расстояние до второго слова */
+    left: 50%;
+    transform: translateX(-50%); /* Центрирует линию */
+}
+
+
+
+
+header {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    margin: 0;
+    padding: 0;
+    background: url('logo2.png') no-repeat center/cover;
+    position: relative;
+    background-color: rgba(2, 3, 38, 0.5); /* Синий цвет с прозрачностью */
+    background-blend-mode: overlay; /* Наложение синего цвета поверх фона */
+}
+
+        .navbar ul li:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+            width: 8px;
+            height: 1px;
+            transition: background 0.3s;
+        }
+
+        .navbar ul li:hover:not(:last-child)::after {
+            background: #76c7c0;
+        }
+
+.menu-icon {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1002;
+        }
+
+        .menu-icon div {
+            width: 30px;
+            height: 3px;
+            background: #ffffff;
+            border-radius: 3px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .menu-icon.active div:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .menu-icon.active div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-icon.active div:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .menu-dropdown {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            z-index: 1001;
+        }
+            .menu-icon {
+                display: none;
+            }
+
+        
+
+
+		
+		
+		
+		
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 100%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 0%; }
+    100% { background-position: 0% 50%; }
+}
+      /* Навигация */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 7vh;
+    background: linear-gradient(to bottom, #010221, rgba(30, 40, 50, 0.4));
+    z-index: 1000;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+    margin-bottom: 0; /* Убираем лишний отступ */
+	backdrop-filter: blur(10px);
+}
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .navbar ul li {
+            position: relative;
+            padding: 5px;
+        }
+
+body {
+        animation: none;
+    }
+
+
+    .card {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    /* Контактная форма */
+    .contact-form {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+
+
+
+		
+		
+
+
+            .navbar ul {
+                display: flex;
+            }
+
+.news-widget.collapsed .news-item:nth-child(n+5) {
+  display: none;
 }
