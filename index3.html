@@ -8,7 +8,7 @@
     <meta name="author" content="Анонимные Решения">
     <title>Отзывы клиентов | Анонимные Решения</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="general.css">
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.0.3/showdown.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
@@ -26,9 +26,11 @@
 }
 
 
-}
-.section-two{
-margin-top:8vh;
+section.section-one h2,section.section-two h2 {
+    font-size:30px;
+    color: #ffffff; /* Цвет, который ты хочешь */
+    font-family: 'Inter', sans-serif; /* Замени на твой шрифт */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
         .review-form input,
@@ -38,7 +40,6 @@ margin-top:8vh;
             margin-top: 15px;
             border: none;
             border-radius: 5px;
-            font-size: 1rem;
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -60,7 +61,6 @@ margin-top:8vh;
             padding: 10px;
             border: none;
             border-radius: 8px;
-            font-size: 1.1rem;
             cursor: pointer;
             transition: 0.3s;
         }
@@ -116,6 +116,7 @@ margin-top:8vh;
             }
         }
     </style>
+	<link rel="stylesheet" href="general.css">
 </head>
 <body>
 <div id="particles-js"></div>

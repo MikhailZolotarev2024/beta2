@@ -12,6 +12,9 @@
 	<script src="script.js" defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+body, #particles-js {
+    height: 800px; /* Или любое другое значение, которое тебе нужно */
+}
         .section {
             margin: 40px auto;
             max-width: 800px;
@@ -19,6 +22,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+			color: #ffffff;
         }
 
         .steps {
@@ -33,6 +37,7 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             text-align: center;
+			color: #ffffff;
         }
 
         .step img {
@@ -41,7 +46,10 @@
         }
 
         .cta {
-            margin-top: 30px;
+    display: flex; /* Это нужно для центрирования */
+    justify-content: center; /* Центрирует кнопку по горизонтали */
+    margin-top: 30px;
+    width: 100%;
         }
 
         .cta a {
@@ -60,42 +68,6 @@
             background: linear-gradient(90deg, #5aa69e, #3b7d74);
         }
 
-        .contact-form {
-            background: rgba(40, 50, 60, 0.6);
-            padding: 20px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            margin-top: 30px;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-
-        }
-
-        .contact-form button {
-            margin-top: 15px;
-            background: linear-gradient(90deg, #76c7c0, #4c9e94);
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .contact-form button:hover {
-            background: linear-gradient(90deg, #5aa69e, #3b7d74);
-        }
 
         footer {
             margin-top: 50px;

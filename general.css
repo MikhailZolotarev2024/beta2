@@ -134,6 +134,11 @@
 			
 			
 @media (min-width: 769px) {
+	
+	header{
+		min-height:300px;
+		
+	}
             .logo-container {
                 top: 10px; /* Меньше отступ сверху */
                 width: 80px; /* Уменьшаем размер логотипа */
@@ -159,7 +164,7 @@
 
     /* Корректировка высоты контейнера с частицами */
     #particles-js {
-        height: 100vh;         /* Высота равная видимой части экрана */
+        height: 100%;         /* Высота равная видимой части экрана */
     }
     
     /* Изменение высоты header */
@@ -262,7 +267,6 @@ header h1 {
 .news-widget h2{
 	        font-size: 28px;
             font-weight: 600;
-            margin-bottom: 10px;
             color: #ffffff;
 }
 
@@ -298,7 +302,7 @@ header h1 {
 
         .bgsec h1 {
 
-            margin-top: 15vh;
+            margin-top: 40px;
     font-size: 3.2rem; /* Немного больше */
     font-weight: 700; /* Сделает шрифт более выразительным */
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Легкая тень для лучшей читаемости */
@@ -336,7 +340,6 @@ header h1 {
 
 .content-wrapper {
     font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
     line-height: 1.6;
     color: #e5e4e2;
 }
@@ -359,20 +362,24 @@ header h1 {
 
 /* news-widget */
 .news-widget {
+	padding:10px;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     color: #e5e4e2;
+	margin-left:20px;
 }
 
 .news-widget h2 {
+	
     font-size: 26px;
     font-weight: 600;
     font-family: 'Playfair Display', serif;
-    margin-bottom: 15px;
 }
 
 .news-widget a {
-    color: #76c7c0;
+    padding:5px;
+	font-size:17px;
+    color: #ffffff;
     transition: color 0.3s;
 }
 
@@ -385,6 +392,7 @@ header h1 {
     font-family: 'Playfair Display', serif;
     text-align: center;
     color: #ffffff;
+	min-height:800px;
 }
 
 .bgsec h1 {
@@ -464,7 +472,9 @@ html {
 
 .carousel-item {
 
-    height: 350px; /* Высота элемента */
+    height: auto; /* Пусть высота определяется содержимым */
+    max-width: 300px; /* Максимальная ширина элемента */
+    padding: 10px;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -474,9 +484,9 @@ html {
 }
 
 .carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    width: 200px;    /* это общаковый параметр,сделать отдельно для моб и комп*/
+    height: auto; /* Теперь изображения сохраняют свои пропорции */
+    object-fit: contain; /* Картинки подгоняются под блок без обрезки */
 }
 
 /* Кнопки переключения */
@@ -513,8 +523,9 @@ html {
 /* Лента с изображениями */
 .carousel-inner {
     display: flex;
-    gap: 20px; /* Расстояние между элементами */
+    gap: 20px;
     transition: transform 0.5s ease-in-out;
+    align-items: center; /* Центрирует изображения вертикально */
 }
 
 #particles-js {
@@ -522,7 +533,7 @@ html {
     top: 0;
     left: 0;
     width: 100%;
-    height: 300vh; /* Базовая высота */
+    height: 300%; /* Базовая высота */
     z-index: -1;
     pointer-events: none;
 }
@@ -532,8 +543,8 @@ html {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 40vh; /* Подстроит новостной блок по центру фона */
-	margin-bottom:10vh;
+
+
 }
 
 .bgsec, .main-container, .main-container2 {
@@ -570,8 +581,8 @@ html {
 }
 .news-item {
   background: rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
   margin: 10px 0;
+  padding:5px;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -659,9 +670,9 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 50vh;
+    height: 275px;
     margin: 0;
-    padding: 0;
+
     background: url('logo2.png') no-repeat center/cover;
     position: relative;
     background-color: rgba(2, 3, 38, 0.5); /* Синий цвет с прозрачностью */
@@ -823,4 +834,14 @@ header {
 		
 *, *::before, *::after {
     box-sizing: border-box;
+}
+
+
+footer{
+	display:flex;
+	justify-content:center;
+}
+
+body#index2 #particles-js {
+    height: 100vh; /* Или любое другое значение, которое тебе нужно */
 }
