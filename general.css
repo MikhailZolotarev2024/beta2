@@ -84,22 +84,22 @@
 
   .icon-grid {
     grid-template-columns: 2fr; /* Одну колонку иконок на мобильном */
-    gap: 10px;
+    gap: 7px;
   }
 
   .icon-card {
-    padding: 4px;
+
     width: 20px;
     height: 20px;
   }
 
     .icon-img {
-        width: 20px;
-        height: 20px;
+        width: 17px;
+        height: 17px;
     }
 
     .icon-card p {
-        font-size: 0.9rem;
+        font-size: 9px;
     }
 
 
@@ -119,6 +119,16 @@
     margin-bottom: 8px;
 }
   
+  
+  
+.carousel{
+	height:100px;
+	max-width:65%;
+}
+.ribbon-container{
+	height:100px;
+	max-width:34%;
+}
   }
 			
 			
@@ -469,12 +479,27 @@ html {
     padding: 0;
     box-sizing: border-box;
 }
+.main-container2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 100%;
+}
 
+/* Карусель (2/3 ширины) */
+
+
+/* Контейнер с ленточками (1/3 ширины) */
+.ribbon-container {
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+}
 .carousel-item {
 
     height: auto; /* Пусть высота определяется содержимым */
-    max-width: 300px; /* Максимальная ширина элемента */
-    padding: 10px;
+    width: auto; /* Максимальная ширина элемента */
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -842,6 +867,22 @@ footer{
 	justify-content:center;
 }
 
-body#index2 #particles-js {
-    height: 100vh; /* Или любое другое значение, которое тебе нужно */
+/* Грид для иконок (2x2) */
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.icon-card {
+    background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+
+.icon-card img {
+    width: 50px;
+    height: 50px;
 }
