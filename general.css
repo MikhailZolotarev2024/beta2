@@ -29,6 +29,7 @@
         margin: 0;
         padding: 0;
         overflow-x: hidden;
+		margin:0px;
     }
 
     .content-wrapper {
@@ -43,7 +44,7 @@
         padding: 3px;
 		margin: 3px;
         box-sizing: border-box;
-        background-color: rgba(255, 255, 255, 0.05);
+        background-color: rgba(255, 255, 255, 0.7);
     }
 
     /* Хедер и другие блоки */
@@ -208,9 +209,7 @@
     /* Корректировка отступов основного содержимого */
 
 	
-.logo-img, .header h1 {
-    mix-blend-mode: normal; /* Убираем наложение */
-}
+
 
 
 
@@ -255,12 +254,13 @@
         }
 
 header h1 {
-			mix-blend-mode:overlay;
-            font-size: 1.8rem;
+
+            font-size: 25px;
             font-weight: 600;
             color: #ffffff;
             letter-spacing: 1px;
             transition: color 0.3s;
+
         }
 
 
@@ -323,13 +323,14 @@ header h1 {
 
 
         .bgsec p {
-
+            font-family: 'Montserrat', sans-serif;
             margin: 0px;
             font-size: 1.4rem; /* Средний размер между заголовком и обычным текстом */
             font-weight: 500;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
             color: #b3b3b3;
             transition: color 0.3s;
+			color: #ffffff;
         }
 
 
@@ -361,7 +362,7 @@ header h1 {
 }
 
 .content-wrapper h2 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     margin-bottom: 15px;
 }
@@ -381,9 +382,9 @@ header h1 {
 
 .news-widget h2 {
 	
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 600;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Montserrat', serif;
 }
 
 .news-widget a {
@@ -399,10 +400,10 @@ header h1 {
 
 /* bgsec */
 .bgsec {
+	height:700px;
     font-family: 'Playfair Display', serif;
     text-align: center;
     color: #ffffff;
-	min-height:800px;
 }
 
 .bgsec h1 {
@@ -414,6 +415,8 @@ header h1 {
 
 .bgsec p {
     font-size: 18px;
+    font-weight: 700;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     margin-bottom: 10px;
 }
 
@@ -424,15 +427,31 @@ header h1 {
 
 
 
+  .carousel {
+    width:100%;
+    height: auto;
+  }
 
+  .ribbon-container {
+    max-width: 34%;
+    height: auto;
+  }
 
+  .carousel-container {
+    width: 65%;
+  }
+carousel-item{
+	width:80px;
+	height:80px;
+}
+carousel-inner{
+	width:100%;
+}
 
-
-
-
-
-
-
+.carousel-item img {
+	width:180px;
+	height:180px;
+}
 
 
 /* Общий контейнер карусели */
@@ -509,7 +528,7 @@ html {
 }
 
 .carousel-item img {
-    width: 200px;    /* это общаковый параметр,сделать отдельно для моб и комп*/
+/* это общаковый параметр,сделать отдельно для моб и комп*/
     height: auto; /* Теперь изображения сохраняют свои пропорции */
     object-fit: contain; /* Картинки подгоняются под блок без обрезки */
 }
@@ -533,8 +552,6 @@ html {
 
 .carousel-container {
     position: relative;
-    width: 80%;
-    margin: 50px auto;
     display: flex;
     align-items: center;
 }
@@ -542,7 +559,7 @@ html {
 /* Область, в которой прокручиваются элементы */
 .carousel {
     overflow: hidden;
-    width: 100%;
+	position:relative;
 }
 
 /* Лента с изображениями */
@@ -583,7 +600,7 @@ html {
     max-width: none; /* Убираем максимальную ширину */
     margin: 40px auto; /* Центрируем */
     padding: 50px 20px;
-    background: url('logo3.png') no-repeat center center/cover;
+    background: url('logo4.png') no-repeat center center/cover;
     opacity: 0.6;
     border-radius: 0; /* Убираем скругления, если они есть */
     text-align: center;
@@ -593,7 +610,80 @@ html {
     justify-content: center;
 	left:0;
 }
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  color: white;
+  text-align: center;
+}
+.comparison-grid h1{
+	font-size: 20px;
+	text-align:center;
+}
+.region-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25); /* Тёмнее для читаемости */
+  border-radius: 12px;
+  padding: 25px 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4); /* мягкая тень */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1;
+}
 
+.region-block h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.circle-stat {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: conic-gradient(#76c7c0 0% 0%, rgba(255,255,255,0.08) 0% 100%);
+  transition: background 0.5s ease;
+  margin-bottom: 10px;
+}
+
+.circle-label {
+  position: absolute;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+}
+.circle-stat {
+  transform: rotate(-90deg);
+}
+.circle-label {
+  transform: rotate(90deg); /* чтобы текст внутри остался прямым */
+}
+.circle-stat strong {
+  display: block;
+  font-size: 1.4rem;
+  color: #76c7c0;
+}
+
+.our-difference {
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 30px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.1rem;
+  backdrop-filter: blur(6px);
+  color: white;
+}
 .news-widget {
   /* Контейнер виджета новостей */
   max-width: 35%;
@@ -623,16 +713,142 @@ html {
 /* Отступ слева */
 }
 
-/* Единая карточка для текста и иконок */
 .content-wrapper {
+	width:60%;
 
-    width: 60%; /* Сужаем, чтобы дать больше места новостям */
-    background: rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
+  color: #fff;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
 }
+
+
+
+.compact-wave {
+  display:flex;
+  flex-direction:column;
+  backdrop-filter: blur(10px);
+
+  border-radius: 10px;
+  color: white;
+  max-width:80%;
+  margin: auto;
+}
+
+.intro-text {
+  font-size: 24px;
+  font-weight: 300;
+  color: #f0f0f0;
+  text-shadow: 0 0 2px rgba(255,255,255,0.1);
+  padding-left:7px;
+}
+
+.wave-list {
+	padding:10px;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.wave-list-wrapper {
+  position: relative;
+  overflow: hidden; /* 👈 важно! Не даст линии выйти наружу */
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+.wave-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin:30px;
+}
+
+
+.wave-icon img {
+  width: 30px;
+  height: 30px;
+  opacity: 0.9;
+}
+
+
+
+.wave-text {
+  flex: 1; /* Текст занимает всё доступное пространство */
+  font-size: 20px;
+  line-height: 1.4;
+  padding-right: 10px;
+}
+
+.wave-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(255,255,255,0.05);
+}
+
+
+.wave-row img {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  
+}
+.wave-row-container img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 5px;
+}
+.wave-row-container {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.wave-row {
+  opacity: 0;
+  transform: translateX(0);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.wave-row:nth-child(odd) {
+  transform: translateX(-50px);
+}
+
+.wave-row:nth-child(even) {
+  flex-direction: row-reverse;
+  transform: translateX(50px);
+}
+
+.wave-row.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.wave-row.hidden {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+
+
 
 .menu-dropdown.active {
   display: block;
@@ -690,18 +906,24 @@ html {
 
 
 header {
-    width:100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 275px;
-    margin: 0;
-
-    background: url('logo2.png') no-repeat center/cover;
-    position: relative;
-    background-color: rgba(2, 3, 38, 0.5); /* Синий цвет с прозрачностью */
-    background-blend-mode: overlay; /* Наложение синего цвета поверх фона */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(to bottom, 
+    rgba(15, 20, 40, 0.95) 0%, 
+    rgba(15, 20, 50, 0.3) 40%, 
+    rgba(15, 20, 60, 0.2) 75%, 
+    rgba(0, 0, 0, 0)) 100%);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  padding: 80px 20px 60px;
+  color: white;
+  font-family: 'Playfair Display', serif;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  height:650px;;
 }
 
         .navbar ul li:not(:last-child)::after {
@@ -852,7 +1074,7 @@ header {
     padding: 0;
     overflow-x: hidden; /* Чтобы не было горизонтального скроллинга */
     box-sizing: border-box;
-    background: linear-gradient(45deg, #020326, #020324 50%, #020326);
+    background: linear-gradient(45deg, #1b2a41, #16212e, #0e151f, #263747, #14202f);
     background-size: 400% 400%;
     animation: gradientAnimation 6s ease-in-out infinite;
         }
@@ -880,9 +1102,40 @@ footer{
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   transition: background 0.3s;
+  width:auto;
+  height:110px;
 }
 
 .icon-card img {
     width: 50px;
     height: 50px;
+}
+
+
+
+
+.news-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 34%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.news-modal.visible {
+  display: flex;
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  color: white;
+  font-family: 'Playfair Display';
 }

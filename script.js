@@ -57,7 +57,7 @@ particlesJS("particles-js", {
             "value": 100, /* Количество частиц */
             "density": { "enable": true, "value_area": 800 } /* Плотность */
         },
-        "color": { "value": "#76c7c0" }, /* Цвет частиц */
+        "color": { "value": "#00ffff" }, /* Цвет частиц */
         "shape": {
             "type": "circle", /* Форма частиц */
             "stroke": { "width": 1, "color": "#ffffff" }
@@ -228,4 +228,33 @@ document.getElementById('showMoreNews').addEventListener('click', function(e) {
   const widget = document.querySelector('.news-widget');
   widget.classList.remove('collapsed');    // убираем класс, скрывающий новости
   this.style.display = 'none';            // скрываем саму кнопку "Показать больше"
+});
+
+  document.querySelectorAll('.circle-stat').forEach(circle => {
+    const percent = parseInt(circle.dataset.percent);
+    circle.style.background = `conic-gradient(#76c7c0 0% ${percent}%, rgba(255,255,255,0.08) ${percent}% 100%)`;
+  });
+  
+  function openNewsModal(title, content) {
+  document.querySelector('.news-modal-title').innerText = title;
+  document.querySelector('.news-modal-content').innerText = content;
+  document.querySelector('.news-modal').classList.add('visible');
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        console.log("✅ Обнаружен:", entry.target);
+        entry.target.classList.remove('hidden');
+        entry.target.classList.add('visible');
+        scrollObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.2
+  });
+
+  document.querySelectorAll('.wave-row').forEach(el => scrollObserver.observe(el));
 });

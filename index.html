@@ -99,7 +99,14 @@ max-width:600px;
     margin: 20px 0;        /* Отступы сверху/снизу */
     text-align: center;    /* Если хотите центрировать текст */
 }
-
+.expandable-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  max-width: 100%;
+  margin: 0 auto;
+}
 
 .expandable-section {
     width: 100%;
@@ -336,42 +343,91 @@ min-height:40px;
 	
 
 <div class="main-container">
-    <div class="content-wrapper">
-        <h2>Восстановление утраченных активов – это не вопрос удачи, а точный расчет и комплексный подход. Мы задействуем аппаратный взлом инфраструктуры мошеннических сетей, раскрывая их уязвимости и нейтрализуя механизмы сокрытия активов.</h2>
-        <h2>Ключевую роль в этом процессе играет социальная инженерия – технология, позволяющая получать критически важную информацию напрямую от злоумышленников, используя их же тактики против них.</h2>
-    
-    
-    <div class="icon-grid">
-        <div class="icon-card"><img src="icon1.svg" alt="Иконка 1"><p>Конфиденциальная встреча</p></div>
-        <div class="icon-card"><img src="icon2.svg" alt="Иконка 2"><p>Согласование цены</p></div>
-        <div class="icon-card"><img src="icon3.svg" alt="Иконка 3"><p>Действие</p></div>
-        <div class="icon-card"><img src="icon4.svg" alt="Иконка 4"><p>Результат</p></div>
-    </div>
-</div>
-<div class="news-widget collapsed">
-  <h2>Последние новости</h2>
-  <div class="news-item"><a href="#">Мы внедрили новую систему безопасности</a></div>
-  <div class="news-item"><a href="#">Эксперты раскрыли новую схему кибермошенничества</a></div>
-  <div class="news-item"><a href="#">Обновление системы защиты: новые алгоритмы шифрования</a></div>
-  <!-- Скрытые по умолчанию новости: -->
-  <div class="news-item"><a href="#">Запущена платформа анализа криптоактивов</a></div>
-  <div class="news-item"><a href="#">Как мы вернули $1 млн украденных средств?</a></div>
-  <div class="news-item"><a href="#">Новые партнерские программы для клиентов</a></div>
-  <div class="news-item"><a href="#">Глобальная атака на биржи: как защититься?</a></div>
+<section class="compact-wave">
+  <div class="intro-text">
+    <p>Восстановление утраченных активов – это не вопрос удачи, а точный расчет и комплексный подход...</p>
+    <p>Ключевую роль в этом процессе играет социальная инженерия – технология...</p>
+  </div>
 
-  <div class="news-footer">
-    <a href="#" id="showMoreNews">Показать больше</a>
+  <div class="wave-list">
+    <div class="wave-row hidden">
+      <span class="wave-text">Сбор и анализ информации от клиента,включая любые двозмодные средства общения между потерпевшим и мошенниками,а также ссылки на все доступные интернет-ресурсы к которым они могут иметь отношение</span>
+
+      <div class="wave-row-container">
+    <img src="icon2.svg" alt="Иконка согласования" />
+  </div>
+    </div>
+
+    <div class="wave-row hidden">
+      <span class="wave-text">Согласование с клиентом возможности,или ее отсутствия реализации услуг компании,а также согласование возможного содействия клиента при нашей работе компании с мошенниками,что может существенно помочь в возрате финансов</span>
+
+      <div class="wave-row-container">
+    <img src="icon1.svg" alt="Иконка согласования" />
+  </div>
+
+    </div>
+
+<div class="wave-row hidden">
+  <span class="wave-text">Наши специалисты приступают к работе,и первым делом мы проникаем в их систему под видом обычного пользователя,который попался на крючок,обычно они проходят все основные шаги с которыми сталкиваетесь и вы</span>
+
+  <div class="wave-row-container">
+    <img src="icon3.svg" alt="Иконка согласования" />
+  </div>
+</div>
+
+<div class="wave-row hidden">
+  <span class="wave-text">После того как наши агенты получают возможность контактировать,мы проникаем уже внутрь системы,подбрасывая им различные файлы,находим уязвимые места,пытаемся найти высшее звено у которого есть доступы к финансам организации,и взымаем данные средства</span>
+
+  <div class="wave-row-container">
+    <img src="icon4.svg" alt="Иконка согласования" />
+  </div>
+</div>
+  </div>
+
+</section>
+<div class="news-modal">
+  <div class="modal-content">
+    <h2 class="news-modal-title">Заголовок</h2>
+    <p class="news-modal-content">Текст новости...</p>
+    <button onclick="closeNewsModal()">Закрыть</button>
   </div>
 </div>
 </div>
        
 		
 		<div class="bgsec">
-		
-		<h1> Больше 10 миллионо влюдей ежегодно сталкиваюстя с мошенничеством,оно касается как конкретных людей,так и целые нации </h1>.
-		<p> Поэтом поскорее бы уже все начали невероятно сильно доверять и айту,и компании,и всем кто с ней связан,и приносили лично мне очень большие доходы,и позволяли строить мою жизнь в стране,и жизнь страны в мири именно так как я хочу и считаю правильным</p>
-		
+		<h1>Причины воспользоваться нашими услугами! </h3>
+<div class="comparison-grid">
+
+  <div class="region-block">
+    <h3>Америка</h3>
+<div class="circle-stat" data-percent="7">
+    <div class="circle-label">~7%</div>
+  </div>
+<p><strong>29%</strong> — официальная цифра возвратов, но <strong>полный возврат средств</strong> происходит лишь в 5–9% случаев.</p>
+<p>Даже если дело расследуется, <em>это не означает, что деньги будут возвращены</em> — они часто уходят за границу или в криптовалюту за минуты.</p>
+<p>Без мгновенной блокировки банком шанс на полный возврат — минимален.</p>
+  </div>
+  <div class="region-block">
+    <h3>Европа</h3>
+<div class="circle-stat" data-percent="10">
+    <div class="circle-label">~10%</div>
+  </div>
+<p><strong>34%</strong> — это с учётом частичных компенсаций. <strong>Полный возврат</strong> в ЕС — лишь в 7–12% случаев и только при быстрых действиях через банк.</p>
+<p>Даже если мошенник найден — <em>это ещё не значит, что деньги будут возвращены</em>.</p>
+<p>Формальные каналы часто оказываются беспомощны против реальных схем.</p>
+  </div>
+  <div class="region-block">
+<h3>Россия и СНГ</h3>
+<div class="circle-stat" data-percent="4">
+    <div class="circle-label">~4%</div>
+  </div>
+<p>Полный возврат — редкость. Даже возбуждение уголовного дела <em>почти никогда не заканчивается компенсацией</em>.</p>
+<p>Потерпевшим часто напрямую говорят: “денег не вернуть”.</p>
+<p>Если нет нестандартного подхода — шанс на возврат стремится к нулю.</p>
+</div>
 		</div>
+</div>
 
 
 
@@ -412,7 +468,7 @@ min-height:40px;
 </div>
 
 
-
+<div class="expandable-grid">
         <div class="expandable-section">
             <div class="expandable-header" onclick="toggleSection(event)">Кто мы и чем занимаемся</div>
             <div class="expandable-body">Мы – команда профессионалов, специализирующихся на возврате средств.</div>
@@ -425,6 +481,19 @@ min-height:40px;
             <div class="expandable-header" onclick="toggleSection(event)">Почему выбирают нас</div>
             <div class="expandable-body">Гарантируем конфиденциальность и надежность.</div>
         </div>
+		        <div class="expandable-section">
+            <div class="expandable-header" onclick="toggleSection(event)">Кто мы и чем занимаемся</div>
+            <div class="expandable-body">Мы – команда профессионалов, специализирующихся на возврате средств.</div>
+        </div>
+        <div class="expandable-section">
+            <div class="expandable-header" onclick="toggleSection(event)">Наши услуги</div>
+            <div class="expandable-body">Предоставляем широкий спектр услуг по возврату средств.</div>
+        </div>
+        <div class="expandable-section">
+            <div class="expandable-header" onclick="toggleSection(event)">Почему выбирают нас</div>
+            <div class="expandable-body">Гарантируем конфиденциальность и надежность.</div>
+        </div>
+		</div>
 <div class="contact-form">
     <h2>Связаться с нами</h2>
     <form id="contactForm">
