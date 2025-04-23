@@ -1,12 +1,21 @@
 // Глобальные функции
 function toggleMenu() {
-    const menuIcon = document.querySelector(".menu-icon");
-    const menuDropdown = document.querySelector(".menu-dropdown");
-    if (menuIcon && menuDropdown) {
-        menuIcon.classList.toggle("active");
-        menuDropdown.classList.toggle("active");
-    }
+  const menuIcon = document.querySelector(".menu-icon");
+  const menuDropdown = document.querySelector(".menu-dropdown");
+
+  if (menuIcon && menuDropdown) {
+    menuIcon.classList.toggle("active");
+    menuDropdown.classList.toggle("active");
+  }
 }
+
+// 👇 безопасное навешивание обработчика
+document.addEventListener("DOMContentLoaded", () => {
+  const icon = document.querySelector(".menu-icon");
+  if (icon) {
+    icon.addEventListener("click", toggleMenu);
+  }
+});
 
 function toggleSection(event) {
     const section = event.target.parentElement;
@@ -223,12 +232,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.getElementById('showMoreNews').addEventListener('click', function(e) {
-  e.preventDefault();
-  const widget = document.querySelector('.news-widget');
-  widget.classList.remove('collapsed');    // убираем класс, скрывающий новости
-  this.style.display = 'none';            // скрываем саму кнопку "Показать больше"
-});
+const showMoreBtn = document.getElementById('showMoreNews');
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      const widget = document.querySelector('.news-widget');
+      if (widget) {
+        widget.classList.remove('collapsed');
+        this.style.display = 'none';
+      }
+    });
+  }
 
   document.querySelectorAll('.circle-stat').forEach(circle => {
     const percent = parseInt(circle.dataset.percent);
@@ -243,18 +257,67 @@ document.getElementById('showMoreNews').addEventListener('click', function(e) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  const scrollObserver = new IntersectionObserver((entries) => {
+  const rows = document.querySelectorAll(".wave-row");
+
+  if (!rows.length) {
+    console.warn("⚠️ Не найдено ни одного .wave-row");
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        console.log("✅ Обнаружен:", entry.target);
-        entry.target.classList.remove('hidden');
-        entry.target.classList.add('visible');
-        scrollObserver.unobserve(entry.target);
+        console.log("🎯 Видим элемент:", entry.target);
+        entry.target.classList.remove("hidden");
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
       }
     });
   }, {
     threshold: 0.2
   });
 
-  document.querySelectorAll('.wave-row').forEach(el => scrollObserver.observe(el));
+  rows.forEach((el, i) => {
+    console.log(`📦 Подключаю к обзору элемент #${i + 1}:`, el);
+    if (el instanceof Element) {
+      observer.observe(el);
+    } else {
+      console.warn("⛔ Не является DOM-элементом:", el);
+    }
+  });
 });
+
+
+
+  
+function animateDots(grid) {
+  const activeCount = parseInt(grid.getAttribute('data-active')) || 0;
+  const dots = [];
+
+  for (let i = 0; i < 100; i++) {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (i < activeCount) dot.classList.add('active');
+    dots.push(dot);
+    grid.appendChild(dot);
+  }
+
+  dots.forEach((dot, i) => {
+    setTimeout(() => dot.classList.add('visible'), i * 20); // скорость появления
+  });
+}
+
+// Активируем при скролле
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.classList.contains('activated')) {
+      entry.target.classList.add('activated');
+      animateDots(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.dot-grid').forEach(grid => {
+  observer.observe(grid);
+});
+

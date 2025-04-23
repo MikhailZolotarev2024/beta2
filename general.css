@@ -576,8 +576,8 @@ html {
     left: 0;
     width: 100%;
     height: 300%; /* Базовая высота */
-    z-index: -1;
-    pointer-events: none;
+    z-index: 0;
+    pointer-events: auto;
 }
 
 .news-container {
@@ -600,7 +600,14 @@ html {
     max-width: none; /* Убираем максимальную ширину */
     margin: 40px auto; /* Центрируем */
     padding: 50px 20px;
-    background: url('logo4.png') no-repeat center center/cover;
+  background: linear-gradient(
+    145deg,
+    rgba(11, 20, 40, 0.9),
+    rgba(5, 15, 30, 0.9),
+    rgba(3, 10, 20, 0.95)
+  );
+  background-size: 200% 200%;
+  animation: gradientShift 12s ease infinite;
     opacity: 0.6;
     border-radius: 0; /* Убираем скругления, если они есть */
     text-align: center;
@@ -609,6 +616,11 @@ html {
     align-items: center;
     justify-content: center;
 	left:0;
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 .comparison-grid {
   display: grid;
@@ -641,37 +653,38 @@ html {
   font-size: 1.2rem;
   margin-bottom: 15px;
 }
+.dot-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
 
-.circle-stat {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: conic-gradient(#76c7c0 0% 0%, rgba(255,255,255,0.08) 0% 100%);
-  transition: background 0.5s ease;
-  margin-bottom: 10px;
+  max-width: 150px;
+  margin: 10px auto;
+}
+.dot {
+  width: 14px;
+  height: 14px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='gray' viewBox='0 0 16 16'><path d='M8 2a2 2 0 110 4 2 2 0 010-4zm0 5a4 4 0 00-4 4v3h2v-3a2 2 0 114 0v3h2v-3a4 4 0 00-4-4z'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  margin:2px;
+}
+.dot.active {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='deepskyblue' viewBox='0 0 16 16'><path d='M8 2a2 2 0 110 4 2 2 0 010-4zm0 5a4 4 0 00-4 4v3h2v-3a2 2 0 114 0v3h2v-3a4 4 0 00-4-4z'/></svg>");
+}
+.dot.visible {
+  opacity: 1;
+  transform: scale(1);
 }
 
-.circle-label {
-  position: absolute;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: white;
-}
-.circle-stat {
-  transform: rotate(-90deg);
-}
-.circle-label {
-  transform: rotate(90deg); /* чтобы текст внутри остался прямым */
-}
-.circle-stat strong {
-  display: block;
-  font-size: 1.4rem;
-  color: #76c7c0;
-}
+  .note {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #ccc;
+  }
 
 .our-difference {
   background: rgba(255,255,255,0.08);
