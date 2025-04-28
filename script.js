@@ -321,3 +321,13 @@ document.querySelectorAll('.dot-grid').forEach(grid => {
   observer.observe(grid);
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+  if (!document.cookie.includes('cookiesAccepted=true')) {
+    document.getElementById('cookieConsent').style.display = 'flex';
+  }
+
+  document.getElementById('acceptCookiesBtn').addEventListener('click', function() {
+    document.cookie = "cookiesAccepted=true; path=/; max-age=31536000"; // 1 год
+    document.getElementById('cookieConsent').style.display = 'none';
+  });
+});

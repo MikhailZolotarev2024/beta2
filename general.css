@@ -1,7 +1,13 @@
 
 @media (max-width: 768px) {
 
+            .menu-icon {
+                display: flex;
+            }
 
+            .navbar ul {
+                display: none;
+            }
 
     /* Основной контейнер 
     .container {
@@ -47,13 +53,7 @@
         background-color: rgba(255, 255, 255, 0.7);
     }
 
-    /* Хедер и другие блоки */
-    header, .bgsec, footer {
-        width: 100%;
-        max-width: 100%;
-        padding: 0;
-        box-sizing: border-box;
-    }
+
 
 
     /* Убираем любые ограничения на ширину */
@@ -69,18 +69,9 @@
     font-family: 'Montserrat', sans-serif; /* Чтобы был единый стиль */
 }
 
-.content-wrapper h2, .news-widget a {
-    font-size: 9px; /* Принудительно задать одинаковый размер */
-    line-height: 1.4;
-    text-decoration: none;
-}
 
- .news-widget h2 {
-    font-size: 11px; /* Принудительно задать одинаковый размер */
-    line-height: 1.4;
-    text-decoration: none;
-	font-family: 'Montserrat', sans-serif !important;
-}
+
+
 
 
   .icon-grid {
@@ -99,33 +90,18 @@
         height: 17px;
     }
 
-    .icon-card p {
-        font-size: 9px;
-    }
 
 
 
   /* Navbar оптимизация */
 
   
-  .bgsec h1 {
-    font-size: 12px;
-    font-weight: 700;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px;
+gin-bottom: 8px;
 }
+  
+  
+  
 
-.bgsec p {
-    font-size: 8px;
-    margin-bottom: 8px;
-}
-  
-  
-  
-.carousel{
-	height:100px;
-	max-width:65%;
-}
 .ribbon-container{
 	height:100px;
 	max-width:34%;
@@ -145,7 +121,13 @@
 			
 			
 @media (min-width: 769px) {
-	
+	            .navbar ul {
+                display: flex;
+            }
+
+            .menu-icon {
+                display: none;
+            }
 	header{
 		min-height:300px;
 		
@@ -198,13 +180,7 @@
     
     /* Адаптация блока с фоновым изображением (.bgsec) */
 
-    .bgsec h1 {
-        font-size: 1rem;       /* Корректировка размера заголовка */
-    }
-    
-    .bgsec p {
-        font-size: 0.5rem;       /* Корректировка размера параграфа */
-    }
+
 
     /* Корректировка отступов основного содержимого */
 
@@ -253,38 +229,11 @@
             transition: background 0.3s, color 0.3s;
         }
 
-header h1 {
-
-            font-size: 25px;
-            font-weight: 600;
-            color: #ffffff;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-
-        }
 
 
 
-        header p {
-            text-align:right;
-            margin: 0px;
-            font-size: 1.2rem;
-            color: #b3b3b3;
-            font-weight: 400;
-            transition: color 0.3s;
-        }
-
-.news-widget h2{
-	        font-size: 28px;
-            font-weight: 600;
-            color: #ffffff;
-}
 
 
-.news-item a {
-  color: #e5e4e2;
-  text-decoration: none;
-}
 .news-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
@@ -310,28 +259,7 @@ header h1 {
 
 
 
-        .bgsec h1 {
 
-            margin-top: 40px;
-    font-size: 3.2rem; /* Немного больше */
-    font-weight: 700; /* Сделает шрифт более выразительным */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Легкая тень для лучшей читаемости */
-            color: #ffffff;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-        }
-
-
-        .bgsec p {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0px;
-            font-size: 1.4rem; /* Средний размер между заголовком и обычным текстом */
-            font-weight: 500;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-            color: #b3b3b3;
-            transition: color 0.3s;
-			color: #ffffff;
-        }
 
 
 
@@ -349,27 +277,7 @@ header h1 {
 
 /*  Шрифты  */
 
-.content-wrapper {
-    font-family: 'Montserrat', sans-serif;
-    line-height: 1.6;
-    color: #e5e4e2;
-}
 
-.content-wrapper h1 {
-    font-size: 32px;
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-
-.content-wrapper h2 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-.content-wrapper p {
-    margin-bottom: 10px;
-}
 
 /* news-widget */
 .news-widget {
@@ -380,45 +288,14 @@ header h1 {
 	margin-left:20px;
 }
 
-.news-widget h2 {
-	
-    font-size: 20px;
-    font-weight: 600;
-    font-family: 'Montserrat', serif;
-}
 
-.news-widget a {
-    padding:5px;
-	font-size:17px;
-    color: #ffffff;
-    transition: color 0.3s;
-}
 
 .news-widget a:hover {
     color: #e5e4e2;
 }
 
 /* bgsec */
-.bgsec {
-	height:700px;
-    font-family: 'Playfair Display', serif;
-    text-align: center;
-    color: #ffffff;
-}
 
-.bgsec h1 {
-    font-size: 40px;
-    font-weight: 700;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px;
-}
-
-.bgsec p {
-    font-size: 18px;
-    font-weight: 700;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    margin-bottom: 10px;
-}
 
 
         /* Контент */
@@ -440,11 +317,11 @@ header h1 {
   .carousel-container {
     width: 65%;
   }
-carousel-item{
+.carousel-item{
 	width:80px;
 	height:80px;
 }
-carousel-inner{
+.carousel-inner{
 	width:100%;
 }
 
@@ -515,59 +392,78 @@ html {
     display: flex;
     flex-direction: column;
 }
-.carousel-item {
-
-    height: auto; /* Пусть высота определяется содержимым */
-    width: auto; /* Максимальная ширина элемента */
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.carousel-item img {
-/* это общаковый параметр,сделать отдельно для моб и комп*/
-    height: auto; /* Теперь изображения сохраняют свои пропорции */
-    object-fit: contain; /* Картинки подгоняются под блок без обрезки */
-}
-
-/* Кнопки переключения */
-.carousel-btn {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 50px; /* Узкая кнопка */
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .carousel-container {
-    position: relative;
-    display: flex;
-    align-items: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 65%;
+  margin: auto;
+  overflow: hidden;
+
 }
 
-/* Область, в которой прокручиваются элементы */
+/* Видимая область */
 .carousel {
-    overflow: hidden;
-	position:relative;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+    height:180px;
+	width:100%;
 }
 
-/* Лента с изображениями */
+/* Лента картинок */
 .carousel-inner {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.5s ease-in-out;
-    align-items: center; /* Центрирует изображения вертикально */
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 20px;
+  align-items: center;
+  width: fit-content;
+}
+
+/* Отдельный элемент карусели */
+.carousel-item {
+  flex: 0 0 auto;
+  width: 180px;
+  height: 180px;
+  background: #fff;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Изображения в элементах */
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* Кнопки прокрутки */
+.carousel-btn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.left-btn {
+  left: 0;
+}
+
+.right-btn {
+  right: 0;
 }
 
 #particles-js {
@@ -589,7 +485,7 @@ html {
 
 }
 
-.bgsec, .main-container, .main-container2 {
+.main-container, .main-container2 {
     width: 100%;
     box-sizing: border-box;
 }
@@ -602,13 +498,13 @@ html {
     padding: 50px 20px;
   background: linear-gradient(
     145deg,
-    rgba(11, 20, 40, 0.9),
-    rgba(5, 15, 30, 0.9),
-    rgba(3, 10, 20, 0.95)
+    rgba(11, 20, 40, 0.6),
+    rgba(5, 15, 30, 0.6),
+    rgba(3, 10, 20, 0.6)
   );
   background-size: 200% 200%;
   animation: gradientShift 12s ease infinite;
-    opacity: 0.6;
+  opacity: 1; /* убираем отдельную прозрачность */
     border-radius: 0; /* Убираем скругления, если они есть */
     text-align: center;
 	display: flex;
@@ -622,6 +518,20 @@ html {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+}}
+
 .comparison-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -631,10 +541,7 @@ html {
   color: white;
   text-align: center;
 }
-.comparison-grid h1{
-	font-size: 20px;
-	text-align:center;
-}
+
 .region-block {
   position: relative;
   display: flex;
@@ -644,8 +551,8 @@ html {
   border-radius: 12px;
   padding: 25px 20px;
   box-shadow: 0 0 15px rgba(0,0,0,0.4); /* мягкая тень */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   z-index: 1;
 }
 
@@ -657,8 +564,8 @@ html {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
 
-  max-width: 150px;
-  margin: 10px auto;
+  max-width: auto;
+  margin: 0 auto;
 }
 .dot {
   width: 14px;
@@ -668,13 +575,15 @@ html {
   background-repeat: no-repeat;
   background-position: center;
   opacity: 0;
-  transform: scale(0.8);
+  transform: scale(1);
   transition: opacity 0.3s ease, transform 0.3s ease;
   margin:2px;
 }
 .dot.active {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='deepskyblue' viewBox='0 0 16 16'><path d='M8 2a2 2 0 110 4 2 2 0 010-4zm0 5a4 4 0 00-4 4v3h2v-3a2 2 0 114 0v3h2v-3a4 4 0 00-4-4z'/></svg>");
+  animation: pulse 2s infinite ease-in-out;
 }
+
 .dot.visible {
   opacity: 1;
   transform: scale(1);
@@ -740,7 +649,7 @@ html {
 .compact-wave {
   display:flex;
   flex-direction:column;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(6px);
 
   border-radius: 10px;
   color: white;
@@ -760,7 +669,6 @@ html {
 	padding:10px;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(255,255,255,0.1);
 }
 
 .wave-list-wrapper {
@@ -929,14 +837,14 @@ header {
     rgba(15, 20, 50, 0.3) 40%, 
     rgba(15, 20, 60, 0.2) 75%, 
     rgba(0, 0, 0, 0)) 100%);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   padding: 80px 20px 60px;
   color: white;
   font-family: 'Playfair Display', serif;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
-  height:650px;;
+  height:100vh;;
 }
 
         .navbar ul li:not(:last-child)::after {
@@ -1151,4 +1059,182 @@ footer{
   width: 90%;
   color: white;
   font-family: 'Playfair Display';
+}
+.site-footer {
+  background: linear-gradient(145deg, #050f1e, #0b1428);
+  color: #ccc;
+  padding: 60px 20px 30px;
+  font-size: 14px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-grid {
+  display: flex;
+  flex-direction: row; /* 👈 меняем на row */
+  justify-content: space-around; /* 👈 равномерное распределение */
+  flex-wrap: wrap;
+  gap: 40px;
+
+  margin-bottom: 40px;
+  align-items: flex-start; /* 👈 чтоб начинались сверху */
+}
+
+.footer-column h4 {
+  font-size: 16px;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column li {
+  margin-bottom: 10px;
+}
+
+.footer-column a {
+  color: #ccc;
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+  color: #00bfff;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 13px;
+  color: #777;
+}
+.footer-column {
+  flex: 1; /* 👈 каждая колонка тянется на равную ширину */
+  min-width: 200px; /* 👈 чтобы на мобилках красиво складывалось */
+}
+.cookie-consent {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 20, 40, 0.95);
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  color: #ccc;
+  font-size: 14px;
+  max-width: 90%;
+  z-index: 9999;
+  display: none; /* Изначально скрыт */
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.cookie-consent p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.cookie-consent a {
+  color: #00bfff;
+  text-decoration: underline;
+}
+
+.cookie-consent button {
+  background: #00bfff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 20px;
+  transition: background 0.3s;
+}
+
+.cookie-consent button:hover {
+  background: #66d9ff;
+}
+.no-select {
+  /* Для современных браузеров */
+  user-select: none;
+
+  /* Префиксы для старых версий */
+  -webkit-user-select: none;  /* Chrome/Safari/Opera */
+  -moz-user-select: none;     /* Старые версии Firefox */
+  -ms-user-select: none;      /* IE/старые Edge */
+  -o-user-select: none;       /* Некоторые старые браузеры Opera */
+}
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  color: #ccc; /* светло-серый для основного текста */
+  background: #0b1428; /* красивый темный фон */
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* === Заголовки === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  color: #fff; /* яркий белый для контраста */
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+}
+
+/* === Адаптивные размеры заголовков через clamp() === */
+h1 {
+  font-size: clamp(32px, 6vw, 60px);
+}
+
+h2 {
+  font-size: clamp(24px, 4vw, 48px);
+}
+
+h3 {
+  font-size: clamp(20px, 3vw, 36px);
+}
+h4 {
+  font-size: clamp(16px, 2vw, 24px);
+}
+h5 {
+  font-size: clamp(12px, 1vw, 12px);
+}
+p {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  color: #bbb; /* чуть мягче основного текста */
+  margin-bottom: 1em;
+  max-width: 700px;
+}
+
+/* === Кнопки и ссылки === */
+a, button {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover, button:hover {
+  color: #66d9ff;
+}
+.intro-text{
+	text-align: center;
+	margin:auto;
 }

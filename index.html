@@ -35,11 +35,6 @@ html {
 
 /* Новостной виджет справа */
 
-header h1, header p {
-    margin: 0; /* Убираем стандартные отступы */
-    padding: 0;
-    text-align: center; /* Текст по центру */
-}
 
 
  .contact-form input,
@@ -85,20 +80,7 @@ max-width:600px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
-        .card h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
-        .card h3{
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;       /* Можно чуть увеличить, например, 1.1rem */
-    line-height: 1.6;      /* Комфортная межстрочная высота */
-    color: #b3b3b3;        /* Мягкий светлый оттенок на тёмном фоне */
-    margin: 20px 0;        /* Отступы сверху/снизу */
-    text-align: center;    /* Если хотите центрировать текст */
-}
+
 .expandable-grid{
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -203,38 +185,6 @@ min-height:40px;
 
 
 
-.icon-card p {
-    margin: 0;
-    font-size: 1rem;
-    color: #b3b3b3;
-    font-weight: 400;
-    transition: color 0.3s;
-}
-
-.icon-card:hover p {
-    color: #e0e0e0;
-}
-
-        /* Медиа-запросы */
-        @media (max-width: 768px) {
-            .logo-container {
-                top: 10px; /* Меньше отступ сверху */
-                width: 80px; /* Уменьшаем размер логотипа */
-                height: 80px;
-            }
-
-            .logo-img {
-        width: 80px;
-        height: 80px;
-            }
-
-            .menu-icon {
-                display: flex;
-            }
-
-            .navbar ul {
-                display: none;
-            }
 
 
 
@@ -249,47 +199,19 @@ min-height:40px;
 
 
 
-            .card h2 {
-                font-size: 1.4rem;
-            }
 
-            .card p {
-                font-size: 0.9rem;
-            }
 
-            .logo-container {
-                top: 10px;
-            }
 
-            .logo-img {
-                width: 80px;
-                height: 80px;
-            }
+
+
 
 
 
         }
 
-        @media (min-width: 769px) {
-            .navbar ul {
-                display: flex;
-            }
 
-            .menu-icon {
-                display: none;
-            }
-        }
 		
-.no-select {
-  /* Для современных браузеров */
-  user-select: none;
 
-  /* Префиксы для старых версий */
-  -webkit-user-select: none;  /* Chrome/Safari/Opera */
-  -moz-user-select: none;     /* Старые версии Firefox */
-  -ms-user-select: none;      /* IE/старые Edge */
-  -o-user-select: none;       /* Некоторые старые браузеры Opera */
-}
     </style>
 
 
@@ -345,8 +267,8 @@ min-height:40px;
 <div class="main-container">
 <section class="compact-wave">
   <div class="intro-text">
-    <p>Восстановление утраченных активов – это не вопрос удачи, а точный расчет и комплексный подход...</p>
-    <p>Ключевую роль в этом процессе играет социальная инженерия – технология...</p>
+    <h4>Восстановление утраченных активов – это не вопрос удачи, а точный расчет и комплексный подход...</h4>
+    <h4>Ключевую роль в этом процессе играет социальная инженерия – технология...</h4>
   </div>
 
   <div class="wave-list">
@@ -400,27 +322,27 @@ min-height:40px;
 <div class="comparison-grid">
 
   <div class="region-block">
-    <h3>Америка</h3>
+    <h3><strong>Америка</strong></h3>
 <div class="dot-grid" data-active="7"></div>
 <p><strong>29%</strong> — официальная цифра возвратов, но <strong>полный возврат средств</strong> происходит лишь в 5–9% случаев.</p>
-<p>Даже если дело расследуется, <em>это не означает, что деньги будут возвращены</em> — они часто уходят за границу или в криптовалюту за минуты.</p>
+<p>Даже если дело расследуется, это не означает, что деньги будут возвращены — они часто уходят за границу или в криптовалюту за минуты.</p>
 <p>Без мгновенной блокировки банком шанс на полный возврат — минимален.</p>
   </div>
 
   
   <div class="region-block">
-    <h3>Европа</h3>
+    <h3><strong>Европа</strong></h3>
 <div class="dot-grid" data-active="9"></div>
-<p><strong>34%</strong> — это с учётом частичных компенсаций. <strong>Полный возврат</strong> в ЕС — лишь в 7–12% случаев и только при быстрых действиях через банк.</p>
-<p>Даже если мошенник найден — <em>это ещё не значит, что деньги будут возвращены</em>.</p>
+<p><strong>34%</strong> — это с учётом частичных компенсаций. Полный возврат в ЕС — лишь в 7–12% случаев и только при быстрых действиях через банк.</p>
+<p>Даже если мошенник найден — это ещё не значит, что деньги будут возвращены.</p>
 <p>Формальные каналы часто оказываются беспомощны против реальных схем.</p>
   </div>
   
   
   <div class="region-block">
-<h3>Россия и СНГ</h3>
+<h3><strong>Россия и СНГ</strong></h3>
 <div class="dot-grid" data-active="3"></div>
-<p>Полный возврат — редкость. Даже возбуждение уголовного дела <em>почти никогда не заканчивается компенсацией</em>.</p>
+<p>Полный возврат — редкость. Даже возбуждение уголовного дела почти никогда не заканчивается компенсацией.</p>
 <p>Потерпевшим часто напрямую говорят: “денег не вернуть”.</p>
 <p>Если нет нестандартного подхода — шанс на возврат стремится к нулю.</p>
 </div>
@@ -456,9 +378,9 @@ min-height:40px;
 </div>
     <!-- Блок ленточек (1/3 ширины) -->
     <div class="ribbon-container">
-<div class="card">
-     <h2>Наши партнеры!!!!</h2>
-    </div>
+
+     <h4>Наши партнеры,а также приложения,с которыми мы сотрудничаем,а так же которые помогают вам более надежно хранить свои крипто-активы,что бы реже обращаться к нам</h4>
+
 </div>
 
 
@@ -501,11 +423,49 @@ min-height:40px;
         <button type="submit" id="submitBtn">Отправить</button>
     </form>
 </div>
-    
-    <footer>
-        <p>© 2025 Анонимные Решения. Все права защищены.</p>
-    </footer>
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      
+      <div class="footer-column">
+        <h4>Компания</h4>
+        <ul>
+          <li><a href="#">О нас</a></li>
+          <li><a href="#">Юридический раздел</a></li>
+          <li><a href="#">Отзывы</a></li>
+          <li><a href="#">Контакты</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="#">Возврат средств</a></li>
+          <li><a href="#">Проверка криптоактивов</a></li>
+          <li><a href="#">Консультация</a></li>
+        </ul>
+      </div>
 
+
+      <div class="footer-column">
+        <h4>Документы</h4>
+        <ul>
+          <li><a href="#">Политика конфиденциальности</a></li>
+          <li><a href="#">Пользовательское соглашение</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Confidential Solutions. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+<div id="cookieConsent" class="cookie-consent">
+  <p>Мы используем файлы cookie для улучшения работы сайта. Продолжая пользоваться сайтом, вы соглашаетесь с нашей <a href="#">политикой конфиденциальности</a>.</p>
+  <button id="acceptCookiesBtn">Принять</button>
+</div>
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script src="script.js"></script>
