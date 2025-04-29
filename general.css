@@ -472,8 +472,8 @@ html {
     left: 0;
     width: 100%;
     height: 300%; /* Базовая высота */
-    z-index: 0;
-    pointer-events: auto;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .news-container {
