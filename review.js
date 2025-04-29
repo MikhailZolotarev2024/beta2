@@ -1,49 +1,47 @@
-fetch('reviews.json')
-  .then(response => response.json())
-  .then(data => {
-    const reviewsGrid = document.querySelector('.reviews-grid');
-    data.forEach(review => {
-      const card = document.createElement('div');
-      card.classList.add('review-card');
-
-      card.innerHTML = `
-        <div class="review-header">
-          <div class="avatar">${review.letter}</div>
-          <div>
-            <div class="review-name">${review.name} ${review.flag}</div>
-            <div class="review-lang">${review.lang.toUpperCase()}</div>
-          </div>
-        </div>
-        <div class="review-text">${review.short}</div>
-        <button class="read-more" data-full="${review.full}">Читать полностью</button>
-      `;
-
-      reviewsGrid.appendChild(card);
-    });
-
-    attachReadMoreLogic(); // Привязываем обработчики к новым кнопкам
-  });
-
-function attachReadMoreLogic() {
-  const readMoreButtons = document.querySelectorAll('.read-more');
+document.addEventListener('DOMContentLoaded', () => {
+  const reviewsGrid = document.querySelector('.reviews-grid');
   const modal = document.getElementById('modal');
   const modalText = document.getElementById('modal-text');
   const closeModal = document.querySelector('.close-modal');
 
-  readMoreButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      modalText.textContent = button.getAttribute('data-full');
-      modal.style.display = 'flex';
+  fetch('reviews.json')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(review => {
+        const card = document.createElement('div');
+        card.className = 'review-card';
+
+        card.innerHTML = `
+          <div class="review-header">
+            <div class="avatar">${review.name.charAt(0)}</div>
+            <div>
+              <div class="review-name">${review.name} <small>${review.flag}</small></div>
+              <div class="review-lang">${review.lang}</div>
+            </div>
+          </div>
+          <div class="review-text">${review.text.substring(0, 120)}...</div>
+          <button class="read-more" data-full="${review.text}">Читать полностью</button>
+        `;
+
+        reviewsGrid.appendChild(card);
+      });
+
+      // после генерации отзывов вешаем обработчики
+      document.querySelectorAll('.read-more').forEach(button => {
+        button.addEventListener('click', () => {
+          modalText.textContent = button.getAttribute('data-full');
+          modal.classList.add('show');
+        });
+      });
     });
-  });
 
   closeModal.addEventListener('click', () => {
-    modal.style.display = 'none';
+    modal.classList.remove('show');
   });
 
   window.addEventListener('click', (e) => {
-    if (e.target == modal) {
-      modal.style.display = 'none';
+    if (e.target === modal) {
+      modal.classList.remove('show');
     }
   });
-}
+});
