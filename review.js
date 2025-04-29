@@ -13,20 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         card.innerHTML = `
           <div class="review-header">
-            <div class="avatar">${review.name.charAt(0)}</div>
+            <div class="avatar">${review.letter}</div>
             <div>
               <div class="review-name">${review.name} <small>${review.flag}</small></div>
               <div class="review-lang">${review.lang}</div>
             </div>
           </div>
-          <div class="review-text">${review.text.substring(0, 120)}...</div>
-          <button class="read-more" data-full="${review.text}">Читать полностью</button>
+          <div class="review-text">${review.short}</div>
+          <button class="read-more" data-full="${review.full}">Читать полностью</button>
         `;
 
         reviewsGrid.appendChild(card);
       });
 
-      // после генерации отзывов вешаем обработчики
       document.querySelectorAll('.read-more').forEach(button => {
         button.addEventListener('click', () => {
           modalText.textContent = button.getAttribute('data-full');
