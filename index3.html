@@ -14,102 +14,114 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 
-.section-one,.section-two {
-    width: 80%; /* Делаем шире */
-    max-width: 900px; /* Чтобы на больших экранах не было слишком широко */
-    background: rgba(40, 50, 60, 0.5);
-    padding: 0px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-	text-align:center;
-	margin: 0 auto;
-}
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 40px;
+    }
 
+    .review-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      overflow: hidden;
+      min-height: 200px;
+    }
 
-section.section-one h2,section.section-two h2 {
-    font-size:30px;
-    color: #ffffff; /* Цвет, который ты хочешь */
-    font-family: 'Inter', sans-serif; /* Замени на твой шрифт */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-}
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
 
-        .review-form input,
-        .review-form textarea {
-            width: 90%;
-            padding: 10px;
-            margin-top: 15px;
-            border: none;
-            border-radius: 5px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-			
-        }
+    .avatar {
+      width: 40px;
+      height: 40px;
+      background: #00e0e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      color: #000;
+    }
 
+    .review-name {
+      font-weight: 600;
+    }
 
+    .review-lang {
+      font-size: 14px;
+      opacity: 0.7;
+    }
 
+    .review-text {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+      max-height: 80px;
+      overflow: hidden;
+      position: relative;
+    }
 
+    .read-more {
+      margin-top: auto;
+      align-self: center;
+      background: none;
+      border: 1px solid #00e0e0;
+      padding: 5px 10px;
+      border-radius: 8px;
+      color: #00e0e0;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
 
+    .read-more:hover {
+      background: #00e0e055;
+    }
 
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      display: none;
+    }
 
+    .modal-content {
+      background: #0b1428;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 90%;
+      position: relative;
+    }
 
-
-        .review-form button {
-            margin-top: 10px;
-            background: linear-gradient(90deg, #76c7c0, #4c9e94);
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .review-form button:hover {
-            background: linear-gradient(90deg, #5aa69e, #3b7d74);
-        }
-
-.review-list {
-    display: flex;
-    flex-wrap: wrap;
-	
-    justify-content: center;
-    gap: 0px; /* Расстояние между карточками */
-}
-
-.review {
-    width: 90%; /* Две карточки в ряд */
-    max-width: 400px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s;
-	min-width:400px;
-}
-
-
-
-.review strong {
-    display: block;
-    color: #ffffff;
-    margin-bottom: 5px;
-    font-size: 1.1rem;
-}
-
-.review p {
-    color: #d0d8e0;
-    text-align: left;
-    font-size: 0.95rem;
-}
-
-.review small {
-    display: block;
-    color: #a0a0a0;
-    font-size: 0.8rem;
-    margin-top: 5px;
-    text-align: right;
-}
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
         @media (max-width: 768px) {
             .review-form input, .review-form textarea {
                 width: 100%;
@@ -153,21 +165,18 @@ section.section-one h2,section.section-two h2 {
         <p>Эффективность. Конфиденциальность. Результат.</p>
     </header>
 
-    <section class="section-one">
-        <h2>Добавить отзыв</h2>
-        <div class="review-form">
-            <input type="text" id="reviewName" placeholder="Ваше имя" required>
-            <textarea id="reviewText" placeholder="Ваш отзыв" required></textarea>
-            <button onclick="addReview()">Оставить отзыв</button>
-        </div>
-    </section>
+  <div class="reviews-grid">
+    <!-- Здесь ничего руками не пишем, сюда динамически загрузятся карточки -->
+  </div>
 
-<section class="section-two">
-    <h2>Отзывы наших клиентов</h2>
-    <div class="review-list">
-        <!-- Сюда добавляются отзывы -->
+  <!-- Модальное окно для полного текста отзыва -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <button class="close-modal">&times;</button>
+      <div id="modal-text"></div>
     </div>
-</section>
+  </div>
+
 
     <footer>
         <p>© 2025 Анонимные Решения. Все права защищены.</p>

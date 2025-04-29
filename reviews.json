@@ -1,12 +1,26 @@
 [
   {
-    "name": "CrazyCat",
-    "date": "3 марта 2025, 13:20",
-    "text": "Классные ребята, вернули бабки за неделю! Я в шоке, думал всё пропало. Спасибо!"
+    "name": "John D.",
+    "lang": "en",
+    "flag": "🇬🇧",
+    "letter": "J",
+    "short": "Thanks to the team! I got my money back in 10 days. Amazing service and communication...",
+    "full": "Thanks to the team! I got my money back in 10 days. Amazing service and constant communication. Definitely recommend them!"
   },
   {
-    "name": "Lena_Star",
-    "date": "28 февраля 2025, 15:10",
-    "text": "Спасибо огромное! Деньги вернули быстро, всё анонимно, как и обещали. Вы лучшие!"
+    "name": "Анна К.",
+    "lang": "ru",
+    "flag": "🇷🇺",
+    "letter": "А",
+    "short": "Очень благодарна за помощь! Вернули деньги через 2 недели...",
+    "full": "Очень благодарна за помощь! Мне вернули средства спустя 2 недели. Постоянная поддержка, всё вежливо и профессионально."
+  },
+  {
+    "name": "Laura M.",
+    "lang": "es",
+    "flag": "🇪🇸",
+    "letter": "L",
+    "short": "Excelente servicio, muy atentos todo el tiempo...",
+    "full": "Excelente servicio, todo el equipo estuvo muy atento. Recuperé mi dinero después de 15 días de espera. ¡Muy recomendado!"
   }
 ]

@@ -1102,11 +1102,14 @@ footer{
   color: #ccc;
   text-decoration: none;
   font-weight: 400;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  display: inline-block; /* 👈 обязательно чтобы работал transform */
 }
 
 .footer-column a:hover {
   color: #00bfff;
+  transform: scale(1.05); /* 👈 лёгкое увеличение */
+  text-shadow: 0 0 8px rgba(0,191,255,0.6); /* 👈 лёгкое свечение */
 }
 
 .footer-bottom {
