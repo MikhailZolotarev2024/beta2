@@ -78,7 +78,16 @@
       overflow: hidden;
       position: relative;
     }
-
+    .add-review-btn {
+      margin-bottom: 20px;
+      background-color: #00e0e0;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
     .read-more {
       margin-top: auto;
       align-self: center;
@@ -114,8 +123,27 @@
   align-items: center;
   justify-content: center;
     }
-
-
+.add-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+.add-modal-content {
+      background: #0b1428;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 90%;
+      position: relative;
+      color: white;
+    }
     .modal.show {
       opacity: 1;
       transform: scale(1);
@@ -188,15 +216,25 @@
         <p>Эффективность. Конфиденциальность. Результат.</p>
     </header>
 
-  <div class="reviews-grid">
-    <!-- Здесь ничего руками не пишем, сюда динамически загрузятся карточки -->
+  <div class="reviews-container">
+    <button class="add-review-btn" onclick="openAddModal()">Оставить отзыв</button>
+    <h1>Отзывы клиентов</h1>
+
+    <div class="reviews-grid" id="reviews"></div>
   </div>
 
-  <!-- Модальное окно для полного текста отзыва -->
   <div class="modal" id="modal">
     <div class="modal-content">
-      <button class="close-modal">&times;</button>
+      <button class="close-modal" onclick="closeModal()">&times;</button>
       <div id="modal-text"></div>
+    </div>
+  </div>
+
+  <div class="add-modal" id="addModal">
+    <div class="add-modal-content">
+      <button class="close-modal" onclick="closeAddModal()">&times;</button>
+      <h2>Форма отзыва</h2>
+      <p>Скоро здесь можно будет оставить отзыв!</p>
     </div>
   </div>
 

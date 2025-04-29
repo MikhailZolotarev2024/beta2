@@ -44,3 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+
+
+    function openAddModal() {
+      document.getElementById('addModal').style.display = 'flex';
+    }
+    function closeAddModal() {
+      document.getElementById('addModal').style.display = 'none';
+    }
+    function closeModal() {
+      document.getElementById('modal').classList.remove('show');
+    }
