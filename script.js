@@ -120,30 +120,23 @@ particlesJS("particles-js", {
 
 
 
-        function loadMarkdown(section) {
-            fetch(`law/${section}.md`)
-                .then(response => response.text())
-                .then(text => {
-                    const converter = new showdown.Converter();
-                    document.getElementById("content").innerHTML = converter.makeHtml(text);
-                })
-                .catch(error => console.error("Ошибка загрузки:", error));
-        }
+function loadMarkdown(section) {
+    fetch(`law/${section}.md`)
+        .then(response => {
+            if (!response.ok) throw new Error(`Ошибка загрузки ${section}.md`);
+            return response.text();
+        })
+        .then(text => {
+            const converter = new showdown.Converter();
+            document.getElementById("content").innerHTML = converter.makeHtml(text);
+        })
+        .catch(error => console.error("Ошибка:", error));
+}
 
-        document.addEventListener("DOMContentLoaded", () => loadMarkdown("confidentiality"));
-
-    function loadMarkdown(section) {
-        fetch(`law/${section}.md`)
-            .then(response => {
-                if (!response.ok) throw new Error(`Ошибка загрузки ${section}.md`);
-                return response.text();
-            })
-            .then(text => {
-                const converter = new showdown.Converter();
-                document.getElementById("content").innerHTML = converter.makeHtml(text);
-            })
-            .catch(error => console.error("Ошибка:", error));
-    }
+// Загружаем первый раздел сразу после загрузки страницы
+document.addEventListener("DOMContentLoaded", () => {
+    loadMarkdown("point1");
+});
 
     // ✅ Загружаем первый раздел сразу после загрузки страницы  
     window.onload = function() {
@@ -331,3 +324,5 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('cookieConsent').style.display = 'none';
   });
 });
+
+
