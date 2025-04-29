@@ -44,9 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
-
-
     function openAddModal() {
       document.getElementById('addModal').style.display = 'flex';
     }
@@ -56,3 +53,82 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeModal() {
       document.getElementById('modal').classList.remove('show');
     }
+ document.getElementById('reviewForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = this.name.value;
+    const lang = this.lang.value;
+    const flag = this.flag.value;
+    const short = this.short.value;
+    const full = this.full.value;
+    const letter = name.trim()[0].toUpperCase();
+
+    const newCard = document.createElement('div');
+    newCard.className = 'review-card';
+    newCard.innerHTML = `
+      <div class="review-header">
+        <div class="avatar">${letter}</div>
+        <div>
+          <div class="review-name">${name} <small>${flag}</small></div>
+          <div class="review-lang">${lang}</div>
+        </div>
+      </div>
+      <div class="review-text">${short}</div>
+      <button class="read-more" data-full="${full}">Читать полностью</button>
+    `;
+
+    document.querySelector('.reviews-grid').appendChild(newCard);
+    closeAddModal();
+
+    // Повторно навешиваем слушатель
+    newCard.querySelector('.read-more').addEventListener('click', () => {
+      modalText.textContent = full;
+      modal.classList.add('show');
+    });
+
+    this.reset();
+  });
+
+document.addEventListener('DOMContentLoaded', () => {
+  // (у тебя тут уже код загрузки отзывов)
+
+  const reviewForm = document.getElementById('reviewForm');
+  const addModal = document.getElementById('addModal');
+
+  reviewForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = this.name.value.trim();
+    const lang = this.lang.value.trim();
+    const flag = this.flag.value.trim();
+    const short = this.short.value.trim();
+    const full = this.full.value.trim();
+    const letter = name.charAt(0).toUpperCase();
+
+    const newCard = document.createElement('div');
+    newCard.className = 'review-card';
+    newCard.innerHTML = `
+      <div class="review-header">
+        <div class="avatar">${letter}</div>
+        <div>
+          <div class="review-name">${name} <small>${flag}</small></div>
+          <div class="review-lang">${lang}</div>
+        </div>
+      </div>
+      <div class="review-text">${short}</div>
+      <button class="read-more" data-full="${full}">Читать полностью</button>
+    `;
+
+    document.querySelector('.reviews-grid').appendChild(newCard);
+
+    // Сразу привязываем кнопку "читать полностью" к новой карточке
+    newCard.querySelector('.read-more').addEventListener('click', () => {
+      modalText.textContent = full;
+      modal.classList.add('show');
+    });
+
+    // Закрываем окно и очищаем форму
+    addModal.style.display = 'none';
+    this.reset();
+  });
+});

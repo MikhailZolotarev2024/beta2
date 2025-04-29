@@ -150,7 +150,7 @@
       pointer-events: auto;
     }
     .modal-content {
-      background: rgba(0, 0, 0, 0.25);
+      background: #0b1428;
       padding: 20px;
       border-radius: 12px;
       max-width: 600px;
@@ -253,7 +253,14 @@
     <div class="add-modal-content">
       <button class="close-modal" onclick="closeAddModal()">&times;</button>
       <h2>Форма отзыва</h2>
-      <p>Скоро здесь можно будет оставить отзыв!</p>
+      <form id="reviewForm" class="review-form">
+  <input type="text" name="name" placeholder="Ваше имя" required><br>
+  <input type="text" name="lang" placeholder="Язык (например, RU)" required><br>
+  <input type="text" name="flag" placeholder="Флаг (например, 🇷🇺)" required><br>
+  <textarea name="short" placeholder="Краткий отзыв" required></textarea><br>
+  <textarea name="full" placeholder="Полный отзыв" required></textarea><br>
+  <button type="submit">Отправить отзыв</button>
+</form>
     </div>
   </div>
 
