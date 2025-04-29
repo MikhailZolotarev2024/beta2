@@ -235,34 +235,16 @@
         <p>Эффективность. Конфиденциальность. Результат.</p>
     </header>
 
-  <div class="reviews-container">
-    <button class="add-review-btn" onclick="openAddModal()">Оставить отзыв</button>
-    <h1>Отзывы клиентов</h1>
-
-    <div class="reviews-grid" id="reviews"></div>
-  </div>
-
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <button class="close-modal" onclick="closeModal()">&times;</button>
-      <div id="modal-text"></div>
-    </div>
-  </div>
-
-  <div class="add-modal" id="addModal">
-    <div class="add-modal-content">
-      <button class="close-modal" onclick="closeAddModal()">&times;</button>
-      <h2>Форма отзыва</h2>
-      <form id="reviewForm" class="review-form">
+<form id="reviewForm" class="review-form">
   <input type="text" name="name" placeholder="Ваше имя" required><br>
   <input type="text" name="lang" placeholder="Язык (например, RU)" required><br>
   <input type="text" name="flag" placeholder="Флаг (например, 🇷🇺)" required><br>
   <textarea name="short" placeholder="Краткий отзыв" required></textarea><br>
   <textarea name="full" placeholder="Полный отзыв" required></textarea><br>
-  <button type="submit">Отправить отзыв</button>
+  <button type="submit">Оставить отзыв</button>
 </form>
-    </div>
-  </div>
+
+<div class="reviews-grid" id="reviews"></div>
 
 
     <footer>
