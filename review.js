@@ -2,15 +2,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const reviewsGrid = document.querySelector('.reviews-grid');
   const modal = document.getElementById('modal');
   const modalText = document.getElementById('modal-text');
-  const closeModal = document.querySelector('.close-modal');
+  const closeModalBtn = document.querySelector('.modal .close-modal');
+  const addModal = document.getElementById('addModal');
+  const closeAddModalBtn = document.querySelector('.add-modal .close-modal');
+  const addReviewBtn = document.querySelector('.add-review-btn');
+  const reviewForm = document.getElementById('reviewForm');
 
+  // Загрузка отзывов
   fetch('reviews.json')
     .then(response => response.json())
     .then(data => {
       data.forEach(review => {
         const card = document.createElement('div');
         card.className = 'review-card';
-
         card.innerHTML = `
           <div class="review-header">
             <div class="avatar">${review.letter}</div>
@@ -22,10 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="review-text">${review.short}</div>
           <button class="read-more" data-full="${review.full}">Читать полностью</button>
         `;
-
         reviewsGrid.appendChild(card);
       });
 
+      // Навешиваем обработчики на кнопки "читать полностью"
       document.querySelectorAll('.read-more').forEach(button => {
         button.addEventListener('click', () => {
           modalText.textContent = button.getAttribute('data-full');
@@ -34,7 +38,18 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-  closeModal.addEventListener('click', () => {
+  // Открытие модалки отзыва
+  addReviewBtn.addEventListener('click', () => {
+    addModal.style.display = 'flex';
+  });
+
+  // Закрытие модалки отзыва
+  closeAddModalBtn.addEventListener('click', () => {
+    addModal.style.display = 'none';
+  });
+
+  // Закрытие основной модалки
+  closeModalBtn.addEventListener('click', () => {
     modal.classList.remove('show');
   });
 
@@ -42,59 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === modal) {
       modal.classList.remove('show');
     }
-  });
-});
-    function openAddModal() {
-      document.getElementById('addModal').style.display = 'flex';
+    if (e.target === addModal) {
+      addModal.style.display = 'none';
     }
-    function closeAddModal() {
-      document.getElementById('addModal').style.display = 'none';
-    }
-    function closeModal() {
-      document.getElementById('modal').classList.remove('show');
-    }
- document.getElementById('reviewForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const name = this.name.value;
-    const lang = this.lang.value;
-    const flag = this.flag.value;
-    const short = this.short.value;
-    const full = this.full.value;
-    const letter = name.trim()[0].toUpperCase();
-
-    const newCard = document.createElement('div');
-    newCard.className = 'review-card';
-    newCard.innerHTML = `
-      <div class="review-header">
-        <div class="avatar">${letter}</div>
-        <div>
-          <div class="review-name">${name} <small>${flag}</small></div>
-          <div class="review-lang">${lang}</div>
-        </div>
-      </div>
-      <div class="review-text">${short}</div>
-      <button class="read-more" data-full="${full}">Читать полностью</button>
-    `;
-
-    document.querySelector('.reviews-grid').appendChild(newCard);
-    closeAddModal();
-
-    // Повторно навешиваем слушатель
-    newCard.querySelector('.read-more').addEventListener('click', () => {
-      modalText.textContent = full;
-      modal.classList.add('show');
-    });
-
-    this.reset();
   });
 
-document.addEventListener('DOMContentLoaded', () => {
-  // (у тебя тут уже код загрузки отзывов)
-
-  const reviewForm = document.getElementById('reviewForm');
-  const addModal = document.getElementById('addModal');
-
+  // Обработка отправки формы
   reviewForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -119,16 +87,37 @@ document.addEventListener('DOMContentLoaded', () => {
       <button class="read-more" data-full="${full}">Читать полностью</button>
     `;
 
-    document.querySelector('.reviews-grid').appendChild(newCard);
+    reviewsGrid.appendChild(newCard);
 
-    // Сразу привязываем кнопку "читать полностью" к новой карточке
+    // Навешиваем событие на новую кнопку "читать полностью"
     newCard.querySelector('.read-more').addEventListener('click', () => {
       modalText.textContent = full;
       modal.classList.add('show');
     });
 
-    // Закрываем окно и очищаем форму
+    // Закрываем окно и чистим форму
     addModal.style.display = 'none';
     this.reset();
   });
 });
+
+function openAddModal() {
+  const addModal = document.getElementById('addModal');
+  if (addModal) {
+    addModal.style.display = 'flex';
+  }
+}
+
+function closeAddModal() {
+  const addModal = document.getElementById('addModal');
+  if (addModal) {
+    addModal.style.display = 'none';
+  }
+}
+
+function closeModal() {
+  const modal = document.getElementById('modal');
+  if (modal) {
+    modal.classList.remove('show');
+  }
+}
