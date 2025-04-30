@@ -326,46 +326,92 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+const ETHERSCAN_API_KEY = "your-etherscan-api-key";
+const TORNADO_HASHES = [
+  "0x1e2e9e0a1ac5bdcc2f30f3f655a48f63b2c8f2216b1a6ee1ae4c3167b6b8e2fb"
+];
+
+const QUICKNODE_URL = "https://green-thrumming-mountain.quiknode.pro/8a77a6ba8c1788e8a4c683d8fb4b85e52c4fe66f/";
+const provider = new ethers.JsonRpcProvider(QUICKNODE_URL);
+
 async function validateAddress(address) {
   return /^0x[a-fA-F0-9]{40}$/.test(address);
 }
 
-async function analyzeEthBalance(address, outputElementId = "output-block") {
+async function getTxsViaEtherscan(address) {
+  const url = `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=asc&apikey=${ETHERSCAN_API_KEY}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  return data.result || [];
+}
+
+async function checkBytecodeEtherscan(address) {
+  const txs = await getTxsViaEtherscan(address);
+  const suspicious = [];
+
+  for (const tx of txs) {
+    if (!tx.to) continue;
+    try {
+      const code = await provider.send("eth_getCode", [tx.to, "latest"]);
+      const hash = ethers.keccak256(code);
+      if (TORNADO_HASHES.includes(hash)) {
+        suspicious.push(`⚠️ Подозрение на Tornado в Tx ${tx.hash.slice(0, 12)}... to ${tx.to}`);
+      }
+    } catch (e) {
+      console.warn("Ошибка байткода:", e);
+    }
+    if (suspicious.length >= 5) break;
+  }
+
+  return suspicious.length ? suspicious : ["Нет подозрений по байткоду (Etherscan)"];
+}
+
+async function analyzeEthBalance(address) {
+  const [balance, txCount, block, ensName] = await Promise.all([
+    provider.getBalance(address),
+    provider.getTransactionCount(address),
+    provider.getBlock("latest"),
+    provider.lookupAddress(address)
+  ]);
+
+  return {
+    eth: ethers.formatEther(balance),
+    txCount,
+    gasLimit: block.gasLimit.toString(),
+    ens: ensName || "—"
+  };
+}
+
+async function analyzeWallet(address, outputElementId = "output-block") {
   const output = document.getElementById(outputElementId);
-  output.textContent = "⏳ Загружаю данные...";
+
+  if (!await validateAddress(address)) {
+    output.textContent = "❌ Невалидный ETH-адрес";
+    return;
+  }
+
+  output.textContent = "⏳ Анализируем...";
 
   try {
-    const provider = new ethers.JsonRpcProvider("https://green-thrumming-mountain.quiknode.pro/8a77a6ba8c1788e8a4c683d8fb4b85e52c4fe66f/");
-
-    const [balance, txCount, block, ensName] = await Promise.all([
-      provider.getBalance(address),
-      provider.getTransactionCount(address),
-      provider.getBlock("latest"),
-      provider.lookupAddress(address)
+    const [info, tornado] = await Promise.all([
+      analyzeEthBalance(address),
+      checkBytecodeEtherscan(address)
     ]);
-
-    const eth = ethers.formatEther(balance);
-    const gasLimit = block.gasLimit.toString();
 
     output.textContent = `
 📍 Адрес: ${address}
-🔠 ENS: ${ensName || "—"}
-💰 Баланс: ${eth} ETH
-🔁 Кол-во транзакций (nonce): ${txCount}
-⛽ Газовый лимит последнего блока: ${gasLimit}
+🔠 ENS: ${info.ens}
+💰 Баланс: ${info.eth} ETH
+🔁 Транзакций: ${info.txCount}
+⛽ Газ последнего блока: ${info.gasLimit}
+
+🧪 Tornado-проверка (по байткоду):
+${tornado.join("\n")}
     `.trim();
   } catch (err) {
-    output.textContent = "❌ Ошибка при анализе адреса.";
+    output.textContent = "❌ Ошибка при анализе кошелька.";
     console.error(err);
   }
-}
-
-function analyzeWallet(address, outputElementId = "output-block") {
-  if (!validateAddress(address)) {
-    document.getElementById(outputElementId).textContent = "❌ Невалидный ETH-адрес";
-    return;
-  }
-  analyzeEthBalance(address, outputElementId);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
