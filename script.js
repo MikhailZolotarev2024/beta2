@@ -365,6 +365,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const walletInput = document.getElementById("wallet-address");
   const output = document.getElementById("output-block");
 
+
+  console.log("🔘 analyze-btn:", analyzeBtn);
+  console.log("📥 wallet-address:", walletInput);
+  console.log("📤 output-block:", output);
+  
+  
   if (analyzeBtn && walletInput && output) {
     analyzeBtn.addEventListener("click", () => {
       const address = walletInput.value.trim().toLowerCase();
