@@ -151,6 +151,27 @@ async function querySolana(address) {
     }
 }
 
+// Функция для получения базовых данных через ethers.js
+async function getEthersBaseInfo(address) {
+    try {
+        const provider = new ethers.JsonRpcProvider("https://green-thrumming-mountain.quiknode.pro/8a77a6ba8c1788e8a4c683d8fb4b85e52c4fe66f/");
+        const [balance, txCount, block, ensName] = await Promise.all([
+            provider.getBalance(address),
+            provider.getTransactionCount(address),
+            provider.getBlock("latest"),
+            provider.lookupAddress(address)
+        ]);
+        return {
+            eth_balance: ethers.formatEther(balance),
+            nonce: txCount,
+            gasLimit: block.gasLimit.toString(),
+            ens: ensName || "—"
+        };
+    } catch (err) {
+        return null;
+    }
+}
+
 // Функция для анализа кошелька
 async function analyzeWallet(address) {
     const network = detectNetwork(address);
@@ -175,6 +196,15 @@ async function analyzeWallet(address) {
                                         name
                                     }
                                 }
+                                tokenBalances {
+                                    currency {
+                                        address
+                                        symbol
+                                        name
+                                        decimals
+                                    }
+                                    value
+                                }
                                 transactions {
                                     hash
                                     value
@@ -190,8 +220,12 @@ async function analyzeWallet(address) {
                         }
                     }
                 `;
-                const bitqueryData = await queryBitquery(bitqueryQuery);
+                const [bitqueryData, ethersBase] = await Promise.all([
+                    queryBitquery(bitqueryQuery),
+                    network === 'ETH' ? getEthersBaseInfo(address) : Promise.resolve(null)
+                ]);
                 result.bitquery = bitqueryData.data[network.toLowerCase()].address;
+                if (ethersBase) result.ethers = ethersBase;
                 break;
 
             case 'blockchain':
@@ -234,8 +268,16 @@ function formatOutput(data) {
     
     let output = `=== Информация о кошельке (${data.network}) ===\n\n`;
     
+    if (data.ethers) {
+        output += `📍 Адрес: ...\n`;
+        output += `🔠 ENS: ${data.ethers.ens}\n`;
+        output += `💰 Баланс (ethers.js): ${data.ethers.eth_balance} ETH\n`;
+        output += `🔁 Кол-во транзакций (nonce): ${data.ethers.nonce}\n`;
+        output += `⛽ Газовый лимит последнего блока: ${data.ethers.gasLimit}\n`;
+    }
+
     if (data.bitquery) {
-        output += `Баланс: ${data.bitquery.balance} ${data.network === 'ETH' ? 'ETH' : 'BNB'}\n\n`;
+        output += `\nБаланс (Bitquery): ${data.bitquery.balance} ${data.network === 'ETH' ? 'ETH' : 'BNB'}\n`;
         
         if (data.bitquery.smartContract) {
             output += `Тип контракта: ${data.bitquery.smartContract.contractType}\n`;
@@ -245,9 +287,16 @@ function formatOutput(data) {
             output += '\n';
         }
         
+        if (data.bitquery.tokenBalances && data.bitquery.tokenBalances.length > 0) {
+            output += 'Токены (ERC-20):\n';
+            data.bitquery.tokenBalances.slice(0, 10).forEach(token => {
+                output += `- ${token.currency.symbol}: ${token.value / Math.pow(10, token.currency.decimals)}\n`;
+            });
+        }
+        
         if (data.bitquery.transactions && data.bitquery.transactions.length > 0) {
-            output += 'Последние транзакции:\n';
-            data.bitquery.transactions.slice(0, 5).forEach(tx => {
+            output += '\nПоследние транзакции:\n';
+            data.bitquery.transactions.slice(0, 10).forEach(tx => {
                 output += `\nХеш: ${tx.hash}\n`;
                 output += `Сумма: ${tx.value} ${data.network === 'ETH' ? 'ETH' : 'BNB'}\n`;
                 output += `От: ${tx.from.address}\n`;
