@@ -326,7 +326,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-const ETHERSCAN_API_KEY = "RUC73APMG97Z573N75QBGQ6X5C447F9A5Y";
+const ETHERSCAN_API_KEY = "your-etherscan-api-key";
 const TORNADO_HASHES = [
   "0x1e2e9e0a1ac5bdcc2f30f3f655a48f63b2c8f2216b1a6ee1ae4c3167b6b8e2fb"
 ];
