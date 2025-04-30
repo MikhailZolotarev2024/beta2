@@ -328,29 +328,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
 async function analyzeWallet(address, outputElementId = 'output') {
   const output = document.getElementById(outputElementId);
-  if (!output) return console.warn(`❗ Элемент #${outputElementId} не найден`);
+  if (!output) return console.warn(`❌ Элемент #${outputElementId} не найден`);
 
-  output.textContent = '🔎 Загружаю...';
+  if (!address || !address.startsWith("0x")) {
+    output.textContent = "❌ Введите корректный адрес";
+    console.warn("❌ Неверный адрес:", address);
+    return;
+  }
+
+  output.textContent = '🔍 Загружаю...';
 
   try {
     const res = await fetch(`https://server-agno.onrender.com/wallet/${address}`);
-    if (!res.ok) {
-      throw new Error('Ответ сервера: ' + res.status);
-    }
+    if (!res.ok) throw new Error("Ответ сервера: " + res.status);
 
     const data = await res.json();
-
-    output.textContent = `
-📬 Адрес: ${address}
-
-💰 ETH: ${data.eth_balance} ETH
-
-📦 Топ токены:
-${data.tokens.map(t => `• ${t.name}: ${t.amount.toFixed(2)} ${t.symbol}`).join('\n')}
-
-📊 DeFi-позиции:
-${data.defi.map(d => `• ${d.name} (${d.chain}): ${d.portfolio_item_list.length} позиций`).join('\n')}
-    `;
+    output.textContent =
+      `📬 Адрес: ${address}\n\n` +
+      `💰 ETH: ${data.eth_balance} ETH\n\n` +
+      `📦 Топ токены:\n` + data.tokens.map(t =>
+        ` - ${t.name}: ${t.amount.toFixed(2)} ${t.symbol}`
+      ).join('\n') + `\n\n` +
+      `📉 DeFi-позиции:\n` + data.defi.map(d =>
+        ` - ${d.name} (${d.chain}): ${d.portfolio_item_list.length} позиций`
+      ).join('\n');
   } catch (error) {
     output.textContent = '❌ Ошибка при анализе кошелька.';
     console.error(error);
