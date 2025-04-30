@@ -343,7 +343,12 @@ async function analyzeWallet(address) {
                     queryBitquery(bitqueryQuery),
                     network === 'ETH' ? getEthersBaseInfo(address) : Promise.resolve(null)
                 ]);
-                const addrData = bitqueryData.data[network.toLowerCase()].address;
+                // Защита от отсутствия данных
+                const netKey = bitqueryData.data && bitqueryData.data[network.toLowerCase()] ? network.toLowerCase() : 'ethereum';
+                if (!bitqueryData.data || !bitqueryData.data[netKey] || !bitqueryData.data[netKey].address) {
+                    throw new Error('Нет данных по этому адресу в Bitquery');
+                }
+                const addrData = bitqueryData.data[netKey].address;
                 // Анализируем контрагентов и топ-3 получателя
                 let allRecipients = [];
                 if (addrData && addrData.outgoingTxs) {
