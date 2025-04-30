@@ -329,6 +329,9 @@ document.addEventListener("DOMContentLoaded", function() {
 async function validateAddress(address) {
   return /^0x[a-fA-F0-9]{40}$/.test(address);
 }
+async function validateAddress(address) {
+  return /^0x[a-fA-F0-9]{40}$/.test(address);
+}
 
 async function analyzeEthBalance(address, outputElementId = "output-block") {
   const output = document.getElementById(outputElementId);
@@ -367,10 +370,3 @@ function analyzeWallet(address, outputElementId = "output-block") {
   }
   analyzeEthBalance(address, outputElementId);
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("analyze-btn").addEventListener("click", () => {
-    const address = document.getElementById("wallet-address").value.trim();
-    analyzeWallet(address);
-  });
-});
