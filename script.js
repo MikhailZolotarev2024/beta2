@@ -326,63 +326,51 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-async function analyzeWallet(address, outputElementId = 'output') {
-  const output = document.getElementById(outputElementId);
-  if (!output) return console.warn(`❌ Элемент #${outputElementId} не найден`);
-
-if (!/^0x[a-fA-F0-9]{40}$/.test(address.trim())) {
-  output.textContent = "❌ Введите корректный ETH-адрес длиной 42 символа";
-  console.warn("❌ Неверный адрес:", address);
-  return;
+async function validateAddress(address) {
+  return /^0x[a-fA-F0-9]{40}$/.test(address);
 }
 
-  output.textContent = '🔍 Загружаю...';
+async function analyzeEthBalance(address, outputElementId = "output-block") {
+  const output = document.getElementById(outputElementId);
+  output.textContent = "⏳ Загружаю данные...";
 
   try {
-    const res = await fetch(`https://server-agno.onrender.com/wallet/${address}`);
-    if (!res.ok) throw new Error("Ответ сервера: " + res.status);
+    const provider = new ethers.JsonRpcProvider("https://your-quicknode-url");
 
-    const data = await res.json();
-    output.textContent =
-      `📬 Адрес: ${address}\n\n` +
-      `💰 ETH: ${data.eth_balance} ETH\n\n` +
-      `📦 Топ токены:\n` + data.tokens.map(t =>
-        ` - ${t.name}: ${t.amount.toFixed(2)} ${t.symbol}`
-      ).join('\n') + `\n\n` +
-      `📉 DeFi-позиции:\n` + data.defi.map(d =>
-        ` - ${d.name} (${d.chain}): ${d.portfolio_item_list.length} позиций`
-      ).join('\n');
-  } catch (error) {
-    output.textContent = '❌ Ошибка при анализе кошелька.';
-    console.error(error);
+    const [balance, txCount, block, ensName] = await Promise.all([
+      provider.getBalance(address),
+      provider.getTransactionCount(address),
+      provider.getBlock("latest"),
+      provider.lookupAddress(address)
+    ]);
+
+    const eth = ethers.formatEther(balance);
+    const gasLimit = block.gasLimit.toString();
+
+    output.textContent = `
+📍 Адрес: ${address}
+🔠 ENS: ${ensName || "—"}
+💰 Баланс: ${eth} ETH
+🔁 Кол-во транзакций (nonce): ${txCount}
+⛽ Газовый лимит последнего блока: ${gasLimit}
+    `.trim();
+  } catch (err) {
+    output.textContent = "❌ Ошибка при анализе адреса.";
+    console.error(err);
   }
+}
+
+function analyzeWallet(address, outputElementId = "output-block") {
+  if (!validateAddress(address)) {
+    document.getElementById(outputElementId).textContent = "❌ Невалидный ETH-адрес";
+    return;
+  }
+  analyzeEthBalance(address, outputElementId);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Все действия после загрузки DOM — здесь
-
-  const analyzeBtn = document.getElementById("analyze-btn");
-  const walletInput = document.getElementById("wallet-address");
-  const output = document.getElementById("output-block");
-
-
-  console.log("🔘 analyze-btn:", analyzeBtn);
-  console.log("📥 wallet-address:", walletInput);
-  console.log("📤 output-block:", output);
-  
-  
-  if (analyzeBtn && walletInput && output) {
-    analyzeBtn.addEventListener("click", () => {
-      const address = walletInput.value.trim().toLowerCase();
-
-      if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
-        output.textContent = "❌ Введите корректный ETH-адрес длиной 42 символа";
-        return;
-      }
-
-      analyzeWallet(address, "output-block");
-    });
-  } else {
-    console.warn("⛔ Один из элементов не найден: analyze-btn, wallet-address или output-block");
-  }
+  document.getElementById("analyze-btn").addEventListener("click", () => {
+    const address = document.getElementById("wallet-address").value.trim();
+    analyzeWallet(address);
+  });
 });
