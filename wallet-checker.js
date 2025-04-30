@@ -1,5 +1,5 @@
 // Конфигурация Bitquery API
-const BITQUERY_API_KEY = 'YOUR_BITQUERY_API_KEY'; // Замените на ваш API ключ
+const BITQUERY_API_KEY = 'ory_at_PLs7PLFfYMM0kwFc5pRG1TorLuYz279TFJS-w6q8xQc.yBCHdlCBJiQ6DaVPTjqRx51d3UpUt0tNJoZ5x9ctOuA'; // Замените на ваш API ключ
 const BITQUERY_ENDPOINT = 'https://graphql.bitquery.io';
 
 // Функция для запроса к Bitquery API
