@@ -330,11 +330,11 @@ async function analyzeWallet(address, outputElementId = 'output') {
   const output = document.getElementById(outputElementId);
   if (!output) return console.warn(`❌ Элемент #${outputElementId} не найден`);
 
-  if (!address || !address.startsWith("0x")) {
-    output.textContent = "❌ Введите корректный адрес";
-    console.warn("❌ Неверный адрес:", address);
-    return;
-  }
+if (!/^0x[a-fA-F0-9]{40}$/.test(address.trim())) {
+  output.textContent = "❌ Введите корректный ETH-адрес длиной 42 символа";
+  console.warn("❌ Неверный адрес:", address);
+  return;
+}
 
   output.textContent = '🔍 Загружаю...';
 
