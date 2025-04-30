@@ -455,14 +455,16 @@ function formatOutput(data) {
         output += `Общий объем полученных средств: ${data.blockchain.total_received} BTC\n`;
         output += `Общий объем отправленных средств: ${data.blockchain.total_sent} BTC\n`;
         output += `Текущий баланс: ${data.blockchain.final_balance} BTC\n`;
-        if (data.blockchain.first_tx_date) output += `\nДата первой транзакции: ${data.blockchain.first_tx_date}\n`;
-        if (data.blockchain.last_tx_date) output += `Дата последней активности: ${data.blockchain.last_tx_date}\n`;
-        if (data.blockchain.unique_counterparties) output += `Уникальных контрагентов: ${data.blockchain.unique_counterparties}\n`;
+        output += `\nДата первой транзакции: ${data.blockchain.first_tx_date || 'нет данных'}\n`;
+        output += `Дата последней активности: ${data.blockchain.last_tx_date || 'нет данных'}\n`;
+        output += `Уникальных контрагентов: ${typeof data.blockchain.unique_counterparties === 'number' ? data.blockchain.unique_counterparties : 'нет данных'}\n`;
         if (data.blockchain.top_recipients && data.blockchain.top_recipients.length > 0) {
             output += 'Топ-3 получателя:\n';
             data.blockchain.top_recipients.forEach((r,i)=>{
                 output += `${i+1}. ${r.addr} (${r.count} раз)\n`;
             });
+        } else {
+            output += 'Топ-3 получателя: нет данных\n';
         }
         if (data.blockchain.tags && data.blockchain.tags.length > 0) {
             output += `Метки риска: ${data.blockchain.tags.join(', ')}\n`;
