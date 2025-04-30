@@ -357,7 +357,26 @@ if (!/^0x[a-fA-F0-9]{40}$/.test(address.trim())) {
     console.error(error);
   }
 }
-document.getElementById("analyze-btn").addEventListener("click", () => {
-  const address = document.getElementById("wallet-address").value.trim();
-  analyzeWallet(address, "output-block"); // ID элемента, куда выводить результат
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Все действия после загрузки DOM — здесь
+
+  const analyzeBtn = document.getElementById("analyze-btn");
+  const walletInput = document.getElementById("wallet-address");
+  const output = document.getElementById("output-block");
+
+  if (analyzeBtn && walletInput && output) {
+    analyzeBtn.addEventListener("click", () => {
+      const address = walletInput.value.trim().toLowerCase();
+
+      if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
+        output.textContent = "❌ Введите корректный ETH-адрес длиной 42 символа";
+        return;
+      }
+
+      analyzeWallet(address, "output-block");
+    });
+  } else {
+    console.warn("⛔ Один из элементов не найден: analyze-btn, wallet-address или output-block");
+  }
 });
