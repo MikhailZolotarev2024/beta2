@@ -335,7 +335,7 @@ async function analyzeEthBalance(address, outputElementId = "output-block") {
   output.textContent = "⏳ Загружаю данные...";
 
   try {
-    const provider = new ethers.JsonRpcProvider("https://your-quicknode-url");
+    const provider = new ethers.JsonRpcProvider("https://green-thrumming-mountain.quiknode.pro/8a77a6ba8c1788e8a4c683d8fb4b85e52c4fe66f/");
 
     const [balance, txCount, block, ensName] = await Promise.all([
       provider.getBalance(address),
