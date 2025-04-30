@@ -70,7 +70,7 @@ async function queryBitquery(query) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-API-KEY': BITQUERY_API_KEY
+                'Authorization': 'Bearer ' + BITQUERY_API_KEY
             },
             body: JSON.stringify({ query })
         });
