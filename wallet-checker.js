@@ -74,7 +74,12 @@ async function queryBitquery(query) {
             },
             body: JSON.stringify({ query })
         });
-        return await response.json();
+        const text = await response.text();
+        try {
+            return JSON.parse(text);
+        } catch (e) {
+            throw new Error(text);
+        }
     } catch (error) {
         console.error('Ошибка при запросе к Bitquery:', error);
         throw error;
