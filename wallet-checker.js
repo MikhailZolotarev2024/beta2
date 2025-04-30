@@ -9,6 +9,9 @@ const BLOCKCHAIN_API_URL = 'https://blockchain.info/rawaddr/';
 const TRON_API_URL = 'https://api.trongrid.io/v1/accounts/';
 const SOLANA_API_URL = 'https://api.mainnet-beta.solana.com';
 
+const BLOCKCHAIR_API_KEY = 'public-api';
+const BLOCKCHAIR_API_URL = 'https://api.blockchair.com/bitcoin/dashboards/address/';
+
 // Поддерживаемые сети
 const SUPPORTED_NETWORKS = {
     ETH: {
@@ -89,7 +92,7 @@ async function queryBlockchain(address) {
     }
 }
 
-// Функция для запроса к Tron API
+// Функция для запроса к Tron API (расширенная)
 async function queryTron(address) {
     try {
         const response = await fetch(`${TRON_API_URL}${address}`, {
@@ -98,15 +101,39 @@ async function queryTron(address) {
             }
         });
         const data = await response.json();
-        
         if (data.error) {
             throw new Error(data.error);
         }
-        
+        // Получаем историю транзакций (до 100)
+        let txs = [];
+        const txResp = await fetch(`https://apilist.tronscanapi.com/api/transaction?sort=-timestamp&count=true&limit=100&address=${address}`);
+        const txData = await txResp.json();
+        if (txData.data) txs = txData.data;
+        // Анализируем даты и контрагентов
+        let firstDate = null;
+        let lastDate = null;
+        let allRecipients = [];
+        let allSenders = [];
+        txs.forEach(tx => {
+            const ts = tx.timestamp;
+            if (!firstDate || ts < firstDate) firstDate = ts;
+            if (!lastDate || ts > lastDate) lastDate = ts;
+            if (tx.toAddress) allRecipients.push(tx.toAddress);
+            if (tx.ownerAddress) allSenders.push(tx.ownerAddress);
+        });
+        // Топ-3 получателя
+        const freq = {};
+        allRecipients.forEach(addr => { if (addr) freq[addr] = (freq[addr]||0)+1; });
+        const topRecipients = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([addr,count])=>({addr,count}));
+        const uniqueCounterparties = new Set([...allRecipients, ...allSenders].filter(Boolean));
         return {
             balance: data.balance / 1000000, // Конвертация из SUN в TRX
             trc20: data.trc20 || {},
-            transactions: data.transactions || []
+            transactions: txs,
+            first_tx_date: firstDate ? new Date(firstDate).toLocaleString() : null,
+            last_tx_date: lastDate ? new Date(lastDate).toLocaleString() : null,
+            unique_counterparties: uniqueCounterparties.size,
+            top_recipients: topRecipients
         };
     } catch (error) {
         console.error('Ошибка при запросе к Tron API:', error);
@@ -114,9 +141,35 @@ async function queryTron(address) {
     }
 }
 
-// Функция для запроса к Solana API
+// Функция для запроса к Solscan API (расширенная)
 async function querySolana(address) {
     try {
+        // Получаем историю транзакций (до 100)
+        const txResp = await fetch(`https://public-api.solscan.io/account/transactions?address=${address}&limit=100`);
+        const txs = await txResp.json();
+        let firstDate = null;
+        let lastDate = null;
+        let allRecipients = [];
+        let allSenders = [];
+        txs.forEach(tx => {
+            const ts = tx.blockTime * 1000;
+            if (!firstDate || ts < firstDate) firstDate = ts;
+            if (!lastDate || ts > lastDate) lastDate = ts;
+            if (tx.parsedInstruction && tx.parsedInstruction.length > 0) {
+                tx.parsedInstruction.forEach(instr => {
+                    if (instr.type === 'transfer') {
+                        if (instr.info && instr.info.destination) allRecipients.push(instr.info.destination);
+                        if (instr.info && instr.info.source) allSenders.push(instr.info.source);
+                    }
+                });
+            }
+        });
+        // Топ-3 получателя
+        const freq = {};
+        allRecipients.forEach(addr => { if (addr) freq[addr] = (freq[addr]||0)+1; });
+        const topRecipients = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([addr,count])=>({addr,count}));
+        const uniqueCounterparties = new Set([...allRecipients, ...allSenders].filter(Boolean));
+        // Получаем баланс и владельца
         const response = await fetch(SOLANA_API_URL, {
             method: 'POST',
             headers: {
@@ -135,15 +188,14 @@ async function querySolana(address) {
             })
         });
         const data = await response.json();
-        
-        if (data.error) {
-            throw new Error(data.error.message);
-        }
-        
         return {
-            balance: data.result.value.lamports / 1000000000, // Конвертация из lamports в SOL
+            balance: data.result.value.lamports / 1000000000,
             owner: data.result.value.owner,
-            executable: data.result.value.executable
+            executable: data.result.value.executable,
+            first_tx_date: firstDate ? new Date(firstDate).toLocaleString() : null,
+            last_tx_date: lastDate ? new Date(lastDate).toLocaleString() : null,
+            unique_counterparties: uniqueCounterparties.size,
+            top_recipients: topRecipients
         };
     } catch (error) {
         console.error('Ошибка при запросе к Solana API:', error);
@@ -172,6 +224,53 @@ async function getEthersBaseInfo(address) {
     }
 }
 
+// Функция для запроса к Blockchair API (Bitcoin)
+async function queryBlockchairBTC(address) {
+    try {
+        const response = await fetch(`${BLOCKCHAIR_API_URL}${address}?key=${BLOCKCHAIR_API_KEY}`);
+        const data = await response.json();
+        if (!data.data || !data.data[address]) throw new Error('Нет данных от Blockchair');
+        const info = data.data[address].address;
+        const txs = data.data[address].transactions || [];
+        const tags = data.data[address].tags || [];
+        // Получаем список транзакций (ограничим до 100 для анализа)
+        let txList = [];
+        if (txs.length > 0) {
+            const txResp = await fetch(`https://api.blockchair.com/bitcoin/dashboards/transactions/${txs.slice(0,100).join(',')}?key=${BLOCKCHAIR_API_KEY}`);
+            const txData = await txResp.json();
+            txList = Object.values(txData.data || {});
+        }
+        // Анализируем контрагентов и даты
+        let allOutputs = [];
+        let allInputs = [];
+        let firstDate = null;
+        let lastDate = null;
+        txList.forEach(tx => {
+            const t = tx.transaction;
+            if (!firstDate || t.time < firstDate) firstDate = t.time;
+            if (!lastDate || t.time > lastDate) lastDate = t.time;
+            allOutputs.push(...(tx.outputs || []).map(o => o.recipient));
+            allInputs.push(...(tx.inputs || []).map(i => i.recipient));
+        });
+        // Топ-3 получателя
+        const freq = {};
+        allOutputs.forEach(addr => { if (addr) freq[addr] = (freq[addr]||0)+1; });
+        const topRecipients = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([addr,count])=>({addr,count}));
+        // Уникальные контрагенты
+        const uniqueCounterparties = new Set([...allOutputs, ...allInputs].filter(Boolean));
+        return {
+            first_tx_date: firstDate,
+            last_tx_date: lastDate,
+            unique_counterparties: uniqueCounterparties.size,
+            top_recipients: topRecipients,
+            tags: tags.map(t=>t.label)
+        };
+    } catch (error) {
+        console.error('Ошибка при запросе к Blockchair API:', error);
+        return null;
+    }
+}
+
 // Функция для анализа кошелька
 async function analyzeWallet(address) {
     const network = detectNetwork(address);
@@ -187,7 +286,7 @@ async function analyzeWallet(address) {
                 const bitqueryQuery = `
                     query {
                         ${network.toLowerCase()} {
-                            address(address: {is: "${address}"}) {
+                            address(address: {is: \"${address}\"}) {
                                 balance
                                 smartContract {
                                     contractType
@@ -216,6 +315,21 @@ async function analyzeWallet(address) {
                                         address
                                     }
                                 }
+                                annotation {
+                                    type
+                                    description
+                                }
+                                firstTx: transactions(orderBy: {asc: block, asc: index}, limit: 1) {
+                                    timestamp
+                                }
+                                lastTx: transactions(orderBy: {desc: block, desc: index}, limit: 1) {
+                                    timestamp
+                                }
+                                outgoingTxs: transactions(sender: {is: \"${address}\"}) {
+                                    to {
+                                        address
+                                    }
+                                }
                             }
                         }
                     }
@@ -224,12 +338,30 @@ async function analyzeWallet(address) {
                     queryBitquery(bitqueryQuery),
                     network === 'ETH' ? getEthersBaseInfo(address) : Promise.resolve(null)
                 ]);
-                result.bitquery = bitqueryData.data[network.toLowerCase()].address;
+                const addrData = bitqueryData.data[network.toLowerCase()].address;
+                // Анализируем контрагентов и топ-3 получателя
+                let allRecipients = [];
+                if (addrData && addrData.outgoingTxs) {
+                    allRecipients = addrData.outgoingTxs.map(tx => tx.to && tx.to.address).filter(Boolean);
+                }
+                const freq = {};
+                allRecipients.forEach(addr => { if (addr) freq[addr] = (freq[addr]||0)+1; });
+                const topRecipients = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([addr,count])=>({addr,count}));
+                const uniqueCounterparties = new Set(allRecipients);
+                result.bitquery = addrData;
+                result.bitquery_topRecipients = topRecipients;
+                result.bitquery_uniqueCounterparties = uniqueCounterparties.size;
+                result.bitquery_firstTx = addrData.firstTx && addrData.firstTx[0] ? addrData.firstTx[0].timestamp : null;
+                result.bitquery_lastTx = addrData.lastTx && addrData.lastTx[0] ? addrData.lastTx[0].timestamp : null;
+                result.bitquery_risk = addrData.annotation && addrData.annotation.length > 0 ? addrData.annotation.map(a=>a.type+': '+a.description).join(', ') : null;
                 if (ethersBase) result.ethers = ethersBase;
                 break;
 
             case 'blockchain':
-                const blockchainData = await queryBlockchain(address);
+                const [blockchainData, blockchairData] = await Promise.all([
+                    queryBlockchain(address),
+                    queryBlockchairBTC(address)
+                ]);
                 result.blockchain = {
                     total_transactions: blockchainData.n_tx,
                     total_received: blockchainData.total_received / 100000000,
@@ -240,7 +372,8 @@ async function analyzeWallet(address) {
                         time: new Date(tx.time * 1000).toLocaleString(),
                         size: tx.size,
                         fee: tx.fee / 100000000
-                    }))
+                    })),
+                    ...blockchairData
                 };
                 break;
 
@@ -294,6 +427,16 @@ function formatOutput(data) {
             });
         }
         
+        if (data.bitquery_firstTx) output += `Первая транзакция: ${new Date(data.bitquery_firstTx * 1000).toLocaleString()}\n`;
+        if (data.bitquery_lastTx) output += `Последняя активность: ${new Date(data.bitquery_lastTx * 1000).toLocaleString()}\n`;
+        if (data.bitquery_uniqueCounterparties) output += `Уникальных контрагентов: ${data.bitquery_uniqueCounterparties}\n`;
+        if (data.bitquery_topRecipients && data.bitquery_topRecipients.length > 0) {
+            output += 'Топ-3 получателя:\n';
+            data.bitquery_topRecipients.forEach((r,i)=>{
+                output += `${i+1}. ${r.addr} (${r.count} раз)\n`;
+            });
+        }
+        if (data.bitquery_risk) output += `Метки риска: ${data.bitquery_risk}\n`;
         if (data.bitquery.transactions && data.bitquery.transactions.length > 0) {
             output += '\nПоследние транзакции:\n';
             data.bitquery.transactions.slice(0, 10).forEach(tx => {
@@ -311,10 +454,21 @@ function formatOutput(data) {
         output += `Общее количество транзакций: ${data.blockchain.total_transactions}\n`;
         output += `Общий объем полученных средств: ${data.blockchain.total_received} BTC\n`;
         output += `Общий объем отправленных средств: ${data.blockchain.total_sent} BTC\n`;
-        output += `Текущий баланс: ${data.blockchain.final_balance} BTC\n\n`;
-        
+        output += `Текущий баланс: ${data.blockchain.final_balance} BTC\n`;
+        if (data.blockchain.first_tx_date) output += `\nДата первой транзакции: ${data.blockchain.first_tx_date}\n`;
+        if (data.blockchain.last_tx_date) output += `Дата последней активности: ${data.blockchain.last_tx_date}\n`;
+        if (data.blockchain.unique_counterparties) output += `Уникальных контрагентов: ${data.blockchain.unique_counterparties}\n`;
+        if (data.blockchain.top_recipients && data.blockchain.top_recipients.length > 0) {
+            output += 'Топ-3 получателя:\n';
+            data.blockchain.top_recipients.forEach((r,i)=>{
+                output += `${i+1}. ${r.addr} (${r.count} раз)\n`;
+            });
+        }
+        if (data.blockchain.tags && data.blockchain.tags.length > 0) {
+            output += `Метки риска: ${data.blockchain.tags.join(', ')}\n`;
+        }
         if (data.blockchain.transactions && data.blockchain.transactions.length > 0) {
-            output += 'Последние транзакции:\n';
+            output += '\nПоследние транзакции:\n';
             data.blockchain.transactions.forEach(tx => {
                 output += `\nХеш: ${tx.hash}\n`;
                 output += `Время: ${tx.time}\n`;
@@ -335,11 +489,20 @@ function formatOutput(data) {
             output += '\n';
         }
         
+        if (data.tron.first_tx_date) output += `Первая транзакция: ${data.tron.first_tx_date}\n`;
+        if (data.tron.last_tx_date) output += `Последняя активность: ${data.tron.last_tx_date}\n`;
+        if (data.tron.unique_counterparties) output += `Уникальных контрагентов: ${data.tron.unique_counterparties}\n`;
+        if (data.tron.top_recipients && data.tron.top_recipients.length > 0) {
+            output += 'Топ-3 получателя:\n';
+            data.tron.top_recipients.forEach((r,i)=>{
+                output += `${i+1}. ${r.addr} (${r.count} раз)\n`;
+            });
+        }
         if (data.tron.transactions && data.tron.transactions.length > 0) {
             output += 'Последние транзакции:\n';
             data.tron.transactions.slice(0, 5).forEach(tx => {
                 output += `\nХеш: ${tx.txID}\n`;
-                output += `Время: ${new Date(tx.raw_data.timestamp).toLocaleString()}\n`;
+                output += `Время: ${new Date(tx.timestamp).toLocaleString()}\n`;
             });
         }
     }
@@ -348,6 +511,15 @@ function formatOutput(data) {
         output += `\nБаланс: ${data.solana.balance} SOL\n`;
         output += `Владелец: ${data.solana.owner}\n`;
         output += `Исполняемый: ${data.solana.executable ? 'Да' : 'Нет'}\n`;
+        if (data.solana.first_tx_date) output += `Первая транзакция: ${data.solana.first_tx_date}\n`;
+        if (data.solana.last_tx_date) output += `Последняя активность: ${data.solana.last_tx_date}\n`;
+        if (data.solana.unique_counterparties) output += `Уникальных контрагентов: ${data.solana.unique_counterparties}\n`;
+        if (data.solana.top_recipients && data.solana.top_recipients.length > 0) {
+            output += 'Топ-3 получателя:\n';
+            data.solana.top_recipients.forEach((r,i)=>{
+                output += `${i+1}. ${r.addr} (${r.count} раз)\n`;
+            });
+        }
     }
     
     return output;
