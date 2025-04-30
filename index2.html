@@ -11,9 +11,9 @@
 	<link rel="stylesheet" href="general.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-body, #particles-js {
-    height: 800px; /* Или любое другое значение, которое тебе нужно */
-}
+        body, #particles-js {
+            height: 800px;
+        }
         .section {
             margin: 40px auto;
             max-width: 800px;
@@ -79,6 +79,63 @@ body, #particles-js {
                 grid-template-columns: 1fr;
             }
         }
+
+        .wallet-checker {
+            margin: 40px auto;
+            max-width: 800px;
+            background: rgba(40, 50, 60, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+        }
+
+        .wallet-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        #wallet-address {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+        #wallet-address::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        #analyze-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #76c7c0, #4c9e94);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #analyze-btn:hover {
+            background: linear-gradient(90deg, #5aa69e, #3b7d74);
+        }
+
+        #output-block {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            color: #ffffff;
+            min-height: 200px;
+            overflow-x: auto;
+        }
     </style>
 </head>
 <body>
@@ -141,18 +198,21 @@ body, #particles-js {
         </div>
     </section>
 
-<div>
-<input type="text" id="wallet-address" placeholder="Введите ETH-адрес">
-<button id="analyze-btn">Анализировать</button>
-</div>
-
-<pre id="output-block">Здесь появится результат...</pre>
+    <div class="wallet-checker">
+        <h2>Проверка криптовалютного кошелька</h2>
+        <div class="wallet-input">
+            <input type="text" id="wallet-address" placeholder="Введите ETH-адрес">
+            <button id="analyze-btn">Анализировать</button>
+        </div>
+        <pre id="output-block">Здесь появится результат анализа...</pre>
+    </div>
 
     <footer>
         <p>© 2025 Анонимные Решения. Все права защищены.</p>
     </footer>
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.6.2/dist/ethers.umd.min.js"></script>
+<script src="wallet-checker.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
