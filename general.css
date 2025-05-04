@@ -1,10 +1,119 @@
 @media (max-width: 768px) {
-    .menu-icon {
-        display: flex;
+    /* Мобильная навигация */
+    .navbar {
+        height: 60px;
+        padding: 0 15px;
     }
 
     .navbar ul {
         display: none;
+    }
+
+    .menu-icon {
+        display: flex;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .menu-icon div {
+        width: 25px;
+        height: 3px;
+        background: #ffffff;
+        margin: 5px;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+    .menu-dropdown {
+        display: none;
+        position: fixed;
+        top: 60px;
+        right: 20px;
+        background: rgba(13, 17, 23, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        padding: 15px;
+        width: 200px;
+        z-index: 999;
+    }
+
+    .menu-dropdown.active {
+        display: block;
+    }
+
+    .menu-dropdown a {
+        display: block;
+        color: #ffffff;
+        padding: 10px;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .menu-dropdown a:hover {
+        color: #76c7c0;
+    }
+
+    /* Оптимизация логотипа */
+    .logo-container {
+        position: fixed;
+        left: 15px;
+        top: 10px;
+        z-index: 1000;
+    }
+
+    .logo-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .logo-text {
+        font-size: 14px;
+    }
+
+    /* Оптимизация блоков регионов */
+    .comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .region-block {
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 15px;
+    }
+
+    .region-block h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    /* Оптимизация контента */
+    .content-wrapper {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .news-widget {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    /* Оптимизация волн */
+    .wave-row {
+        margin: 15px 0;
+        gap: 10px;
+    }
+
+    .wave-icon img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .wave-text {
+        font-size: 16px;
     }
 
     .main-container {
