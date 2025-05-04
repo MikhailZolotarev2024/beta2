@@ -286,6 +286,8 @@ header p {
   padding: 10px;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  position: relative; /* чтобы transform не вылазил визуально */
 }
 
 /* --- КАРУСЕЛЬ, ФУТЕР, ПРОЧЕЕ --- */
