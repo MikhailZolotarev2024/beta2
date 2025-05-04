@@ -63,12 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
 particlesJS("particles-js", {
     "particles": {
         "number": {
-            "value": 100, /* Количество частиц */
-            "density": { "enable": true, "value_area": 800 } /* Плотность */
+            "value": 100,
+            "density": { "enable": true, "value_area": 800 }
         },
-        "color": { "value": "#00ffff" }, /* Цвет частиц */
+        "color": { "value": "#00ffff" },
         "shape": {
-            "type": "circle", /* Форма частиц */
+            "type": "circle",
             "stroke": { "width": 1, "color": "#ffffff" }
         },
         "opacity": {
@@ -80,7 +80,7 @@ particlesJS("particles-js", {
             "random": true
         },
         "line_linked": {
-            "enable": true, /* Включить соединения между частицами */
+            "enable": true,
             "distance": 150,
             "color": "#ffffff",
             "opacity": 0.4,
@@ -88,7 +88,7 @@ particlesJS("particles-js", {
         },
         "move": {
             "enable": true,
-            "speed": 2, /* Скорость движения */
+            "speed": 2,
             "direction": "none",
             "random": false,
             "straight": false,
@@ -100,11 +100,11 @@ particlesJS("particles-js", {
         "events": {
             "onhover": {
                 "enable": true,
-                "mode": "grab" /* Частицы реагируют на курсор */
+                "mode": "grab"
             },
             "onclick": {
                 "enable": true,
-                "mode": "push" /* Частицы разлетаются при клике */
+                "mode": "push"
             }
         },
         "modes": {
@@ -112,7 +112,7 @@ particlesJS("particles-js", {
             "push": { "particles_nb": 4 }
         }
     },
-    "retina_detect": true /* Улучшенная чёткость для ретина-экранов */
+    "retina_detect": true
 });
 
 
@@ -237,47 +237,54 @@ const showMoreBtn = document.getElementById('showMoreNews');
     });
   }
 
-  document.querySelectorAll('.circle-stat').forEach(circle => {
-    const percent = parseInt(circle.dataset.percent);
-    circle.style.background = `conic-gradient(#76c7c0 0% ${percent}%, rgba(255,255,255,0.08) ${percent}% 100%)`;
-  });
-  
-  function openNewsModal(title, content) {
-  document.querySelector('.news-modal-title').innerText = title;
-  document.querySelector('.news-modal-content').innerText = content;
-  document.querySelector('.news-modal').classList.add('visible');
-}
 
+  
+  function openNewsModal(id) {
+    const news = window.NEWS_DATA || [];
+    const item = news.find(n => n.id === id);
+    if (!item) return;
+
+    document.getElementById('modalTitle').innerText = item.title;
+    document.getElementById('modalDate').innerText = item.date;
+    document.getElementById('modalText').innerText = item.fullText || item.shortText;
+    document.getElementById('newsModal').classList.add('active');
+  }
+
+  document.getElementById('newsModalClose').onclick = function() {
+    document.getElementById('newsModal').classList.remove('active');
+  };
 
 document.addEventListener("DOMContentLoaded", function () {
   const rows = document.querySelectorAll(".wave-row");
 
   if (!rows.length) {
-    console.warn("⚠️ Не найдено ни одного .wave-row");
+    console.warn("❗ wave-row не найдены даже после DOMContentLoaded");
     return;
   }
 
-  const observer = new IntersectionObserver((entries) => {
+  const shown = new Set();
+
+  const waveObserver = new IntersectionObserver((entries) => {
+    let delay = 0;
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        console.log("🎯 Видим элемент:", entry.target);
-        entry.target.classList.remove("hidden");
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
+      if (entry.isIntersecting && !shown.has(entry.target)) {
+        setTimeout(() => {
+          entry.target.classList.add("visible");
+        }, delay);
+        delay += 200;
+        shown.add(entry.target);
+        waveObserver.unobserve(entry.target);
       }
     });
   }, {
-    threshold: 0.2
+    threshold: 0,
+    rootMargin: "0px"
   });
 
-  rows.forEach((el, i) => {
-    console.log(`📦 Подключаю к обзору элемент #${i + 1}:`, el);
-    if (el instanceof Element) {
-      observer.observe(el);
-    } else {
-      console.warn("⛔ Не является DOM-элементом:", el);
-    }
-  });
+  rows.forEach(row => waveObserver.observe(row));
+
+  // 🔧 Пинаем scroll для GitHub Pages
+  setTimeout(() => window.dispatchEvent(new Event('scroll')), 100);
 });
 
 
@@ -301,7 +308,7 @@ function animateDots(grid) {
 }
 
 // Активируем при скролле
-const observer = new IntersectionObserver(entries => {
+const dotObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting && !entry.target.classList.contains('activated')) {
       entry.target.classList.add('activated');
@@ -311,7 +318,7 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 
 document.querySelectorAll('.dot-grid').forEach(grid => {
-  observer.observe(grid);
+  dotObserver.observe(grid);
 });
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -324,5 +331,75 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('cookieConsent').style.display = 'none';
   });
 });
+
+// --- Новости: вывод, листание, модальное окно (оптимизировано под 3x2) ---
+const NEWS_PER_PAGE = 6; // 3 столбика × 2 строки
+let currentPage = 0;
+
+function renderNewsPages() {
+  const news = window.NEWS_DATA || [];
+  const totalPages = Math.ceil(news.length / NEWS_PER_PAGE);
+  const carousel = document.getElementById('newsCarousel');
+  if (!carousel) return;
+
+  let pagesHTML = '';
+  for (let p = 0; p < totalPages; p++) {
+    const pageNews = news.slice(p * NEWS_PER_PAGE, (p + 1) * NEWS_PER_PAGE);
+    pagesHTML += '<div class="news-grid">';
+    for (let i = 0; i < 6; i++) {
+      const newsItem = pageNews[i];
+      if (newsItem) {
+        pagesHTML += `
+          <div class="news-card" data-id="${newsItem.id}">
+            <div class="news-card-title">${newsItem.title}</div>
+            <div class="news-card-date">${newsItem.date}</div>
+            <div class="news-card-text">${newsItem.shortText}</div>
+            <button class="news-card-more" data-id="${newsItem.id}">Подробнее</button>
+          </div>
+        `;
+      } else {
+        pagesHTML += `<div class="news-card news-card-empty"></div>`;
+      }
+    }
+    pagesHTML += '</div>';
+  }
+  carousel.innerHTML = pagesHTML;
+  updateNewsCarousel();
+  document.querySelectorAll('.news-card-more').forEach(btn => {
+    btn.onclick = function() {
+      const id = +this.dataset.id;
+      openNewsModal(id);
+    };
+  });
+}
+
+function updateNewsCarousel() {
+  const carousel = document.getElementById('newsCarousel');
+  const totalPages = Math.ceil((window.NEWS_DATA || []).length / NEWS_PER_PAGE);
+  if (carousel) {
+    carousel.style.transform = `translateX(-${currentPage * 100}%)`;
+  }
+  document.getElementById('newsPrevBtn').disabled = currentPage === 0;
+  document.getElementById('newsNextBtn').disabled = currentPage === totalPages - 1;
+}
+
+document.getElementById('newsPrevBtn').onclick = function() {
+  if (currentPage > 0) {
+    currentPage--;
+    updateNewsCarousel();
+  }
+};
+document.getElementById('newsNextBtn').onclick = function() {
+  const totalPages = Math.ceil((window.NEWS_DATA || []).length / NEWS_PER_PAGE);
+  if (currentPage < totalPages - 1) {
+    currentPage++;
+    updateNewsCarousel();
+  }
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById('newsCarousel')) renderNewsPages();
+});
+// --- Конец блока новостей ---
 
 
