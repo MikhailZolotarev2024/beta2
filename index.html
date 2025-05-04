@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Анонимные Решения</title>
-	<link rel="stylesheet" href="general.css">
+	<link rel="stylesheet" href="general.new.css">
 	<!-- Подключение шрифтов в <head> -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -66,16 +66,15 @@ html {
         /* Контент */
 
 
-        .card, {
+        .card {
             background: linear-gradient(to bottom, rgba(40, 50, 60, 0.4), rgba(30, 40, 50, 0.4));
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(8px);
+            max-width:600px;
         }
-.card{
-max-width:600px;
-}
+
         .card:hover, .news-widget:hover {
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
@@ -207,7 +206,7 @@ min-height:40px;
 
 
 
-        }
+
 
 
 		
@@ -272,50 +271,53 @@ min-height:40px;
   </div>
 
   <div class="wave-list">
-    <div class="wave-row hidden">
+    <div class="wave-row">
       <span class="wave-text">Сбор и анализ информации от клиента,включая любые двозмодные средства общения между потерпевшим и мошенниками,а также ссылки на все доступные интернет-ресурсы к которым они могут иметь отношение</span>
-
       <div class="wave-row-container">
-    <img src="icon2.svg" alt="Иконка согласования" />
-  </div>
+        <img src="icon2.svg" alt="Иконка согласования" />
+      </div>
     </div>
-
-    <div class="wave-row hidden">
+    <div class="wave-row">
       <span class="wave-text">Согласование с клиентом возможности,или ее отсутствия реализации услуг компании,а также согласование возможного содействия клиента при нашей работе компании с мошенниками,что может существенно помочь в возрате финансов</span>
-
       <div class="wave-row-container">
-    <img src="icon1.svg" alt="Иконка согласования" />
-  </div>
-
+        <img src="icon1.svg" alt="Иконка согласования" />
+      </div>
     </div>
-
-<div class="wave-row hidden">
-  <span class="wave-text">Наши специалисты приступают к работе,и первым делом мы проникаем в их систему под видом обычного пользователя,который попался на крючок,обычно они проходят все основные шаги с которыми сталкиваетесь и вы</span>
-
-  <div class="wave-row-container">
-    <img src="icon3.svg" alt="Иконка согласования" />
-  </div>
-</div>
-
-<div class="wave-row hidden">
-  <span class="wave-text">После того как наши агенты получают возможность контактировать,мы проникаем уже внутрь системы,подбрасывая им различные файлы,находим уязвимые места,пытаемся найти высшее звено у которого есть доступы к финансам организации,и взымаем данные средства</span>
-
-  <div class="wave-row-container">
-    <img src="icon4.svg" alt="Иконка согласования" />
-  </div>
-</div>
+    <div class="wave-row">
+      <span class="wave-text">Наши специалисты приступают к работе,и первым делом мы проникаем в их систему под видом обычного пользователя,который попался на крючок,обычно они проходят все основные шаги с которыми сталкиваетесь и вы</span>
+      <div class="wave-row-container">
+        <img src="icon3.svg" alt="Иконка согласования" />
+      </div>
+    </div>
+    <div class="wave-row">
+      <span class="wave-text">После того как наши агенты получают возможность контактировать,мы проникаем уже внутрь системы,подбрасывая им различные файлы,находим уязвимые места,пытаемся найти высшее звено у которого есть доступы к финансам организации,и взымаем данные средства</span>
+      <div class="wave-row-container">
+        <img src="icon4.svg" alt="Иконка согласования" />
+      </div>
+    </div>
   </div>
 
 </section>
-<div class="news-modal">
-  <div class="modal-content">
-    <h2 class="news-modal-title">Заголовок</h2>
-    <p class="news-modal-content">Текст новости...</p>
-    <button onclick="closeNewsModal()">Закрыть</button>
+
+</div>
+<section class="news-section">
+  <h2>Новости</h2>
+  <button class="news-nav-btn left" id="newsPrevBtn">&#8592;</button>
+  <div class="news-carousel" id="newsCarousel">
+    <!-- Сюда будут подставляться новости JS-скриптом -->
+  </div>
+  <button class="news-nav-btn right" id="newsNextBtn">&#8594;</button>
+</section>
+
+<!-- Модальное окно для новости -->
+<div class="news-modal" id="newsModal">
+  <div class="news-modal-content" id="newsModalContent">
+    <button class="news-modal-close" id="newsModalClose">&times;</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalDate"></div>
+    <div id="modalText"></div>
   </div>
 </div>
-</div>
-       
 		
 		<div class="bgsec">
 		<h1>Причины воспользоваться нашими услугами! </h3>
@@ -343,7 +345,7 @@ min-height:40px;
 <h3><strong>Россия и СНГ</strong></h3>
 <div class="dot-grid" data-active="3"></div>
 <p>Полный возврат — редкость. Даже возбуждение уголовного дела почти никогда не заканчивается компенсацией.</p>
-<p>Потерпевшим часто напрямую говорят: “денег не вернуть”.</p>
+<p>Потерпевшим часто напрямую говорят: "денег не вернуть".</p>
 <p>Если нет нестандартного подхода — шанс на возврат стремится к нулю.</p>
 </div>
 		</div>
@@ -353,18 +355,17 @@ min-height:40px;
 
 
 
-<div class="card">
-   <h2> </h2>
 
-</div>
 
 	
 
 <div class="main-container2">
     <!-- Блок карусели (2/3 ширины) -->
 <div class="carousel-container">
+
     <button id="prevBtn" class="carousel-btn left-btn">◀</button>
     <div class="carousel">
+
         <div class="carousel-inner">
             <div class="carousel-item"><img src="MetaMask.jpg" alt="MetaMask"></div>
             <div class="carousel-item"><img src="trust-wallet.jpg" alt="Trust Wallet"></div>
@@ -377,11 +378,7 @@ min-height:40px;
     <button id="nextBtn" class="carousel-btn right-btn">▶</button>
 </div>
     <!-- Блок ленточек (1/3 ширины) -->
-    <div class="ribbon-container">
 
-     <h4>Наши партнеры,а также приложения,с которыми мы сотрудничаем,а так же которые помогают вам более надежно хранить свои крипто-активы,что бы реже обращаться к нам</h4>
-
-</div>
 
 
 
@@ -467,7 +464,7 @@ min-height:40px;
   <button id="acceptCookiesBtn">Принять</button>
 </div>
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
-<script src="script.js"></script>
+<script src="news-data.js" defer></script>
+<script src="script.js" defer></script>
 </body>
 </html>
