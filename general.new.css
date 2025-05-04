@@ -599,6 +599,6 @@ footer, .site-footer {
 }
 @media (max-width: 600px) {
   .news-section { min-height: 220px; max-height: 320px; padding: 10px 2px 6px 2px; }
-  .news-grid { grid-template-columns: 1fr; grid-template-rows: repeat(6, 1fr); gap: 10px; }
-  .news-card { padding: 7px 5px; font-size: 0.97rem; }
+  .news-grid {display: grid;grid-template-columns: 1fr;gap: 12px;padding: 10px;}
+  .news-card {padding: 10px 8px;font-size: 0.95rem;}
 }
