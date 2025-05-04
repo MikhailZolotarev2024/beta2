@@ -240,7 +240,7 @@ const showMoreBtn = document.getElementById('showMoreNews');
 
   
   function openNewsModal(id) {
-    const news = window.NEWS_DATA || [];
+    const news = typeof newsItems !== 'undefined' ? newsItems : [];
     const item = news.find(n => n.id === id);
     if (!item) return;
 
@@ -333,11 +333,15 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // --- Новости: вывод, листание, модальное окно (оптимизировано под 3x2) ---
-const NEWS_PER_PAGE = 6; // 3 столбика × 2 строки
+function getNewsPerPage() {
+  return window.innerWidth <= 600 ? 2 : 6;
+}
+
 let currentPage = 0;
 
 function renderNewsPages() {
-  const news = window.NEWS_DATA || [];
+  const news = typeof newsItems !== 'undefined' ? newsItems : [];
+  const NEWS_PER_PAGE = getNewsPerPage();
   const totalPages = Math.ceil(news.length / NEWS_PER_PAGE);
   const carousel = document.getElementById('newsCarousel');
   if (!carousel) return;
@@ -346,7 +350,7 @@ function renderNewsPages() {
   for (let p = 0; p < totalPages; p++) {
     const pageNews = news.slice(p * NEWS_PER_PAGE, (p + 1) * NEWS_PER_PAGE);
     pagesHTML += '<div class="news-grid">';
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < NEWS_PER_PAGE; i++) {
       const newsItem = pageNews[i];
       if (newsItem) {
         pagesHTML += `
@@ -375,7 +379,9 @@ function renderNewsPages() {
 
 function updateNewsCarousel() {
   const carousel = document.getElementById('newsCarousel');
-  const totalPages = Math.ceil((window.NEWS_DATA || []).length / NEWS_PER_PAGE);
+  const NEWS_PER_PAGE = getNewsPerPage();
+  const news = typeof newsItems !== 'undefined' ? newsItems : [];
+  const totalPages = Math.ceil(news.length / NEWS_PER_PAGE);
   if (carousel) {
     carousel.style.transform = `translateX(-${currentPage * 100}%)`;
   }
@@ -390,7 +396,9 @@ document.getElementById('newsPrevBtn').onclick = function() {
   }
 };
 document.getElementById('newsNextBtn').onclick = function() {
-  const totalPages = Math.ceil((window.NEWS_DATA || []).length / NEWS_PER_PAGE);
+  const NEWS_PER_PAGE = getNewsPerPage();
+  const news = typeof newsItems !== 'undefined' ? newsItems : [];
+  const totalPages = Math.ceil(news.length / NEWS_PER_PAGE);
   if (currentPage < totalPages - 1) {
     currentPage++;
     updateNewsCarousel();
@@ -399,6 +407,12 @@ document.getElementById('newsNextBtn').onclick = function() {
 
 document.addEventListener('DOMContentLoaded', function() {
   if (document.getElementById('newsCarousel')) renderNewsPages();
+});
+
+window.addEventListener('resize', function() {
+  currentPage = 0;
+  renderNewsPages();
+  updateNewsCarousel();
 });
 // --- Конец блока новостей ---
 
