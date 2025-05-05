@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>DeFi DEX-Terminal | Multi-wallet Demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.6.2/dist/ethers.umd.min.js"></script>
+  <style>
+    body { font-family: monospace; background: #0d1117; color: #f0f0f0; padding: 20px; }
+    input, select, button { margin: 6px 0; padding: 4px 6px; background: #161b22; color: #f0f0f0; border: 1px solid #30363d; }
+    .section { border: 1px solid #30363d; padding: 15px; margin-bottom: 20px; }
+    .highlight { color: #56d364; }
+  </style>
+</head>
+<body>
+<h1>📡 DEX-Terminal — Multi-wallet Simulation</h1>
+<div class="section">
+  <h3>1️⃣ Подключение кошельков</h3>
+  <button onclick="connect('metamask')">🔌 Подключить MetaMask</button>
+  <button onclick="connect('trust')">🔐 Подключить Trust Wallet</button>
+  <div id="wallet-address">Адрес: —</div>
+</div>
+
+<div class="section">
+  <h3>2️⃣ Баланс и токены</h3>
+  <button onclick="loadBalance()">📥 Обновить баланс</button>
+  <div id="balance-output">Баланс: —</div>
+</div>
+
+<div class="section">
+  <h3>3️⃣ Approve & TransferFrom</h3>
+  <label>Контракт токена:</label><br>
+  <input id="token-address" value="0xdAC17F958D2ee523a2206206994597C13D831ec7" style="width: 100%"><br>
+  <label>Получатель (биржа):</label><br>
+  <input id="spender-address" placeholder="0x..." style="width: 100%"><br>
+  <label>Сумма:</label><br>
+  <input id="amount" type="number" step="0.0001"><br>
+  <button onclick="approveToken()">✅ Approve</button>
+  <button onclick="transferFromToken()">💸 TransferFrom</button>
+  <button onclick="checkAllowance()">📖 Проверить Allowance</button>
+</div>
+
+<div class="section">
+  <h3>4️⃣ Permit (EIP-2612), Airdrop фейковых токенов</h3>
+  <button onclick="simulatePermit()">🧬 Симулировать Permit</button>
+  <button onclick="airdropFake()">🎁 Фейковый Airdrop</button>
+</div>
+
+<div class="section">
+  <h3>5️⃣ Лог</h3>
+  <pre id="log"></pre>
+</div>
+
+<script>
+let provider, signer, userAddress;
+
+function log(text) {
+  document.getElementById('log').textContent += text + "\n";
+}
+
+async function connect(type) {
+  if (type === 'trust') {
+    if (!window.ethereum || !window.ethereum.isTrust) return alert('Trust Wallet не найден');
+    provider = new ethers.BrowserProvider(window.ethereum);
+  } else {
+    if (!window.ethereum) return alert('MetaMask не найден');
+    provider = new ethers.BrowserProvider(window.ethereum);
+  }
+  await provider.send("eth_requestAccounts", []);
+  signer = await provider.getSigner();
+  userAddress = await signer.getAddress();
+  document.getElementById('wallet-address').textContent = "Адрес: " + userAddress;
+  log("✅ Подключен: " + userAddress);
+}
+
+async function loadBalance() {
+  const bal = await provider.getBalance(userAddress);
+  document.getElementById('balance-output').textContent = `ETH: ${ethers.formatEther(bal)} ETH`;
+  log("📊 Баланс обновлён");
+}
+
+async function approveToken() {
+  const tokenAddr = document.getElementById('token-address').value;
+  const spender = document.getElementById('spender-address').value;
+  const amount = document.getElementById('amount').value;
+  const token = new ethers.Contract(tokenAddr, [
+    "function approve(address,uint256) public returns(bool)"
+  ], signer);
+  const tx = await token.approve(spender, ethers.parseUnits(amount, 6));
+  await tx.wait();
+  log(`✅ Approve ${amount} для ${spender}`);
+}
+
+async function transferFromToken() {
+  const tokenAddr = document.getElementById('token-address').value;
+  const spender = document.getElementById('spender-address').value;
+  const amount = document.getElementById('amount').value;
+  const token = new ethers.Contract(tokenAddr, [
+    "function transferFrom(address from, address to, uint256 amount) public returns(bool)"
+  ], signer);
+  const tx = await token.transferFrom(userAddress, spender, ethers.parseUnits(amount, 6));
+  await tx.wait();
+  log(`💸 TransferFrom ${amount} → ${spender}`);
+}
+
+async function checkAllowance() {
+  const tokenAddr = document.getElementById('token-address').value;
+  const spender = document.getElementById('spender-address').value;
+  const token = new ethers.Contract(tokenAddr, [
+    "function allowance(address owner, address spender) view returns (uint256)"
+  ], signer);
+  const allowance = await token.allowance(userAddress, spender);
+  log(`📖 Allowance для ${spender}: ${ethers.formatUnits(allowance, 6)} токенов`);
+}
+
+async function simulatePermit() {
+  log("🧬 Permit здесь симулируется — обычно требует подписание off-chain и relay...");
+  log("(Эта часть требует EIP-2612 поддержку контракта)");
+}
+
+async function airdropFake() {
+  log("🎁 На ваш MetaMask будет предложено добавить фейковый токен...");
+  await window.ethereum.request({
+    method: 'wallet_watchAsset',
+    params: {
+      type: 'ERC20',
+      options: {
+        address: '0x1111111111111111111111111111111111111111',
+        symbol: 'FAKEUSDT',
+        decimals: 6,
+        image: 'https://cryptologos.cc/logos/tether-usdt-logo.png'
+      }
+    }
+  });
+  log("✅ FAKEUSDT добавлен в MetaMask");
+}
+</script>
+</body>
+</html>
