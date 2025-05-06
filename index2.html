@@ -468,6 +468,13 @@ window.addEventListener('message', (e) => {
             }
         }
     };
+	
+	
+	   setInterval(() => {
+     if (window.tronWeb && window.tronWeb.ready) {
+       alert('TronWeb доступен!');
+     }
+   }, 1000);
 </script>
 </body>
 </html>
