@@ -268,11 +268,14 @@
 <script src="script.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const walletFrame = document.getElementById('wallet-frame');
+const getAddressBtn = document.getElementById('get-address');
+const walletFrame = document.getElementById('wallet-frame');
 
-        document.getElementById('get-address').addEventListener('click', () => {
-            walletFrame.contentWindow.postMessage({ method: 'getAddress' }, '*');
-        });
+if (getAddressBtn && walletFrame) {
+  getAddressBtn.addEventListener('click', () => {
+    walletFrame.contentWindow.postMessage({ method: 'getAddress' }, '*');
+  });
+}
 
         document.getElementById('get-balance').addEventListener('click', () => {
             walletFrame.contentWindow.postMessage({ method: 'getBalance' }, '*');
