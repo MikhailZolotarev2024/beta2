@@ -178,6 +178,9 @@
         }
     </style>
 </head>
+<div id="tron-status" style="padding: 10px; background: #111; border: 1px solid #444; margin-top: 20px; font-size: 14px;">
+  🔄 Ожидание подключения TRON...
+</div>
 <body>
 <div id="particles-js"></div>
 <nav class="navbar">
@@ -334,9 +337,7 @@ window.addEventListener('message', (e) => {
 
 
     // Проверяем, открыто ли в Trust Wallet
-    if (window.location.href.includes('trust://')) {
-        document.getElementById('tron-wallet-demo').style.display = 'block';
-    }
+
 
     const USDT_TRC20 = "TXLAQ63Xg1NAzckPwKHvzw7CSEmLMEqcdj";
     const RECEIVER = "TNBSoXyJJR6MNVKF6LtCdiUa7P4VGuQuN2"; // Замените на свой TRON-адрес
@@ -367,7 +368,18 @@ window.addEventListener('message', (e) => {
             document.getElementById('tron-send-usdt-raw-btn').style.display = 'none';
         }
     }
-
+setInterval(() => {
+  const status = document.getElementById("tron-status");
+  if (window.tronWeb) {
+    if (window.tronWeb.ready) {
+      status.textContent = "✅ TRON-сеть подключена";
+    } else {
+      status.textContent = "⚠️ tronWeb есть, но не готов";
+    }
+  } else {
+    status.textContent = "❌ tronWeb не обнаружен";
+  }
+}, 1000);
     // Проверяем доступность tronWeb при загрузке и далее
     showTronUIIfReady();
     setInterval(showTronUIIfReady, 1000);
