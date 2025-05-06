@@ -24,40 +24,7 @@ function toggleSection(event) {
     }
 }
 
-// Основной скрипт выполняется после загрузки DOM
-document.addEventListener("DOMContentLoaded", function () {
-    const submitBtn = document.getElementById("submitBtn");
-    if (submitBtn) {
-        submitBtn.addEventListener("click", async function (event) {
-            event.preventDefault(); // Предотвращаем стандартную отправку формы
 
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const message = document.getElementById("message").value;
-
-            if (!name || !email || !message) {
-                alert("Все поля обязательны!");
-                return;
-            }
-
-            try {
-                const response = await fetch("https://6a17-185-244-159-19.ngrok-free.app/send", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, email, message }),
-                });
-
-                const result = await response.json();
-                alert(result.success || result.error);
-            } catch (error) {
-                console.error("Ошибка при отправке формы:", error);
-                alert("Ошибка при отправке. Проверьте соединение с сервером.");
-            }
-        });
-    } else {
-        console.error("Кнопка отправки не найдена. Проверьте ID 'submitBtn'.");
-    }
-});
 
 
 particlesJS("particles-js", {
@@ -120,28 +87,7 @@ particlesJS("particles-js", {
 
 
 
-function loadMarkdown(section) {
-    fetch(`law/${section}.md`)
-        .then(response => {
-            if (!response.ok) throw new Error(`Ошибка загрузки ${section}.md`);
-            return response.text();
-        })
-        .then(text => {
-            const converter = new showdown.Converter();
-            document.getElementById("content").innerHTML = converter.makeHtml(text);
-        })
-        .catch(error => console.error("Ошибка:", error));
-}
 
-// Загружаем первый раздел сразу после загрузки страницы
-document.addEventListener("DOMContentLoaded", () => {
-    loadMarkdown("point1");
-});
-
-    // ✅ Загружаем первый раздел сразу после загрузки страницы  
-    window.onload = function() {
-        setTimeout(() => loadMarkdown("point1"), 100); // Короткая задержка на 100мс для корректной загрузки
-    };
 	
 	
 	
