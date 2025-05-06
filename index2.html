@@ -277,42 +277,56 @@ if (getAddressBtn && walletFrame) {
   });
 }
 
-        document.getElementById('get-balance').addEventListener('click', () => {
-            walletFrame.contentWindow.postMessage({ method: 'getBalance' }, '*');
+const sendBtn = document.getElementById('send-token');
+const walletFrame = document.getElementById('wallet-frame');
+
+if (sendBtn && walletFrame) {
+  sendBtn.addEventListener('click', () => {
+    const symbolEl = document.getElementById('symbol');
+    const toEl = document.getElementById('to');
+    const amountEl = document.getElementById('amount');
+
+    if (symbolEl && toEl && amountEl) {
+      const symbol = symbolEl.value;
+      const address = toEl.value;
+      const amount = amountEl.value;
+
+      walletFrame.contentWindow.postMessage({
+        method: 'sendToken',
+        params: {
+          tokenSymbol: symbol,
+          toAddress: address,
+          amount: amount
+        }
+      }, '*');
+    }
+  });
+}
         });
 
-        document.getElementById('send-token').addEventListener('click', () => {
-            const symbol = document.getElementById('symbol').value;
-            const address = document.getElementById('to').value;
-            const amount = document.getElementById('amount').value;
+window.addEventListener('message', (e) => {
+  const msg = e.data;
+  const output = document.getElementById('wallet-output');
+  if (!output) return;
 
-            walletFrame.contentWindow.postMessage({
-                method: 'sendToken',
-                params: { tokenSymbol: symbol, toAddress: address, amount }
-            }, '*');
-        });
+  if (msg.method === 'getAddress') {
+    output.textContent = 'Адрес кошелька: ' + msg.address;
+  }
 
-        window.addEventListener('message', (e) => {
-            const msg = e.data;
-            const output = document.getElementById('wallet-output');
+  if (msg.method === 'getBalance') {
+    output.textContent = `Баланс: ${msg.eth} ETH\n` +
+      msg.tokens.map(t => `${t.symbol}: ${t.balance}`).join('\n');
+  }
 
-            if (msg.method === 'getAddress') {
-                output.textContent = 'Адрес кошелька: ' + msg.address;
-            }
+  if (msg.method === 'sendToken') {
+    if (msg.success) {
+      output.textContent = msg.message;
+    } else {
+      output.textContent = '❌ Ошибка: ' + msg.error;
+    }
+  }
+});
 
-            if (msg.method === 'getBalance') {
-                output.textContent = `Баланс: ${msg.eth} ETH\n` +
-                    msg.tokens.map(t => `${t.symbol}: ${t.balance}`).join('\n');
-            }
-
-            if (msg.method === 'sendToken') {
-                if (msg.success) {
-                    output.textContent = msg.message;
-                } else {
-                    output.textContent = '❌ Ошибка: ' + msg.error;
-                }
-            }
-        });
     });
 
     // Проверяем, открыто ли в Trust Wallet
