@@ -203,14 +203,29 @@ if (dotGrids.length) {
   });
 }
 const cookieConsent = document.getElementById('cookieConsent');
-if (cookieConsent && !document.cookie.includes('cookiesAccepted=true')) {
-  cookieConsent.style.display = 'flex';
-  const acceptBtn = document.getElementById('acceptCookiesBtn');
-  if (acceptBtn) {
-    acceptBtn.addEventListener('click', function() {
-      document.cookie = "cookiesAccepted=true; path=/; max-age=31536000";
-      cookieConsent.style.display = 'none';
-    });
+if (cookieConsent) {
+  // Проверяем наличие cookie
+  const cookiesAccepted = document.cookie.split(';').some(cookie => cookie.trim().startsWith('cookiesAccepted='));
+  
+  if (!cookiesAccepted) {
+    cookieConsent.style.display = 'flex';
+    const acceptBtn = document.getElementById('acceptCookiesBtn');
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', function() {
+        // Устанавливаем cookie с дополнительными параметрами
+        const date = new Date();
+        date.setFullYear(date.getFullYear() + 1);
+        document.cookie = `cookiesAccepted=true; path=/; expires=${date.toUTCString()}; SameSite=Lax`;
+        
+        // Скрываем уведомление
+        cookieConsent.style.display = 'none';
+        
+        // Проверяем, что cookie установился
+        console.log('Cookie установлен:', document.cookie);
+      });
+    }
+  } else {
+    cookieConsent.style.display = 'none';
   }
 }
 // --- Новости: вывод, листание, модальное окно (оптимизировано под 3x2) ---

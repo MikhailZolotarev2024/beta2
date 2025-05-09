@@ -7,6 +7,8 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="general.new.css">
     <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="md-converter.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
@@ -137,9 +139,37 @@
         <p>© 2025 Анонимные Решения. Все права защищены.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js" defer></script>
+    <script src="legal.js" defer></script>
 
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Функция для загрузки Markdown файлов
+        async function loadMarkdown(point) {
+            const content = document.getElementById('content');
+            content.innerHTML = 'Загрузка...';
+            
+            try {
+                // Загружаем соответствующий Markdown файл
+                await window.loadMarkdown(`content/${point}.md`, 'content');
+                
+                // Обновляем активную кнопку
+                document.querySelectorAll('.nav-links button').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.getAttribute('onclick').includes(point)) {
+                        btn.classList.add('active');
+                    }
+                });
+            } catch (error) {
+                content.innerHTML = 'Ошибка загрузки контента. Пожалуйста, попробуйте позже.';
+                console.error('Ошибка загрузки Markdown:', error);
+            }
+        }
 
-<script src="script.js" defer></script>
+        // Загружаем первый пункт при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMarkdown('point1');
+        });
+    </script>
 </body>
 </html>
