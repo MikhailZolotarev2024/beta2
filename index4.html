@@ -143,33 +143,6 @@
     <script src="script.js" defer></script>
     <script src="legal.js" defer></script>
 
-    <script>
-        // Функция для загрузки Markdown файлов
-        async function loadMarkdown(point) {
-            const content = document.getElementById('content');
-            content.innerHTML = 'Загрузка...';
-            
-            try {
-                // Загружаем соответствующий Markdown файл
-                await window.loadMarkdown(`content/${point}.md`, 'content');
-                
-                // Обновляем активную кнопку
-                document.querySelectorAll('.nav-links button').forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.getAttribute('onclick').includes(point)) {
-                        btn.classList.add('active');
-                    }
-                });
-            } catch (error) {
-                content.innerHTML = 'Ошибка загрузки контента. Пожалуйста, попробуйте позже.';
-                console.error('Ошибка загрузки Markdown:', error);
-            }
-        }
 
-        // Загружаем первый пункт при загрузке страницы
-        document.addEventListener('DOMContentLoaded', () => {
-            loadMarkdown('point1');
-        });
-    </script>
 </body>
 </html>
