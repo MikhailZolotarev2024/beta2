@@ -8,6 +8,7 @@
 	<!-- Подключение шрифтов в <head> -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="reviews-carousel.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 		@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
@@ -387,30 +388,18 @@ min-height:40px;
 
 <div class="expandable-grid">
         <div class="expandable-section">
-            <div class="expandable-header" onclick="toggleSection(event)">Кто мы и чем занимаемся</div>
+            <div class="expandable-header">Кто мы и чем занимаемся</div>
             <div class="expandable-body">Мы – команда профессионалов, специализирующихся на возврате средств.</div>
         </div>
         <div class="expandable-section">
-            <div class="expandable-header" onclick="toggleSection(event)">Наши услуги</div>
+            <div class="expandable-header">Наши услуги</div>
             <div class="expandable-body">Предоставляем широкий спектр услуг по возврату средств.</div>
         </div>
         <div class="expandable-section">
-            <div class="expandable-header" onclick="toggleSection(event)">Почему выбирают нас</div>
+            <div class="expandable-header">Почему выбирают нас</div>
             <div class="expandable-body">Гарантируем конфиденциальность и надежность.</div>
         </div>
-		        <div class="expandable-section">
-            <div class="expandable-header" onclick="toggleSection(event)">Кто мы и чем занимаемся</div>
-            <div class="expandable-body">Мы – команда профессионалов, специализирующихся на возврате средств.</div>
-        </div>
-        <div class="expandable-section">
-            <div class="expandable-header" onclick="toggleSection(event)">Наши услуги</div>
-            <div class="expandable-body">Предоставляем широкий спектр услуг по возврату средств.</div>
-        </div>
-        <div class="expandable-section">
-            <div class="expandable-header" onclick="toggleSection(event)">Почему выбирают нас</div>
-            <div class="expandable-body">Гарантируем конфиденциальность и надежность.</div>
-        </div>
-		</div>
+</div>
 <div class="contact-form" id="contact">
     <h2>Связаться с нами</h2>
     <form id="contactForm">
@@ -467,5 +456,15 @@ min-height:40px;
 <script src="newsdata.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
 <script src="script.js" defer></script>
+<div class="reviews-container">
+    <div class="reviews-carousel">
+        <!-- Колонки будут добавлены через JavaScript -->
+    </div>
+    <div class="carousel-controls">
+        <button class="carousel-button prev">←</button>
+        <button class="carousel-button next">→</button>
+    </div>
+</div>
+<script src="reviews-carousel.js"></script>
 </body>
 </html>
