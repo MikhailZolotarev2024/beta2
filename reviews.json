@@ -1,26 +1,250 @@
 [
-  {
-    "name": "John D.",
+{
+    "name": "Grace C.",
     "lang": "en",
-    "flag": "🇬🇧",
-    "letter": "J",
-    "short": "Thanks to the team! I got my money back in 10 days. Amazing service and communication...",
-    "full": "Thanks to the team! I got my money back in 10 days. Amazing service and constant communication. Definitely recommend them!"
-  },
-  {
-    "name": "Анна К.",
+    "flag": "GB",
+    "letter": "G",
+    "short": "Really appreciated the constant updates. Got my refund quickly....",
+    "full": "I was initially skeptical about using this service, but I'm so glad I did. The process was smooth from start to finish. The team kept me informed at every step, and I received my refund much faster than expected. What impressed me most was their attention to detail and willingness to explain everything clearly. Highly recommend!"
+},
+{
+    "name": "Cheryl B.",
     "lang": "ru",
-    "flag": "🇷🇺",
-    "letter": "А",
-    "short": "Очень благодарна за помощь! Вернули деньги через 2 недели...",
-    "full": "Очень благодарна за помощь! Мне вернули средства спустя 2 недели. Постоянная поддержка, всё вежливо и профессионально."
-  },
-  {
-    "name": "Laura M.",
-    "lang": "es",
-    "flag": "🇪🇸",
-    "letter": "L",
-    "short": "Excelente servicio, muy atentos todo el tiempo...",
-    "full": "Excelente servicio, todo el equipo estuvo muy atento. Recuperé mi dinero después de 15 días de espera. ¡Muy recomendado!"
-  }
+    "flag": "RU",
+    "letter": "C",
+    "short": "Была некоторая задержка с ответом, но в итоге всё решилось...",
+    "full": "Хочу поделиться своим опытом. Изначально была небольшая задержка с ответом от поддержки, что меня немного насторожило. Но когда они вышли на связь, я была приятно удивлена их профессионализмом. Они не только решили мою проблему, но и подробно объяснили, почему произошла задержка. В итоге всё решилось даже лучше, чем я ожидала. Особенно понравилось, что они не просто формально отписались, а действительно вникли в ситуацию."
+},
+{
+    "name": "Michael O.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "M",
+    "short": "Quick and efficient service. Got my money back in 5 days.",
+    "full": "Quick and efficient service. Got my money back in 5 days."
+},
+{
+    "name": "Patricia G.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "P",
+    "short": "Сложно было разобраться вначале, но поддержка помогла...",
+    "full": "Сложно было разобраться вначале, не хватало инструкции, но поддержка помогла."
+},
+{
+    "name": "Stephen R.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "S",
+    "short": "Great support team, very responsive and helpful.",
+    "full": "Great support team, very responsive and helpful."
+},
+{
+    "name": "Autumn D.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "A",
+    "short": "Professional service, would use again.",
+    "full": "Professional service, would use again."
+},
+{
+    "name": "Joseph R.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "J",
+    "short": "Была некоторая задержка с ответом, но в итоге всё решилось...",
+    "full": "Была некоторая задержка с ответом, но в итоге всё решилось."
+},
+{
+    "name": "Mark H.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "M",
+    "short": "Excellent service, highly recommend!",
+    "full": "Excellent service, highly recommend!"
+},
+{
+    "name": "Ronald M.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "R",
+    "short": "Сложно было разобраться вначале, но поддержка помогла...",
+    "full": "Сложно было разобраться вначале, не хватало инструкции, но поддержка помогла."
+},
+{
+    "name": "Sean G.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "S",
+    "short": "Fast and reliable service.",
+    "full": "Fast and reliable service."
+},
+{
+    "name": "Alyssa T.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "A",
+    "short": "Была некоторая задержка с ответом, но в итоге всё решилось...",
+    "full": "Была некоторая задержка с ответом, но в итоге всё решилось."
+},
+{
+    "name": "Angela P.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "A",
+    "short": "Very satisfied with the service.",
+    "full": "Very satisfied with the service."
+},
+{
+    "name": "Jamie F.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "J",
+    "short": "Вернули средства за неделю, я в восторге...",
+    "full": "Вернули средства за неделю, я в восторге. Уровень сервиса – на высоте."
+},
+{
+    "name": "Shannon P.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "S",
+    "short": "Great experience, will use again.",
+    "full": "Great experience, will use again."
+},
+{
+    "name": "Catherine R.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "C",
+    "short": "Спасибо огромное за помощь! Деньги вернули очень быстро...",
+    "full": "Спасибо огромное за помощь! Деньги вернули очень быстро, всё прошло гладко."
+},
+{
+    "name": "Emily M.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "E",
+    "short": "Quick response and resolution.",
+    "full": "Quick response and resolution."
+},
+{
+    "name": "Dave N.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "D",
+    "short": "Вернули средства за неделю, я в восторге...",
+    "full": "Вернули средства за неделю, я в восторге. Уровень сервиса – на высоте."
+},
+{
+    "name": "Ryan P.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "R",
+    "short": "Excellent customer service.",
+    "full": "Excellent customer service."
+},
+{
+    "name": "Billy G.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "B",
+    "short": "Спасибо огромное за помощь! Деньги вернули очень быстро...",
+    "full": "Спасибо огромное за помощь! Деньги вернули очень быстро, всё прошло гладко."
+},
+{
+    "name": "Anthony S.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "A",
+    "short": "Very professional team.",
+    "full": "Very professional team."
+},
+{
+    "name": "Tiffany R.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "T",
+    "short": "Профессиональная команда, поддержка на связи...",
+    "full": "Профессиональная команда, поддержка на связи, всё понравилось!"
+},
+{
+    "name": "Kevin B.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "K",
+    "short": "Great support, fast resolution.",
+    "full": "Great support, fast resolution."
+},
+{
+    "name": "Amanda L.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "A",
+    "short": "Профессиональная команда, поддержка на связи...",
+    "full": "Профессиональная команда, поддержка на связи, всё понравилось!"
+},
+{
+    "name": "Kevin W.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "K",
+    "short": "Very satisfied with the service.",
+    "full": "Very satisfied with the service."
+},
+{
+    "name": "Joanna J.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "J",
+    "short": "Профессиональная команда, поддержка на связи...",
+    "full": "Профессиональная команда, поддержка на связи, всё понравилось!"
+},
+{
+    "name": "Blake C.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "B",
+    "short": "Fast and efficient service.",
+    "full": "Fast and efficient service."
+},
+{
+    "name": "Jamie S.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "J",
+    "short": "Спасибо огромное за помощь! Деньги вернули очень быстро...",
+    "full": "Спасибо огромное за помощь! Деньги вернули очень быстро, всё прошло гладко."
+},
+{
+    "name": "Jeremy S.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "J",
+    "short": "Excellent experience overall.",
+    "full": "Excellent experience overall."
+},
+{
+    "name": "Kimberly W.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "K",
+    "short": "Вернули средства за неделю, я в восторге...",
+    "full": "Вернули средства за неделю, я в восторге. Уровень сервиса – на высоте."
+},
+{
+    "name": "Nicholas M.",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "N",
+    "short": "Very professional and helpful.",
+    "full": "Very professional and helpful."
+},
+{
+    "name": "Travis C.",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "T",
+    "short": "Вернули средства за неделю, я в восторге...",
+    "full": "Вернули средства за неделю, я в восторге. Уровень сервиса – на высоте."
+}
 ]
