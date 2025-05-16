@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     let currentPosition = 0;
     let totalColumns = 0;
     let columns = [];
+    let columnsPerView = getColumnsPerView();
+    let maxPosition = 0;
 
     // Модальное окно для отзыва
     let modal = document.getElementById('modal');
@@ -76,7 +78,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Рендер колонок в карусель
     function renderColumns() {
-        const maxPosition = Math.max(0, totalColumns - columnsPerView);
         if (currentPosition > maxPosition) {
             currentPosition = maxPosition;
         }
@@ -100,7 +101,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
     function goNext() {
-        const maxPosition = Math.max(0, totalColumns - columnsPerView);
         if (currentPosition < maxPosition) {
             currentPosition++;
             carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
@@ -120,11 +120,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     function getColumnsPerView() {
         return window.innerWidth <= 768 ? 1 : 2;
     }
-    let columnsPerView = getColumnsPerView();
     window.addEventListener('resize', () => {
         const newColumnsPerView = getColumnsPerView();
         if (newColumnsPerView !== columnsPerView) {
             columnsPerView = newColumnsPerView;
+            maxPosition = Math.max(0, totalColumns - columnsPerView);
             renderColumns();
             updateButtons();
         }
@@ -154,6 +154,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const reviews = await loadReviews();
     const cards = reviews.map(createReviewCard);
     createColumns(cards);
+    maxPosition = Math.max(0, totalColumns - columnsPerView);
     renderColumns();
     updateButtons();
 }); 
