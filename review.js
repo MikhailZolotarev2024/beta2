@@ -5,16 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalText = document.getElementById('modal-text');
   const closeModalBtn = document.querySelector('.modal .close-modal');
 
-  // Загружаем существующие отзывы
-  fetch('reviews.json')
-    .then(response => response.json())
-    .then(data => {
-      data.forEach(review => {
-        const card = createReviewCard(review);
-        reviewsGrid.appendChild(card);
-      });
-    });
-
   // Отправка новой формы
   reviewForm.addEventListener('submit', function (e) {
     e.preventDefault();
