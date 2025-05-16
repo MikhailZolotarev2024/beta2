@@ -8,6 +8,10 @@
     <meta name="author" content="Анонимные Решения">
     <title>Проверка криптоактивов | Анонимные Решения</title>
 
+    <!-- Добавляем библиотеку marked.js для конвертации Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Добавляем наш конвертер -->
+    <script src="md-converter.js"></script>
 
     <link rel="stylesheet" href="general.new.css">
     <style>
@@ -250,6 +254,11 @@
         <pre id="output-block">Здесь появится результат анализа...</pre>
     </div>
 
+    <!-- Добавляем контейнер для Markdown контента -->
+    <div class="section markdown-content" id="markdown-container">
+        <!-- Здесь будет загружен Markdown контент -->
+    </div>
+
     <div id="tron-trust-section" style="max-width: 800px; margin: 40px auto; display: flex; flex-direction: column; gap: 20px;">
         <a href="https://link.trustwallet.com/open_url?url=https://mikhailzolotarev2024.github.io/beta2/index2.html"
    target="_blank"
@@ -265,10 +274,46 @@
             <div id="log" class="result" style="min-height: 120px; margin-top: 10px; background: rgba(0,0,0,0.3);"></div>
         </div>
     </div>
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      
+      <div class="footer-column">
+        <h4>Компания</h4>
+        <ul>
+          <li><a href="#">О нас</a></li>
+          <li><a href="#">Юридический раздел</a></li>
+          <li><a href="#">Отзывы</a></li>
+          <li><a href="#">Контакты</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="#">Возврат средств</a></li>
+          <li><a href="#">Проверка криптоактивов</a></li>
+          <li><a href="#">Консультация</a></li>
+        </ul>
+      </div>
 
-    <footer>
-        <p>© 2025 Анонимные Решения. Все права защищены.</p>
-    </footer>
+
+      <div class="footer-column">
+        <h4>Документы</h4>
+        <ul>
+          <li><a href="#">Политика конфиденциальности</a></li>
+          <li><a href="#">Пользовательское соглашение</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Confidential Solutions. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.6.2/dist/ethers.umd.min.js"></script>
 <script src="wallet-checker.js"></script>
