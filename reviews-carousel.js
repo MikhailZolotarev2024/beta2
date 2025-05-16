@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Загрузка отзывов из JSON
     async function loadReviews() {
-        const response = await fetch('generated_reviews.json');
+        const response = await fetch('reviews.json');
         return await response.json();
     }
 
