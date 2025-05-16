@@ -76,6 +76,10 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Рендер колонок в карусель
     function renderColumns() {
+        const maxPosition = Math.max(0, totalColumns - columnsPerView);
+        if (currentPosition > maxPosition) {
+            currentPosition = maxPosition;
+        }
         carousel.innerHTML = '';
         columns.forEach(col => carousel.appendChild(col));
         carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
@@ -96,7 +100,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
     function goNext() {
-        if (currentPosition < totalColumns - columnsPerView) {
+        const maxPosition = Math.max(0, totalColumns - columnsPerView);
+        if (currentPosition < maxPosition) {
             currentPosition++;
             carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
             updateButtons();
