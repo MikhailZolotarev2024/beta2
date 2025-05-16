@@ -7,6 +7,23 @@ document.addEventListener('DOMContentLoaded', async function() {
     let totalColumns = 0;
     let columns = [];
 
+    // Модальное окно для отзыва
+    let modal = document.getElementById('modal');
+    let modalText = document.getElementById('modal-text');
+    let closeModalBtn = document.querySelector('.modal .close-modal');
+    if (closeModalBtn) {
+        closeModalBtn.onclick = () => {
+            modal.classList.remove('show');
+            resetAutoplay();
+        };
+    }
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('show');
+            resetAutoplay();
+        }
+    });
+
     // Загрузка отзывов из JSON
     async function loadReviews() {
         const response = await fetch('reviews.json');
@@ -27,18 +44,16 @@ document.addEventListener('DOMContentLoaded', async function() {
             </div>
             <div class="review-content">
                 <span class="review-short">${review.short}</span>
-                <span class="review-full">${review.full}</span>
                 <button class="expand-btn">Читать полностью</button>
             </div>
         `;
-        // Кнопка раскрытия
+        // Кнопка раскрытия — теперь открывает модалку
         card.querySelector('.expand-btn').addEventListener('click', function(e) {
             e.stopPropagation();
-            card.classList.toggle('expanded');
-            if(card.classList.contains('expanded')) {
-                this.textContent = 'Скрыть';
-            } else {
-                this.textContent = 'Читать полностью';
+            if (modal && modalText) {
+                modalText.textContent = review.full;
+                modal.classList.add('show');
+                pauseAutoplay(15000); // Остановить автопрокрутку на 15 секунд
             }
         });
         return card;
@@ -94,11 +109,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
     prevButton.onclick = function() {
         goPrev();
-        resetAutoplay();
+        pauseAutoplay(15000);
     };
     nextButton.onclick = function() {
         goNext();
-        resetAutoplay();
+        pauseAutoplay(15000);
     };
 
     // Определение количества колонок вью в зависимости от ширины экрана
@@ -115,11 +130,24 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     });
 
-    // Обновляю автопрокрутку на 5 секунд
-    let autoplayInterval = setInterval(goNext, 5000);
-    function resetAutoplay() {
+    // Автопрокрутка: 7 секунд, пауза 15 секунд при ручном действии
+    let autoplayInterval = setInterval(goNext, 7000);
+    let autoplayPaused = false;
+    let pauseTimeout = null;
+    function pauseAutoplay(ms) {
         clearInterval(autoplayInterval);
-        autoplayInterval = setInterval(goNext, 5000);
+        autoplayPaused = true;
+        if (pauseTimeout) clearTimeout(pauseTimeout);
+        pauseTimeout = setTimeout(() => {
+            autoplayPaused = false;
+            autoplayInterval = setInterval(goNext, 7000);
+        }, ms);
+    }
+    function resetAutoplay() {
+        if (pauseTimeout) clearTimeout(pauseTimeout);
+        clearInterval(autoplayInterval);
+        autoplayPaused = false;
+        autoplayInterval = setInterval(goNext, 7000);
     }
 
     // Главная инициализация
