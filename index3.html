@@ -263,8 +263,15 @@
   <button type="submit">Оставить отзыв</button>
 </form>
 
-<div class="reviews-grid" id="reviews"></div>
-
+<div class="reviews-container">
+    <div class="reviews-carousel">
+        <!-- Колонки будут добавлены через JavaScript -->
+    </div>
+    <div class="carousel-controls">
+        <button class="carousel-button prev">←</button>
+        <button class="carousel-button next">→</button>
+    </div>
+</div>
 
 <footer class="site-footer">
   <div class="footer-container">
@@ -308,5 +315,7 @@
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
 <script src="review.js" defer></script>
 <script src="script.js" defer></script>
+<link rel="stylesheet" href="reviews-carousel.css">
+<script src="reviews-carousel.js"></script>
 </body>
 </html>
