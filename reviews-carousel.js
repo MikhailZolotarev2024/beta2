@@ -100,11 +100,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             currentPosition++;
             carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
             updateButtons();
-        } else if (currentPosition >= totalColumns - columnsPerView) {
-            // Если достигли конца — возвращаемся в начало
-            currentPosition = 0;
-            carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
-            updateButtons();
         }
     }
     prevButton.onclick = function() {

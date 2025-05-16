@@ -15,11 +15,21 @@ if (icon) {
 }
 
 function toggleSection(event) {
-  const section = event.target.parentElement;
+  const header = event.target;
+  const section = header.closest('.expandable-section');
   if (section) {
     section.classList.toggle("active");
   }
 }
+
+// Добавляем обработчики событий для секций
+const sections = document.querySelectorAll('.expandable-section');
+sections.forEach(section => {
+  const header = section.querySelector('.expandable-header');
+  if (header) {
+    header.addEventListener('click', toggleSection);
+  }
+});
 
 if (window.particlesJS) {
   const particlesEl = document.getElementById('particles-js');
@@ -313,6 +323,13 @@ window.addEventListener('resize', function() {
   updateNewsCarousel();
 });
 // --- Конец блока новостей ---
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    if (typeof renderNewsPages === 'function') renderNewsPages();
+    if (typeof updateNewsCarousel === 'function') updateNewsCarousel();
+  }, 50);
+});
 });
 
 
