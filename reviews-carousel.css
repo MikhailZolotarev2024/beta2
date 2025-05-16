@@ -93,39 +93,46 @@
 .carousel-controls {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    left: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     pointer-events: none;
+    z-index: 2;
+    transform: translateY(-50%);
 }
 
 .carousel-button {
-    width: 40px;
-    height: 40px;
+    pointer-events: auto;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(30, 40, 50, 0.8), rgba(20, 30, 40, 0.9));
     border: none;
-    color: white;
-    font-size: 1.5rem;
+    background: linear-gradient(135deg, #76c7c0 60%, #4c9e94 100%);
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
     cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+    outline: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-    pointer-events: auto;
-    backdrop-filter: blur(8px);
+    opacity: 0.95;
 }
 
-.carousel-button:hover {
-    background: linear-gradient(135deg, rgba(50, 70, 90, 0.9), rgba(40, 60, 80, 1));
-    transform: scale(1.1);
+.carousel-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #5aa69e 60%, #3b7d74 100%);
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
 }
 
 .carousel-button:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
-    transform: none;
+    filter: grayscale(0.5);
 }
 
 .carousel-button.prev {

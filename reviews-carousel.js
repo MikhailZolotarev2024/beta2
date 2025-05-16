@@ -74,20 +74,40 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     // Обработчики кнопок
-    prevButton.onclick = function() {
+    function goPrev() {
         if (currentPosition > 0) {
             currentPosition--;
             carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
             updateButtons();
         }
-    };
-    nextButton.onclick = function() {
+    }
+    function goNext() {
         if (currentPosition < totalColumns - columnsPerView) {
             currentPosition++;
             carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
             updateButtons();
+        } else if (currentPosition >= totalColumns - columnsPerView) {
+            // Если достигли конца — возвращаемся в начало
+            currentPosition = 0;
+            carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
+            updateButtons();
         }
+    }
+    prevButton.onclick = function() {
+        goPrev();
+        resetAutoplay();
     };
+    nextButton.onclick = function() {
+        goNext();
+        resetAutoplay();
+    };
+
+    // Автопрокрутка
+    let autoplayInterval = setInterval(goNext, 3000);
+    function resetAutoplay() {
+        clearInterval(autoplayInterval);
+        autoplayInterval = setInterval(goNext, 3000);
+    }
 
     // Главная инициализация
     const reviews = await loadReviews();
