@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     const prevButton = document.querySelector('.carousel-button.prev');
     const nextButton = document.querySelector('.carousel-button.next');
     const cardsPerColumn = 5;
-    const columnsPerView = 2;
     let currentPosition = 0;
     let totalColumns = 0;
     let columns = [];
@@ -102,11 +101,25 @@ document.addEventListener('DOMContentLoaded', async function() {
         resetAutoplay();
     };
 
-    // Автопрокрутка
-    let autoplayInterval = setInterval(goNext, 3000);
+    // Определение количества колонок вью в зависимости от ширины экрана
+    function getColumnsPerView() {
+        return window.innerWidth <= 768 ? 1 : 2;
+    }
+    let columnsPerView = getColumnsPerView();
+    window.addEventListener('resize', () => {
+        const newColumnsPerView = getColumnsPerView();
+        if (newColumnsPerView !== columnsPerView) {
+            columnsPerView = newColumnsPerView;
+            renderColumns();
+            updateButtons();
+        }
+    });
+
+    // Обновляю автопрокрутку на 5 секунд
+    let autoplayInterval = setInterval(goNext, 5000);
     function resetAutoplay() {
         clearInterval(autoplayInterval);
-        autoplayInterval = setInterval(goNext, 3000);
+        autoplayInterval = setInterval(goNext, 5000);
     }
 
     // Главная инициализация

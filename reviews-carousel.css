@@ -141,4 +141,42 @@
 
 .carousel-button.next {
     right: -20px;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .reviews-container {
+    max-width: 98vw;
+    padding: 10px 0;
+  }
+  .reviews-carousel {
+    gap: 10px;
+  }
+  .reviews-column {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    gap: 12px;
+  }
+  .review-card {
+    padding: 14px;
+    font-size: 0.98rem;
+  }
+  .carousel-controls {
+    top: 98%;
+    left: 0;
+    width: 100%;
+    transform: none;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .carousel-button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+    margin: 0 8px;
+    opacity: 0.95;
+    pointer-events: auto;
+  }
 } 
