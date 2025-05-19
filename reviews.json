@@ -246,5 +246,237 @@
     "letter": "T",
     "short": "Вернули средства за неделю, я в восторге...",
     "full": "Вернули средства за неделю, я в восторге. Уровень сервиса – на высоте."
+},
+{
+    "name": "Katarzyna W.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "K",
+    "short": "Świetna obsługa, szybki zwrot pieniędzy...",
+    "full": "Jestem pod ogromnym wrażeniem profesjonalizmu tej firmy. Początkowo miałam obawy, ale proces okazał się bardzo prosty i przejrzysty. Zespół wsparcia był zawsze dostępny i odpowiadał na wszystkie moje pytania. Zwrot środków otrzymałam w ciągu zaledwie 3 dni! Szczególnie doceniam ich cierpliwość i chęć pomocy. Na pewno skorzystam z ich usług ponownie w przyszłości."
+},
+{
+    "name": "Piotr K.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "P",
+    "short": "Szybko i sprawnie, polecam!",
+    "full": "Szybko i sprawnie, polecam!"
+},
+{
+    "name": "Anna M.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "A",
+    "short": "Trochę długo czekałam na odpowiedź, ale warto było...",
+    "full": "Trochę długo czekałam na odpowiedź, ale warto było. Wszystko zostało rozwiązane profesjonalnie i z należytą starannością. Szczególnie podobało mi się podejście do klienta - nie traktowali mnie jak kolejnego numeru w systemie. Mimo początkowych opóźnień, jestem bardzo zadowolona z końcowego rezultatu."
+},
+{
+    "name": "Marek D.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "M",
+    "short": "Profesjonalna obsługa, szybki zwrot.",
+    "full": "Profesjonalna obsługa, szybki zwrot."
+},
+{
+    "name": "Agnieszka S.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "A",
+    "short": "Polecam z całego serca!...",
+    "full": "Polecam z całego serca! Przeszłam przez cały proces zwrotu środków i muszę przyznać, że byłam pod wrażeniem. Zespół wsparcia był niezwykle pomocny, odpowiadali na wszystkie moje pytania, nawet te najprostsze. Proces był przejrzysty, a komunikacja - wzorowa. Dostałam zwrot w ciągu tygodnia, co jest świetnym wynikiem. Szczególnie doceniam ich cierpliwość i profesjonalizm w trudnych sytuacjach."
+},
+{
+    "name": "Tomasz B.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "T",
+    "short": "Świetna firma, szybka obsługa.",
+    "full": "Świetna firma, szybka obsługa."
+},
+{
+    "name": "Magdalena K.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "M",
+    "short": "Trochę problemów na początku, ale...",
+    "full": "Trochę problemów na początku, ale obsługa klienta pomogła mi wszystko rozwiązać. Doceniam ich cierpliwość i profesjonalizm."
+},
+{
+    "name": "Jakub W.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "J",
+    "short": "Szybki zwrot pieniędzy, polecam!",
+    "full": "Szybki zwrot pieniędzy, polecam!"
+},
+{
+    "name": "Karolina P.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "K",
+    "short": "Profesjonalna obsługa, szybka reakcja...",
+    "full": "Profesjonalna obsługa, szybka reakcja na wszystkie moje pytania. Szczególnie podobało mi się, że nie musiałam długo czekać na odpowiedzi. Proces zwrotu środków był przejrzysty i szybki. Na pewno skorzystam z ich usług ponownie!"
+},
+{
+    "name": "Łukasz M.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "Ł",
+    "short": "Dobra firma, polecam.",
+    "full": "Dobra firma, polecam."
+},
+{
+    "name": "Natalia S.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "N",
+    "short": "Świetna obsługa, szybki zwrot pieniędzy...",
+    "full": "Świetna obsługa, szybki zwrot pieniędzy. Początkowo miałam obawy, ale proces okazał się bardzo prosty. Zespół wsparcia był zawsze dostępny i odpowiadał na wszystkie moje pytania. Szczególnie doceniam ich cierpliwość i chęć pomocy."
+},
+{
+    "name": "Paweł K.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "P",
+    "short": "Szybko i sprawnie.",
+    "full": "Szybko i sprawnie."
+},
+{
+    "name": "Monika W.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "M",
+    "short": "Trochę długo czekałam na odpowiedź...",
+    "full": "Trochę długo czekałam na odpowiedź, ale warto było. Wszystko zostało rozwiązane profesjonalnie i z należytą starannością. Szczególnie podobało mi się podejście do klienta - nie traktowali mnie jak kolejnego numeru w systemie."
+},
+{
+    "name": "Adam D.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "A",
+    "short": "Profesjonalna obsługa.",
+    "full": "Profesjonalna obsługa."
+},
+{
+    "name": "Ewa M.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "E",
+    "short": "Polecam z całego serca!...",
+    "full": "Polecam z całego serca! Przeszłam przez cały proces zwrotu środków i muszę przyznać, że byłam pod wrażeniem. Zespół wsparcia był niezwykle pomocny, odpowiadali na wszystkie moje pytania, nawet te najprostsze. Proces był przejrzysty, a komunikacja - wzorowa."
+},
+{
+    "name": "Michał K.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "M",
+    "short": "Świetna firma.",
+    "full": "Świetna firma."
+},
+{
+    "name": "Aleksandra P.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "A",
+    "short": "Trochę problemów na początku...",
+    "full": "Trochę problemów na początku, ale obsługa klienta pomogła mi wszystko rozwiązać. Doceniam ich cierpliwość i profesjonalizm w trudnych sytuacjach."
+},
+{
+    "name": "Krzysztof W.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "K",
+    "short": "Szybki zwrot.",
+    "full": "Szybki zwrot."
+},
+{
+    "name": "Joanna S.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "J",
+    "short": "Profesjonalna obsługa, szybka reakcja...",
+    "full": "Profesjonalna obsługa, szybka reakcja na wszystkie moje pytania. Szczególnie podobało mi się, że nie musiałam długo czekać na odpowiedzi. Proces zwrotu środków był przejrzysty i szybki."
+},
+{
+    "name": "Robert M.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "R",
+    "short": "Dobra firma.",
+    "full": "Dobra firma."
+},
+{
+    "name": "Patrycja K.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "P",
+    "short": "Świetna obsługa, szybki zwrot pieniędzy...",
+    "full": "Świetna obsługa, szybki zwrot pieniędzy. Początkowo miałam obawy, ale proces okazał się bardzo prosty. Zespół wsparcia był zawsze dostępny i odpowiadał na wszystkie moje pytania. Szczególnie doceniam ich cierpliwość i chęć pomocy w każdej sytuacji."
+},
+{
+    "name": "Daniel W.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "D",
+    "short": "Szybko i sprawnie.",
+    "full": "Szybko i sprawnie."
+},
+{
+    "name": "Sylwia P.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "S",
+    "short": "Trochę długo czekałam na odpowiedź...",
+    "full": "Trochę długo czekałam na odpowiedź, ale warto było. Wszystko zostało rozwiązane profesjonalnie i z należytą starannością. Szczególnie podobało mi się podejście do klienta - nie traktowali mnie jak kolejnego numeru w systemie."
+},
+{
+    "name": "Marcin D.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "M",
+    "short": "Profesjonalna obsługa.",
+    "full": "Profesjonalna obsługa."
+},
+{
+    "name": "Dominika M.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "D",
+    "short": "Polecam z całego serca!...",
+    "full": "Polecam z całego serca! Przeszłam przez cały proces zwrotu środków i muszę przyznać, że byłam pod wrażeniem. Zespół wsparcia był niezwykle pomocny, odpowiadali na wszystkie moje pytania, nawet te najprostsze. Proces był przejrzysty, a komunikacja - wzorowa."
+},
+{
+    "name": "Bartosz K.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "B",
+    "short": "Świetna firma.",
+    "full": "Świetna firma."
+},
+{
+    "name": "Weronika P.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "W",
+    "short": "Trochę problemów na początku...",
+    "full": "Trochę problemów na początku, ale obsługa klienta pomogła mi wszystko rozwiązać. Doceniam ich cierpliwość i profesjonalizm w trudnych sytuacjach."
+},
+{
+    "name": "Tomasz D.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "T",
+    "short": "Profesjonalna obsługa.",
+    "full": "Profesjonalna obsługa."
+},
+{
+    "name": "Karolina M.",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "K",
+    "short": "Polecam z całego serca!...",
+    "full": "Polecam z całego serca! Przeszłam przez cały proces zwrotu środków i muszę przyznać, że byłam pod wrażeniem. Zespół wsparcia był niezwykle pomocny, odpowiadali na wszystkie moje pytania, nawet te najprostsze. Proces był przejrzysty, a komunikacja - wzorowa."
 }
 ]
