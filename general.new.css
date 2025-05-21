@@ -784,6 +784,97 @@ footer, .site-footer {
     background: rgba(244, 67, 54, 0.9);
 }
 
+/*   НАЧАЛО БЛОКА С ОТПРАВКОЙ ФОРМ   */
+.review-form-card {
+  max-width: 520px;
+  margin: 40px auto;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.review-header-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar-circle {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #76c7c0, #4c9e94);
+  border-radius: 50%;
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reviewer-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.meta-input, .flag-input, .lang-input {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  color: white;
+  width: 100%;
+}
+
+.meta-sub {
+  display: flex;
+  gap: 10px;
+}
+.flag-input {
+  max-width: 60px;
+  text-align: center;
+}
+.lang-input {
+  max-width: 80px;
+  text-align: center;
+}
+
+.short-review, .full-review {
+  min-height: 60px;
+  background: rgba(255,255,255,0.08);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  color: white;
+  resize: vertical;
+}
+
+.submit-review {
+  align-self: flex-end;
+  padding: 10px 24px;
+  background: linear-gradient(90deg, #76c7c0, #4c9e94);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-review:hover {
+  background: linear-gradient(90deg, #5aa69e, #3b7d74);
+}
+/*   КОНЕЦ БЛОКА С ОТПРАВКОЙ ФОРМ   */
 @keyframes slideIn {
     from {
         transform: translateX(100%);

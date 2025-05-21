@@ -254,14 +254,21 @@
 
     </header>
 
-<form id="reviewForm" class="review-form">
-  <input type="text" name="name" placeholder="Ваше имя" required><br>
-  <input type="text" name="lang" placeholder="Язык (например, RU)" required><br>
-  <input type="text" name="flag" placeholder="Флаг (например, 🇷🇺)" required><br>
-  <textarea name="short" placeholder="Краткий отзыв" required></textarea><br>
-  <textarea name="full" placeholder="Полный отзыв" required></textarea><br>
-  <button type="submit">Оставить отзыв</button>
-</form>
+<div class="review-form-card">
+  <div class="review-header-row">
+    <div class="avatar-circle">A</div>
+    <div class="reviewer-meta">
+      <input type="text" placeholder="Ваше имя" class="meta-input" required>
+      <div class="meta-sub">
+        <input type="text" placeholder="🇷🇺" class="flag-input" maxlength="2" required>
+        <input type="text" placeholder="RU" class="lang-input" maxlength="3" required>
+      </div>
+    </div>
+  </div>
+  <textarea class="short-review" placeholder="Краткий отзыв..." required></textarea>
+  <textarea class="full-review" placeholder="Полный отзыв..." required></textarea>
+  <button class="submit-review">Отправить отзыв</button>
+</div>
 
 <div class="reviews-container">
     <div class="reviews-carousel">
