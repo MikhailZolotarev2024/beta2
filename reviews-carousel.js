@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const newColumnsPerView = getColumnsPerView();
         if (newColumnsPerView !== columnsPerView) {
             columnsPerView = newColumnsPerView;
-            maxPosition = Math.max(0, totalColumns - columnsPerView);
+            maxPosition = Math.max(0, columns.length - columnsPerView);
             renderColumns();
             updateButtons();
         }
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const reviews = await loadReviews();
     const cards = reviews.map(createReviewCard);
     createColumns(cards);
-    maxPosition = Math.max(0, totalColumns - columnsPerView);
+    maxPosition = Math.max(0, columns.length - columnsPerView);
     renderColumns();
     updateButtons();
 }); 
