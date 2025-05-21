@@ -253,21 +253,23 @@
 
 
     </header>
+<div class="chat-style-form">
+  <div class="chat-question">👤 Как вас зовут?</div>
+  <input type="text" placeholder="Введите имя..." class="chat-input" required>
 
-<div class="review-form-card">
-  <div class="review-header-row">
-    <div class="avatar-circle">A</div>
-    <div class="reviewer-meta">
-      <input type="text" placeholder="Ваше имя" class="meta-input" required>
-      <div class="meta-sub">
-        <input type="text" placeholder="🇷🇺" class="flag-input" maxlength="2" required>
-        <input type="text" placeholder="RU" class="lang-input" maxlength="3" required>
-      </div>
-    </div>
+  <div class="chat-question">🌍 Из какой вы страны?</div>
+  <div class="chat-row">
+    <input type="text" placeholder="🇺🇦" maxlength="2" class="chat-flag" required>
+    <input type="text" placeholder="UA" maxlength="3" class="chat-lang" required>
   </div>
-  <textarea class="short-review" placeholder="Краткий отзыв..." required></textarea>
-  <textarea class="full-review" placeholder="Полный отзыв..." required></textarea>
-  <button class="submit-review">Отправить отзыв</button>
+
+  <div class="chat-question">💬 Опишите ваш опыт кратко</div>
+  <textarea placeholder="Краткий отзыв..." class="chat-textarea" required></textarea>
+
+  <div class="chat-question">📖 Хотите рассказать больше?</div>
+  <textarea placeholder="Полный отзыв..." class="chat-textarea" required></textarea>
+
+  <button class="chat-submit">📩 Отправить отзыв</button>
 </div>
 
 <div class="reviews-container">
