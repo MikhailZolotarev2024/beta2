@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     let columns = [];
     let columnsPerView = getColumnsPerView();
     let maxPosition = 0;
+    let cards;
 
     // Модальное окно для отзыва
     let modal = document.getElementById('modal');
@@ -120,11 +121,29 @@ document.addEventListener('DOMContentLoaded', async function() {
     function getColumnsPerView() {
         return window.innerWidth <= 768 ? 1 : 2;
     }
+
+    // Главная инициализация
+    const reviews = await loadReviews();
+    cards = reviews.map(createReviewCard);
+    createColumns(cards);
+    maxPosition = Math.max(0, columns.length - columnsPerView);
+    renderColumns();
+    updateButtons();
+
+    // Обновленный обработчик resize
     window.addEventListener('resize', () => {
         const newColumnsPerView = getColumnsPerView();
         if (newColumnsPerView !== columnsPerView) {
             columnsPerView = newColumnsPerView;
+
+            // Пересоздаем колонки под новую ширину
+            createColumns(cards);
             maxPosition = Math.max(0, columns.length - columnsPerView);
+
+            if (currentPosition > maxPosition) {
+                currentPosition = maxPosition;
+            }
+
             renderColumns();
             updateButtons();
         }
@@ -149,12 +168,4 @@ document.addEventListener('DOMContentLoaded', async function() {
         autoplayPaused = false;
         autoplayInterval = setInterval(goNext, 7000);
     }
-
-    // Главная инициализация
-    const reviews = await loadReviews();
-    const cards = reviews.map(createReviewCard);
-    createColumns(cards);
-    maxPosition = Math.max(0, columns.length - columnsPerView);
-    renderColumns();
-    updateButtons();
 }); 
