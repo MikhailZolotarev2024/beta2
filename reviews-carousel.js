@@ -90,10 +90,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (currentPosition > maxPosition) {
             currentPosition = maxPosition;
         }
-
         carousel.innerHTML = '';
         columns.forEach(col => carousel.appendChild(col));
-
         carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
     }
 

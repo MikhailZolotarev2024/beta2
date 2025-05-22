@@ -888,7 +888,7 @@ footer, .site-footer {
 }
 
 .reviews-column {
-  flex: 0 0 33.333%; /* Показываем 3 колонки */
+  flex: 0 0 33.333%;
   max-width: 33.333%;
 }
 
@@ -908,5 +908,4 @@ footer, .site-footer {
 .reviews-carousel {
   display: flex;
   transition: transform 0.5s ease;
-  width: 100%;
 }
