@@ -924,6 +924,7 @@ footer, .site-footer {
   justify-content: space-between;
   pointer-events: none;
   z-index: 10;
+  padding: 0 10px;
 }
 
 .carousel-button {
@@ -947,30 +948,30 @@ footer, .site-footer {
 }
 
 .carousel-button.prev {
-  margin-left: -20px;
+  margin-left: 0;
 }
 
 .carousel-button.next {
-  margin-right: -20px;
+  margin-right: 0;
 }
 
 @media (max-width: 768px) {
   .reviews-carousel-container {
     width: 95%;
-    padding: 0 40px;
+    padding: 0 20px;
   }
-  
+  .carousel-controls {
+    padding: 0 2px;
+  }
   .carousel-button {
     width: 35px;
     height: 35px;
     font-size: 18px;
   }
-  
   .carousel-button.prev {
-    margin-left: -15px;
+    margin-left: 0;
   }
-  
   .carousel-button.next {
-    margin-right: -15px;
+    margin-right: 0;
   }
 }
