@@ -75,11 +75,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             columns[colIdx].appendChild(card);
         });
 
-        // Удалить пустые колонки и пересчитать позиции
+        // Удалить пустые колонки
         columns = columns.filter(col => col.children.length > 0);
+
+        // Пересчитать максимальную позицию
         maxPosition = Math.max(0, columns.length - columnsPerView);
-        
-        // Если текущая позиция больше максимальной, сбросить её
         if (currentPosition > maxPosition) {
             currentPosition = maxPosition;
         }
@@ -115,7 +115,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     function goNext() {
         const max = Math.max(0, columns.length - columnsPerView);
         if (currentPosition >= max) return;
-
         currentPosition++;
         carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
         updateButtons();
