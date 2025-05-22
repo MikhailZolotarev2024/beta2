@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     const nextButton = document.querySelector('.carousel-button.next');
     const cardsPerColumn = 5;
     let currentPosition = 0;
-    let totalColumns = 0;
     let columns = [];
     let columnsPerView = getColumnsPerView();
     let maxPosition = 0;
@@ -65,8 +64,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Формирование колонок
     function createColumns(cards) {
         columns = [];
-        totalColumns = Math.ceil(cards.length / cardsPerColumn);
-        for (let i = 0; i < totalColumns; i++) {
+        for (let i = 0; i < Math.ceil(cards.length / cardsPerColumn); i++) {
             const column = document.createElement('div');
             column.className = 'reviews-column';
             columns.push(column);
@@ -89,8 +87,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Обновление состояния кнопок
     function updateButtons() {
+        const actualMax = Math.max(0, columns.length - columnsPerView);
         prevButton.disabled = currentPosition === 0;
-        nextButton.disabled = currentPosition >= totalColumns - columnsPerView;
+        nextButton.disabled = currentPosition >= actualMax;
     }
 
     // Обработчики кнопок
@@ -103,6 +102,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
     function goNext() {
         console.log({ currentPosition, maxPosition, columnsLength: columns.length, columnsPerView });
+        if (currentPosition >= Math.max(0, columns.length - columnsPerView)) {
+            return; // не скроллим в пустоту
+        }
         if (currentPosition < maxPosition) {
             currentPosition++;
             carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
