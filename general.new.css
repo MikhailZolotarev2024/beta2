@@ -888,8 +888,8 @@ footer, .site-footer {
 }
 
 .reviews-column {
-  flex: 0 0 calc(100% / 2); /* если 2 на экране */
-  max-width: calc(100% / 2);
+  flex: 0 0 50%;
+  max-width: 50%;
 }
 
 @media (max-width: 768px) {
@@ -897,4 +897,15 @@ footer, .site-footer {
     flex: 0 0 100%;
     max-width: 100%;
   }
+}
+
+.reviews-carousel-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.reviews-carousel {
+  display: flex;
+  transition: transform 0.5s ease;
 }

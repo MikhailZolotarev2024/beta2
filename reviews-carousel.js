@@ -77,6 +77,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Удалить пустые колонки
         columns = columns.filter(col => col.children.length > 0);
+        // Пересчитать максимальную позицию
+        maxPosition = Math.max(0, columns.length - columnsPerView);
     }
 
     // Рендер колонок в карусель
