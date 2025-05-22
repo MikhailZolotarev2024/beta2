@@ -75,10 +75,14 @@ document.addEventListener('DOMContentLoaded', async function() {
             columns[colIdx].appendChild(card);
         });
 
-        // Удалить пустые колонки
+        // Удалить пустые колонки и пересчитать позиции
         columns = columns.filter(col => col.children.length > 0);
-        // Пересчитать максимальную позицию
         maxPosition = Math.max(0, columns.length - columnsPerView);
+        
+        // Если текущая позиция больше максимальной, сбросить её
+        if (currentPosition > maxPosition) {
+            currentPosition = maxPosition;
+        }
     }
 
     // Рендер колонок в карусель
