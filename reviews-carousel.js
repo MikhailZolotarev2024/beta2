@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
     function goNext() {
+        console.log({ currentPosition, maxPosition, columnsLength: columns.length, columnsPerView });
         if (currentPosition < maxPosition) {
             currentPosition++;
             carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
@@ -126,6 +127,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const reviews = await loadReviews();
     cards = reviews.map(createReviewCard);
     createColumns(cards);
+    columnsPerView = getColumnsPerView(); // пересчёт по фактической ширине
     maxPosition = Math.max(0, columns.length - columnsPerView);
     renderColumns();
     updateButtons();
