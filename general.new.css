@@ -927,6 +927,7 @@ footer, .site-footer {
 }
 
 .carousel-button {
+	margin:20px;
   background: rgba(0, 224, 224, 0.95);
   color: #fff;
   border: none;
