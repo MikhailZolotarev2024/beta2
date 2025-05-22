@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Определение количества колонок вью в зависимости от ширины экрана
     function getColumnsPerView() {
-        return window.innerWidth <= 768 ? 1 : 2;
+        return window.innerWidth <= 768 ? 1 : 3;
     }
 
     // Главная инициализация
