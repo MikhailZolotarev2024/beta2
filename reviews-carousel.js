@@ -64,7 +64,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Формирование колонок
     function createColumns(cards) {
         columns = [];
-        for (let i = 0; i < Math.ceil(cards.length / cardsPerColumn); i++) {
+        const total = Math.ceil(cards.length / cardsPerColumn);
+        for (let i = 0; i < total; i++) {
             const column = document.createElement('div');
             column.className = 'reviews-column';
             columns.push(column);
@@ -73,6 +74,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             const colIdx = Math.floor(idx / cardsPerColumn);
             columns[colIdx].appendChild(card);
         });
+
+        // Удалить пустые колонки
+        columns = columns.filter(col => col.children.length > 0);
     }
 
     // Рендер колонок в карусель
@@ -101,15 +105,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
     function goNext() {
-        console.log({ currentPosition, maxPosition, columnsLength: columns.length, columnsPerView });
-        if (currentPosition >= Math.max(0, columns.length - columnsPerView)) {
-            return; // не скроллим в пустоту
-        }
-        if (currentPosition < maxPosition) {
-            currentPosition++;
-            carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
-            updateButtons();
-        }
+        const max = Math.max(0, columns.length - columnsPerView);
+        if (currentPosition >= max) return;
+
+        currentPosition++;
+        carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
+        updateButtons();
     }
     prevButton.onclick = function() {
         goPrev();

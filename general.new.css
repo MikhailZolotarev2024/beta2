@@ -413,6 +413,10 @@ footer, .site-footer {
   .icon-img { width: 30px; height: 30px; }
   .wave-row-container { width: 40px; height: 40px; }
   .wave-row-container img { width: 30px; height: 30px; }
+  .reviews-column {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
 @media (max-width: 500px) {
   .navbar { height: 50px; }
@@ -881,4 +885,16 @@ footer, .site-footer {
         gap: 10px;
         text-align: center;
     }
+}
+
+.reviews-column {
+  flex: 0 0 calc(100% / 2); /* если 2 на экране */
+  max-width: calc(100% / 2);
+}
+
+@media (max-width: 768px) {
+  .reviews-column {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
