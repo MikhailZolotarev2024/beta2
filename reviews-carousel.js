@@ -91,8 +91,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             currentPosition = maxPosition;
         }
         carousel.innerHTML = '';
-        columns.forEach(col => carousel.appendChild(col));
-        carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
+        for (let i = currentPosition; i < currentPosition + columnsPerView && i < columns.length; i++) {
+            carousel.appendChild(columns[i]);
+        }
     }
 
     // Обновление состояния кнопок
@@ -106,7 +107,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     function goPrev() {
         if (currentPosition > 0) {
             currentPosition--;
-            carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
+            renderColumns();
             updateButtons();
         }
     }
@@ -114,7 +115,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const max = Math.max(0, columns.length - columnsPerView);
         if (currentPosition >= max) return;
         currentPosition++;
-        carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
+        renderColumns();
         updateButtons();
     }
     prevButton.onclick = function() {
