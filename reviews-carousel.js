@@ -90,13 +90,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         carousel.innerHTML = '';
         columns.forEach(col => carousel.appendChild(col));
 
-        // Установим ширину в зависимости от числа колонок
-        const percentageWidth = columns.length * (100 / columnsPerView);
-        carousel.style.width = `${percentageWidth}%`;
-
-        // transform теперь считается от доли ширины каждой колонки
-        const shift = (100 / columns.length) * currentPosition;
-        carousel.style.transform = `translateX(-${shift}%)`;
+        carousel.style.transform = `translateX(-${currentPosition * 100}%)`;
     }
 
     // Обновление состояния кнопок
