@@ -32,15 +32,29 @@ document.addEventListener('DOMContentLoaded', async function() {
         return await response.json();
     }
 
+    // Генерация случайной даты с 2021 по текущий год
+    function getRandomDate() {
+        const start = new Date(2021, 0, 1).getTime();
+        const end = new Date().getTime();
+        const date = new Date(start + Math.random() * (end - start));
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}.${month}.${year}`;
+    }
+
     // Создание DOM-элемента карточки
     function createReviewCard(review) {
         const card = document.createElement('div');
         card.className = 'review-card';
+        // Добавляем дату
+        const reviewDate = review.date || getRandomDate();
         card.innerHTML = `
             <div class="review-header">
                 <div class="review-avatar">${review.letter}</div>
                 <div class="review-info">
                     <div class="review-name">${review.name} <span style="font-size:0.9em;color:#76c7c0;">${review.flag}</span></div>
+                    <span class="review-date">${reviewDate}</span>
                     <div style="font-size:0.95em;color:#aaa;">${review.lang}</div>
                 </div>
             </div>

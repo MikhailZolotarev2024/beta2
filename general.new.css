@@ -1025,3 +1025,12 @@ footer, .site-footer {
   .carousel-button.next { right: -10px; }
   .carousel-button { width: 32px; height: 32px; font-size: 1rem; }
 }
+
+/* Дата отзыва в карточке */
+.review-date {
+  font-size: 0.95em;
+  color: #b3b3b3;
+  margin-bottom: 8px;
+  display: block;
+  letter-spacing: 0.02em;
+}
