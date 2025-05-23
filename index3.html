@@ -197,16 +197,17 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
     </style>
 
 </head>
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <button class="close-modal">&times;</button>
-    <div id="modal-text"></div>
-  </div>
-</div>
 <body>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div id="modal-text"></div>
+        </div>
+    </div>
 <div id="particles-js"></div>
 <nav class="navbar">
 	<div class="logo-container">
@@ -217,12 +218,13 @@
     </div>
 </div>
         <ul>
-            <li><a href="index4.html">Юридический Раздел</a></li>
-            <li><a href="index3.html">Отзывы</a></li>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="index2.html">Проверка криптоактивов</a></li>
-            <li><a href="#contact">Связаться</a></li>
+            <li><a href="index4.html" data-i18n="menu-legal">Юридический Раздел</a></li>
+            <li><a href="index3.html" data-i18n="menu-reviews">Отзывы</a></li>
+            <li><a href="index.html" data-i18n="menu-main">Главная</a></li>
+            <li><a href="index2.html" data-i18n="menu-crypto">Проверка криптоактивов</a></li>
+            <li><a href="#contact" data-i18n="menu-contact">Связаться</a></li>
         </ul>
+        <button onclick="loadLang('en')" style="margin-left:20px;">🇬🇧 English</button>
     </nav>
 	<div class="menu-icon" onclick="toggleMenu()">
             <div></div>
@@ -237,39 +239,39 @@
         <a href="#contact">Связаться</a>
     </div>
     <header>
-<h3>📜 Правила размещения отзыва</h3>
-<h4>Честность и личный опыт</h4>
-<h5>Пишите только о том, что происходило с вами. Без преувеличений или выдумки.</h5>
+<h3 data-i18n="review-rules-title">📜 Правила размещения отзыва</h3>
+<h4 data-i18n="honesty-title">Честность и личный опыт</h4>
+<h5 data-i18n="honesty-desc">Пишите только о том, что происходило с вами. Без преувеличений или выдумки.</h5>
 
-<h4>Конфиденциальность</h4>
-<h5>Не указывайте ФИО, контакты, номера дел и другие персональные данные.</h5>
+<h4 data-i18n="confidentiality-title">Конфиденциальность</h4>
+<h5 data-i18n="confidentiality-desc">Не указывайте ФИО, контакты, номера дел и другие персональные данные.</h5>
 
 
-<h4>Языки, которые поддерживаются</h4>
-<h5>Русский, английский, испанский, немецкий, французский — для других языков укажите флаг/код ISO.</h5>
+<h4 data-i18n="supported-languages-title">Языки, которые поддерживаются</h4>
+<h5 data-i18n="supported-languages-desc">Русский, английский, испанский, немецкий, французский — для других языков укажите флаг/код ISO.</h5>
 
-<h4>Без рекламы и спама</h4>
-<h5>Ссылки, упоминания сторонних услуг или попытки продвижения запрещены.</h5>
+<h4 data-i18n="no-spam-title">Без рекламы и спама</h4>
+<h5 data-i18n="no-spam-desc">Ссылки, упоминания сторонних услуг или попытки продвижения запрещены.</h5>
 
 
     </header>
 <div class="chat-style-form">
-  <div class="chat-question">👤 Как вас зовут?</div>
-  <input type="text" placeholder="Введите имя..." class="chat-input" required>
+  <div class="chat-question" data-i18n="form-name-question">👤 Как вас зовут?</div>
+  <input type="text" placeholder="Введите имя..." class="chat-input" data-i18n-placeholder="form-name-placeholder" required>
 
-  <div class="chat-question">🌍 Из какой вы страны?</div>
+  <div class="chat-question" data-i18n="form-country-question">🌍 Из какой вы страны?</div>
   <div class="chat-row">
-    <input type="text" placeholder="🇺🇦" maxlength="2" class="chat-flag" required>
-    <input type="text" placeholder="UA" maxlength="3" class="chat-lang" required>
+    <input type="text" placeholder="🇺🇦" maxlength="2" class="chat-flag" data-i18n-placeholder="form-flag-placeholder" required>
+    <input type="text" placeholder="UA" maxlength="3" class="chat-lang" data-i18n-placeholder="form-lang-placeholder" required>
   </div>
 
-  <div class="chat-question">💬 Опишите ваш опыт кратко</div>
-  <textarea placeholder="Краткий отзыв..." class="chat-textarea" required></textarea>
+  <div class="chat-question" data-i18n="form-short-review">💬 Опишите ваш опыт кратко</div>
+  <textarea placeholder="Краткий отзыв..." class="chat-textarea" data-i18n-placeholder="form-short-review-placeholder" required></textarea>
 
-  <div class="chat-question">📖 Хотите рассказать больше?</div>
-  <textarea placeholder="Полный отзыв..." class="chat-textarea" required></textarea>
+  <div class="chat-question" data-i18n="form-full-review">📖 Хотите рассказать больше?</div>
+  <textarea placeholder="Полный отзыв..." class="chat-textarea" data-i18n-placeholder="form-full-review-placeholder" required></textarea>
 
-  <button class="chat-submit">📩 Отправить отзыв</button>
+  <button class="chat-submit" data-i18n="send-review-btn">📩 Отправить отзыв</button>
 </div>
 
 <div class="reviews-outer-wrapper" style="position:relative;width:100%;max-width:1400px;margin:0 auto;">
@@ -287,37 +289,37 @@
     <div class="footer-grid">
       
       <div class="footer-column">
-        <h4>Компания</h4>
+        <h4 data-i18n="footer-company-title">Компания</h4>
         <ul>
-          <li><a href="#">О нас</a></li>
-          <li><a href="#">Юридический раздел</a></li>
-          <li><a href="#">Отзывы</a></li>
-          <li><a href="#">Контакты</a></li>
+          <li><a href="#" data-i18n="footer-about">О нас</a></li>
+          <li><a href="#" data-i18n="footer-legal">Юридический раздел</a></li>
+          <li><a href="#" data-i18n="footer-reviews">Отзывы</a></li>
+          <li><a href="#" data-i18n="footer-contacts">Контакты</a></li>
         </ul>
       </div>
       
       <div class="footer-column">
-        <h4>Услуги</h4>
+        <h4 data-i18n="footer-services-title">Услуги</h4>
         <ul>
-          <li><a href="#">Возврат средств</a></li>
-          <li><a href="#">Проверка криптоактивов</a></li>
-          <li><a href="#">Консультация</a></li>
+          <li><a href="#" data-i18n="footer-refund">Возврат средств</a></li>
+          <li><a href="#" data-i18n="footer-crypto-check">Проверка криптоактивов</a></li>
+          <li><a href="#" data-i18n="footer-consult">Консультация</a></li>
         </ul>
       </div>
 
 
       <div class="footer-column">
-        <h4>Документы</h4>
+        <h4 data-i18n="footer-docs-title">Документы</h4>
         <ul>
-          <li><a href="#">Политика конфиденциальности</a></li>
-          <li><a href="#">Пользовательское соглашение</a></li>
+          <li><a href="#" data-i18n="footer-privacy">Политика конфиденциальности</a></li>
+          <li><a href="#" data-i18n="footer-terms">Пользовательское соглашение</a></li>
         </ul>
       </div>
 
     </div>
 
     <div class="footer-bottom">
-      <p>© 2025 Confidential Solutions. Все права защищены.</p>
+      <p data-i18n="footer-copyright">© 2025 Confidential Solutions. Все права защищены.</p>
     </div>
   </div>
 </footer>
@@ -326,5 +328,21 @@
 <script src="script.js" defer></script>
 <link rel="stylesheet" href="reviews-carousel.css">
 <script src="reviews-carousel.js" defer></script>
+<script>
+async function loadLang(lang) {
+  const res = await fetch('/lang/' + lang + '.json');
+  const dict = await res.json();
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key]) el.innerText = dict[key];
+  });
+  
+  // Добавляем обработку плейсхолдеров
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (dict[key]) el.placeholder = dict[key];
+  });
+}
+</script>
 </body>
 </html>
