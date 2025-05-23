@@ -984,7 +984,6 @@ footer, .site-footer {
 .carousel-button {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   z-index: 10;
   width: 48px;
   height: 48px;
@@ -995,7 +994,6 @@ footer, .site-footer {
   font-weight: bold;
   box-shadow: 0 4px 16px rgba(0,0,0,0.18);
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
   outline: none;
   display: flex;
   align-items: center;
