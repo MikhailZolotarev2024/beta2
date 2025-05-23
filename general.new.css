@@ -1009,11 +1009,7 @@ footer, .site-footer {
 .carousel-button.next {
   right: -60px;
 }
-.carousel-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #5aa69e 60%, #3b7d74 100%);
-  transform: scale(1.08);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-}
+
 .carousel-button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
