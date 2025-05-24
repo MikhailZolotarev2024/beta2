@@ -102,9 +102,9 @@ function createNewsElement(news) {
   const div = document.createElement('div');
   div.className = 'news-item';
   div.innerHTML = `
-    <h3>${t(news.titleKey)}</h3>
+    <h3>${news.title}</h3>
     <div class="news-date">${t('news-date', { date: formatDate(news.date) })}</div>
-    <p>${t(news.shortTextKey)}</p>
+    <p>${news.shortText}</p>
     <button class="read-more" data-i18n="news-read-more">${t('news-read-more')}</button>
   `;
   
@@ -122,7 +122,7 @@ function showNewsModal(news) {
   const date = document.getElementById('modalDate');
   const text = document.getElementById('modalText');
   
-  title.textContent = t(news.titleKey);
+  title.textContent = news.title;
   date.textContent = t('news-date', { date: formatDate(news.date) });
   text.textContent = news.fullText;
   
