@@ -1,79 +1,183 @@
 const newsItems = [
   {
     id: 1,
-    title: "Запуск нового сервиса",
+    titleKey: "news-launch-title",
+    shortTextKey: "news-launch-short",
     date: "2024-06-01",
-    shortText: "Мы запустили новый сервис проверки криптоактивов.",
     fullText: "Подробное описание новости, все детали, ссылки и т.д."
   },
   {
     id: 2,
-    title: "Обновление платформы",
+    titleKey: "news-update-title",
+    shortTextKey: "news-update-short",
     date: "2024-05-20",
-    shortText: "Вышло крупное обновление платформы.",
     fullText: "Теперь доступна мультисетевая проверка, улучшена адаптация и добавлены новые анимации."
   },
   {
     id: 3,
-    title: "Новая статья в блоге",
+    titleKey: "news-blog-title",
+    shortTextKey: "news-blog-short",
     date: "2024-05-10",
-    shortText: "Опубликована новая статья о безопасности криптовалют.",
     fullText: "В статье подробно разбираются основные угрозы и способы защиты ваших активов."
   },
   {
     id: 4,
-    title: "Партнёрство с экспертами",
+    titleKey: "news-partnership-title",
+    shortTextKey: "news-partnership-short",
     date: "2024-04-28",
-    shortText: "Мы заключили партнёрство с ведущими экспертами отрасли.",
     fullText: "Теперь наши клиенты получают ещё больше преимуществ и консультаций."
   },
   {
     id: 5,
-    title: "Расширение команды",
+    titleKey: "news-team-title",
+    shortTextKey: "news-team-short",
     date: "2024-04-15",
-    shortText: "К нам присоединились новые специалисты.",
     fullText: "Это позволит нам ещё быстрее и качественнее решать ваши задачи!"
   },
   {
     id: 6,
-    title: "Вебинар по безопасности",
+    titleKey: "news-webinar-title",
+    shortTextKey: "news-webinar-short",
     date: "2024-04-01",
-    shortText: "Провели бесплатный вебинар для всех клиентов.",
     fullText: "Запись вебинара доступна в личном кабинете."
   },
   {
     id: 7,
-    title: "Появились новые партнёры",
+    titleKey: "news-partners-title",
+    shortTextKey: "news-partners-short",
     date: "2024-03-20",
-    shortText: "К нашей платформе присоединились новые партнёры.",
     fullText: "Это расширяет возможности для наших пользователей."
   },
   {
     id: 8,
-    title: "Улучшение мобильной версии",
+    titleKey: "news-mobile-title",
+    shortTextKey: "news-mobile-short",
     date: "2024-03-10",
-    shortText: "Мобильная версия сайта стала ещё удобнее.",
     fullText: "Теперь пользоваться сервисом с телефона стало проще и быстрее."
   },
   {
     id: 9,
-    title: "Праздничная акция",
+    titleKey: "news-holiday-title",
+    shortTextKey: "news-holiday-short",
     date: "2024-02-23",
-    shortText: "Провели акцию ко Дню защитника Отечества.",
     fullText: "Скидки и бонусы для всех новых клиентов!"
   },
   {
     id: 10,
-    title: "Новый раздел FAQ",
+    titleKey: "news-faq-title",
+    shortTextKey: "news-faq-short",
     date: "2024-02-10",
-    shortText: "Добавлен раздел с часто задаваемыми вопросами.",
     fullText: "Теперь вы можете быстро найти ответы на популярные вопросы."
   },
   {
     id: 11,
-    title: "Обновление политики конфиденциальности",
+    titleKey: "news-privacy-title",
+    shortTextKey: "news-privacy-short",
     date: "2024-01-30",
-    shortText: "Мы обновили политику конфиденциальности.",
     fullText: "Пожалуйста, ознакомьтесь с новыми условиями на сайте."
   }
-]; 
+];
+
+// Функция для получения переведенного текста
+function getTranslatedNews() {
+  return newsItems.map(item => ({
+    ...item,
+    title: t(item.titleKey),
+    shortText: t(item.shortTextKey)
+  }));
+}
+
+// Функция для форматирования даты
+function formatDate(dateStr) {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString(currentLang === 'ru' ? 'ru-RU' : 'en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+// Функция для создания элемента новости
+function createNewsElement(news) {
+  const div = document.createElement('div');
+  div.className = 'news-item';
+  div.innerHTML = `
+    <h3>${t(news.titleKey)}</h3>
+    <div class="news-date">${t('news-date', { date: formatDate(news.date) })}</div>
+    <p>${t(news.shortTextKey)}</p>
+    <button class="read-more" data-i18n="news-read-more">${t('news-read-more')}</button>
+  `;
+  
+  div.querySelector('.read-more').addEventListener('click', () => {
+    showNewsModal(news);
+  });
+  
+  return div;
+}
+
+// Функция для показа модального окна с новостью
+function showNewsModal(news) {
+  const modal = document.getElementById('newsModal');
+  const title = document.getElementById('modalTitle');
+  const date = document.getElementById('modalDate');
+  const text = document.getElementById('modalText');
+  
+  title.textContent = t(news.titleKey);
+  date.textContent = t('news-date', { date: formatDate(news.date) });
+  text.textContent = news.fullText;
+  
+  modal.style.display = 'block';
+}
+
+// Инициализация карусели новостей
+function initNewsCarousel() {
+  const carousel = document.getElementById('newsCarousel');
+  const prevBtn = document.getElementById('newsPrevBtn');
+  const nextBtn = document.getElementById('newsNextBtn');
+  const closeBtn = document.getElementById('newsModalClose');
+  const modal = document.getElementById('newsModal');
+  
+  let currentIndex = 0;
+  const news = getTranslatedNews();
+  
+  function updateCarousel() {
+    carousel.innerHTML = '';
+    const start = currentIndex;
+    const end = Math.min(start + 3, news.length);
+    
+    for (let i = start; i < end; i++) {
+      carousel.appendChild(createNewsElement(news[i]));
+    }
+  }
+  
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
+  });
+  
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex < news.length - 3) {
+      currentIndex++;
+      updateCarousel();
+    }
+  });
+  
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+  
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+  
+  updateCarousel();
+}
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+  initNewsCarousel();
+}); 

@@ -303,7 +303,7 @@ min-height:40px;
 
 </div>
 <section class="news-section">
-  <h2>Новости</h2>
+  <h2 data-i18n="news-title">Новости</h2>
   <button class="news-nav-btn left" id="newsPrevBtn">&#8592;</button>
   <div class="news-carousel" id="newsCarousel">
     <!-- Сюда будут подставляться новости JS-скриптом -->
@@ -318,6 +318,7 @@ min-height:40px;
     <h3 id="modalTitle"></h3>
     <div id="modalDate"></div>
     <div id="modalText"></div>
+    <button class="news-read-more" data-i18n="news-read-more">Читать далее</button>
   </div>
 </div>
 		
@@ -326,31 +327,29 @@ min-height:40px;
 <div class="comparison-grid">
 
   <div class="region-block">
-    <h3><strong>Америка</strong></h3>
-<div class="dot-grid" data-active="7"></div>
-<p><strong>29%</strong> — официальная цифра возвратов, но <strong>полный возврат средств</strong> происходит лишь в 5–9% случаев.</p>
-<p>Даже если дело расследуется, это не означает, что деньги будут возвращены — они часто уходят за границу или в криптовалюту за минуты.</p>
-<p>Без мгновенной блокировки банком шанс на полный возврат — минимален.</p>
+    <h3><strong data-i18n="region-america-title">Америка</strong></h3>
+    <div class="dot-grid" data-active="7"></div>
+    <p data-i18n="region-america-stats"><strong>29%</strong> — официальная цифра возвратов, но <strong>полный возврат средств</strong> происходит лишь в 5–9% случаев.</p>
+    <p data-i18n="region-america-desc1">Даже если дело расследуется, это не означает, что деньги будут возвращены — они часто уходят за границу или в криптовалюту за минуты.</p>
+    <p data-i18n="region-america-desc2">Без мгновенной блокировки банком шанс на полный возврат — минимален.</p>
   </div>
 
-  
   <div class="region-block">
-    <h3><strong>Европа</strong></h3>
-<div class="dot-grid" data-active="9"></div>
-<p><strong>34%</strong> — это с учётом частичных компенсаций. Полный возврат в ЕС — лишь в 7–12% случаев и только при быстрых действиях через банк.</p>
-<p>Даже если мошенник найден — это ещё не значит, что деньги будут возвращены.</p>
-<p>Формальные каналы часто оказываются беспомощны против реальных схем.</p>
+    <h3><strong data-i18n="region-europe-title">Европа</strong></h3>
+    <div class="dot-grid" data-active="9"></div>
+    <p data-i18n="region-europe-stats"><strong>34%</strong> — это с учётом частичных компенсаций. Полный возврат в ЕС — лишь в 7–12% случаев и только при быстрых действиях через банк.</p>
+    <p data-i18n="region-europe-desc1">Даже если мошенник найден — это ещё не значит, что деньги будут возвращены.</p>
+    <p data-i18n="region-europe-desc2">Формальные каналы часто оказываются беспомощны против реальных схем.</p>
   </div>
-  
-  
+
   <div class="region-block">
-<h3><strong>Россия и СНГ</strong></h3>
-<div class="dot-grid" data-active="3"></div>
-<p>Полный возврат — редкость. Даже возбуждение уголовного дела почти никогда не заканчивается компенсацией.</p>
-<p>Потерпевшим часто напрямую говорят: "денег не вернуть".</p>
-<p>Если нет нестандартного подхода — шанс на возврат стремится к нулю.</p>
+    <h3><strong data-i18n="region-russia-title">Россия и СНГ</strong></h3>
+    <div class="dot-grid" data-active="3"></div>
+    <p data-i18n="region-russia-stats">Полный возврат — редкость. Даже возбуждение уголовного дела почти никогда не заканчивается компенсацией.</p>
+    <p data-i18n="region-russia-desc1">Потерпевшим часто напрямую говорят: "денег не вернуть".</p>
+    <p data-i18n="region-russia-desc2">Если нет нестандартного подхода — шанс на возврат стремится к нулю.</p>
+  </div>
 </div>
-		</div>
 </div>
 
 
