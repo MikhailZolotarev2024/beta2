@@ -1,9 +1,16 @@
 let currentLang = 'ru';
 let translations = {};
 
+function getBasePath() {
+  const path = window.location.pathname;
+  const parts = path.split('/');
+  return parts.includes('beta2') ? '/beta2' : '';
+}
+
 async function loadLang(lang) {
   try {
-    const res = await fetch('/lang/' + lang + '.json');
+    const base = getBasePath();
+    const res = await fetch(`${base}/lang/${lang}.json`);
     translations = await res.json();
     currentLang = lang;
     
