@@ -25,10 +25,8 @@ async function loadLang(lang) {
       const key = el.getAttribute('data-i18n-placeholder');
       if (translations[key]) el.placeholder = translations[key];
     });
-    // Добавлено для обновления новостного виджета при смене языка
-    if (typeof updateNewsCarousel === 'function') {
-      updateNewsCarousel();
-    }
+
+    // Теперь ТОЛЬКО после загрузки перевода запускаем карусель
     if (typeof initNewsCarousel === 'function') {
       initNewsCarousel();
     }
@@ -58,4 +56,5 @@ function formatTokens(tokens) {
   return tokens.map(t => `${t.tokenName}: ${formatNumber(t.balance/10**(t.tokenDecimal||6))}`).join(', ');
 }
 
+// Запускаем как всегда
 loadLang('ru'); 

@@ -138,7 +138,6 @@ window.initNewsCarousel = function() {
   const modal = document.getElementById('newsModal');
   
   let currentIndex = 0;
-  let news = getTranslatedNews();
   
   window.updateNewsCarousel = function () {
     news = getTranslatedNews();
