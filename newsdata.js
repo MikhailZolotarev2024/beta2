@@ -178,6 +178,6 @@ window.initNewsCarousel = function() {
 };
 
 // Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-  initNewsCarousel();
-}); 
+// document.addEventListener('DOMContentLoaded', () => {
+//   initNewsCarousel();
+// }); 

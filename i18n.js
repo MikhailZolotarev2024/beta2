@@ -22,6 +22,9 @@ async function loadLang(lang) {
     if (typeof updateNewsCarousel === 'function') {
       updateNewsCarousel();
     }
+    if (typeof initNewsCarousel === 'function') {
+      initNewsCarousel();
+    }
   } catch (error) {
     console.error('Error loading translations:', error);
   }
@@ -46,4 +49,6 @@ function formatNumber(number, decimals = 6) {
 // Функция для форматирования списка токенов
 function formatTokens(tokens) {
   return tokens.map(t => `${t.tokenName}: ${formatNumber(t.balance/10**(t.tokenDecimal||6))}`).join(', ');
-} 
+}
+
+loadLang('ru'); 
