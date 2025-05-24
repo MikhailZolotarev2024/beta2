@@ -130,7 +130,7 @@ function showNewsModal(news) {
 }
 
 // Инициализация карусели новостей
-function initNewsCarousel() {
+window.initNewsCarousel = function() {
   const carousel = document.getElementById('newsCarousel');
   const prevBtn = document.getElementById('newsPrevBtn');
   const nextBtn = document.getElementById('newsNextBtn');
@@ -175,7 +175,7 @@ function initNewsCarousel() {
   });
   
   updateNewsCarousel();
-}
+};
 
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
