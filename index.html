@@ -471,6 +471,12 @@ async function loadLang(lang) {
     if (dict[key]) el.placeholder = dict[key];
   });
 }
+
+if (document.readyState !== 'loading') {
+  initNewsCarousel();
+} else {
+  document.addEventListener('DOMContentLoaded', initNewsCarousel);
+}
 </script>
 </body>
 </html>
