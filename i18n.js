@@ -18,6 +18,10 @@ async function loadLang(lang) {
       const key = el.getAttribute('data-i18n-placeholder');
       if (translations[key]) el.placeholder = translations[key];
     });
+    // Добавлено для обновления новостного виджета при смене языка
+    if (typeof updateNewsCarousel === 'function') {
+      updateNewsCarousel();
+    }
   } catch (error) {
     console.error('Error loading translations:', error);
   }

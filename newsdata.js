@@ -138,29 +138,29 @@ function initNewsCarousel() {
   const modal = document.getElementById('newsModal');
   
   let currentIndex = 0;
-  const news = getTranslatedNews();
+  let news = getTranslatedNews();
   
-  function updateCarousel() {
+  window.updateNewsCarousel = function () {
+    news = getTranslatedNews();
     carousel.innerHTML = '';
     const start = currentIndex;
     const end = Math.min(start + 3, news.length);
-    
     for (let i = start; i < end; i++) {
       carousel.appendChild(createNewsElement(news[i]));
     }
-  }
+  };
   
   prevBtn.addEventListener('click', () => {
     if (currentIndex > 0) {
       currentIndex--;
-      updateCarousel();
+      updateNewsCarousel();
     }
   });
   
   nextBtn.addEventListener('click', () => {
     if (currentIndex < news.length - 3) {
       currentIndex++;
-      updateCarousel();
+      updateNewsCarousel();
     }
   });
   
@@ -174,7 +174,7 @@ function initNewsCarousel() {
     }
   });
   
-  updateCarousel();
+  updateNewsCarousel();
 }
 
 // Инициализация при загрузке страницы
