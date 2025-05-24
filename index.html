@@ -458,27 +458,5 @@ min-height:40px;
 <script src="script.js"></script>
 
 <script src="reviews-carousel.js"></script>
-<script>
-async function loadLang(lang) {
-  const res = await fetch('lang/' + lang + '.json');
-  const dict = await res.json();
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (dict[key]) el.innerText = dict[key];
-  });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const key = el.getAttribute('data-i18n-placeholder');
-    if (dict[key]) el.placeholder = dict[key];
-  });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  if (typeof initNewsCarousel === 'function') {
-    initNewsCarousel();
-  } else {
-    console.error('❌ initNewsCarousel не определена!');
-  }
-});
-</script>
 </body>
 </html>
