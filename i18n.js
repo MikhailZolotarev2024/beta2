@@ -1,4 +1,4 @@
-let currentLang = 'ru';
+window.currentLang = 'ru';
 let translations = {};
 
 function getBasePath() {
@@ -12,7 +12,7 @@ async function loadLang(lang) {
     const base = getBasePath();
     const res = await fetch(`${base}/lang/${lang}.json`);
     translations = await res.json();
-    currentLang = lang;
+    window.currentLang = lang;
     
     // Обновляем тексты элементов
     document.querySelectorAll('[data-i18n]').forEach(el => {
