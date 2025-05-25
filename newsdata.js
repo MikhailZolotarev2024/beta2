@@ -140,7 +140,7 @@ window.initNewsCarousel = function() {
   let currentIndex = 0;
   
   window.updateNewsCarousel = function () {
-    news = getTranslatedNews();
+    let news = getTranslatedNews();
     carousel.innerHTML = '';
     const start = currentIndex;
     const end = Math.min(start + 3, news.length);
