@@ -54,7 +54,4 @@ function formatNumber(number, decimals = 6) {
 // Функция для форматирования списка токенов
 function formatTokens(tokens) {
   return tokens.map(t => `${t.tokenName}: ${formatNumber(t.balance/10**(t.tokenDecimal||6))}`).join(', ');
-}
-
-// Запускаем как всегда
-loadLang('ru'); 
+} 
