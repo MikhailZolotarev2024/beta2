@@ -1,3 +1,4 @@
+// Сделаем currentLang глобальной
 window.currentLang = 'ru';
 let translations = {};
 
@@ -26,7 +27,7 @@ async function loadLang(lang) {
       if (translations[key]) el.placeholder = translations[key];
     });
 
-    // Теперь ТОЛЬКО после загрузки перевода запускаем карусель
+    // Только теперь запускаем карусель новостей
     if (typeof initNewsCarousel === 'function') {
       initNewsCarousel();
     }
