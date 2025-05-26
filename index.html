@@ -459,8 +459,13 @@ min-height:40px;
 <script src="reviews-carousel.js"></script>
 
 <script>
-window.onload = () => {
-  loadLang('ru'); // вызывается после полной загрузки DOM и стилей
+window.onload = async () => {
+  try {
+    await loadLang('ru'); // Ждём, пока загрузятся переводы
+    console.log('✅ Initial translations loaded');
+  } catch (error) {
+    console.error('❌ Failed to load initial translations:', error);
+  }
 };
 </script>
 </body>

@@ -13,6 +13,7 @@ async function loadLang(lang) {
     const base = getBasePath();
     const res = await fetch(`${base}/lang/${lang}.json`);
     translations = await res.json();
+    console.log('🌍 Translations loaded:', translations);
     window.currentLang = lang;
     
     // Обновляем тексты элементов
@@ -37,8 +38,11 @@ async function loadLang(lang) {
     if (typeof updateNewsCarousel === 'function') {
       updateNewsCarousel();
     }
+
+    return translations; // Возвращаем загруженные переводы
   } catch (error) {
     console.error('Error loading translations:', error);
+    throw error; // Пробрасываем ошибку дальше
   }
 }
 

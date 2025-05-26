@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     const carousel = document.querySelector('.reviews-carousel');
     const prevButton = document.querySelector('.carousel-button.prev');
     const nextButton = document.querySelector('.carousel-button.next');
+    
+    // Проверяем наличие необходимых элементов
+    if (!carousel || !prevButton || !nextButton) {
+        console.error('❌ Required carousel elements not found');
+        return;
+    }
+
     const cardsPerColumn = 5;
     let currentPosition = 0;
     let columns = [];
@@ -13,14 +20,18 @@ document.addEventListener('DOMContentLoaded', async function() {
     let modal = document.getElementById('modal');
     let modalText = document.getElementById('modal-text');
     let closeModalBtn = document.querySelector('.modal .close-modal');
+    
     if (closeModalBtn) {
         closeModalBtn.onclick = () => {
-            modal.classList.remove('show');
-            resetAutoplay();
+            if (modal) {
+                modal.classList.remove('show');
+                resetAutoplay();
+            }
         };
     }
+
     window.addEventListener('click', (e) => {
-        if (e.target === modal) {
+        if (modal && e.target === modal) {
             modal.classList.remove('show');
             resetAutoplay();
         }
