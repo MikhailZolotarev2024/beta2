@@ -116,6 +116,7 @@
   "system-raw-tx-success": "✅ Raw transaction successful: {txid}",
   "system-raw-tx-error": "❌ Raw transaction error: {code}",
 
+  "news-title": "News",
   "news-date": "{{date}}",
   "news-read-more": "Read more",
   
