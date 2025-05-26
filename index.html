@@ -459,9 +459,9 @@ min-height:40px;
 <script src="reviews-carousel.js"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  loadLang('ru'); // вызывается после загрузки всех скриптов
-});
+window.onload = () => {
+  loadLang('ru'); // вызывается после полной загрузки DOM и стилей
+};
 </script>
 </body>
 </html>

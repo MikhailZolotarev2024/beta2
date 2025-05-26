@@ -159,28 +159,25 @@ window.initNewsCarousel = function() {
   const modal = document.getElementById('newsModal');
   
   window.updateNewsCarousel = function () {
-    let news = getTranslatedNews();
-    console.log("news items →", news);
-    
-    // Очищаем карусель
-    const carousel = document.getElementById('newsCarousel');
-    if (carousel) {
-      // Удаляем все обработчики событий
-      const oldItems = carousel.querySelectorAll('.news-card');
-      oldItems.forEach(item => {
-        const button = item.querySelector('.read-more');
-        if (button) {
-          const newButton = button.cloneNode(true);
-          button.parentNode.replaceChild(newButton, button);
-        }
-      });
-      
-      carousel.innerHTML = '';
-      
-      const start = currentIndex;
-      const end = Math.min(start + 3, news.length);
-      for (let i = start; i < end; i++) {
-        carousel.appendChild(createNewsElement(news[i]));
+    const news = getTranslatedNews();
+    const cards = document.querySelectorAll('.news-card');
+
+    for (let i = 0; i < cards.length; i++) {
+      const card = cards[i];
+      const newsItem = news[i + currentIndex];
+      if (!newsItem) continue;
+
+      const title = card.querySelector('h3');
+      const date = card.querySelector('.news-date');
+      const text = card.querySelector('p');
+      const button = card.querySelector('.read-more');
+
+      if (title) title.textContent = t(newsItems[i + currentIndex].titleKey);
+      if (date) date.textContent = t('news-date', { date: formatDate(newsItem.date) });
+      if (text) text.textContent = t(newsItems[i + currentIndex].shortTextKey);
+      if (button) {
+        button.textContent = t('news-read-more');
+        button.onclick = () => showNewsModal(newsItem);
       }
     }
   };
