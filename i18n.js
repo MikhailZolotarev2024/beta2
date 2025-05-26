@@ -9,45 +9,120 @@ function getBasePath() {
 }
 
 async function loadLang(lang) {
+  const base = getBasePath();
+  const url = `${base}/lang/${lang}.json`;
+  console.log('🌍 Loading translations from:', url);
+
   try {
-    const base = getBasePath();
-    const res = await fetch(`${base}/lang/${lang}.json`);
-    translations = await res.json();
-    console.log('🌍 Translations loaded:', translations);
+    // Загрузка JSON
+    console.log('📥 Fetching translations...');
+    const res = await fetch(url);
+    console.log('📦 Fetch response:', {
+      status: res.status,
+      statusText: res.statusText,
+      headers: Object.fromEntries(res.headers.entries())
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    // Получение текста
+    const rawText = await res.text();
+    console.log('📄 Raw JSON text:', rawText);
+
+    // Парсинг JSON
+    try {
+      translations = JSON.parse(rawText);
+      console.log('✅ JSON parsed successfully:', translations);
+    } catch (parseError) {
+      console.error('❌ JSON parse error:', parseError);
+      throw new Error(`JSON parse error: ${parseError.message}`);
+    }
+
     window.currentLang = lang;
     
     // Обновляем тексты элементов
-    document.querySelectorAll('[data-i18n]').forEach(el => {
+    const elements = document.querySelectorAll('[data-i18n]');
+    console.log(`🔍 Found ${elements.length} elements with data-i18n`);
+    
+    const translatedKeys = new Set();
+    const missingKeys = new Set();
+    
+    elements.forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if (translations[key]) el.innerText = translations[key];
+      if (translations[key]) {
+        el.innerText = translations[key];
+        translatedKeys.add(key);
+      } else {
+        missingKeys.add(key);
+      }
     });
+
+    console.log('✅ Successfully translated keys:', Array.from(translatedKeys));
+    if (missingKeys.size > 0) {
+      console.warn('⚠️ Missing translations for keys:', Array.from(missingKeys));
+    }
     
     // Обновляем плейсхолдеры
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const placeholders = document.querySelectorAll('[data-i18n-placeholder]');
+    console.log(`🔍 Found ${placeholders.length} elements with data-i18n-placeholder`);
+    
+    placeholders.forEach(el => {
       const key = el.getAttribute('data-i18n-placeholder');
-      if (translations[key]) el.placeholder = translations[key];
+      if (translations[key]) {
+        el.placeholder = translations[key];
+        translatedKeys.add(key);
+      } else {
+        missingKeys.add(key);
+      }
     });
 
     // Инициализируем карусель новостей один раз
     if (typeof initNewsCarousel === 'function' && !window.newsCarouselInitialized) {
+      console.log('🎠 Initializing news carousel...');
+      const newsCards = document.querySelectorAll('.news-card');
+      console.log(`📰 Found ${newsCards.length} news cards`);
+      
+      const newsData = typeof getTranslatedNews === 'function' ? getTranslatedNews() : null;
+      console.log('📰 News data:', newsData);
+      
       initNewsCarousel();
       window.newsCarouselInitialized = true;
+      console.log('✅ News carousel initialized');
     }
 
     // Обновляем карусель при смене языка
     if (typeof updateNewsCarousel === 'function') {
+      console.log('🔄 Updating news carousel...');
+      const newsCards = document.querySelectorAll('.news-card');
+      console.log(`📰 Found ${newsCards.length} news cards`);
+      
+      const newsData = typeof getTranslatedNews === 'function' ? getTranslatedNews() : null;
+      console.log('📰 News data:', newsData);
+      
       updateNewsCarousel();
+      console.log('✅ News carousel updated');
     }
 
-    return translations; // Возвращаем загруженные переводы
+    return translations;
   } catch (error) {
-    console.error('Error loading translations:', error);
-    throw error; // Пробрасываем ошибку дальше
+    console.error('❌ Error loading translations:', {
+      message: error.message,
+      stack: error.stack,
+      cause: error.cause
+    });
+    throw error;
   }
 }
 
 function t(key, params = {}) {
-  let text = translations[key] || key;
+  let text = translations[key];
+  
+  if (!text) {
+    console.warn(`⚠️ Translation key not found: "${key}"`);
+    text = key;
+  }
   
   // Заменяем параметры в тексте
   Object.entries(params).forEach(([param, value]) => {
