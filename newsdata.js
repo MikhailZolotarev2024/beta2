@@ -123,9 +123,15 @@ function createNewsElement(news) {
     <button class="read-more" data-i18n="news-read-more">${t('news-read-more')}</button>
   `;
   
-  div.querySelector('.read-more').addEventListener('click', () => {
-    showNewsModal(news);
-  });
+  // Удаляем старые обработчики событий, если они есть
+  const oldButton = div.querySelector('.read-more');
+  if (oldButton) {
+    const newButton = oldButton.cloneNode(true);
+    oldButton.parentNode.replaceChild(newButton, oldButton);
+    newButton.addEventListener('click', () => {
+      showNewsModal(news);
+    });
+  }
   
   return div;
 }
@@ -155,11 +161,26 @@ window.initNewsCarousel = function() {
   window.updateNewsCarousel = function () {
     let news = getTranslatedNews();
     console.log("news items →", news);
-    carousel.innerHTML = '';
-    const start = currentIndex;
-    const end = Math.min(start + 3, news.length);
-    for (let i = start; i < end; i++) {
-      carousel.appendChild(createNewsElement(news[i]));
+    
+    // Очищаем карусель
+    if (carousel) {
+      // Удаляем все обработчики событий
+      const oldItems = carousel.querySelectorAll('.news-item');
+      oldItems.forEach(item => {
+        const button = item.querySelector('.read-more');
+        if (button) {
+          const newButton = button.cloneNode(true);
+          button.parentNode.replaceChild(newButton, button);
+        }
+      });
+      
+      carousel.innerHTML = '';
+      
+      const start = currentIndex;
+      const end = Math.min(start + 3, news.length);
+      for (let i = start; i < end; i++) {
+        carousel.appendChild(createNewsElement(news[i]));
+      }
     }
   };
   
@@ -190,7 +211,7 @@ window.initNewsCarousel = function() {
   updateNewsCarousel();
 };
 
-// Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-  initNewsCarousel();
-}); 
+// Удаляем инициализацию из DOMContentLoaded
+// document.addEventListener('DOMContentLoaded', () => {
+//   initNewsCarousel();
+// }); 

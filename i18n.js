@@ -27,9 +27,15 @@ async function loadLang(lang) {
       if (translations[key]) el.placeholder = translations[key];
     });
 
-    // Только теперь запускаем карусель новостей
-    if (typeof initNewsCarousel === 'function') {
+    // Инициализируем карусель новостей один раз
+    if (typeof initNewsCarousel === 'function' && !window.newsCarouselInitialized) {
       initNewsCarousel();
+      window.newsCarouselInitialized = true;
+    }
+
+    // Обновляем карусель при смене языка
+    if (typeof updateNewsCarousel === 'function') {
+      updateNewsCarousel();
     }
   } catch (error) {
     console.error('Error loading translations:', error);
