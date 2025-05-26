@@ -130,40 +130,6 @@ if (carousel && items.length) {
   });
 }
 
-const showMoreBtn = document.getElementById('showMoreNews');
-if (showMoreBtn) {
-  showMoreBtn.addEventListener('click', function (e) {
-    e.preventDefault();
-    const widget = document.querySelector('.news-widget');
-    if (widget) {
-      widget.classList.remove('collapsed');
-      this.style.display = 'none';
-    }
-  });
-}
-
-function openNewsModal(id) {
-  const news = typeof newsItems !== 'undefined' ? newsItems : [];
-  const item = news.find(n => n.id === id);
-  if (!item) return;
-  const modalTitle = document.getElementById('modalTitle');
-  const modalDate = document.getElementById('modalDate');
-  const modalText = document.getElementById('modalText');
-  const newsModal = document.getElementById('newsModal');
-  if (modalTitle) modalTitle.innerText = item.title;
-  if (modalDate) modalDate.innerText = item.date;
-  if (modalText) modalText.innerText = item.fullText || item.shortText;
-  if (newsModal) newsModal.classList.add('active');
-}
-
-const newsModalClose = document.getElementById('newsModalClose');
-if (newsModalClose) {
-  newsModalClose.onclick = function() {
-    const newsModal = document.getElementById('newsModal');
-    if (newsModal) newsModal.classList.remove('active');
-  };
-}
-
 const rows = document.querySelectorAll(".wave-row");
 if (rows.length) {
   const shown = new Set();
@@ -238,98 +204,6 @@ if (cookieConsent) {
     cookieConsent.style.display = 'none';
   }
 }
-// --- Новости: вывод, листание, модальное окно (оптимизировано под 3x2) ---
-function getNewsPerPage() {
-  return window.innerWidth <= 600 ? 2 : 6;
-}
-let currentPage = 0;
-function renderNewsPages() {
-  const news = typeof newsItems !== 'undefined' ? newsItems : [];
-  const NEWS_PER_PAGE = getNewsPerPage();
-  const totalPages = Math.ceil(news.length / NEWS_PER_PAGE);
-  const carousel = document.getElementById('newsCarousel');
-  if (!carousel) return;
-  let pagesHTML = '';
-  for (let p = 0; p < totalPages; p++) {
-    const pageNews = news.slice(p * NEWS_PER_PAGE, (p + 1) * NEWS_PER_PAGE);
-    pagesHTML += '<div class="news-grid">';
-    for (let i = 0; i < NEWS_PER_PAGE; i++) {
-      const newsItem = pageNews[i];
-      if (newsItem) {
-        pagesHTML += `
-          <div class="news-card" data-id="${newsItem.id}">
-            <div class="news-card-title">${newsItem.title}</div>
-            <div class="news-card-date">${newsItem.date}</div>
-            <div class="news-card-text">${newsItem.shortText}</div>
-            <button class="news-card-more" data-id="${newsItem.id}">Подробнее</button>
-          </div>
-        `;
-      } else {
-        pagesHTML += `<div class="news-card news-card-empty"></div>`;
-      }
-    }
-    pagesHTML += '</div>';
-  }
-  carousel.innerHTML = pagesHTML;
-  updateNewsCarousel();
-  document.querySelectorAll('.news-card-more').forEach(btn => {
-    btn.onclick = function() {
-      const id = +this.dataset.id;
-      openNewsModal(id);
-    };
-  });
-}
-function updateNewsCarousel() {
-  const carousel = document.getElementById('newsCarousel');
-  const NEWS_PER_PAGE = getNewsPerPage();
-  const news = typeof newsItems !== 'undefined' ? newsItems : [];
-  const totalPages = Math.ceil(news.length / NEWS_PER_PAGE);
-  if (carousel) {
-    carousel.style.transform = `translateX(-${currentPage * 100}%)`;
-  }
-  const prevBtn = document.getElementById('newsPrevBtn');
-  const nextBtn = document.getElementById('newsNextBtn');
-  if (prevBtn) prevBtn.disabled = currentPage === 0;
-  if (nextBtn) nextBtn.disabled = currentPage === totalPages - 1;
-}
-const newsPrevBtn = document.getElementById('newsPrevBtn');
-if (newsPrevBtn) {
-  newsPrevBtn.onclick = function() {
-    if (currentPage > 0) {
-      currentPage--;
-      updateNewsCarousel();
-    }
-  };
-}
-const newsNextBtn = document.getElementById('newsNextBtn');
-if (newsNextBtn) {
-  newsNextBtn.onclick = function() {
-    const NEWS_PER_PAGE = getNewsPerPage();
-    const news = typeof newsItems !== 'undefined' ? newsItems : [];
-    const totalPages = Math.ceil(news.length / NEWS_PER_PAGE);
-    if (currentPage < totalPages - 1) {
-      currentPage++;
-      updateNewsCarousel();
-    }
-  };
-}
-document.addEventListener('DOMContentLoaded', function() {
-  const newsCarousel = document.getElementById('newsCarousel');
-  if (newsCarousel) renderNewsPages();
-});
-window.addEventListener('resize', function() {
-  currentPage = 0;
-  renderNewsPages();
-  updateNewsCarousel();
-});
-// --- Конец блока новостей ---
-
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    if (typeof renderNewsPages === 'function') renderNewsPages();
-    if (typeof updateNewsCarousel === 'function') updateNewsCarousel();
-  }, 50);
-});
 });
 
 

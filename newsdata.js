@@ -117,20 +117,16 @@ function createNewsElement(news) {
   const div = document.createElement('div');
   div.className = 'news-card';
   div.innerHTML = `
-    <h3>${news.title}</h3>
-    <div class="news-date">${t('news-date', { date: formatDate(news.date) })}</div>
-    <p>${news.shortText}</p>
-    <button class="read-more" data-i18n="news-read-more">${t('news-read-more')}</button>
+    <div class="news-card-title">${news.title}</div>
+    <div class="news-card-date">${t('news-date', { date: formatDate(news.date) })}</div>
+    <div class="news-card-text">${news.shortText}</div>
+    <button class="news-card-more" data-i18n="news-read-more">${t('news-read-more')}</button>
   `;
   
-  // Удаляем старые обработчики событий, если они есть
-  const oldButton = div.querySelector('.read-more');
-  if (oldButton) {
-    const newButton = oldButton.cloneNode(true);
-    oldButton.parentNode.replaceChild(newButton, oldButton);
-    newButton.addEventListener('click', () => {
-      showNewsModal(news);
-    });
+  // Добавляем обработчик для кнопки
+  const button = div.querySelector('.news-card-more');
+  if (button) {
+    button.addEventListener('click', () => showNewsModal(news));
   }
   
   return div;
@@ -143,11 +139,10 @@ function showNewsModal(news) {
   const date = document.getElementById('modalDate');
   const text = document.getElementById('modalText');
   
-  title.textContent = news.title;
-  date.textContent = t('news-date', { date: formatDate(news.date) });
-  text.textContent = news.fullText;
-  
-  modal.style.display = 'block';
+  if (title) title.textContent = news.title;
+  if (date) date.textContent = t('news-date', { date: formatDate(news.date) });
+  if (text) text.textContent = news.fullText;
+  if (modal) modal.classList.add('active');
 }
 
 // Инициализация карусели новостей
@@ -158,28 +153,41 @@ window.initNewsCarousel = function() {
   const closeBtn = document.getElementById('newsModalClose');
   const modal = document.getElementById('newsModal');
   
-  window.updateNewsCarousel = function () {
+  if (!carousel || !prevBtn || !nextBtn) {
+    console.error('❌ Required news carousel elements not found');
+    return;
+  }
+
+  // Очищаем карусель и добавляем начальные карточки
+  carousel.innerHTML = '';
+  const news = getTranslatedNews();
+  for (let i = 0; i < 3; i++) {
+    if (news[i]) {
+      carousel.appendChild(createNewsElement(news[i]));
+    }
+  }
+  
+  window.updateNewsCarousel = function() {
     const news = getTranslatedNews();
-    const cards = document.querySelectorAll('.news-card');
-
-    for (let i = 0; i < cards.length; i++) {
-      const card = cards[i];
+    const cards = carousel.querySelectorAll('.news-card');
+    
+    cards.forEach((card, i) => {
       const newsItem = news[i + currentIndex];
-      if (!newsItem) continue;
-
-      const title = card.querySelector('h3');
-      const date = card.querySelector('.news-date');
-      const text = card.querySelector('p');
-      const button = card.querySelector('.read-more');
-
-      if (title) title.textContent = t(newsItems[i + currentIndex].titleKey);
+      if (!newsItem) return;
+      
+      const title = card.querySelector('.news-card-title');
+      const date = card.querySelector('.news-card-date');
+      const text = card.querySelector('.news-card-text');
+      const button = card.querySelector('.news-card-more');
+      
+      if (title) title.textContent = newsItem.title;
       if (date) date.textContent = t('news-date', { date: formatDate(newsItem.date) });
-      if (text) text.textContent = t(newsItems[i + currentIndex].shortTextKey);
+      if (text) text.textContent = newsItem.shortText;
       if (button) {
         button.textContent = t('news-read-more');
         button.onclick = () => showNewsModal(newsItem);
       }
-    }
+    });
   };
   
   prevBtn.addEventListener('click', () => {
@@ -196,13 +204,15 @@ window.initNewsCarousel = function() {
     }
   });
   
-  closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      if (modal) modal.classList.remove('active');
+    });
+  }
   
   window.addEventListener('click', (e) => {
     if (e.target === modal) {
-      modal.style.display = 'none';
+      modal.classList.remove('active');
     }
   });
   
