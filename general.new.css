@@ -635,11 +635,15 @@ footer, .site-footer {
   font-size: 24px;
   cursor: pointer;
   color: #ccc;
-  transition: color 0.3s ease;
+  background: none;
+  border: none;
+  padding: 5px;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .news-modal-close:hover {
-  color: #fff;
+  color: #00bfff;
+  transform: scale(1.15);
 }
 
 .news-modal-title {
@@ -1079,4 +1083,9 @@ footer, .site-footer {
 #toggleLangBtn:hover {
   background: #00bfff;
   color: black;
+}
+
+/* Скрывать кнопку с классом .news-card-more, если она находится внутри .news-modal */
+.news-modal .news-card-more {
+  display: none !important;
 }
