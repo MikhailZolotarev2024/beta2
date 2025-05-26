@@ -115,7 +115,7 @@ function formatDate(dateStr) {
 // Функция для создания элемента новости
 function createNewsElement(news) {
   const div = document.createElement('div');
-  div.className = 'news-item';
+  div.className = 'news-card';
   div.innerHTML = `
     <h3>${news.title}</h3>
     <div class="news-date">${t('news-date', { date: formatDate(news.date) })}</div>
@@ -163,9 +163,10 @@ window.initNewsCarousel = function() {
     console.log("news items →", news);
     
     // Очищаем карусель
+    const carousel = document.getElementById('newsCarousel');
     if (carousel) {
       // Удаляем все обработчики событий
-      const oldItems = carousel.querySelectorAll('.news-item');
+      const oldItems = carousel.querySelectorAll('.news-card');
       oldItems.forEach(item => {
         const button = item.querySelector('.read-more');
         if (button) {
