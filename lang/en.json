@@ -116,31 +116,52 @@
   "system-raw-tx-success": "✅ Raw transaction successful: {txid}",
   "system-raw-tx-error": "❌ Raw transaction error: {code}",
 
-  "news-title": "News",
+  "news-date": "{{date}}",
   "news-read-more": "Read more",
-  "news-date": "Date: {date}",
-  "news-launch-title": "New Service Launch",
-  "news-launch-short": "We have launched a new crypto asset verification service.",
-  "news-update-title": "Platform Update",
-  "news-update-short": "A major platform update has been released.",
-  "news-blog-title": "New Blog Article",
-  "news-blog-short": "A new article about cryptocurrency security has been published.",
-  "news-partnership-title": "Partnership with Experts",
-  "news-partnership-short": "We have partnered with leading industry experts.",
+  
+  "news-launch-title": "Launch of New Service",
+  "news-launch-short": "We are excited to announce the launch of our new service. This is a significant step forward in our development.",
+  "news-launch-full": "We are proud to announce the launch of our new service. This is a significant step forward in our development. The new service includes advanced features, improved security, and a more user-friendly interface. All details, links, and additional information are available in your personal account.",
+  
+  "news-update-title": "Major Update Released",
+  "news-update-short": "We have released a major update with new features and improvements.",
+  "news-update-full": "We are pleased to announce a major update to our service. Now available: multi-network verification, improved adaptation, and new animations. These changes will make your experience even more comfortable and efficient.",
+  
+  "news-blog-title": "New Article on Security",
+  "news-blog-short": "We have published a new article about protecting your assets.",
+  "news-blog-full": "We have published a detailed article that examines the main threats and ways to protect your assets. The article covers the latest security trends and provides practical recommendations for protecting your investments.",
+  
+  "news-partnership-title": "New Partnership Agreement",
+  "news-partnership-short": "We have signed a new partnership agreement.",
+  "news-partnership-full": "We are pleased to announce a new partnership agreement. Now our clients receive even more benefits and consultations. This partnership opens up new opportunities for our users.",
+  
   "news-team-title": "Team Expansion",
-  "news-team-short": "New specialists have joined our team.",
-  "news-webinar-title": "Security Webinar",
-  "news-webinar-short": "We conducted a free webinar for all clients.",
+  "news-team-short": "Our team has grown with new professionals.",
+  "news-team-full": "We are happy to announce the expansion of our team with new professionals. This will allow us to solve your tasks even faster and more efficiently!",
+  
+  "news-webinar-title": "Webinar Recording Available",
+  "news-webinar-short": "The recording of our latest webinar is now available.",
+  "news-webinar-full": "The recording of our latest webinar is now available in your personal account. Don't miss the opportunity to learn about the latest updates and features of our service.",
+  
   "news-partners-title": "New Partners",
-  "news-partners-short": "New partners have joined our platform.",
-  "news-mobile-title": "Mobile Version Improvement",
-  "news-mobile-short": "The mobile version of the site has become even more convenient.",
-  "news-holiday-title": "Holiday Promotion",
-  "news-holiday-short": "We held a promotion for Defender of the Fatherland Day.",
-  "news-faq-title": "New FAQ Section",
-  "news-faq-short": "A section with frequently asked questions has been added.",
+  "news-partners-short": "We are expanding our network of partners.",
+  "news-partners-full": "We are expanding our network of partners. This expands the capabilities for our users and provides access to new services and features.",
+  
+  "news-mobile-title": "Mobile Version Update",
+  "news-mobile-short": "The mobile version has been significantly improved.",
+  "news-mobile-full": "We have significantly improved the mobile version of our service. Now using the service from your phone has become easier and faster. The interface has been optimized for mobile devices, and new features have been added.",
+  
+  "news-holiday-title": "Special Holiday Offer",
+  "news-holiday-short": "Special discounts and bonuses for all new clients!",
+  "news-holiday-full": "We are pleased to announce special discounts and bonuses for all new clients! Take advantage of our holiday offer to get the best conditions for using our service.",
+  
+  "news-faq-title": "Updated FAQ Section",
+  "news-faq-short": "We have updated our FAQ section with new answers.",
+  "news-faq-full": "We have updated our FAQ section with new answers to popular questions. Now you can quickly find answers to your questions and get help with using our service.",
+  
   "news-privacy-title": "Privacy Policy Update",
-  "news-privacy-short": "We have updated our privacy policy.",
+  "news-privacy-short": "Please review our updated privacy policy.",
+  "news-privacy-full": "We have updated our privacy policy. Please review the new terms on our website to stay informed about how we protect your data and ensure your privacy."
 
   "region-america-title": "America",
   "region-america-stats": "29% is the official return rate, but full refunds occur in only 5-9% of cases.",
