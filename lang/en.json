@@ -117,7 +117,7 @@
   "system-raw-tx-error": "❌ Raw transaction error: {code}",
 
   "news-title": "News",
-  "news-date": "{{date}}",
+  "news-date": "%date%",
   "news-read-more": "Read more",
   
   "news-launch-title": "Launch of New Service",

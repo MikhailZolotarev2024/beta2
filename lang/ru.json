@@ -132,7 +132,7 @@
   "region-russia-desc2": "Если нет нестандартного подхода — шанс на возврат стремится к нулю.",
 
   "news-title": "Новости",
-  "news-date": "{{date}}",
+  "news-date": "%date%",
   "news-read-more": "Читать далее",
   
   "news-launch-title": "Запуск нового сервиса",
