@@ -141,6 +141,7 @@ window.initNewsCarousel = function() {
   
   window.updateNewsCarousel = function () {
     let news = getTranslatedNews();
+    console.log("news items →", news); // Отладочный вывод
     carousel.innerHTML = '';
     const start = currentIndex;
     const end = Math.min(start + 3, news.length);
