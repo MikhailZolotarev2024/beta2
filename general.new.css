@@ -1089,3 +1089,8 @@ footer, .site-footer {
 .news-modal .news-card-more {
   display: none !important;
 }
+
+/* Скрывать кнопку "Читать далее" внутри модального окна */
+.news-modal .news-read-more {
+  display: none !important;
+}
