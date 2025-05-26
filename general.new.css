@@ -618,13 +618,14 @@ footer, .site-footer {
 
 .news-modal-content {
   position: relative;
-  background-color: #fff;
+  background-color: #101625;
   margin: 50px auto;
   padding: 20px;
   width: 90%;
   max-width: 800px;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  color: #fff;
 }
 
 .news-modal-close {
@@ -633,31 +634,31 @@ footer, .site-footer {
   top: 20px;
   font-size: 24px;
   cursor: pointer;
-  color: #666;
+  color: #ccc;
   transition: color 0.3s ease;
 }
 
 .news-modal-close:hover {
-  color: #000;
+  color: #fff;
 }
 
 .news-modal-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #333;
+  color: #00bfff;
 }
 
 .news-modal-date {
   font-size: 14px;
-  color: #666;
+  color: #ccc;
   margin-bottom: 20px;
 }
 
 .news-modal-text {
   font-size: 16px;
   line-height: 1.6;
-  color: #444;
+  color: #ccc;
   white-space: pre-wrap;
 }
 
@@ -1061,4 +1062,21 @@ footer, .site-footer {
   margin-bottom: 8px;
   display: block;
   letter-spacing: 0.02em;
+}
+
+/* Стили для кнопки переключения языка */
+#toggleLangBtn {
+  background: transparent;
+  border: 1px solid #00bfff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+#toggleLangBtn:hover {
+  background: #00bfff;
+  color: black;
 }

@@ -204,6 +204,16 @@ if (cookieConsent) {
     cookieConsent.style.display = 'none';
   }
 }
+
+// Добавляем обработчик переключения языка
+const langToggleBtn = document.getElementById('toggleLangBtn');
+if (langToggleBtn) {
+  langToggleBtn.addEventListener('click', async () => {
+    const newLang = window.currentLang === 'ru' ? 'en' : 'ru';
+    await loadLang(newLang);
+    langToggleBtn.textContent = newLang === 'ru' ? '🇬🇧 English' : '🇷🇺 Русский';
+  });
+}
 });
 
 

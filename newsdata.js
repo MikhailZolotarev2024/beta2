@@ -138,10 +138,13 @@ function showNewsModal(news) {
   const title = document.getElementById('modalTitle');
   const date = document.getElementById('modalDate');
   const text = document.getElementById('modalText');
+  const modalBtn = document.querySelector('#newsModal .read-more');
   
   if (title) title.textContent = news.title;
   if (date) date.textContent = t('news-date', { date: formatDate(news.date) });
   if (text) text.textContent = news.fullText;
+  // Скрываем кнопку внутри модалки, если она осталась
+  if (modalBtn) modalBtn.style.display = 'none';
   if (modal) modal.classList.add('active');
 }
 
