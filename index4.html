@@ -178,18 +178,6 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="legal-md.js"></script>
-    <script src="script.js" defer></script>
-    <script>
-    async function loadLang(lang) {
-      const res = await fetch('/lang/' + lang + '.json');
-      const dict = await res.json();
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[key]) el.innerText = dict[key];
-      });
-    }
-    </script>
-    <script src="newsdata.js"></script>
     <script src="i18n.js"></script>
     <script src="script.js"></script>
 </body>
