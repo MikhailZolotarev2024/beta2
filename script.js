@@ -342,7 +342,7 @@ function waitForI18n() {
     }
   });
 }
-
+console.log('🚀 Calling loadLang with:', lang);
 // Основная функция инициализации приложения
 async function initializeApp() {
   try {
