@@ -127,8 +127,6 @@ async function initLang() {
 function setupLangToggleBtn() {
   const langToggleBtn = document.getElementById('toggleLangBtn');
   if (langToggleBtn) {
-    langToggleBtn.disabled = true;
-    
     langToggleBtn.addEventListener('click', async () => {
       if (langToggleBtn.disabled) return;
       
@@ -196,6 +194,86 @@ async function initializeApp() {
       }
     }
 
+    // Инициализация wave-row
+    const rows = document.querySelectorAll(".wave-row");
+    if (rows.length) {
+      const shown = new Set();
+      const waveObserver = new IntersectionObserver((entries) => {
+        let delay = 0;
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !shown.has(entry.target)) {
+            setTimeout(() => {
+              entry.target.classList.add("visible");
+            }, delay);
+            delay += 200;
+            shown.add(entry.target);
+            waveObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0, rootMargin: "0px" });
+      rows.forEach(row => waveObserver.observe(row));
+      setTimeout(() => window.dispatchEvent(new Event('scroll')), 100);
+    }
+
+    // Инициализация dot-grid
+    function animateDots(grid) {
+      const activeCount = parseInt(grid.getAttribute('data-active')) || 0;
+      const dots = [];
+      for (let i = 0; i < 100; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (i < activeCount) dot.classList.add('active');
+        dots.push(dot);
+        grid.appendChild(dot);
+      }
+      dots.forEach((dot, i) => {
+        setTimeout(() => dot.classList.add('visible'), i * 20);
+      });
+    }
+
+    const dotGrids = document.querySelectorAll('.dot-grid');
+    if (dotGrids.length) {
+      const dotObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.classList.contains('activated')) {
+            entry.target.classList.add('activated');
+            animateDots(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      dotGrids.forEach(grid => {
+        dotObserver.observe(grid);
+      });
+    }
+
+    // Инициализация cookie consent
+    const cookieConsent = document.getElementById('cookieConsent');
+    if (cookieConsent) {
+      // Проверяем наличие cookie
+      const cookiesAccepted = document.cookie.split(';').some(cookie => cookie.trim().startsWith('cookiesAccepted='));
+      
+      if (!cookiesAccepted) {
+        cookieConsent.style.display = 'flex';
+        const acceptBtn = document.getElementById('acceptCookiesBtn');
+        if (acceptBtn) {
+          acceptBtn.addEventListener('click', function() {
+            // Устанавливаем cookie с дополнительными параметрами
+            const date = new Date();
+            date.setFullYear(date.getFullYear() + 1);
+            document.cookie = `cookiesAccepted=true; path=/; expires=${date.toUTCString()}; SameSite=Lax`;
+            
+            // Скрываем уведомление
+            cookieConsent.style.display = 'none';
+            
+            // Проверяем, что cookie установился
+            console.log('Cookie установлен:', document.cookie);
+          });
+        }
+      } else {
+        cookieConsent.style.display = 'none';
+      }
+    }
+
     // Ждём загрузки i18n.js
     await waitForI18n();
     
@@ -204,6 +282,12 @@ async function initializeApp() {
     
     // Настраиваем кнопку переключения
     setupLangToggleBtn();
+    
+    // Разблокируем кнопку после инициализации
+    const langToggleBtn = document.getElementById('toggleLangBtn');
+    if (langToggleBtn) {
+      langToggleBtn.disabled = false;
+    }
     
     console.log('✅ Модуль переключения языка успешно инициализирован');
   } catch (error) {
