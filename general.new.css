@@ -1081,19 +1081,48 @@ footer, .site-footer {
 
 /* Стили для кнопки переключения языка */
 #toggleLangBtn {
-  background: transparent;
-  border: 1px solid #00bfff;
-  padding: 8px 14px;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: background 0.3s, color 0.3s;
+    background: linear-gradient(135deg, rgba(30, 40, 50, 0.6), rgba(20, 30, 40, 0.9));
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 20px;
+    backdrop-filter: blur(10px);
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 #toggleLangBtn:hover {
-  background: #00bfff;
-  color: black;
+    background: linear-gradient(135deg, rgba(50, 70, 90, 0.7), rgba(40, 60, 80, 0.9));
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#toggleLangBtn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+#toggleLangBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: linear-gradient(135deg, rgba(30, 40, 50, 0.4), rgba(20, 30, 40, 0.6));
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    #toggleLangBtn {
+        margin: 10px 0;
+        width: 100%;
+        max-width: 200px;
+    }
 }
 
 /* Скрывать кнопку с классом .news-card-more, если она находится внутри .news-modal */

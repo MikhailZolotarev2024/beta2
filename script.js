@@ -217,12 +217,29 @@ function updateLangToggleBtnText(currentLang) {
   const langToggleBtn = document.getElementById('toggleLangBtn');
   if (langToggleBtn) {
     langToggleBtn.textContent = currentLang === LANGUAGES.RU ? '🇬🇧 English' : '🇷🇺 Русский';
+    langToggleBtn.disabled = false; // Разблокируем кнопку после обновления
+  }
+}
+
+// Функция для блокировки кнопки во время загрузки
+function setLangButtonLoading(isLoading) {
+  const langToggleBtn = document.getElementById('toggleLangBtn');
+  if (langToggleBtn) {
+    langToggleBtn.disabled = isLoading;
+    if (isLoading) {
+      langToggleBtn.dataset.originalText = langToggleBtn.textContent;
+      langToggleBtn.textContent = '⌛';
+    } else {
+      langToggleBtn.textContent = langToggleBtn.dataset.originalText || '';
+    }
   }
 }
 
 // Функция для применения языка: сохраняет в localStorage, загружает переводы, обновляет кнопку
 async function applyLang(lang) {
   try {
+    setLangButtonLoading(true);
+    
     // Сохраняем выбранный язык
     localStorage.setItem('lang', lang);
     
@@ -238,12 +255,19 @@ async function applyLang(lang) {
     console.log(`✅ Язык успешно изменён на ${lang}`);
   } catch (error) {
     console.error('❌ Ошибка при применении языка:', error);
+    // В случае ошибки возвращаем предыдущий язык
+    const previousLang = lang === LANGUAGES.RU ? LANGUAGES.EN : LANGUAGES.RU;
+    updateLangToggleBtnText(previousLang);
+  } finally {
+    setLangButtonLoading(false);
   }
 }
 
 // Инициализация языка при загрузке страницы
 async function initLang() {
   try {
+    setLangButtonLoading(true);
+    
     // Получаем язык из localStorage или по умолчанию 'ru'
     const savedLang = localStorage.getItem('lang') || LANGUAGES.RU;
     
@@ -253,6 +277,8 @@ async function initLang() {
     console.log('✅ Язык успешно инициализирован');
   } catch (error) {
     console.error('❌ Ошибка при инициализации языка:', error);
+  } finally {
+    setLangButtonLoading(false);
   }
 }
 
@@ -260,7 +286,12 @@ async function initLang() {
 function setupLangToggleBtn() {
   const langToggleBtn = document.getElementById('toggleLangBtn');
   if (langToggleBtn) {
+    // Блокируем кнопку до загрузки переводов
+    langToggleBtn.disabled = true;
+    
     langToggleBtn.addEventListener('click', async () => {
+      if (langToggleBtn.disabled) return;
+      
       // Переключаем язык
       const newLang = window.currentLang === LANGUAGES.RU ? LANGUAGES.EN : LANGUAGES.RU;
       await applyLang(newLang);
