@@ -205,15 +205,59 @@ if (cookieConsent) {
   }
 }
 
-// Добавляем обработчик переключения языка
-const langToggleBtn = document.getElementById('toggleLangBtn');
-if (langToggleBtn) {
-  langToggleBtn.addEventListener('click', async () => {
-    const newLang = window.currentLang === 'ru' ? 'en' : 'ru';
-    await loadLang(newLang);
-    langToggleBtn.textContent = newLang === 'ru' ? '🇬🇧 English' : '🇷🇺 Русский';
-  });
+// === ЛОГИКА ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА ===
+// Функция для установки текста на кнопке переключения языка
+function updateLangToggleBtnText(currentLang) {
+  const langToggleBtn = document.getElementById('toggleLangBtn');
+  if (langToggleBtn) {
+    langToggleBtn.textContent = currentLang === 'ru' ? '🇬🇧 English' : '🇷🇺 Русский';
+  }
 }
+
+// Функция для применения языка: сохраняет в localStorage, загружает переводы, обновляет кнопку
+async function applyLang(lang) {
+  try {
+    localStorage.setItem('lang', lang); // Сохраняем выбранный язык
+    await loadLang(lang); // Загружаем переводы
+    updateLangToggleBtnText(lang); // Обновляем текст кнопки
+  } catch (error) {
+    console.error('Ошибка при применении языка:', error);
+  }
+}
+
+// Инициализация языка при загрузке страницы
+async function initLang() {
+  // Получаем язык из localStorage или по умолчанию 'ru'
+  const savedLang = localStorage.getItem('lang') || 'ru';
+  await loadLang(savedLang);
+  updateLangToggleBtnText(savedLang);
+}
+
+// Назначаем обработчик на кнопку переключения языка
+function setupLangToggleBtn() {
+  const langToggleBtn = document.getElementById('toggleLangBtn');
+  if (langToggleBtn) {
+    langToggleBtn.addEventListener('click', async () => {
+      // Переключаем язык
+      const newLang = window.currentLang === 'ru' ? 'en' : 'ru';
+      await applyLang(newLang);
+    });
+  }
+}
+
+// Проверяем, что функция loadLang уже определена (i18n.js загружен)
+if (typeof loadLang === 'function') {
+  initLang().then(setupLangToggleBtn);
+} else {
+  // Если i18n.js ещё не загрузился, ждём его появления
+  const i18nInterval = setInterval(() => {
+    if (typeof loadLang === 'function') {
+      clearInterval(i18nInterval);
+      initLang().then(setupLangToggleBtn);
+    }
+  }, 50);
+}
+// === КОНЕЦ ЛОГИКИ ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА ===
 });
 
 
