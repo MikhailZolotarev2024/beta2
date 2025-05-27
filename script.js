@@ -206,31 +206,54 @@ if (cookieConsent) {
 }
 
 // === ЛОГИКА ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА ===
+// Константы для языков
+const LANGUAGES = {
+  RU: 'ru',
+  EN: 'en'
+};
+
 // Функция для установки текста на кнопке переключения языка
 function updateLangToggleBtnText(currentLang) {
   const langToggleBtn = document.getElementById('toggleLangBtn');
   if (langToggleBtn) {
-    langToggleBtn.textContent = currentLang === 'ru' ? '🇬🇧 English' : '🇷🇺 Русский';
+    langToggleBtn.textContent = currentLang === LANGUAGES.RU ? '🇬🇧 English' : '🇷🇺 Русский';
   }
 }
 
 // Функция для применения языка: сохраняет в localStorage, загружает переводы, обновляет кнопку
 async function applyLang(lang) {
   try {
-    localStorage.setItem('lang', lang); // Сохраняем выбранный язык
-    await loadLang(lang); // Загружаем переводы
-    updateLangToggleBtnText(lang); // Обновляем текст кнопки
+    // Сохраняем выбранный язык
+    localStorage.setItem('lang', lang);
+    
+    // Загружаем переводы
+    await loadLang(lang);
+    
+    // Обновляем текст кнопки
+    updateLangToggleBtnText(lang);
+    
+    // Обновляем атрибут lang у html
+    document.documentElement.lang = lang;
+    
+    console.log(`✅ Язык успешно изменён на ${lang}`);
   } catch (error) {
-    console.error('Ошибка при применении языка:', error);
+    console.error('❌ Ошибка при применении языка:', error);
   }
 }
 
 // Инициализация языка при загрузке страницы
 async function initLang() {
-  // Получаем язык из localStorage или по умолчанию 'ru'
-  const savedLang = localStorage.getItem('lang') || 'ru';
-  await loadLang(savedLang);
-  updateLangToggleBtnText(savedLang);
+  try {
+    // Получаем язык из localStorage или по умолчанию 'ru'
+    const savedLang = localStorage.getItem('lang') || LANGUAGES.RU;
+    
+    // Применяем сохранённый язык
+    await applyLang(savedLang);
+    
+    console.log('✅ Язык успешно инициализирован');
+  } catch (error) {
+    console.error('❌ Ошибка при инициализации языка:', error);
+  }
 }
 
 // Назначаем обработчик на кнопку переключения языка
@@ -239,24 +262,46 @@ function setupLangToggleBtn() {
   if (langToggleBtn) {
     langToggleBtn.addEventListener('click', async () => {
       // Переключаем язык
-      const newLang = window.currentLang === 'ru' ? 'en' : 'ru';
+      const newLang = window.currentLang === LANGUAGES.RU ? LANGUAGES.EN : LANGUAGES.RU;
       await applyLang(newLang);
     });
   }
 }
 
-// Проверяем, что функция loadLang уже определена (i18n.js загружен)
-if (typeof loadLang === 'function') {
-  initLang().then(setupLangToggleBtn);
-} else {
-  // Если i18n.js ещё не загрузился, ждём его появления
-  const i18nInterval = setInterval(() => {
+// Функция для проверки готовности i18n.js
+function waitForI18n() {
+  return new Promise((resolve) => {
     if (typeof loadLang === 'function') {
-      clearInterval(i18nInterval);
-      initLang().then(setupLangToggleBtn);
+      resolve();
+    } else {
+      const checkInterval = setInterval(() => {
+        if (typeof loadLang === 'function') {
+          clearInterval(checkInterval);
+          resolve();
+        }
+      }, 50);
     }
-  }, 50);
+  });
 }
+
+// Инициализация при загрузке DOM
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    // Ждём загрузки i18n.js
+    await waitForI18n();
+    
+    // Инициализируем язык
+    await initLang();
+    
+    // Настраиваем кнопку переключения
+    setupLangToggleBtn();
+    
+    console.log('✅ Модуль переключения языка успешно инициализирован');
+  } catch (error) {
+    console.error('❌ Ошибка при инициализации модуля переключения языка:', error);
+  }
+});
+
 // === КОНЕЦ ЛОГИКИ ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА ===
 });
 
