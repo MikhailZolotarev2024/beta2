@@ -1218,3 +1218,27 @@ footer, .site-footer {
 #toggleLangBtn:not(:disabled):active {
     transform: translateY(0);
 }
+
+#toggleLangBtn {
+  cursor: pointer !important;
+  opacity: 1 !important;
+  transition: opacity 0.3s ease;
+}
+
+#toggleLangBtn[data-loading="true"] {
+  opacity: 0.8;
+}
+
+#toggleLangBtn .loading-spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

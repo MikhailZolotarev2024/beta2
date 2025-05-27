@@ -32,7 +32,7 @@ function updateLangToggleBtnText(currentLang) {
       langToggleBtn.textContent = currentLang === LANGUAGES.RU ? '🇬🇧 English' : '🇷🇺 Русский';
       langToggleBtn.style.opacity = '1';
     }, 150);
-    langToggleBtn.disabled = false;
+    langToggleBtn.dataset.loading = 'false';
   }
 }
 
@@ -40,7 +40,7 @@ function updateLangToggleBtnText(currentLang) {
 function setLangButtonLoading(isLoading) {
   const langToggleBtn = document.getElementById('toggleLangBtn');
   if (langToggleBtn) {
-    langToggleBtn.disabled = isLoading;
+    langToggleBtn.dataset.loading = isLoading.toString();
     if (isLoading) {
       langToggleBtn.dataset.originalText = langToggleBtn.textContent;
       langToggleBtn.innerHTML = '<span class="loading-spinner"></span>';
@@ -127,8 +127,10 @@ async function initLang() {
 function setupLangToggleBtn() {
   const langToggleBtn = document.getElementById('toggleLangBtn');
   if (langToggleBtn) {
+    langToggleBtn.dataset.loading = 'false';
+    
     langToggleBtn.addEventListener('click', async () => {
-      if (langToggleBtn.disabled) return;
+      if (langToggleBtn.dataset.loading === 'true') return;
       
       const newLang = document.documentElement.lang === LANGUAGES.RU ? LANGUAGES.EN : LANGUAGES.RU;
       await applyLang(newLang);
@@ -286,7 +288,7 @@ async function initializeApp() {
     // Разблокируем кнопку после инициализации
     const langToggleBtn = document.getElementById('toggleLangBtn');
     if (langToggleBtn) {
-      langToggleBtn.disabled = false;
+      langToggleBtn.dataset.loading = 'false';
     }
     
     console.log('✅ Модуль переключения языка успешно инициализирован');
