@@ -158,12 +158,3 @@ function formatNumber(number, decimals = 6) {
 function formatTokens(tokens) {
   return tokens.map(t => `${t.tokenName}: ${formatNumber(t.balance/10**(t.tokenDecimal||6))}`).join(', ');
 } 
-
-window.addEventListener('DOMContentLoaded', async () => {
-  if (typeof initializeApp === 'function') {
-    await initializeApp();
-    console.log('✅ App initialized from i18n.js');
-  } else {
-    console.warn('⚠️ initializeApp() не определена на момент DOMContentLoaded');
-  }
-})
