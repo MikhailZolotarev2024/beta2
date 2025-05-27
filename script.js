@@ -216,8 +216,13 @@ const LANGUAGES = {
 function updateLangToggleBtnText(currentLang) {
   const langToggleBtn = document.getElementById('toggleLangBtn');
   if (langToggleBtn) {
-    langToggleBtn.textContent = currentLang === LANGUAGES.RU ? '🇬🇧 English' : '🇷🇺 Русский';
-    langToggleBtn.disabled = false; // Разблокируем кнопку после обновления
+    // Добавляем анимацию
+    langToggleBtn.style.opacity = '0';
+    setTimeout(() => {
+      langToggleBtn.textContent = currentLang === LANGUAGES.RU ? '🇬🇧 English' : '🇷🇺 Русский';
+      langToggleBtn.style.opacity = '1';
+    }, 150);
+    langToggleBtn.disabled = false;
   }
 }
 
@@ -228,14 +233,14 @@ function setLangButtonLoading(isLoading) {
     langToggleBtn.disabled = isLoading;
     if (isLoading) {
       langToggleBtn.dataset.originalText = langToggleBtn.textContent;
-      langToggleBtn.textContent = '⌛';
+      langToggleBtn.innerHTML = '<span class="loading-spinner"></span>';
     } else {
-      langToggleBtn.textContent = langToggleBtn.dataset.originalText || '';
+      langToggleBtn.innerHTML = langToggleBtn.dataset.originalText || '';
     }
   }
 }
 
-// Функция для применения языка: сохраняет в localStorage, загружает переводы, обновляет кнопку
+// Функция для применения языка
 async function applyLang(lang) {
   try {
     setLangButtonLoading(true);
@@ -252,12 +257,37 @@ async function applyLang(lang) {
     // Обновляем атрибут lang у html
     document.documentElement.lang = lang;
     
+    // Инициализируем карусель новостей после смены языка
+    if (typeof initNewsCarousel === 'function') {
+      initNewsCarousel();
+    }
+    
+    // Добавляем анимацию для элементов с переводами
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(10px)';
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 100);
+    });
+    
     console.log(`✅ Язык успешно изменён на ${lang}`);
   } catch (error) {
     console.error('❌ Ошибка при применении языка:', error);
-    // В случае ошибки возвращаем предыдущий язык
     const previousLang = lang === LANGUAGES.RU ? LANGUAGES.EN : LANGUAGES.RU;
     updateLangToggleBtnText(previousLang);
+    
+    // Показываем уведомление об ошибке
+    const notification = document.createElement('div');
+    notification.className = 'error-notification';
+    notification.textContent = 'Ошибка при смене языка. Попробуйте позже.';
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.remove();
+    }, 3000);
   } finally {
     setLangButtonLoading(false);
   }
@@ -282,18 +312,16 @@ async function initLang() {
   }
 }
 
-// Назначаем обработчик на кнопку переключения языка
+// Настройка кнопки переключения языка
 function setupLangToggleBtn() {
   const langToggleBtn = document.getElementById('toggleLangBtn');
   if (langToggleBtn) {
-    // Блокируем кнопку до загрузки переводов
     langToggleBtn.disabled = true;
     
     langToggleBtn.addEventListener('click', async () => {
       if (langToggleBtn.disabled) return;
       
-      // Переключаем язык
-      const newLang = window.currentLang === LANGUAGES.RU ? LANGUAGES.EN : LANGUAGES.RU;
+      const newLang = document.documentElement.lang === LANGUAGES.RU ? LANGUAGES.EN : LANGUAGES.RU;
       await applyLang(newLang);
     });
   }
@@ -318,6 +346,45 @@ function waitForI18n() {
 // Инициализация при загрузке DOM
 document.addEventListener('DOMContentLoaded', async () => {
   try {
+    // Настраиваем обработчики меню
+    const icon = document.querySelector(".menu-icon");
+    if (icon) {
+      icon.addEventListener("click", toggleMenu);
+    }
+
+    // Настраиваем обработчики для секций
+    const sections = document.querySelectorAll('.expandable-section');
+    sections.forEach(section => {
+      const header = section.querySelector('.expandable-header');
+      if (header) {
+        header.addEventListener('click', toggleSection);
+      }
+    });
+
+    // Инициализируем particles.js если есть
+    if (window.particlesJS) {
+      const particlesEl = document.getElementById('particles-js');
+      if (particlesEl) {
+        particlesJS("particles-js", {
+          "particles": {
+            "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#00ffff" },
+            "shape": { "type": "circle", "stroke": { "width": 1, "color": "#ffffff" } },
+            "opacity": { "value": 0.6, "random": true },
+            "size": { "value": 3, "random": true },
+            "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
+            "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out" }
+          },
+          "interactivity": {
+            "detect_on": "canvas",
+            "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } },
+            "modes": { "grab": { "distance": 200, "line_linked": { "opacity": 1 } }, "push": { "particles_nb": 4 } }
+          },
+          "retina_detect": true
+        });
+      }
+    }
+
     // Ждём загрузки i18n.js
     await waitForI18n();
     
@@ -329,7 +396,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     console.log('✅ Модуль переключения языка успешно инициализирован');
   } catch (error) {
-    console.error('❌ Ошибка при инициализации модуля переключения языка:', error);
+    console.error('❌ Ошибка при инициализации:', error);
   }
 });
 
