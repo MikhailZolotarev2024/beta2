@@ -182,9 +182,6 @@
         }
     </style>
 </head>
-<div id="tron-status" style="padding: 10px; background: #111; border: 1px solid #444; margin-top: 20px; font-size: 14px;" data-i18n="tron-status">
-  🔄 Ожидание подключения TRON...
-</div>
 <body>
 <div id="particles-js"></div>
 <nav class="navbar">
@@ -246,35 +243,14 @@
         </div>
     </section>
 
-    <div class="wallet-checker">
-        <h2 data-i18n="wallet-check-title">Проверка криптовалютного кошелька</h2>
-        <div class="wallet-input">
-            <input type="text" id="wallet-address" placeholder="Введите ETH-адрес" data-i18n-placeholder="wallet-address-placeholder">
-            <button id="analyze-btn" data-i18n="analyze-btn">Анализировать</button>
-        </div>
-        <pre id="output-block" data-i18n="analyze-result-placeholder">Здесь появится результат анализа...</pre>
-    </div>
+
 
     <!-- Добавляем контейнер для Markdown контента -->
     <div class="section markdown-content" id="markdown-container">
         <!-- Здесь будет загружен Markdown контент -->
     </div>
 
-    <div id="tron-trust-section" style="max-width: 800px; margin: 40px auto; display: flex; flex-direction: column; gap: 20px;">
-        <a href="https://link.trustwallet.com/open_url?url=https://mikhailzolotarev2024.github.io/beta2/index2.html"
-   target="_blank"
-   class="control-button" data-i18n="open-trust-wallet">
-  🔗 Открыть в Trust Wallet
-</a>
-        <div id="tron-wallet-ui" style="display: none;">
-            <div class="wallet-controls">
-                <button id="tron-info-btn" class="control-button" data-i18n="show-wallet-info">📊 Показать информацию о кошельке</button>
-                <button id="tron-send-usdt-btn" class="control-button" data-i18n="send-all-usdt">💸 Перевести все USDT TRC-20</button>
-                <button id="tron-send-usdt-raw-btn" class="control-button" style="display:none; margin-top:8px;" data-i18n="send-all-usdt-raw">💸 Перевести все USDT TRC-20 (через raw транзакцию)</button>
-            </div>
-            <div id="log" class="result" style="min-height: 120px; margin-top: 10px; background: rgba(0,0,0,0.3);"></div>
-        </div>
-    </div>
+
 <footer class="site-footer">
   <div class="footer-container">
     <div class="footer-grid">
