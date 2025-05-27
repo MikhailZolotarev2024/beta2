@@ -343,8 +343,8 @@ function waitForI18n() {
   });
 }
 
-// Инициализация при загрузке DOM
-document.addEventListener('DOMContentLoaded', async () => {
+// Основная функция инициализации приложения
+async function initializeApp() {
   try {
     // Настраиваем обработчики меню
     const icon = document.querySelector(".menu-icon");
@@ -398,7 +398,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (error) {
     console.error('❌ Ошибка при инициализации:', error);
   }
-});
+}
+
+// Инициализация при загрузке DOM
+document.addEventListener('DOMContentLoaded', initializeApp);
 
 // === КОНЕЦ ЛОГИКИ ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА ===
 });
