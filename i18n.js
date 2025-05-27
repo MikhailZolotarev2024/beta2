@@ -5,7 +5,10 @@ let translations = {};
 function getBasePath() {
   const path = window.location.pathname;
   const parts = path.split('/');
-  return parts.includes('beta2') ? '/beta2' : '';
+  if (parts.length > 1 && parts[1]) {
+    return `/${parts[1]}`; // это имя репозитория на GitHub Pages
+  }
+  return '';
 }
 
 async function loadLang(lang) {
