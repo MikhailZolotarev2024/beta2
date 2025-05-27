@@ -257,9 +257,9 @@ async function applyLang(lang) {
     // Обновляем атрибут lang у html
     document.documentElement.lang = lang;
     
-    // Инициализируем карусель новостей после смены языка
-    if (typeof initNewsCarousel === 'function') {
-      initNewsCarousel();
+    // Обновляем карусель новостей после смены языка
+    if (typeof updateNewsCarousel === 'function') {
+      updateNewsCarousel();
     }
     
     // Добавляем анимацию для элементов с переводами

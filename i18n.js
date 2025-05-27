@@ -52,10 +52,11 @@ async function loadLang(lang) {
     elements.forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (translations[key]) {
-        el.innerText = translations[key];
+        el.innerHTML = translations[key];
         translatedKeys.add(key);
       } else {
         missingKeys.add(key);
+        console.warn(`❗ Missing translation for key: ${key}`);
       }
     });
 
@@ -75,22 +76,9 @@ async function loadLang(lang) {
         translatedKeys.add(key);
       } else {
         missingKeys.add(key);
+        console.warn(`❗ Missing translation for placeholder key: ${key}`);
       }
     });
-
-    // Инициализируем карусель новостей один раз
-    if (typeof initNewsCarousel === 'function' && !window.newsCarouselInitialized) {
-      console.log('🎠 Initializing news carousel...');
-      const newsCards = document.querySelectorAll('.news-card');
-      console.log(`📰 Found ${newsCards.length} news cards`);
-      
-      const newsData = typeof getTranslatedNews === 'function' ? getTranslatedNews() : null;
-      console.log('📰 News data:', newsData);
-      
-      initNewsCarousel();
-      window.newsCarouselInitialized = true;
-      console.log('✅ News carousel initialized');
-    }
 
     // Обновляем карусель при смене языка
     if (typeof updateNewsCarousel === 'function') {
@@ -103,6 +91,32 @@ async function loadLang(lang) {
       
       updateNewsCarousel();
       console.log('✅ News carousel updated');
+    }
+
+    // Сбрасываем флаг инициализации карусели
+    window.newsCarouselInitialized = false;
+
+    // Инициализируем карусель новостей
+    if (typeof initNewsCarousel === 'function') {
+      console.log('🎠 Initializing news carousel...');
+      const newsCards = document.querySelectorAll('.news-card');
+      console.log(`📰 Found ${newsCards.length} news cards`);
+      
+      const newsData = typeof getTranslatedNews === 'function' ? getTranslatedNews() : null;
+      console.log('📰 News data:', newsData);
+      
+      // Проверяем наличие элемента карусели
+      const newsCarousel = document.getElementById('newsCarousel');
+      if (newsCarousel) {
+        // Используем requestAnimationFrame для гарантии, что DOM обновлен
+        requestAnimationFrame(() => {
+          initNewsCarousel();
+          window.newsCarouselInitialized = true;
+          console.log('✅ News carousel initialized');
+        });
+      } else {
+        console.warn('⚠️ News carousel element not found');
+      }
     }
 
     return translations;
