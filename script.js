@@ -242,6 +242,7 @@ function setLangButtonLoading(isLoading) {
 
 // Функция для применения языка
 async function applyLang(lang) {
+  console.log('🚀 Calling loadLang with:', lang);
   try {
     setLangButtonLoading(true);
     
@@ -342,7 +343,7 @@ function waitForI18n() {
     }
   });
 }
-console.log('🚀 Calling loadLang with:', lang);
+
 // Основная функция инициализации приложения
 async function initializeApp() {
   try {
