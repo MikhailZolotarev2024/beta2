@@ -3,10 +3,10 @@ window.currentLang = 'ru';
 let translations = {};
 
 function getBasePath() {
-  const path = window.location.pathname;
-  const parts = path.split('/');
-  if (parts.length > 1 && parts[1]) {
-    return `/${parts[1]}`; // это имя репозитория на GitHub Pages
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  // Если сайт работает в подпапке (GitHub Pages), вернём её как basePath
+  if (parts.length > 0) {
+    return `/${parts[0]}`;
   }
   return '';
 }
