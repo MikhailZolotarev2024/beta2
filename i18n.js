@@ -149,6 +149,9 @@ function t(key, params = {}) {
   return text;
 }
 
+// Делаем функцию t глобальной
+window.t = t;
+
 // Функция для форматирования чисел
 function formatNumber(number, decimals = 6) {
   return Number(number).toFixed(decimals);
