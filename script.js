@@ -19,10 +19,12 @@ function toggleMenu() {
 function closeMenuOnClickOutside(event) {
   const menuIcon = document.querySelector(".menu-icon");
   const menuDropdown = document.querySelector(".menu-dropdown");
+  const langToggle = document.querySelector(".lang-toggle");
   
   if (menuIcon && menuDropdown && 
       !menuIcon.contains(event.target) && 
-      !menuDropdown.contains(event.target)) {
+      !menuDropdown.contains(event.target) &&
+      !langToggle.contains(event.target)) {
     menuIcon.classList.remove("active");
     menuDropdown.classList.remove("active");
     document.removeEventListener("click", closeMenuOnClickOutside);
@@ -45,28 +47,27 @@ const LANGUAGES = {
 
 // Функция для установки текста на кнопке переключения языка
 function updateLangToggleBtnText(currentLang) {
-  const langToggleBtn = document.getElementById('toggleLangBtn');
+  const langToggleBtn = document.querySelector('.lang-btn');
   if (langToggleBtn) {
     // Добавляем анимацию
     langToggleBtn.style.opacity = '0';
     setTimeout(() => {
-      langToggleBtn.textContent = currentLang === LANGUAGES.RU ? '🇬🇧 English' : '🇷🇺 Русский';
+      langToggleBtn.textContent = currentLang.toUpperCase();
       langToggleBtn.style.opacity = '1';
     }, 150);
-    langToggleBtn.dataset.loading = 'false';
   }
 }
 
 // Функция для блокировки кнопки во время загрузки
 function setLangButtonLoading(isLoading) {
-  const langToggleBtn = document.getElementById('toggleLangBtn');
+  const langToggleBtn = document.querySelector('.lang-btn');
   if (langToggleBtn) {
-    langToggleBtn.dataset.loading = isLoading.toString();
     if (isLoading) {
-      langToggleBtn.dataset.originalText = langToggleBtn.textContent;
       langToggleBtn.innerHTML = '<span class="loading-spinner"></span>';
+      langToggleBtn.disabled = true;
     } else {
-      langToggleBtn.innerHTML = langToggleBtn.dataset.originalText || '';
+      langToggleBtn.disabled = false;
+      updateLangToggleBtnText(document.documentElement.lang);
     }
   }
 }
@@ -104,6 +105,12 @@ async function applyLang(lang) {
         el.style.transform = 'translateY(0)';
       }, 100);
     });
+    
+    // Закрываем выпадающее меню
+    const langDropdown = document.querySelector('.lang-dropdown');
+    if (langDropdown) {
+      langDropdown.classList.remove('active');
+    }
     
     console.log(`✅ Язык успешно изменён на ${lang}`);
   } catch (error) {
@@ -146,15 +153,33 @@ async function initLang() {
 
 // Настройка кнопки переключения языка
 function setupLangToggleBtn() {
-  const langToggleBtn = document.getElementById('toggleLangBtn');
-  if (langToggleBtn) {
-    langToggleBtn.dataset.loading = 'false';
+  const langToggle = document.querySelector('.lang-toggle');
+  const langBtn = document.querySelector('.lang-btn');
+  const langDropdown = document.querySelector('.lang-dropdown');
+  
+  if (langToggle && langBtn && langDropdown) {
+    // Обработчик клика по кнопке
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      langDropdown.classList.toggle('active');
+    });
     
-    langToggleBtn.addEventListener('click', async () => {
-      if (langToggleBtn.dataset.loading === 'true') return;
-      
-      const newLang = document.documentElement.lang === LANGUAGES.RU ? LANGUAGES.EN : LANGUAGES.RU;
-      await applyLang(newLang);
+    // Обработчик клика по опциям
+    const langOptions = langDropdown.querySelectorAll('.lang-option');
+    langOptions.forEach(option => {
+      option.addEventListener('click', async () => {
+        const lang = option.dataset.lang;
+        if (lang) {
+          await applyLang(lang);
+        }
+      });
+    });
+    
+    // Закрытие при клике вне меню
+    document.addEventListener('click', (e) => {
+      if (!langToggle.contains(e.target)) {
+        langDropdown.classList.remove('active');
+      }
     });
   }
 }
@@ -182,7 +207,7 @@ async function initializeApp() {
     const menuIcon = document.querySelector(".menu-icon");
     if (menuIcon) {
       menuIcon.addEventListener("click", (e) => {
-        e.stopPropagation(); // Предотвращаем всплытие события
+        e.stopPropagation();
         toggleMenu();
       });
     }
@@ -396,9 +421,9 @@ if (carousel && items.length) {
     setupLangToggleBtn();
     
     // Разблокируем кнопку после инициализации
-    const langToggleBtn = document.getElementById('toggleLangBtn');
+    const langToggleBtn = document.querySelector('.lang-btn');
     if (langToggleBtn) {
-      langToggleBtn.dataset.loading = 'false';
+      langToggleBtn.disabled = false;
     }
     
     console.log('✅ Модуль переключения языка успешно инициализирован');
