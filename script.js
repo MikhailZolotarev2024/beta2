@@ -157,6 +157,25 @@ function waitForI18n() {
 // Основная функция инициализации приложения
 async function initializeApp() {
   try {
+    // A/B тестирование для header
+    const header = document.querySelector('header');
+    if (header) {
+      const variant = localStorage.getItem('header_variant') || (Math.random() < 0.5 ? 'A' : 'B');
+      localStorage.setItem('header_variant', variant);
+
+      if (variant === 'B') {
+        header.innerHTML = `
+          <section class="hero-offer">
+            <div class="offer-content">
+              <h1>📩 Бесплатный аудит</h1>
+              <p>Узнайте, можно ли вернуть ваши средства после мошенничества. Наши эксперты бесплатно проведут оценку и дадут рекомендации.</p>
+              <a href="#contact" class="offer-cta">Оставить заявку</a>
+            </div>
+          </section>
+        `;
+      }
+    }
+
     // Настраиваем обработчики меню
     const icon = document.querySelector(".menu-icon");
     if (icon) {
