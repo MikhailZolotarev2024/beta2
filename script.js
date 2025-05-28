@@ -163,6 +163,43 @@ async function initializeApp() {
       icon.addEventListener("click", toggleMenu);
     }
 
+    // Инициализация карусели
+    const carousel = document.querySelector('.carousel-inner');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentPosition = 0;
+    const itemWidth = 180; // Ширина элемента карусели
+    const gap = 20; // Отступ между элементами
+
+    if (carousel && prevBtn && nextBtn) {
+      const items = carousel.querySelectorAll('.carousel-item');
+      const totalItems = items.length;
+      const maxPosition = -(totalItems - 1) * (itemWidth + gap);
+
+      function updateCarousel() {
+        carousel.style.transform = `translateX(${currentPosition}px)`;
+        prevBtn.disabled = currentPosition >= 0;
+        nextBtn.disabled = currentPosition <= maxPosition;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        if (currentPosition < 0) {
+          currentPosition += itemWidth + gap;
+          updateCarousel();
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (currentPosition > maxPosition) {
+          currentPosition -= itemWidth + gap;
+          updateCarousel();
+        }
+      });
+
+      // Инициализация начального состояния
+      updateCarousel();
+    }
+
     // Настраиваем обработчики для секций
     const sections = document.querySelectorAll('.expandable-section');
     sections.forEach(section => {
