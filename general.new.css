@@ -193,6 +193,7 @@ a:hover, button:hover { color: #66d9ff; }
 
 /* Мобильное меню */
 .menu-icon {
+	right:0;
   display: none;
   cursor: pointer;
   flex-direction: column;
