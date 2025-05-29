@@ -227,7 +227,7 @@ a:hover, button:hover { color: #66d9ff; }
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-10px);
+  transform: translateY(-10px); /* ✔️ лёгкое смещение для анимации */
   transition: opacity 0.3s ease, transform 0.3s ease;
   z-index: 999;
 }
@@ -238,9 +238,6 @@ a:hover, button:hover { color: #66d9ff; }
   transform: translateY(0);
 }
 
-.menu-dropdown:not(.active) {
-  transform: translateY(-100%);
-}
 
 .menu-dropdown a {
   display: block;
