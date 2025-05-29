@@ -64,7 +64,7 @@ a:hover, button:hover { color: #66d9ff; }
 
 /* --- НАВИГАЦИЯ И ЛОГОТИП --- */
 .navbar {
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
