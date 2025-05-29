@@ -113,6 +113,12 @@ a:hover, button:hover { color: #66d9ff; }
   line-height: 1.2;
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 /* Стили для кнопки переключения языка */
 .lang-toggle {
   position: relative;
@@ -284,23 +290,18 @@ a:hover, button:hover { color: #66d9ff; }
     font-size: 12px;
   }
   
+  .nav-right {
+    gap: 10px;
+  }
+  
   .lang-toggle {
-    margin-right: 10px;
+    margin-right: 0;
   }
   
   .lang-btn {
     padding: 6px 10px;
     font-size: 12px;
     min-width: 40px;
-  }
-  
-  .lang-dropdown {
-    min-width: 80px;
-  }
-  
-  .lang-option {
-    padding: 6px 12px;
-    font-size: 12px;
   }
 }
 
