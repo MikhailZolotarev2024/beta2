@@ -212,20 +212,26 @@ a:hover, button:hover { color: #66d9ff; }
 .menu-dropdown {
   display: none;
   position: fixed;
+  top: 0;
   right: 0;
-  width: 40%;
-  background: rgba(13, 17, 23, 0.95);
+  width: 45%; /* Или 40%, как тебе нужно */
+  background: rgba(13, 17, 23, 0.98);
   backdrop-filter: blur(10px);
   padding: 20px;
   box-sizing: border-box;
   z-index: 1001;
-  transform: translateY(-100%);
   transition: transform 0.3s ease-out;
+  border-bottom-left-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
 .menu-dropdown.active {
   display: block;
   transform: translateY(0);
+}
+
+.menu-dropdown:not(.active) {
+  transform: translateY(-100%);
 }
 
 .menu-dropdown a {
