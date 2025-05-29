@@ -80,7 +80,10 @@ a:hover, button:hover { color: #66d9ff; }
   transition: background 0.3s;
   backdrop-filter: blur(10px);
 }
-
+.navbar-wrapper {
+  position: relative;
+  z-index: 1000;
+}
 .navbar ul {
   flex-grow: 1;
   display: flex;
@@ -214,7 +217,7 @@ a:hover, button:hover { color: #66d9ff; }
 .menu-dropdown {
   display: none;
   position: fixed;
-  top: 0;
+  top: 100%;
   right: 0;
   width: 45%; /* Или 40%, как тебе нужно */
   background: rgba(13, 17, 23, 0.98);
