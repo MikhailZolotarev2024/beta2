@@ -82,12 +82,13 @@ a:hover, button:hover { color: #66d9ff; }
 }
 
 .navbar ul {
+  flex-grow: 1;
   display: flex;
-  gap: 25px;
-  margin: 0;
+  justify-content: center;
+  gap: 20px;
   padding: 0;
+  margin: 0;
   list-style: none;
-  align-items: center;
 }
 
 .logo-container {
