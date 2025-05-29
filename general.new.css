@@ -117,6 +117,7 @@ a:hover, button:hover { color: #66d9ff; }
   display: flex;
   align-items: center;
   gap: 15px;
+  margin-left: auto;
 }
 
 /* Стили для кнопки переключения языка */
