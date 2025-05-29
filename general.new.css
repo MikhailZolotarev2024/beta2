@@ -212,7 +212,7 @@ a:hover, button:hover { color: #66d9ff; }
 .menu-dropdown {
   display: none;
   position: fixed;
-  left: 0;
+  right: 0;
   width: 40%;
   background: rgba(13, 17, 23, 0.95);
   backdrop-filter: blur(10px);
