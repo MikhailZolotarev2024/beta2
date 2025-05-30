@@ -1,13 +1,19 @@
+/* Базовые стили для всех устройств */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(13, 17, 23, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+/* Стили для мобильных устройств (ширина <= 768px) */
 @media (max-width: 768px) {
-    /* Мобильная навигация */
     .navbar {
         height: 60px;
         padding: 0 15px;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
     }
 
     .navbar ul {
@@ -78,23 +84,6 @@
         color: #76c7c0;
     }
 
-    /* Оптимизация логотипа */
-    .logo-container {
-        position: fixed;
-        left: 15px;
-        top: 10px;
-        z-index: 1000;
-    }
-
-    .logo-img {
-        width: 40px;
-        height: 40px;
-    }
-
-    .logo-text {
-        font-size: 14px;
-    }
-
     /* Оптимизация блоков регионов */
     .comparison-grid {
         display: flex;
@@ -108,232 +97,34 @@
         width: 100%;
         margin-bottom: 15px;
         padding: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
     }
 
     .region-block h3 {
         font-size: 18px;
         margin-bottom: 10px;
-    }
-
-    /* Оптимизация контента */
-    .content-wrapper {
-        width: 100%;
-        padding: 10px;
-        margin-top: 60px;
-    }
-
-    .news-widget {
-        width: 100%;
-        margin-top: 20px;
-    }
-
-    /* Оптимизация волн */
-    .wave-row {
-        margin: 15px 0;
-        gap: 10px;
-    }
-
-    .wave-icon img {
-        width: 25px;
-        height: 25px;
-    }
-
-    .wave-text {
-        font-size: 16px;
-    }
-
-    .main-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-    }
-
-    .content-wrapper {
-        width: 65%;
-        padding: 6px;
-        box-sizing: border-box;
-        margin: 3px;
-    }
-
-    .news-widget {
-        width: 35%;
-        padding: 3px;
-        margin: 3px;
-        box-sizing: border-box;
-        background-color: rgba(255, 255, 255, 0.7);
-    }
-
-    .main-container2 {
-        max-width: 100%;
-        width: 100%;
-    }
-
-    .content-wrapper, .news-widget {
-        font-size: 9px;
-        font-family: 'Montserrat', sans-serif;
-    }
-
-    .icon-grid {
-        grid-template-columns: 2fr;
-        gap: 7px;
-    }
-
-    .icon-card {
-        width: 20px;
-        height: 20px;
-    }
-
-    .icon-img {
-        width: 17px;
-        height: 17px;
-    }
-
-    .ribbon-container {
-        height: 100px;
-        max-width: 34%;
-    }
-
-    /* Анимации для мобильных устройств */
-    @keyframes slideInFromLeft {
-        from {
-            transform: translateX(-100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-
-    @keyframes slideInFromRight {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-
-    .wave-row {
-        animation: none;
-        opacity: 0;
-        transform: translateX(-100%);
-        transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-    }
-
-    .wave-row.visible {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    .wave-row:nth-child(odd) {
-        transform: translateX(-100%);
-    }
-
-    .wave-row:nth-child(even) {
-        transform: translateX(100%);
-    }
-
-    .wave-row.visible:nth-child(odd) {
-        animation: slideInFromLeft 0.8s ease-out forwards;
-    }
-
-    .wave-row.visible:nth-child(even) {
-        animation: slideInFromRight 0.8s ease-out forwards;
-    }
-
-    .wave-row.hidden {
-        opacity: 0;
-        transform: translateX(-100%);
-    }
-
-    .wave-row.hidden:nth-child(even) {
-        transform: translateX(100%);
-    }
-
-    .wave-icon img {
-        transition: transform 0.5s ease-out;
-    }
-
-    .wave-row:hover .wave-icon img {
-        transform: scale(1.1);
-    }
-
-    .wave-text {
-        transition: color 0.3s ease-out;
-    }
-
-    .wave-row:hover .wave-text {
-        color: #76c7c0;
+        color: #ffffff;
     }
 }
 
+/* Стили для десктопов (ширина >= 769px) */
 @media (min-width: 769px) {
+    .navbar {
+        height: 80px;
+        padding: 0 30px;
+    }
+
     .navbar ul {
         display: flex;
-    }
-
-    .menu-icon {
-        display: none;
-    }
-
-    header {
-        min-height: 300px;
-    }
-
-    .logo-container {
-        top: 10px;
-        width: 80px;
-        height: 80px;
-    }
-
-    .logo-img {
-        width: 80px;
-        height: 80px;
-    }
-
-    .logo-container {
-        top: 10px;
-    }
-
-    .logo-img {
-        width: 80px;
-        height: 80px;
-    }
-
-    /* Адаптация новостного виджета */
-
-    /* Корректировка высоты контейнера с частицами */
-    #particles-js {
+        align-items: center;
+        gap: 20px;
         height: 100%;
     }
 
-    /* Изменение высоты header */
-
-    /* Адаптация логотипа */
-    .logo-container {
-        width: 60px;
-        height: 60px;
-        top: 10px;
+    .navbar ul li {
+        list-style: none;
     }
-
-    .logo-img {
-        width: 60px;
-        height: 60px;
-    }
-
-    /* Адаптация блока с фоновым изображением (.bgsec) */
-
-    /* Корректировка отступов основного содержимого */
 
     .navbar ul li a {
         color: #d0d8e0;
@@ -341,99 +132,49 @@
         font-weight: 600;
         text-decoration: none;
         padding: 8px 12px;
-        transition: color 0.3s, transform 0.3s;
-    }
-
-    .menu-dropdown a {
-        display: block;
-        text-decoration: none;
-        color: #e0e0e0;
-        padding: 10px;
-        font-size: 1rem;
-        font-weight: 400;
-        transition: background 0.3s, color 0.3s;
-    }
-
-    .news-item:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    }
-
-    .news-widget.collapsed .news-item:nth-child(n+5) {
-        display: none;
-    }
-
-    .news-footer a {
-        color: #e5e4e2;
-        font-weight: 600;
         transition: color 0.3s;
     }
 
-    .news-footer a:hover {
-        color: #e5e4e2;
+    .navbar ul li a:hover {
+        color: #76c7c0;
     }
 
-    /* news-widget */
-    .news-widget {
-        padding: 10px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 14px;
-        color: #e5e4e2;
-        margin-left: 20px;
+    .menu-icon {
+        display: none;
     }
 
-    .news-widget a:hover {
-        color: #e5e4e2;
+    .menu-dropdown {
+        display: none;
     }
 
-    /* bgsec */
-
-    /* Контент */
-
-    .carousel {
+    /* Оптимизация блоков регионов */
+    .comparison-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        padding: 30px;
         width: 100%;
-        height: auto;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
-    .ribbon-container {
-        max-width: 34%;
-        height: auto;
-    }
-
-    .carousel-container {
-        width: 65%;
-    }
-
-    .carousel-item {
-        width: 80px;
-        height: 80px;
-    }
-
-    .carousel-inner {
+    .region-block {
         width: 100%;
+        margin-bottom: 0;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        transition: transform 0.3s ease;
     }
 
-    .carousel-item img {
-        width: 180px;
-        height: 180px;
+    .region-block:hover {
+        transform: translateY(-5px);
     }
 
-    /* Общий контейнер карусели */
-
-    /* Элементы карусели */
-
-    .carousel-btn:hover {
-        background: rgba(0, 0, 0, 0.8);
-    }
-
-    /* Левая кнопка */
-    .left-btn {
-        left: 0;
-    }
-
-    /* Правая кнопка */
-    .right-btn {
-        right: 0;
+    .region-block h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: #ffffff;
     }
 }
 
@@ -901,7 +642,7 @@ header {
         rgba(15, 20, 40, 0.95) 0%, 
         rgba(15, 20, 50, 0.3) 40%, 
         rgba(15, 20, 60, 0.2) 75%, 
-        rgba(0, 0, 0, 0)) 100%);
+        rgba(0, 0, 0, 0) 100%);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     padding: 80px 20px 60px;
@@ -1174,6 +915,7 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 15px;
+    width: auto;
 }
 
 .cookie-consent p {

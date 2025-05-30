@@ -1731,3 +1731,23 @@ footer, .site-footer {
     font-size: 1.1rem;
   }
 }
+
+.cookie-consent {
+    position: fixed;
+    bottom: 15px; /* Немного уменьшаю значение */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 20, 40, 0.95);
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    color: #ccc;
+    font-size: 14px;
+    max-width: 90%;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: auto;
+}
