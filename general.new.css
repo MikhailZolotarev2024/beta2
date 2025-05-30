@@ -1440,3 +1440,33 @@ header p {
     font-size: 0.95rem;
   }
 }
+
+/* Стили для кнопок в блоке новостей */
+.news-section .carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 240px; /* Такая же высота как у новостных карточек */
+  width: 50px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  transition: background 0.3s ease;
+}
+
+.news-section .carousel-btn:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+.news-section .left-btn {
+  left: 0;
+}
+
+.news-section .right-btn {
+  right: 0;
+}
