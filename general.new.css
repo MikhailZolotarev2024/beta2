@@ -615,15 +615,30 @@ header p {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  text-align: center; /* Центрирование заголовка */
+}
+
+.news-section h2 {
+  margin-bottom: 30px; /* Отступ под заголовком */
+}
+
+.news-carousel-wrapper {
+  position: relative; /* Для абсолютного позиционирования кнопок внутри */
+  display: flex;
+  align-items: center; /* Выравнивание по центру по вертикали */
+  width: 100%;
+  overflow: hidden; /* Скрываем все, что выходит за пределы */
+  padding: 0 60px; /* Отступы для кнопок */
+  box-sizing: border-box;
 }
 
 .news-carousel {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
-  padding: 20px;
+  padding: 0; /* Убираем внутренние отступы */
   justify-content: center;
-  position: relative;
+  width: 100%; /* Занимаем всю доступную ширину в обертке */
 }
 
 .news-card {
@@ -1474,7 +1489,7 @@ header p {
 /* Стили для формы связи */
 .contact-form {
   max-width: 70%;
-  max-height:400px;
+  max-height: 240px;
   margin: 60px auto;
   padding: 40px;
   background: rgba(20, 30, 40, 0.6);
@@ -1582,5 +1597,96 @@ header p {
   .contact-form h2 {
     font-size: 1.6rem;
     margin-bottom: 20px;
+  }
+}
+
+/* Стили для футера */
+footer, .site-footer {
+  background: #050a13;
+  color: #ccc;
+  padding: 40px 0 0 0;
+  margin-top: 60px;
+  width: 100%;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.footer-column h4 {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 18px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column li {
+  margin-bottom: 10px;
+}
+
+.footer-column a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-column a:hover {
+  color: #00bfff;
+}
+
+.footer-bottom {
+  text-align: center;
+  color: #777;
+  padding: 18px 0 10px 0;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .footer-column {
+    margin-bottom: 30px;
+  }
+}
+
+/* Адаптивность для кнопок новостей */
+@media (max-width: 768px) {
+  .news-carousel-wrapper {
+    padding: 0 40px; /* Уменьшаем отступы для кнопок */
+  }
+  
+  .news-section .carousel-btn {
+    width: 40px;
+    height: 200px; /* Скорректируем высоту кнопок */
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .news-carousel-wrapper {
+    padding: 0 30px; /* Еще уменьшаем отступы для кнопок */
+  }
+  
+  .news-section .carousel-btn {
+    width: 30px;
+    height: 180px; /* Скорректируем высоту кнопок */
+    font-size: 1rem;
   }
 }
