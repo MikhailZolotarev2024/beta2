@@ -1470,3 +1470,116 @@ header p {
 .news-section .right-btn {
   right: 0;
 }
+
+/* Стили для формы связи */
+.contact-form {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 40px;
+  background: rgba(20, 30, 40, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-form h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: rgba(118, 199, 192, 0.5);
+  box-shadow: 0 0 15px rgba(118, 199, 192, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.contact-form button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #76c7c0, #4c9e94);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(118, 199, 192, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(118, 199, 192, 0.4);
+  background: linear-gradient(135deg, #8ad7d0, #5caea4);
+}
+
+.contact-form button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(118, 199, 192, 0.3);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .contact-form {
+    margin: 40px 20px;
+    padding: 30px 20px;
+  }
+
+  .contact-form h2 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  .contact-form button {
+    padding: 14px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form {
+    margin: 30px 15px;
+    padding: 25px 15px;
+  }
+
+  .contact-form h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+}
