@@ -1473,7 +1473,8 @@ header p {
 
 /* Стили для формы связи */
 .contact-form {
-  max-width: 600px;
+  max-width: 70%;
+  max-height:400px;
   margin: 60px auto;
   padding: 40px;
   background: rgba(20, 30, 40, 0.6);
