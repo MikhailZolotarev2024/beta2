@@ -1998,21 +1998,22 @@ footer, .site-footer {
 /* Стили для пагинации отзывов */
 .reviews-pagination {
   display: flex;
-  justify-content: center;
+  justify-content: center; /* Центрирование пагинации */
   align-items: center;
-  gap: 8px;
-  margin-top: 20px;
+  gap: 15px; /* Увеличиваем отступ между кнопками */
+  margin-top: 30px; /* Увеличиваем отступ сверху */
   padding: 10px 0;
 }
 
 .reviews-pagination button {
-  background: none;
-  border: none;
-  color: #76c7c0;
+  background: none; /* Убираем фон */
+  border: none; /* Убираем рамку */
+  color: #76c7c0; /* Цвет кнопок */
   font-size: 1rem;
   cursor: pointer;
   padding: 5px 10px;
   transition: all 0.3s ease;
+  font-weight: normal; /* Сбрасываем bold для обычных кнопок */
 }
 
 .reviews-pagination .pagination-page {
@@ -2025,14 +2026,14 @@ footer, .site-footer {
 }
 
 .reviews-pagination .pagination-page.active {
-  background: #76c7c0;
-  color: #ffffff;
-  font-weight: bold;
+  background: none; /* Убираем фон у активной кнопки */
+  color: #fff; /* Цвет активной кнопки */
+  font-weight: bold; /* Жирный шрифт для активной кнопки */
 }
 
 .reviews-pagination button:hover:not(.active) {
-  color: #ffffff;
-  transform: scale(1.1);
+  color: #ffffff; /* Цвет при наведении */
+  transform: scale(1.1); /* Анимация при наведении */
 }
 
 .reviews-pagination button:disabled {
@@ -2043,7 +2044,7 @@ footer, .site-footer {
 
 @media (max-width: 768px) {
   .reviews-pagination {
-    gap: 6px;
+    gap: 10px; /* Уменьшаем отступ на мобильных */
   }
   
   .reviews-pagination button {

@@ -210,24 +210,28 @@ function updateReviewsPagination() {
   const totalPages = Math.ceil(reviews.length / reviewsPerPage);
   const pagination = document.querySelector('.reviews-pagination');
   
-  // Обновляем номера страниц
-  const pageButtons = pagination.querySelectorAll('.pagination-page');
-  pageButtons.forEach((button, index) => {
-    if (index < totalPages) {
-      button.style.display = 'flex';
-      button.textContent = index + 1;
-      button.classList.toggle('active', index + 1 === currentReviewsPage);
-    } else {
-      button.style.display = 'none';
+  if (!pagination) return; // Добавляем проверку наличия элемента
+
+  // Очищаем существующие кнопки страниц, кроме стрелок
+  pagination.querySelectorAll('.pagination-page').forEach(button => button.remove());
+
+  // Добавляем кнопки страниц
+  for (let i = 1; i <= totalPages; i++) {
+    const pageButton = document.createElement('button');
+    pageButton.classList.add('pagination-page');
+    pageButton.textContent = i;
+    if (i === currentReviewsPage) {
+      pageButton.classList.add('active');
     }
-  });
+    pagination.insertBefore(pageButton, pagination.querySelector('.pagination-arrow.next'));
+  }
   
   // Обновляем состояние стрелок
   const prevButton = pagination.querySelector('.pagination-arrow.prev');
   const nextButton = pagination.querySelector('.pagination-arrow.next');
   
-  prevButton.disabled = currentReviewsPage === 1;
-  nextButton.disabled = currentReviewsPage === totalPages;
+  if (prevButton) prevButton.disabled = currentReviewsPage === 1;
+  if (nextButton) nextButton.disabled = currentReviewsPage === totalPages;
 }
 
 // Функция для обновления отображения отзывов
@@ -238,7 +242,7 @@ function updateReviewsDisplay() {
   
   reviews.forEach((review, index) => {
     if (index >= startIndex && index < endIndex) {
-      review.style.display = 'block';
+      review.style.display = 'flex'; // Используем flex для отображения карточек
     } else {
       review.style.display = 'none';
     }
@@ -276,7 +280,7 @@ function initReviewsPagination() {
   });
   
   // Инициализируем отображение
-  updateReviewsDisplay();
+  // updateReviewsDisplay(); // Этот вызов будет в initializeApp
 }
 
 // Основная функция инициализации приложения
@@ -301,7 +305,7 @@ async function initializeApp() {
       }
     });
 
-    // Инициализация карусели
+    // Инициализация карусели изображений (не отзывов)
 const carousel = document.querySelector(".carousel-inner");
 let items = Array.from(document.querySelectorAll(".carousel-item"));
 const prevBtn = document.getElementById("prevBtn");
@@ -498,23 +502,18 @@ if (carousel && items.length) {
     
     // Настраиваем кнопку переключения
     setupLangToggleBtn();
-    
-    // Разблокируем кнопку после инициализации
-    const langToggleBtn = document.querySelector('.lang-btn');
-    if (langToggleBtn) {
-      langToggleBtn.disabled = false;
-    }
-    
-    // Добавляем инициализацию пагинации отзывов
+
+    // Инициализируем пагинацию отзывов после загрузки всех данных и DOM
     initReviewsPagination();
-    
+    updateReviewsDisplay(); // Первое отображение отзывов при загрузке страницы
+
     console.log('✅ Модуль переключения языка успешно инициализирован');
   } catch (error) {
     console.error('❌ Ошибка при инициализации:', error);
   }
 }
 
-// Инициализация при загрузке DOM
+// Запускаем приложение после полной загрузки DOM
 document.addEventListener('DOMContentLoaded', initializeApp);
 
 
