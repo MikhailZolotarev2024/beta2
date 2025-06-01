@@ -1268,7 +1268,7 @@ header p {
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   width: 100%;
-  padding: 20px;
+  padding: 0 20px;
   box-sizing: border-box;
 }
 
@@ -1276,9 +1276,11 @@ header p {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   padding: 20px;
-  height: 100%;
+  height: auto;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -2095,54 +2097,52 @@ footer, .site-footer {
     }
 }
 
-/* Медиа-запрос для десктопов (ширина экрана >= 1024px) */
-@media (min-width: 1024px) {
+/* Медиа-запрос для десктопов (ширина экрана >= 768px) */
+@media (min-width: 768px) {
     .reviews-carousel {
-        display: grid; /* Используем Grid для колонок */
-        grid-template-columns: repeat(2, 1fr); /* Две колонки равной ширины */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 20px; /* Расстояние между карточками */
+        padding: 0 20px; /* Отступы по бокам */
     }
 
     .review-card {
-        height: 400px; /* Фиксированная высота для всех карточек */
-        /* overflow: hidden; /* Скрываем содержимое, которое выходит за рамки */
-        /* text-overflow: ellipsis; /* Добавляем многоточие для обрезанного текста - если нужно */
-        /* display: block; /* Карточки будут блочными элементами в Grid */
+        height: auto; /* Автоматическая высота */
+        min-height: 400px; /* Минимальная высота для выравнивания */
+        display: flex; /* Сохраняем flexbox для внутреннего содержимого */
+        flex-direction: column;
+        justify-content: space-between; /* Распределяем содержимое */
     }
 
      /* Стили для аватара и хедера карточки */
      .review-card .review-header {
-         /* Убедитесь, что хедер и аватар не занимают всю высоту */
          flex-shrink: 0;
      }
+
+    /* Убираем специфичные стили для 1024px, т.к. 768px теперь основной брейкпоинт для 2 колонок */
 }
 
-/* Медиа-запрос для планшетов (например, от 768px до 1023px) */
-/* Оставьте стили по умолчанию (flexbox, 1 колонка), если они подходят, или добавьте специфичные */
-@media (min-width: 768px) and (max-width: 1023px) {
-    /* Стили для планшетов, если отличаются от мобильных и десктопов */
-     .reviews-carousel {
-         /* Возможно, здесь тоже grid, но с другой конфигурацией, или flexbox */
-         /* display: grid; */
-         /* grid-template-columns: repeat(2, 1fr); */
-         /* gap: 20px; */
-     }
-    .review-card {
-         /* Возможно, другая высота для планшетов */
-         /* height: auto; */
-    }
-}
-
-/* Стили для мобильных (до 767px) */
+/* Медиа-запрос для мобильных (до 767px) */
 @media (max-width: 767px) {
     .reviews-carousel {
-        /* Здесь должны быть стили для одной колонки, которые уже, вероятно, есть по умолчанию */
-        /* display: flex; */
-        /* flex-direction: column; */
-        /* gap: 20px; */
+        display: grid; /* Используем Grid и для мобильных */
+        grid-template-columns: 1fr; /* Одна колонка */
+        gap: 15px; /* Отступ между карточками */
+        padding: 0 15px; /* Отступы по бокам */
     }
     .review-card {
-         /* Возможно, авто высота или ограниченная для мобильных */
-         /* height: auto; */
+        height: auto; /* Автоматическая высота */
+        min-height: 300px; /* Возможно, меньшая минимальная высота для мобильных */
+        display: flex; /* Сохраняем flexbox для внутреннего содержимого */
+        flex-direction: column;
+        justify-content: space-between;
     }
+}
+
+/* Общие стили для reviews-carousel (вне медиа-запросов) */
+.reviews-carousel {
+    width: 100%;
+    max-width: 1400px; /* Или ваш желаемый максимальный размер */
+    margin: 0 auto; /* Центрируем блок */
+    box-sizing: border-box;
 }

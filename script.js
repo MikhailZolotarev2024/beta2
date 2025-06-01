@@ -374,12 +374,10 @@ function updateReviewsPagination() {
 
 // Функция для обновления отображения отзывов
 function updateReviewsDisplay() {
-  // Используем allReviews для пагинации
   const reviewsToDisplay = allReviews;
   const startIndex = (currentReviewsPage - 1) * reviewsPerPage;
   const endIndex = Math.min(startIndex + reviewsPerPage, reviewsToDisplay.length);
   
-  // Сначала скрываем все отзывы в контейнере
   const reviewsContainer = document.querySelector('.reviews-carousel');
   if (!reviewsContainer) return;
 
@@ -388,10 +386,9 @@ function updateReviewsDisplay() {
 
   // Отображаем только отзывы для текущей страницы
   for (let i = startIndex; i < endIndex; i++) {
-    // Ищем существующую карточку в DOM по индексу в объединенном массиве allReviews
     const reviewCard = reviewsContainer.children[i];
-     if(reviewCard) { // Проверка на существование элемента
-         reviewCard.style.display = 'flex'; // Используем flex для отображения карточек
+     if(reviewCard) {
+         reviewCard.style.display = 'flex'; // Используем flex для отображения содержимого внутри карточки
      }
   }
   
