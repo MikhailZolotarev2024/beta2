@@ -624,6 +624,70 @@ async function initializeApp() {
       });
     }
 
+    // --- Инициализация карусели изображений (восстановление логики) ---
+    const imageCarouselInner = document.querySelector('.carousel-inner');
+    const imageCarouselItems = document.querySelectorAll('.carousel-item');
+    const imageLeftBtn = document.querySelector('.carousel-btn.left-btn');
+    const imageRightBtn = document.querySelector('.carousel-btn.right-btn');
+    const itemWidth = imageCarouselItems[0]?.offsetWidth || 0; // Ширина одного элемента
+    let currentImageIndex = 0;
+    let autoScrollInterval = null;
+    const autoScrollDelay = 5000; // Задержка автоскроллинга в миллисекундах
+
+    if (imageCarouselInner && imageCarouselItems.length > 0 && imageLeftBtn && imageRightBtn) {
+
+      const updateImageCarousel = () => {
+        imageCarouselInner.style.transform = `translateX(${-currentImageIndex * (itemWidth + 20)}px)`; // 20px - это gap
+        // Можно добавить обновление состояния кнопок, если нужно (например, отключать на первом/последнем слайде)
+      };
+
+      const startAutoScroll = () => {
+        stopAutoScroll();
+        autoScrollInterval = setInterval(() => {
+          currentImageIndex++;
+          if (currentImageIndex >= imageCarouselItems.length) {
+            currentImageIndex = 0; // Возврат к первому слайду
+          }
+          updateImageCarousel();
+        }, autoScrollDelay);
+      };
+
+      const stopAutoScroll = () => {
+        if (autoScrollInterval) {
+          clearInterval(autoScrollInterval);
+          autoScrollInterval = null;
+        }
+      };
+
+      // Обработчики кликов по кнопкам
+      imageLeftBtn.addEventListener('click', () => {
+        stopAutoScroll();
+        currentImageIndex--;
+        if (currentImageIndex < 0) {
+          currentImageIndex = imageCarouselItems.length - 1; // Переход к последнему слайду
+        }
+        updateImageCarousel();
+        startAutoScroll(); // Перезапустить автоскроллинг после ручного переключения
+      });
+
+      imageRightBtn.addEventListener('click', () => {
+        stopAutoScroll();
+        currentImageIndex++;
+        if (currentImageIndex >= imageCarouselItems.length) {
+          currentImageIndex = 0; // Возврат к первому слайду
+        }
+        updateImageCarousel();
+        startAutoScroll(); // Перезапустить автоскроллинг после ручного переключения
+      });
+
+      // Запускаем автоскроллинг при загрузке
+      startAutoScroll();
+
+      // Останавливаем автоскроллинг при наведении на карусель
+      imageCarouselInner.parentElement.addEventListener('mouseenter', stopAutoScroll);
+      imageCarouselInner.parentElement.addEventListener('mouseleave', startAutoScroll);
+    }
+
     console.log('✅ Приложение инициализировано.');
 
   } catch (error) {
