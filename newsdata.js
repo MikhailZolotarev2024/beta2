@@ -89,8 +89,9 @@ const newsItems = [
   }
 ];
 
-// Глобальная переменная для хранения текущей позиции карусели
-let currentIndex = 0;
+// Глобальная переменная для хранения текущей страницы
+let currentPage = 1;
+const itemsPerPage = 3;
 
 // Функция для получения переведенного текста
 function getTranslatedNews() {
@@ -148,77 +149,85 @@ function showNewsModal(news) {
   if (modal) modal.classList.add('active');
 }
 
-// Инициализация карусели новостей
-window.initNewsCarousel = function() {
-  const carousel = document.getElementById('newsCarousel');
-  const prevBtn = document.getElementById('newsPrevBtn');
-  const nextBtn = document.getElementById('newsNextBtn');
-  const closeBtn = document.getElementById('newsModalClose');
-  const modal = document.getElementById('newsModal');
-  
-  if (!carousel || !prevBtn || !nextBtn) {
-    console.error('❌ Required news carousel elements not found');
-    return;
-  }
-
-  // Очищаем карусель и добавляем начальные карточки
-  carousel.innerHTML = '';
+// Функция для обновления пагинации
+function updatePagination() {
   const news = getTranslatedNews();
-  for (let i = 0; i < 3; i++) {
+  const totalPages = Math.ceil(news.length / itemsPerPage);
+  const pagination = document.querySelector('.news-pagination');
+  
+  // Обновляем номера страниц
+  const pageButtons = pagination.querySelectorAll('.pagination-page');
+  pageButtons.forEach((button, index) => {
+    if (index < totalPages) {
+      button.style.display = 'flex';
+      button.textContent = index + 1;
+      button.classList.toggle('active', index + 1 === currentPage);
+    } else {
+      button.style.display = 'none';
+    }
+  });
+  
+  // Обновляем состояние стрелок
+  const prevButton = pagination.querySelector('.pagination-arrow.prev');
+  const nextButton = pagination.querySelector('.pagination-arrow.next');
+  
+  prevButton.disabled = currentPage === 1;
+  nextButton.disabled = currentPage === totalPages;
+}
+
+// Функция для обновления карусели новостей
+function updateNewsCarousel() {
+  const carousel = document.getElementById('newsCarousel');
+  const news = getTranslatedNews();
+  
+  // Очищаем карусель
+  carousel.innerHTML = '';
+  
+  // Вычисляем индексы для текущей страницы
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = Math.min(startIndex + itemsPerPage, news.length);
+  
+  // Добавляем новости для текущей страницы
+  for (let i = startIndex; i < endIndex; i++) {
     if (news[i]) {
       carousel.appendChild(createNewsElement(news[i]));
     }
   }
   
-  window.updateNewsCarousel = function() {
-    const news = getTranslatedNews();
-    const cards = carousel.querySelectorAll('.news-card');
-    
-    cards.forEach((card, i) => {
-      const newsItem = news[i + currentIndex];
-      if (!newsItem) return;
-      
-      const title = card.querySelector('.news-card-title');
-      const date = card.querySelector('.news-card-date');
-      const text = card.querySelector('.news-card-text');
-      const button = card.querySelector('.news-card-more');
-      
-      if (title) title.textContent = newsItem.title;
-      if (date) date.textContent = t('news-date', { date: formatDate(newsItem.date) });
-      if (text) text.textContent = newsItem.shortText;
-      if (button) {
-        button.textContent = t('news-read-more');
-        button.onclick = () => showNewsModal(newsItem);
-      }
-    });
-  };
+  // Обновляем пагинацию
+  updatePagination();
+}
+
+// Инициализация карусели новостей
+window.initNewsCarousel = function() {
+  const carousel = document.getElementById('newsCarousel');
+  const pagination = document.querySelector('.news-pagination');
   
-  prevBtn.addEventListener('click', () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateNewsCarousel();
-    }
-  });
-  
-  nextBtn.addEventListener('click', () => {
-    if (currentIndex < newsItems.length - 3) {
-      currentIndex++;
-      updateNewsCarousel();
-    }
-  });
-  
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      if (modal) modal.classList.remove('active');
-    });
+  if (!carousel || !pagination) {
+    console.error('❌ Required news carousel elements not found');
+    return;
   }
-  
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('active');
+
+  // Добавляем обработчики для кнопок пагинации
+  pagination.addEventListener('click', (e) => {
+    if (e.target.classList.contains('pagination-page')) {
+      currentPage = parseInt(e.target.textContent);
+      updateNewsCarousel();
+    } else if (e.target.classList.contains('pagination-arrow')) {
+      if (e.target.classList.contains('prev') && currentPage > 1) {
+        currentPage--;
+      } else if (e.target.classList.contains('next')) {
+        const news = getTranslatedNews();
+        const totalPages = Math.ceil(news.length / itemsPerPage);
+        if (currentPage < totalPages) {
+          currentPage++;
+        }
+      }
+      updateNewsCarousel();
     }
   });
   
+  // Инициализируем карусель
   updateNewsCarousel();
 };
 
