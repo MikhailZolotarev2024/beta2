@@ -606,6 +606,24 @@ async function initializeApp() {
     initReviewsPagination(); // Настраиваем обработчики кнопок
     updateReviewsDisplay(); // Отображаем первую страницу отзывов
 
+    // --- Логика для модального окна новостей ---
+    const newsModal = document.querySelector('.news-modal');
+    const newsModalCloseBtn = document.querySelector('.news-modal-close');
+
+    if (newsModal && newsModalCloseBtn) {
+      // Закрытие модального окна по клику на кнопку закрытия
+      newsModalCloseBtn.addEventListener('click', () => {
+        newsModal.classList.remove('active');
+      });
+
+      // Закрытие модального окна по клику вне содержимого
+      newsModal.addEventListener('click', (e) => {
+        if (e.target === newsModal) {
+          newsModal.classList.remove('active');
+        }
+      });
+    }
+
     console.log('✅ Приложение инициализировано.');
 
   } catch (error) {
