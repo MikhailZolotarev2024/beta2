@@ -518,14 +518,8 @@ header p {
 
 /* Анимации */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* --- ХЕДЕР --- */
@@ -541,6 +535,46 @@ header h1 {
 }
 header p {
   font-size: 1.3rem; color: #ccc; margin-top: 0; margin-bottom: 0;
+}
+
+/* Медиа-запрос для экранов с высотой менее 700px */
+@media (max-height: 700px) {
+  header {
+    padding-top: 60px; /* Уменьшаем верхний отступ */
+    padding-bottom: 40px; /* Уменьшаем нижний отступ */
+    height: auto; /* Высота становится автоматической */
+    min-height: 100vh; /* Но минимальная высота остается 100vh */
+  }
+  
+  header h1 {
+    font-size: clamp(24px, 4vw, 48px); /* Уменьшаем размер заголовка */
+    margin-bottom: 16px;
+  }
+  
+  header p {
+    font-size: clamp(1rem, 1.5vw, 1.2rem); /* Уменьшаем размер параграфа */
+  }
+
+  .offer-details {
+    padding-top: 10px;
+  }
+  
+  .offer-subtext {
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    margin-bottom: 10px;
+  }
+
+  .offer-benefits li {
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
+    margin: 6px 0;
+  }
+
+  .cta a {
+     padding: clamp(10px, 1.5vw, 12px) clamp(15px, 3vw, 20px);
+     font-size: clamp(0.9rem, 1.5vw, 1rem);
+     border-radius: 8px;
+  }
+
 }
 
 /* --- КОНТЕЙНЕРЫ, СЕТКИ, КАРТОЧКИ --- */
