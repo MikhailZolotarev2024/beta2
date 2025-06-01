@@ -1792,7 +1792,7 @@ header p {
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
   .contact-form {
-    margin: 40px 20px;
+    margin: 40px auto;
     padding: 30px 20px;
     max-width: 100%;
     width: 100%;
