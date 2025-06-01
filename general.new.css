@@ -253,6 +253,17 @@ header p {
   list-style: none;
 }
 
+.navbar ul a {
+  color: #a020f0; /* Фиолетовый цвет */
+  text-decoration: underline; /* Подчеркивание */
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.navbar ul a:hover {
+  color: #be40f0; /* Изменение цвета при наведении */
+}
+
 .logo-container {
   display: flex;
   align-items: center;
