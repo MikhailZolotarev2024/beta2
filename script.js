@@ -202,8 +202,20 @@ function waitForI18n() {
 
 // Глобальные переменные для пагинации отзывов
 let currentReviewsPage = 1;
-const reviewsPerPage = 3;
+let reviewsPerPage = 3; // Значение по умолчанию для мобильных
 let allReviews = []; // Массив для хранения всех отзывов (из JSON и локальных)
+
+// Функция для определения количества отзывов на странице в зависимости от ширины экрана
+function getReviewsPerPage() {
+    // Можно настроить эти брейкпоинты и количество отзывов по желанию
+    if (window.innerWidth >= 1024) { // Например, для экранов шириной 1024px и более (десктопы)
+        return 8; // 2 столбца по 4 отзыва
+    } else if (window.innerWidth >= 768) { // Для планшетов
+        return 6; // Например, 2 столбца по 3 отзыва
+    } else { // Для мобильных
+        return 3;
+    }
+}
 
 // Функция для загрузки отзывов из JSON
 async function loadGeneratedReviews() {
@@ -298,24 +310,58 @@ function showModal(text) {
 
 // Функция для обновления пагинации отзывов
 function updateReviewsPagination() {
-  const reviews = document.querySelectorAll('.review-card');
-  const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+  const totalPages = Math.ceil(allReviews.length / reviewsPerPage);
   const pagination = document.querySelector('.reviews-pagination');
   
-  if (!pagination) return; // Добавляем проверку наличия элемента
+  if (!pagination) return;
 
   // Очищаем существующие кнопки страниц, кроме стрелок
-  pagination.querySelectorAll('.pagination-page').forEach(button => button.remove());
+  pagination.querySelectorAll('.pagination-page, .pagination-ellipsis').forEach(button => button.remove());
 
-  // Добавляем кнопки страниц
-  for (let i = 1; i <= totalPages; i++) {
+  // Функция для создания кнопки страницы
+  const createPageButton = (pageNum) => {
     const pageButton = document.createElement('button');
     pageButton.classList.add('pagination-page');
-    pageButton.textContent = i;
-    if (i === currentReviewsPage) {
+    pageButton.textContent = pageNum;
+    if (pageNum === currentReviewsPage) {
       pageButton.classList.add('active');
     }
-    pagination.insertBefore(pageButton, pagination.querySelector('.pagination-arrow.next'));
+    return pageButton;
+  };
+
+  // Функция для создания эллипсиса
+  const createEllipsis = () => {
+    const ellipsis = document.createElement('span');
+    ellipsis.classList.add('pagination-ellipsis');
+    ellipsis.textContent = '...';
+    return ellipsis;
+  };
+
+  // Добавляем первую страницу
+  pagination.insertBefore(createPageButton(1), pagination.querySelector('.pagination-arrow.next'));
+
+  // Добавляем страницы вокруг текущей
+  const startPage = Math.max(2, currentReviewsPage - 1);
+  const endPage = Math.min(totalPages - 1, currentReviewsPage + 1);
+
+  // Добавляем эллипсис после первой страницы, если нужно
+  if (startPage > 2) {
+    pagination.insertBefore(createEllipsis(), pagination.querySelector('.pagination-arrow.next'));
+  }
+
+  // Добавляем страницы вокруг текущей
+  for (let i = startPage; i <= endPage; i++) {
+    pagination.insertBefore(createPageButton(i), pagination.querySelector('.pagination-arrow.next'));
+  }
+
+  // Добавляем эллипсис перед последней страницей, если нужно
+  if (endPage < totalPages - 1) {
+    pagination.insertBefore(createEllipsis(), pagination.querySelector('.pagination-arrow.next'));
+  }
+
+  // Добавляем последнюю страницу, если она не первая
+  if (totalPages > 1) {
+    pagination.insertBefore(createPageButton(totalPages), pagination.querySelector('.pagination-arrow.next'));
   }
   
   // Обновляем состояние стрелок
@@ -323,7 +369,13 @@ function updateReviewsPagination() {
   const nextButton = pagination.querySelector('.pagination-arrow.next');
   
   if (prevButton) prevButton.disabled = currentReviewsPage === 1;
-  if (nextButton) nextButton.disabled = currentReviewsPage === totalPages;
+  if (nextButton) nextButton.disabled = currentReviewsPage >= totalPages;
+
+  // Если текущая страница стала больше общего количества страниц
+  if (currentReviewsPage > totalPages) {
+    currentReviewsPage = totalPages > 0 ? totalPages : 1;
+    updateReviewsDisplay();
+  }
 }
 
 // Функция для обновления отображения отзывов
@@ -336,10 +388,13 @@ function updateReviewsDisplay() {
   // Сначала скрываем все отзывы в контейнере
   const reviewsContainer = document.querySelector('.reviews-carousel');
   if (!reviewsContainer) return;
+
+  // Скрываем все карточки отзывов в контейнере
   reviewsContainer.querySelectorAll('.review-card').forEach(card => card.style.display = 'none');
 
   // Отображаем только отзывы для текущей страницы
   for (let i = startIndex; i < endIndex; i++) {
+    // Ищем существующую карточку в DOM по индексу в объединенном массиве allReviews
     const reviewCard = reviewsContainer.children[i];
      if(reviewCard) { // Проверка на существование элемента
          reviewCard.style.display = 'flex'; // Используем flex для отображения карточек
@@ -361,24 +416,26 @@ function initReviewsPagination() {
   // Добавляем обработчики для кнопок пагинации
   pagination.addEventListener('click', (e) => {
     if (e.target.classList.contains('pagination-page')) {
-      currentReviewsPage = parseInt(e.target.textContent);
-      updateReviewsDisplay();
+      const page = parseInt(e.target.textContent);
+      if (page !== currentReviewsPage) { // Проверяем, что это не текущая страница
+          currentReviewsPage = page;
+          updateReviewsDisplay();
+      }
     } else if (e.target.classList.contains('pagination-arrow')) {
       if (e.target.classList.contains('prev') && currentReviewsPage > 1) {
         currentReviewsPage--;
+        updateReviewsDisplay();
       } else if (e.target.classList.contains('next')) {
-        const reviews = document.querySelectorAll('.review-card');
-        const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+        const totalPages = Math.ceil(allReviews.length / reviewsPerPage);
         if (currentReviewsPage < totalPages) {
           currentReviewsPage++;
+          updateReviewsDisplay();
         }
       }
-      updateReviewsDisplay();
     }
   });
   
-  // Инициализируем отображение
-  // updateReviewsDisplay(); // Этот вызов будет в initializeApp
+  // Инициализируем отображение - первый показ будет в initializeApp
 }
 
 // Основная функция инициализации приложения
@@ -395,11 +452,16 @@ async function initializeApp() {
 
     // Закрываем меню при изменении размера окна
     window.addEventListener("resize", () => {
-      const menuIcon = document.querySelector(".menu-icon");
-      const menuDropdown = document.querySelector(".menu-dropdown");
-      if (window.innerWidth > 768 && menuIcon && menuDropdown) {
-        menuIcon.classList.remove("active");
-        menuDropdown.classList.remove("active");
+      // Пересчитываем количество отзывов на странице при изменении размера
+      const newReviewsPerPage = getReviewsPerPage();
+      if (newReviewsPerPage !== reviewsPerPage) {
+          reviewsPerPage = newReviewsPerPage;
+          // Сбрасываем страницу на первую при изменении количества отзывов на странице
+          currentReviewsPage = 1;
+          updateReviewsDisplay(); // Обновляем отображение и пагинацию
+      } else {
+          // Если количество отзывов на странице не изменилось, просто обновляем отображение (например, при повороте экрана)
+          updateReviewsDisplay();
       }
     });
 
@@ -529,24 +591,27 @@ async function initializeApp() {
 
     // 1. Загружаем сгенерированные отзывы
     const generatedReviews = await loadGeneratedReviews();
-    const generatedReviewCards = generatedReviews.map(createReviewCard);
-
+    
     // 2. Загружаем локальные отзывы
     const localReviews = getLocalReviews(); // Функция из reviews-local.js
-    const localReviewCards = localReviews.map(createReviewCard);
-
+    
     // 3. Объединяем все отзывы и добавляем их в DOM
     allReviews = generatedReviews.concat(localReviews); // Объединяем данные для пагинации
+    
     const reviewsContainer = document.querySelector('.reviews-carousel');
     if (reviewsContainer) {
-      // Очищаем контейнер перед добавлением (если там что-то было)
-      reviewsContainer.innerHTML = '';
-      // Добавляем все карточки в DOM (и сгенерированные, и локальные)
-      generatedReviewCards.forEach(card => reviewsContainer.appendChild(card));
-      localReviewCards.forEach(card => reviewsContainer.appendChild(card));
+        // Очищаем контейнер перед добавлением
+        reviewsContainer.innerHTML = '';
+        // Создаем и добавляем все карточки отзывов (сгенерированные и локальные) в DOM
+        allReviews.forEach(review => {
+            const card = createReviewCard(review);
+            reviewsContainer.appendChild(card);
+        });
     }
 
     // 4. Инициализируем пагинацию отзывов и отображаем первую страницу
+    // Определяем начальное количество отзывов на странице
+    reviewsPerPage = getReviewsPerPage();
     initReviewsPagination(); // Настраиваем обработчики кнопок
     updateReviewsDisplay(); // Отображаем первую страницу отзывов
 

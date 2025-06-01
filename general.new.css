@@ -1997,85 +1997,134 @@ footer, .site-footer {
 
 /* Стили для пагинации отзывов */
 .reviews-pagination {
-  display: flex;
-  justify-content: center; /* Центрирование пагинации */
-  align-items: center;
-  gap: 15px; /* Увеличиваем отступ между кнопками */
-  margin-top: 30px; /* Увеличиваем отступ сверху */
-  padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .reviews-pagination button {
-  background: none; /* Убираем фон */
-  border: none; /* Убираем рамку */
-  color: #76c7c0; /* Цвет кнопок */
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 5px 10px;
-  transition: all 0.3s ease;
-  font-weight: normal; /* Сбрасываем bold для обычных кнопок */
+    margin: 0;
+    padding: 8px 12px;
+    border: none;
+    background-color: transparent;
+    color: #76c7c0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.reviews-pagination .pagination-page {
-  min-width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
+.reviews-pagination button:hover:not(:disabled) {
+    color: #ffffff;
+    transform: scale(1.1);
 }
 
-.reviews-pagination .pagination-page.active {
-  background: none; /* Убираем фон у активной кнопки */
-  color: #fff; /* Цвет активной кнопки */
-  font-weight: bold; /* Жирный шрифт для активной кнопки */
-}
-
-.reviews-pagination button:hover:not(.active) {
-  color: #ffffff; /* Цвет при наведении */
-  transform: scale(1.1); /* Анимация при наведении */
+.reviews-pagination button.active {
+    font-weight: bold;
+    color: #ffffff;
 }
 
 .reviews-pagination button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 
+.reviews-pagination .pagination-arrow {
+    font-size: 1.2rem;
+}
+
+.reviews-pagination .pagination-ellipsis {
+    color: #666;
+    padding: 0 4px;
+    user-select: none;
+}
+
+/* Медиа-запросы для адаптивности пагинации */
 @media (max-width: 768px) {
-  .reviews-pagination {
-    gap: 10px; /* Уменьшаем отступ на мобильных */
-  }
-  
-  .reviews-pagination button {
-    font-size: 0.9rem;
-    padding: 4px 8px;
-  }
-  
-  .reviews-pagination .pagination-page {
-    min-width: 26px;
-    height: 26px;
-  }
+    .reviews-pagination {
+        gap: 4px;
+    }
+    
+    .reviews-pagination button {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+        min-width: 28px;
+        height: 28px;
+    }
+    
+    .reviews-pagination .pagination-arrow {
+        font-size: 1rem;
+    }
 }
 
-/* Обновленные стили для контейнера отзывов */
-.reviews-carousel-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+@media (max-width: 480px) {
+    .reviews-pagination {
+        gap: 2px;
+    }
+    
+    .reviews-pagination button {
+        padding: 4px 8px;
+        font-size: 0.85rem;
+        min-width: 24px;
+        height: 24px;
+    }
 }
 
-.reviews-carousel {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: 20px;
+/* Медиа-запрос для десктопов (ширина экрана >= 1024px) */
+@media (min-width: 1024px) {
+    .reviews-carousel {
+        display: grid; /* Используем Grid для колонок */
+        grid-template-columns: repeat(2, 1fr); /* Две колонки равной ширины */
+        gap: 20px; /* Расстояние между карточками */
+    }
+
+    .review-card {
+        height: 400px; /* Фиксированная высота для всех карточек */
+        /* overflow: hidden; /* Скрываем содержимое, которое выходит за рамки */
+        /* text-overflow: ellipsis; /* Добавляем многоточие для обрезанного текста - если нужно */
+        /* display: block; /* Карточки будут блочными элементами в Grid */
+    }
+
+     /* Стили для аватара и хедера карточки */
+     .review-card .review-header {
+         /* Убедитесь, что хедер и аватар не занимают всю высоту */
+         flex-shrink: 0;
+     }
 }
 
-@media (max-width: 768px) {
-  .reviews-carousel {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-  }
+/* Медиа-запрос для планшетов (например, от 768px до 1023px) */
+/* Оставьте стили по умолчанию (flexbox, 1 колонка), если они подходят, или добавьте специфичные */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Стили для планшетов, если отличаются от мобильных и десктопов */
+     .reviews-carousel {
+         /* Возможно, здесь тоже grid, но с другой конфигурацией, или flexbox */
+         /* display: grid; */
+         /* grid-template-columns: repeat(2, 1fr); */
+         /* gap: 20px; */
+     }
+    .review-card {
+         /* Возможно, другая высота для планшетов */
+         /* height: auto; */
+    }
+}
+
+/* Стили для мобильных (до 767px) */
+@media (max-width: 767px) {
+    .reviews-carousel {
+        /* Здесь должны быть стили для одной колонки, которые уже, вероятно, есть по умолчанию */
+        /* display: flex; */
+        /* flex-direction: column; */
+        /* gap: 20px; */
+    }
+    .review-card {
+         /* Возможно, авто высота или ограниченная для мобильных */
+         /* height: auto; */
+    }
 }
