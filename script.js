@@ -203,6 +203,98 @@ function waitForI18n() {
 // Глобальные переменные для пагинации отзывов
 let currentReviewsPage = 1;
 const reviewsPerPage = 3;
+let allReviews = []; // Массив для хранения всех отзывов (из JSON и локальных)
+
+// Функция для загрузки отзывов из JSON
+async function loadGeneratedReviews() {
+  try {
+    // Проверяем, существует ли файл reviews.json. Если нет, используем generated_reviews.json
+    // В реальном приложении лучше иметь более надежный механизм проверки или использовать один источник
+    const response = await fetch('reviews.json');
+    if (!response.ok) {
+        console.warn('reviews.json not found, trying generated_reviews.json');
+        const fallbackResponse = await fetch('generated_reviews.json');
+        if (!fallbackResponse.ok) {
+             console.error('Failed to load reviews from both reviews.json and generated_reviews.json');
+             return [];
+        }
+        return await fallbackResponse.json();
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('❌ Ошибка при загрузке сгенерированных отзывов:', error);
+    return [];
+  }
+}
+
+// Создание DOM-элемента карточки отзыва (обновленная из reviews-carousel.js)
+function createReviewCard(review) {
+    const card = document.createElement('div');
+    card.className = 'review-card'; // Класс для пагинации
+    // Добавляем дату (используем дату из отзыва, если есть, иначе генерируем)
+    const reviewDate = review.date && review.date !== 'случайная дата с 2021 по сегодня' ? review.date : getRandomDate();
+    card.innerHTML = `
+        <div class="review-header">
+            <div class="review-avatar">${review.letter || (review.name ? review.name[0] : '?')}</div>
+            <div class="review-info">
+                <div class="review-name">${review.name || 'Аноним'} <span style="font-size:0.9em;color:#76c7c0;">${review.flag || ''}</span></div>
+                <span class="review-date">${reviewDate}</span>
+                <div style="font-size:0.95em;color:#aaa;">${review.lang || ''}</div>
+            </div>
+        </div>
+        <div class="review-content">
+            <span class="review-short">${review.short || ''}</span>
+            <button class="read-more">Подробнее</button>
+        </div>
+    `;
+    // Обработчик для кнопки "Подробнее"
+    card.querySelector('.read-more').addEventListener('click', function(e) {
+        e.stopPropagation();
+        showModal(review.full || review.short || 'Нет полного отзыва.');
+    });
+
+     // Добавляем класс 'generated' для стилей и отличия от локальных
+    card.classList.add('generated');
+
+    return card;
+}
+
+// Функция для получения случайной даты (перенесена из reviews-carousel.js)
+function getRandomDate() {
+    const start = new Date(2021, 0, 1).getTime();
+    const end = new Date().getTime();
+    const date = new Date(start + Math.random() * (end - start));
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+}
+
+// Функция для отображения модального окна (перенесена из reviews-carousel.js, адаптирована)
+function showModal(text) {
+    let modal = document.getElementById('modal'); // Используем существующее модальное окно в index3.html
+    let modalText = document.getElementById('modal-text'); // Элемент для текста отзыва
+    
+    if (!modal || !modalText) {
+      console.error('Modal elements not found in index3.html');
+      return;
+    }
+
+    modalText.textContent = text;
+    modal.classList.add('show');
+
+    // Добавляем обработчик для закрытия по клику вне модалки
+     modal.onclick = e => { if (e.target === modal) modal.classList.remove('show'); };
+
+     // Убедимся, что кнопка закрытия работает (уже есть в index3.html, но на всякий случай)
+     const closeModalBtn = modal.querySelector('.close-modal');
+     if(closeModalBtn && !closeModalBtn.dataset.listenerAdded) { // Добавляем слушатель только один раз
+        closeModalBtn.dataset.listenerAdded = 'true';
+        closeModalBtn.onclick = () => { // Переопределяем onclick, так как в index3.html он есть
+             modal.classList.remove('show');
+        };
+     }
+}
 
 // Функция для обновления пагинации отзывов
 function updateReviewsPagination() {
@@ -236,17 +328,23 @@ function updateReviewsPagination() {
 
 // Функция для обновления отображения отзывов
 function updateReviewsDisplay() {
-  const reviews = document.querySelectorAll('.review-card');
+  // Используем allReviews для пагинации
+  const reviewsToDisplay = allReviews;
   const startIndex = (currentReviewsPage - 1) * reviewsPerPage;
-  const endIndex = Math.min(startIndex + reviewsPerPage, reviews.length);
+  const endIndex = Math.min(startIndex + reviewsPerPage, reviewsToDisplay.length);
   
-  reviews.forEach((review, index) => {
-    if (index >= startIndex && index < endIndex) {
-      review.style.display = 'flex'; // Используем flex для отображения карточек
-    } else {
-      review.style.display = 'none';
-    }
-  });
+  // Сначала скрываем все отзывы в контейнере
+  const reviewsContainer = document.querySelector('.reviews-carousel');
+  if (!reviewsContainer) return;
+  reviewsContainer.querySelectorAll('.review-card').forEach(card => card.style.display = 'none');
+
+  // Отображаем только отзывы для текущей страницы
+  for (let i = startIndex; i < endIndex; i++) {
+    const reviewCard = reviewsContainer.children[i];
+     if(reviewCard) { // Проверка на существование элемента
+         reviewCard.style.display = 'flex'; // Используем flex для отображения карточек
+     }
+  }
   
   updateReviewsPagination();
 }
@@ -304,82 +402,6 @@ async function initializeApp() {
         menuDropdown.classList.remove("active");
       }
     });
-
-    // Инициализация карусели изображений (не отзывов)
-const carousel = document.querySelector(".carousel-inner");
-let items = Array.from(document.querySelectorAll(".carousel-item"));
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-
-if (carousel && items.length) {
-  let index = items.length;
-  let itemWidth = items[0]?.offsetWidth ? items[0].offsetWidth + 20 : 0;
-  let isMoving = false;
-  let autoSlideInterval;
-
-  // Клонируем элементы
-  items.forEach((item) => {
-    const clone = item.cloneNode(true);
-    clone.classList.add("clone");
-    carousel.appendChild(clone);
-  });
-  items.forEach((item) => {
-    const clone = item.cloneNode(true);
-    clone.classList.add("clone");
-    carousel.insertBefore(clone, items[0]);
-  });
-  const allItems = Array.from(document.querySelectorAll(".carousel-item"));
-  itemWidth = allItems[1]?.offsetWidth ? allItems[1].offsetWidth + 20 : 0;
-  carousel.style.transform = `translateX(${-index * itemWidth}px)`;
-
-  function updateCarousel() {
-    if (isMoving) return;
-    isMoving = true;
-    carousel.style.transition = "transform 0.5s ease-in-out";
-    carousel.style.transform = `translateX(${-index * itemWidth}px)`;
-    setTimeout(() => {
-      if (index >= allItems.length - items.length) {
-        carousel.style.transition = "none";
-        index = items.length;
-        carousel.style.transform = `translateX(${-index * itemWidth}px)`;
-      }
-      if (index <= 0) {
-        carousel.style.transition = "none";
-        index = allItems.length - items.length * 2;
-        carousel.style.transform = `translateX(${-index * itemWidth}px)`;
-      }
-      isMoving = false;
-    }, 500);
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener("click", function () {
-      index++;
-      updateCarousel();
-    });
-  }
-  if (prevBtn) {
-    prevBtn.addEventListener("click", function () {
-      index--;
-      updateCarousel();
-    });
-  }
-
-  function autoSlide() {
-    index++;
-    updateCarousel();
-  }
-  autoSlideInterval = setInterval(autoSlide, 3000);
-  carousel.addEventListener("mouseenter", () => clearInterval(autoSlideInterval));
-  carousel.addEventListener("mouseleave", () => {
-    autoSlideInterval = setInterval(autoSlide, 3000);
-  });
-  window.addEventListener("resize", function () {
-    itemWidth = allItems[1]?.offsetWidth ? allItems[1].offsetWidth + 20 : 0;
-    carousel.style.transition = "none";
-    carousel.style.transform = `translateX(${-index * itemWidth}px)`;
-  });
-}
 
     // Настраиваем обработчики для секций
     const sections = document.querySelectorAll('.expandable-section');
@@ -503,17 +525,50 @@ if (carousel && items.length) {
     // Настраиваем кнопку переключения
     setupLangToggleBtn();
 
-    // Инициализируем пагинацию отзывов после загрузки всех данных и DOM
-    initReviewsPagination();
-    updateReviewsDisplay(); // Первое отображение отзывов при загрузке страницы
+    // --- Логика загрузки и отображения отзывов ---
 
-    console.log('✅ Модуль переключения языка успешно инициализирован');
+    // 1. Загружаем сгенерированные отзывы
+    const generatedReviews = await loadGeneratedReviews();
+    const generatedReviewCards = generatedReviews.map(createReviewCard);
+
+    // 2. Загружаем локальные отзывы
+    const localReviews = getLocalReviews(); // Функция из reviews-local.js
+    const localReviewCards = localReviews.map(createReviewCard);
+
+    // 3. Объединяем все отзывы и добавляем их в DOM
+    allReviews = generatedReviews.concat(localReviews); // Объединяем данные для пагинации
+    const reviewsContainer = document.querySelector('.reviews-carousel');
+    if (reviewsContainer) {
+      // Очищаем контейнер перед добавлением (если там что-то было)
+      reviewsContainer.innerHTML = '';
+      // Добавляем все карточки в DOM (и сгенерированные, и локальные)
+      generatedReviewCards.forEach(card => reviewsContainer.appendChild(card));
+      localReviewCards.forEach(card => reviewsContainer.appendChild(card));
+    }
+
+    // 4. Инициализируем пагинацию отзывов и отображаем первую страницу
+    initReviewsPagination(); // Настраиваем обработчики кнопок
+    updateReviewsDisplay(); // Отображаем первую страницу отзывов
+
+    console.log('✅ Приложение инициализировано.');
+
   } catch (error) {
-    console.error('❌ Ошибка при инициализации:', error);
+    console.error('❌ Ошибка при инициализации приложения:', error);
   }
 }
 
 // Запускаем приложение после полной загрузки DOM
 document.addEventListener('DOMContentLoaded', initializeApp);
+
+// Функция для получения локальных отзывов (нужна здесь для initializeApp)
+function getLocalReviews() {
+    try {
+      // Предполагаем, что localStorage уже доступен на DOMContentLoaded
+      return JSON.parse(localStorage.getItem('localReviews') || '[]');
+    } catch {
+      console.error('Error reading local reviews from localStorage.');
+      return [];
+    }
+  }
 
 
