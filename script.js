@@ -200,6 +200,85 @@ function waitForI18n() {
   });
 }
 
+// Глобальные переменные для пагинации отзывов
+let currentReviewsPage = 1;
+const reviewsPerPage = 3;
+
+// Функция для обновления пагинации отзывов
+function updateReviewsPagination() {
+  const reviews = document.querySelectorAll('.review-card');
+  const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+  const pagination = document.querySelector('.reviews-pagination');
+  
+  // Обновляем номера страниц
+  const pageButtons = pagination.querySelectorAll('.pagination-page');
+  pageButtons.forEach((button, index) => {
+    if (index < totalPages) {
+      button.style.display = 'flex';
+      button.textContent = index + 1;
+      button.classList.toggle('active', index + 1 === currentReviewsPage);
+    } else {
+      button.style.display = 'none';
+    }
+  });
+  
+  // Обновляем состояние стрелок
+  const prevButton = pagination.querySelector('.pagination-arrow.prev');
+  const nextButton = pagination.querySelector('.pagination-arrow.next');
+  
+  prevButton.disabled = currentReviewsPage === 1;
+  nextButton.disabled = currentReviewsPage === totalPages;
+}
+
+// Функция для обновления отображения отзывов
+function updateReviewsDisplay() {
+  const reviews = document.querySelectorAll('.review-card');
+  const startIndex = (currentReviewsPage - 1) * reviewsPerPage;
+  const endIndex = Math.min(startIndex + reviewsPerPage, reviews.length);
+  
+  reviews.forEach((review, index) => {
+    if (index >= startIndex && index < endIndex) {
+      review.style.display = 'block';
+    } else {
+      review.style.display = 'none';
+    }
+  });
+  
+  updateReviewsPagination();
+}
+
+// Инициализация пагинации отзывов
+function initReviewsPagination() {
+  const pagination = document.querySelector('.reviews-pagination');
+  
+  if (!pagination) {
+    console.error('❌ Reviews pagination element not found');
+    return;
+  }
+  
+  // Добавляем обработчики для кнопок пагинации
+  pagination.addEventListener('click', (e) => {
+    if (e.target.classList.contains('pagination-page')) {
+      currentReviewsPage = parseInt(e.target.textContent);
+      updateReviewsDisplay();
+    } else if (e.target.classList.contains('pagination-arrow')) {
+      if (e.target.classList.contains('prev') && currentReviewsPage > 1) {
+        currentReviewsPage--;
+      } else if (e.target.classList.contains('next')) {
+        const reviews = document.querySelectorAll('.review-card');
+        const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+        if (currentReviewsPage < totalPages) {
+          currentReviewsPage++;
+        }
+      }
+      updateReviewsDisplay();
+    }
+  });
+  
+  // Инициализируем отображение
+  updateReviewsDisplay();
+}
+
 // Основная функция инициализации приложения
 async function initializeApp() {
   try {
@@ -425,6 +504,9 @@ if (carousel && items.length) {
     if (langToggleBtn) {
       langToggleBtn.disabled = false;
     }
+    
+    // Добавляем инициализацию пагинации отзывов
+    initReviewsPagination();
     
     console.log('✅ Модуль переключения языка успешно инициализирован');
   } catch (error) {
