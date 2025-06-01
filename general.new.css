@@ -254,14 +254,14 @@ header p {
 }
 
 .navbar ul a {
-  color: #a020f0; /* Фиолетовый цвет */
-  text-decoration: underline; /* Подчеркивание */
+  color: #ffffff; /* Белый цвет */
+  text-decoration: none; /* Убираем подчеркивание */
   font-size: 16px;
   transition: color 0.3s;
 }
 
 .navbar ul a:hover {
-  color: #be40f0; /* Изменение цвета при наведении */
+  color: #cccccc; /* Изменение цвета при наведении (немного светлее) */
 }
 
 .logo-container {
