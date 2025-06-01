@@ -624,30 +624,62 @@ async function initializeApp() {
       });
     }
 
-    // --- Инициализация карусели изображений (восстановление логики) ---
+    // --- Инициализация карусели изображений (восстановление логики и добавление зацикливания) ---
     const imageCarouselInner = document.querySelector('.carousel-inner');
-    const imageCarouselItems = document.querySelectorAll('.carousel-item');
+    let imageCarouselItems = document.querySelectorAll('.carousel-item');
     const imageLeftBtn = document.querySelector('.carousel-btn.left-btn');
     const imageRightBtn = document.querySelector('.carousel-btn.right-btn');
-    const itemWidth = imageCarouselItems[0]?.offsetWidth || 0; // Ширина одного элемента
-    let currentImageIndex = 0;
-    let autoScrollInterval = null;
-    const autoScrollDelay = 5000; // Задержка автоскроллинга в миллисекундах
 
     if (imageCarouselInner && imageCarouselItems.length > 0 && imageLeftBtn && imageRightBtn) {
+      const itemWidth = imageCarouselItems[0].offsetWidth;
+      const gap = 20; // Убедитесь, что это соответствует вашему CSS gap
+      const totalItemWidth = itemWidth + gap;
+      const visibleItems = Math.floor(imageCarouselInner.offsetWidth / totalItemWidth); // Количество видимых элементов (приблизительно)
+      const cloneCount = visibleItems + 2; // Клонируем немного больше, чем видно
 
-      const updateImageCarousel = () => {
-        imageCarouselInner.style.transform = `translateX(${-currentImageIndex * (itemWidth + 20)}px)`; // 20px - это gap
-        // Можно добавить обновление состояния кнопок, если нужно (например, отключать на первом/последнем слайде)
+      // Клонируем последние элементы и добавляем в начало
+      for (let i = 0; i < cloneCount; i++) {
+        const clone = imageCarouselItems[imageCarouselItems.length - 1 - i].cloneNode(true);
+        imageCarouselInner.prepend(clone);
+      }
+
+      // Клонируем первые элементы и добавляем в конец
+      for (let i = 0; i < cloneCount; i++) {
+        const clone = imageCarouselItems[i].cloneNode(true);
+        imageCarouselInner.appendChild(clone);
+      }
+
+      // Обновляем NodeList после добавления клонов
+      imageCarouselItems = document.querySelectorAll('.carousel-item');
+
+      let currentImageIndex = cloneCount; // Начинаем с первого оригинального элемента
+      let autoScrollInterval = null;
+      const autoScrollDelay = 5000; // Задержка автоскроллинга в миллисекундах
+
+      const updateImageCarousel = (smooth = true) => {
+        imageCarouselInner.style.transition = smooth ? 'transform 0.5s ease' : 'none';
+        imageCarouselInner.style.transform = `translateX(${-currentImageIndex * totalItemWidth}px)`;
+
+        // Логика для зацикливания
+        if (currentImageIndex >= imageCarouselItems.length - cloneCount) {
+          // Если достигли клонированных первых элементов в конце
+          setTimeout(() => {
+            currentImageIndex = cloneCount; // Переходим к первому оригинальному элементу
+            updateImageCarousel(false); // Мгновенный переход (без анимации)
+          }, 500); // Должно совпадать с transition duration
+        } else if (currentImageIndex < cloneCount) {
+          // Если достигли клонированных последних элементов в начале
+           setTimeout(() => {
+            currentImageIndex = imageCarouselItems.length - cloneCount * 2; // Переходим к последнему оригинальному элементу
+            updateImageCarousel(false); // Мгновенный переход
+          }, 500); // Должно совпадать с transition duration
+        }
       };
 
       const startAutoScroll = () => {
         stopAutoScroll();
         autoScrollInterval = setInterval(() => {
           currentImageIndex++;
-          if (currentImageIndex >= imageCarouselItems.length) {
-            currentImageIndex = 0; // Возврат к первому слайду
-          }
           updateImageCarousel();
         }, autoScrollDelay);
       };
@@ -659,13 +691,13 @@ async function initializeApp() {
         }
       };
 
+      // Устанавливаем начальную позицию без анимации
+      updateImageCarousel(false);
+
       // Обработчики кликов по кнопкам
       imageLeftBtn.addEventListener('click', () => {
         stopAutoScroll();
         currentImageIndex--;
-        if (currentImageIndex < 0) {
-          currentImageIndex = imageCarouselItems.length - 1; // Переход к последнему слайду
-        }
         updateImageCarousel();
         startAutoScroll(); // Перезапустить автоскроллинг после ручного переключения
       });
@@ -673,9 +705,6 @@ async function initializeApp() {
       imageRightBtn.addEventListener('click', () => {
         stopAutoScroll();
         currentImageIndex++;
-        if (currentImageIndex >= imageCarouselItems.length) {
-          currentImageIndex = 0; // Возврат к первому слайду
-        }
         updateImageCarousel();
         startAutoScroll(); // Перезапустить автоскроллинг после ручного переключения
       });
@@ -684,8 +713,20 @@ async function initializeApp() {
       startAutoScroll();
 
       // Останавливаем автоскроллинг при наведении на карусель
-      imageCarouselInner.parentElement.addEventListener('mouseenter', stopAutoScroll);
-      imageCarouselInner.parentElement.addEventListener('mouseleave', startAutoScroll);
+      const carouselContainer = document.querySelector('.carousel-container'); // Используем внешний контейнер для наведения
+      if(carouselContainer) {
+         carouselContainer.addEventListener('mouseenter', stopAutoScroll);
+         carouselContainer.addEventListener('mouseleave', startAutoScroll);
+      }
+
+      // Корректировка при изменении размера окна
+      window.addEventListener('resize', () => {
+        // При изменении размера окна, возможно, нужно пересчитать cloneCount и заново инициализировать карусель.
+        // Для простоты пока просто сбросим на первый оригинальный элемент.
+        currentImageIndex = cloneCount;
+        updateImageCarousel(false); // Мгновенный сброс
+      });
+
     }
 
     console.log('✅ Приложение инициализировано.');
