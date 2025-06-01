@@ -1796,6 +1796,7 @@ header p {
     padding: 30px 20px;
     max-width: 100%;
     width: 100%;
+    box-sizing: border-box; /* Убедимся, что padding включен в ширину */
   }
 
   .contact-form h2 {
@@ -1817,8 +1818,11 @@ header p {
 
 @media (max-width: 480px) {
   .contact-form {
-    margin: 30px 15px;
-    padding: 25px 15px;
+    margin: 30px auto;
+    padding: 25px 15px; /* Немного уменьшаем padding на очень маленьких экранах */
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .contact-form h2 {
