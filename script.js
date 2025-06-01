@@ -388,7 +388,7 @@ function updateReviewsDisplay() {
   for (let i = startIndex; i < endIndex; i++) {
     const reviewCard = reviewsContainer.children[i];
      if(reviewCard) {
-         reviewCard.style.display = 'flex'; // Используем flex для отображения содержимого внутри карточки
+         reviewCard.style.removeProperty('display'); // Очищаем inline-стиль display
      }
   }
   

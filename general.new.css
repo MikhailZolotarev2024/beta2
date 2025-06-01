@@ -1268,8 +1268,10 @@ header p {
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   width: 100%;
-  padding: 0 20px;
+  max-width: 1400px;
+  margin: 0 auto;
   box-sizing: border-box;
+  padding: 0 20px;
 }
 
 .review-card {
@@ -2125,7 +2127,6 @@ footer, .site-footer {
 /* Медиа-запрос для мобильных (до 767px) */
 @media (max-width: 767px) {
     .reviews-carousel {
-        display: grid; /* Используем Grid и для мобильных */
         grid-template-columns: 1fr; /* Одна колонка */
         gap: 15px; /* Отступ между карточками */
         padding: 0 15px; /* Отступы по бокам */
