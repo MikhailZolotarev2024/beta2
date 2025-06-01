@@ -586,67 +586,122 @@ async function initializeApp() {
     // Настраиваем кнопку переключения
     setupLangToggleBtn();
 
-    // --- Инициализация карусели изображений ---
+    // --- Инициализация карусели изображений (Зацикленная прокрутка) ---
     const imageCarouselContainer = document.querySelector('.carousel-container');
     const imageCarouselInner = document.querySelector('.carousel-inner');
-    const imageCarouselItems = document.querySelectorAll('.carousel-item'); // Используем const, т.к. этот NodeList не будет изменяться
+    const originalImageItems = document.querySelectorAll('.carousel-item'); // Оригинальные элементы перед клонированием
     const imageLeftBtn = document.querySelector('.carousel-btn.left-btn');
     const imageRightBtn = document.querySelector('.carousel-btn.right-btn');
 
-    if (imageCarouselInner && imageCarouselItems.length > 0 && imageCarouselContainer) {
-      console.log('✅ Карусель найдена и запускается...');
+    if (imageCarouselInner && originalImageItems.length > 0 && imageCarouselContainer && imageLeftBtn && imageRightBtn) {
+      console.log('✅ Карусель изображений найдена и запускается (зацикленная прокрутка)...');
 
-      // Клонирование карточек (для эффекта зацикливания - только в конец)
-      // Клонируем достаточное количество, чтобы заполнить видимую область или больше
-      const itemWidth = imageCarouselItems[0]?.offsetWidth || 0;
+      const itemWidth = originalImageItems[0]?.offsetWidth || 0;
       const gap = 20; // Убедитесь, что это соответствует вашему CSS gap
       const totalItemWidth = itemWidth + gap;
       const containerWidth = imageCarouselContainer.offsetWidth;
-      const itemsToClone = Math.ceil(containerWidth / totalItemWidth) + 1; // Клонируем чуть больше, чем видно
 
-      for (let i = 0; i < itemsToClone && i < imageCarouselItems.length; i++) {
-        const clone = imageCarouselItems[i].cloneNode(true);
+      // Определяем, сколько элементов видно, чтобы понять, сколько клонировать
+      // Клонируем достаточно, чтобы полностью заполнить видимую область с запасом
+      const visibleItemsCount = Math.ceil(containerWidth / totalItemWidth);
+      const cloneCount = visibleItemsCount > 0 ? visibleItemsCount + 2 : originalImageItems.length; // Клонируем минимум visibleItemsCount + 2, или все, если видно мало
+
+      // Клонируем последние элементы и добавляем в начало inner
+      for (let i = 0; i < cloneCount; i++) {
+        const cloneIndex = (originalImageItems.length - 1 - i + originalImageItems.length) % originalImageItems.length;
+        const clone = originalImageItems[cloneIndex].cloneNode(true);
+        imageCarouselInner.prepend(clone);
+      }
+
+      // Клонируем первые элементы и добавляем в конец inner
+      for (let i = 0; i < cloneCount; i++) {
+        const cloneIndex = i % originalImageItems.length;
+        const clone = originalImageItems[cloneIndex].cloneNode(true);
         imageCarouselInner.appendChild(clone);
       }
 
-      // Обновляем NodeList после добавления клонов (если он нужен с клонами, но в данной логике не требуется)
-      // imageCarouselItems = document.querySelectorAll('.carousel-item'); // Не нужно для этой простой логики
+      // Теперь получаем полный список элементов, включая клоны
+      let allImageItems = imageCarouselInner.querySelectorAll('.carousel-item');
 
-      let currentIndex = 0;
+      // Индекс текущего элемента. Начинаем с первого оригинального элемента (после клонов в начале)
+      let currentImageIndex = cloneCount;
+      let autoScrollInterval = null;
+      const autoScrollDelay = 5000; // Задержка автоскроллинга в миллисекундах
 
-      const updateCarousel = (smooth = true) => {
-        imageCarouselInner.style.transition = smooth ? 'transform 0.5s ease' : 'none';
-        imageCarouselInner.style.transform = `translateX(-${currentIndex * totalItemWidth}px)`;
+      const updateImageCarousel = (smooth = true) => {
+        imageCarouselInner.style.transition = smooth ? 'transform 0.5s ease' : 'none'; // Длительность transition должна совпадать с setTimeout
+        imageCarouselInner.style.transform = `translateX(${-currentImageIndex * totalItemWidth}px)`;
+
+        // Логика для зацикливания: мгновенный переход при достижении клонов
+        if (currentImageIndex >= allImageItems.length - cloneCount) {
+          // Если достигли клонированных первых элементов в конце
+          setTimeout(() => {
+            currentImageIndex = cloneCount; // Переходим к первому оригинальному элементу
+            updateImageCarousel(false); // Мгновенный переход (без анимации)
+          }, 500); // Должно совпадать с transition duration CSS
+        } else if (currentImageIndex < cloneCount) {
+          // Если достигли клонированных последних элементов в начале
+           setTimeout(() => {
+            currentImageIndex = allImageItems.length - cloneCount * 2; // Переходим к последнему оригинальному элементу
+            updateImageCarousel(false); // Мгновенный переход
+          }, 500); // Должно совпадать с transition duration CSS
+        }
       };
 
-      if (imageLeftBtn) {
-          imageLeftBtn.addEventListener('click', () => {
-            currentIndex = Math.max(currentIndex - 1, 0);
-            updateCarousel();
-          });
-      }
+      const startAutoScroll = () => {
+        stopAutoScroll();
+        autoScrollInterval = setInterval(() => {
+          currentImageIndex++;
+          updateImageCarousel();
+        }, autoScrollDelay);
+      };
 
-      if (imageRightBtn) {
-          imageRightBtn.addEventListener('click', () => {
-            // Простая логика, без зацикливания перехода от клонов к оригиналу
-            const maxIndex = imageCarouselItems.length - Math.floor(containerWidth / totalItemWidth);
-            currentIndex = Math.min(currentIndex + 1, maxIndex >= 0 ? maxIndex : 0); // Не уходим за последний видимый оригинальный элемент
-            updateCarousel();
-          });
-      }
+      const stopAutoScroll = () => {
+        if (autoScrollInterval) {
+          clearInterval(autoScrollInterval);
+          autoScrollInterval = null;
+        }
+      };
 
-      // Initial update
-      updateCarousel();
+      // Устанавливаем начальную позицию без анимации
+      updateImageCarousel(false);
 
-      // Обработка изменения размера окна: сброс позиции
+      // Обработчики кликов по кнопкам
+      imageLeftBtn.addEventListener('click', () => {
+        stopAutoScroll();
+        currentImageIndex--;
+        updateImageCarousel();
+        // startAutoScroll(); // Возможно, не нужно перезапускать автоскроллинг после ручного переключения
+      });
+
+      imageRightBtn.addEventListener('click', () => {
+        stopAutoScroll();
+        currentImageIndex++;
+        updateImageCarousel();
+        // startAutoScroll(); // Возможно, не нужно перезапускать автоскроллинг после ручного переключения
+      });
+
+      // Запускаем автоскроллинг при загрузке
+       startAutoScroll();
+
+      // Останавливаем автоскроллинг при наведении на карусель
+       if(imageCarouselContainer) {
+         imageCarouselContainer.addEventListener('mouseenter', stopAutoScroll);
+         imageCarouselContainer.addEventListener('mouseleave', startAutoScroll);
+       }
+
+      // Обработка изменения размера окна: сброс позиции и, возможно, переинициализация
        window.addEventListener('resize', () => {
-         // Сбросим на первый элемент при изменении размера
-         currentIndex = 0;
-         updateCarousel(false); // Мгновенный сброс
+         // Простейший вариант: сброс на начальную позицию.
+         // Более надежный вариант - полная переинициализация карусели.
+         currentIndex = cloneCount;
+         updateImageCarousel(false); // Мгновенный сброс
+
+         // Если требуется, можно добавить debounce для resize и полную переинициализацию
        });
 
     } else {
-      console.warn('🚫 Карусель изображений не найдена или пуста.');
+      console.warn('🚫 Карусель изображений не найдена, пуста или отсутствуют кнопки.');
     }
 
     // --- Логика загрузки и отображения отзывов ---
