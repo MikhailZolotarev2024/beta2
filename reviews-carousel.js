@@ -1,207 +1,248 @@
+// Константы
+const CAROUSEL_CONFIG = {
+    CARDS_PER_COLUMN: 5,
+    AUTOPLAY_INTERVAL: 7000,
+    PAUSE_DURATION: 15000,
+    MOBILE_BREAKPOINT: 768
+};
+
+// Кэширование DOM элементов
+const DOM = {
+    carousel: document.querySelector('.reviews-carousel'),
+    prevButton: document.querySelector('.carousel-button.prev'),
+    nextButton: document.querySelector('.carousel-button.next'),
+    modal: document.getElementById('modal'),
+    modalText: document.getElementById('modal-text'),
+    closeModalBtn: document.querySelector('.modal .close-modal')
+};
+
+// Состояние карусели
+const state = {
+    currentPosition: 0,
+    columns: [],
+    columnsPerView: getColumnsPerView(),
+    maxPosition: 0,
+    cards: [],
+    autoplayInterval: null,
+    autoplayPaused: false,
+    pauseTimeout: null
+};
+
+// Инициализация при загрузке DOM
 document.addEventListener('DOMContentLoaded', async function() {
-    const carousel = document.querySelector('.reviews-carousel');
-    const prevButton = document.querySelector('.carousel-button.prev');
-    const nextButton = document.querySelector('.carousel-button.next');
+    if (!validateElements()) return;
     
-    // Проверяем наличие необходимых элементов
-    if (!carousel || !prevButton || !nextButton) {
+    setupEventListeners();
+    await initializeCarousel();
+});
+
+// Валидация необходимых элементов
+function validateElements() {
+    if (!DOM.carousel || !DOM.prevButton || !DOM.nextButton) {
         console.error('❌ Required carousel elements not found');
-        return;
+        return false;
     }
+    return true;
+}
 
-    const cardsPerColumn = 5;
-    let currentPosition = 0;
-    let columns = [];
-    let columnsPerView = getColumnsPerView();
-    let maxPosition = 0;
-    let cards;
-
-    // Модальное окно для отзыва
-    let modal = document.getElementById('modal');
-    let modalText = document.getElementById('modal-text');
-    let closeModalBtn = document.querySelector('.modal .close-modal');
-    
-    if (closeModalBtn) {
-        closeModalBtn.onclick = () => {
-            if (modal) {
-                modal.classList.remove('show');
+// Настройка обработчиков событий
+function setupEventListeners() {
+    if (DOM.closeModalBtn) {
+        DOM.closeModalBtn.onclick = () => {
+            if (DOM.modal) {
+                DOM.modal.classList.remove('show');
                 resetAutoplay();
             }
         };
     }
 
     window.addEventListener('click', (e) => {
-        if (modal && e.target === modal) {
-            modal.classList.remove('show');
+        if (DOM.modal && e.target === DOM.modal) {
+            DOM.modal.classList.remove('show');
             resetAutoplay();
         }
     });
 
-    // Загрузка отзывов из JSON
-    async function loadReviews() {
-        const response = await fetch('reviews.json');
-        return await response.json();
-    }
+    DOM.prevButton.onclick = () => {
+        goPrev();
+        pauseAutoplay(CAROUSEL_CONFIG.PAUSE_DURATION);
+    };
 
-    // Генерация случайной даты с 2021 по текущий год
-    function getRandomDate() {
-        const start = new Date(2021, 0, 1).getTime();
-        const end = new Date().getTime();
-        const date = new Date(start + Math.random() * (end - start));
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const year = date.getFullYear();
-        return `${day}.${month}.${year}`;
-    }
+    DOM.nextButton.onclick = () => {
+        goNext();
+        pauseAutoplay(CAROUSEL_CONFIG.PAUSE_DURATION);
+    };
 
-    // Создание DOM-элемента карточки
-    function createReviewCard(review) {
-        const card = document.createElement('div');
-        card.className = 'review-card';
-        // Добавляем дату
-        const reviewDate = review.date || getRandomDate();
-        card.innerHTML = `
-            <div class="review-header">
-                <div class="review-avatar">${review.letter}</div>
-                <div class="review-info">
-                    <div class="review-name">${review.name} <span style="font-size:0.9em;color:#76c7c0;">${review.flag}</span></div>
-                    <span class="review-date">${reviewDate}</span>
-                    <div style="font-size:0.95em;color:#aaa;">${review.lang}</div>
-                </div>
-            </div>
-            <div class="review-content">
-                <span class="review-short">${review.short}</span>
-                <button class="expand-btn">Читать полностью</button>
-            </div>
-        `;
-        // Кнопка раскрытия — теперь открывает модалку
-        card.querySelector('.expand-btn').addEventListener('click', function(e) {
-            e.stopPropagation();
-            if (modal && modalText) {
-                modalText.textContent = review.full;
-                modal.classList.add('show');
-                pauseAutoplay(15000); // Остановить автопрокрутку на 15 секунд
-            }
-        });
-        return card;
-    }
+    window.addEventListener('resize', debounce(handleResize, 250));
+}
 
-    // Формирование колонок
-    function createColumns(cards) {
-        columns = [];
-        const total = Math.ceil(cards.length / cardsPerColumn);
-        for (let i = 0; i < total; i++) {
-            const column = document.createElement('div');
-            column.className = 'reviews-column';
-            columns.push(column);
-        }
-        cards.forEach((card, idx) => {
-            const colIdx = Math.floor(idx / cardsPerColumn);
-            columns[colIdx].appendChild(card);
-        });
-
-        // Удалить пустые колонки
-        columns = columns.filter(col => col.children.length > 0);
-
-        // Пересчитать максимальную позицию
-        maxPosition = Math.max(0, columns.length - columnsPerView);
-        if (currentPosition > maxPosition) {
-            currentPosition = maxPosition;
-        }
-    }
-
-    // Рендер колонок в карусель
-    function renderColumns() {
-        if (currentPosition > maxPosition) {
-            currentPosition = maxPosition;
-        }
-        carousel.innerHTML = '';
-        for (let i = currentPosition; i < currentPosition + columnsPerView && i < columns.length; i++) {
-            carousel.appendChild(columns[i]);
-        }
-    }
-
-    // Обновление состояния кнопок
-    function updateButtons() {
-        const actualMax = Math.max(0, columns.length - columnsPerView);
-        prevButton.disabled = currentPosition === 0;
-        nextButton.disabled = currentPosition >= actualMax;
-    }
-
-    // Обработчики кнопок
-    function goPrev() {
-        if (currentPosition > 0) {
-            currentPosition--;
-            renderColumns();
-            updateButtons();
-        }
-    }
-    function goNext() {
-        const max = Math.max(0, columns.length - columnsPerView);
-        if (currentPosition >= max) return;
-        currentPosition++;
+// Инициализация карусели
+async function initializeCarousel() {
+    try {
+        const reviews = await loadReviews();
+        state.cards = reviews.map(createReviewCard);
+        createColumns(state.cards);
+        state.columnsPerView = getColumnsPerView();
+        state.maxPosition = Math.max(0, state.columns.length - state.columnsPerView);
         renderColumns();
         updateButtons();
+        startAutoplay();
+    } catch (error) {
+        console.error('❌ Error initializing carousel:', error);
     }
-    prevButton.onclick = function() {
-        goPrev();
-        pauseAutoplay(15000);
-    };
-    nextButton.onclick = function() {
-        goNext();
-        pauseAutoplay(15000);
-    };
+}
 
-    // Определение количества колонок вью в зависимости от ширины экрана
-    function getColumnsPerView() {
-        return window.innerWidth <= 768 ? 1 : 3;
-    }
+// Загрузка отзывов
+async function loadReviews() {
+    const response = await fetch('reviews.json');
+    return await response.json();
+}
 
-    // Главная инициализация
-    const reviews = await loadReviews();
-    cards = reviews.map(createReviewCard);
-    createColumns(cards);
-    columnsPerView = getColumnsPerView(); // пересчёт по фактической ширине
-    maxPosition = Math.max(0, columns.length - columnsPerView);
-    renderColumns();
-    updateButtons();
+// Создание карточки отзыва
+function createReviewCard(review) {
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    const reviewDate = review.date || getRandomDate();
+    
+    card.innerHTML = `
+        <div class="review-header">
+            <div class="review-avatar">${review.letter}</div>
+            <div class="review-info">
+                <div class="review-name">${review.name} <span style="font-size:0.9em;color:#76c7c0;">${review.flag}</span></div>
+                <span class="review-date">${reviewDate}</span>
+                <div style="font-size:0.95em;color:#aaa;">${review.lang}</div>
+            </div>
+        </div>
+        <div class="review-content">
+            <span class="review-short">${review.short}</span>
+            <button class="expand-btn">Читать полностью</button>
+        </div>
+    `;
 
-    // Обновленный обработчик resize
-    window.addEventListener('resize', () => {
-        const newColumnsPerView = getColumnsPerView();
-        if (newColumnsPerView !== columnsPerView) {
-            columnsPerView = newColumnsPerView;
-
-            // Пересоздаем колонки под новую ширину
-            createColumns(cards);
-            maxPosition = Math.max(0, columns.length - columnsPerView);
-
-            if (currentPosition > maxPosition) {
-                currentPosition = maxPosition;
-            }
-
-            renderColumns();
-            updateButtons();
+    card.querySelector('.expand-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (DOM.modal && DOM.modalText) {
+            DOM.modalText.textContent = review.full;
+            DOM.modal.classList.add('show');
+            pauseAutoplay(CAROUSEL_CONFIG.PAUSE_DURATION);
         }
     });
 
-    // Автопрокрутка: 7 секунд, пауза 15 секунд при ручном действии
-    let autoplayInterval = setInterval(goNext, 7000);
-    let autoplayPaused = false;
-    let pauseTimeout = null;
-    function pauseAutoplay(ms) {
-        clearInterval(autoplayInterval);
-        autoplayPaused = true;
-        if (pauseTimeout) clearTimeout(pauseTimeout);
-        pauseTimeout = setTimeout(() => {
-            autoplayPaused = false;
-            autoplayInterval = setInterval(goNext, 7000);
-        }, ms);
+    return card;
+}
+
+// Управление колонками
+function createColumns(cards) {
+    state.columns = [];
+    const total = Math.ceil(cards.length / CAROUSEL_CONFIG.CARDS_PER_COLUMN);
+    
+    for (let i = 0; i < total; i++) {
+        const column = document.createElement('div');
+        column.className = 'reviews-column';
+        state.columns.push(column);
     }
-    function resetAutoplay() {
-        if (pauseTimeout) clearTimeout(pauseTimeout);
-        clearInterval(autoplayInterval);
-        autoplayPaused = false;
-        autoplayInterval = setInterval(goNext, 7000);
+
+    cards.forEach((card, idx) => {
+        const colIdx = Math.floor(idx / CAROUSEL_CONFIG.CARDS_PER_COLUMN);
+        state.columns[colIdx].appendChild(card);
+    });
+
+    state.columns = state.columns.filter(col => col.children.length > 0);
+    state.maxPosition = Math.max(0, state.columns.length - state.columnsPerView);
+    
+    if (state.currentPosition > state.maxPosition) {
+        state.currentPosition = state.maxPosition;
     }
-}); 
+}
+
+// Рендеринг колонок
+function renderColumns() {
+    if (state.currentPosition > state.maxPosition) {
+        state.currentPosition = state.maxPosition;
+    }
+    
+    DOM.carousel.innerHTML = '';
+    for (let i = state.currentPosition; i < state.currentPosition + state.columnsPerView && i < state.columns.length; i++) {
+        DOM.carousel.appendChild(state.columns[i]);
+    }
+}
+
+// Обновление состояния кнопок
+function updateButtons() {
+    const actualMax = Math.max(0, state.columns.length - state.columnsPerView);
+    DOM.prevButton.disabled = state.currentPosition === 0;
+    DOM.nextButton.disabled = state.currentPosition >= actualMax;
+}
+
+// Навигация
+function goPrev() {
+    if (state.currentPosition > 0) {
+        state.currentPosition--;
+        renderColumns();
+        updateButtons();
+    }
+}
+
+function goNext() {
+    const max = Math.max(0, state.columns.length - state.columnsPerView);
+    if (state.currentPosition >= max) return;
+    state.currentPosition++;
+    renderColumns();
+    updateButtons();
+}
+
+// Автопрокрутка
+function startAutoplay() {
+    state.autoplayInterval = setInterval(goNext, CAROUSEL_CONFIG.AUTOPLAY_INTERVAL);
+}
+
+function pauseAutoplay(ms) {
+    clearInterval(state.autoplayInterval);
+    state.autoplayPaused = true;
+    if (state.pauseTimeout) clearTimeout(state.pauseTimeout);
+    state.pauseTimeout = setTimeout(() => {
+        state.autoplayPaused = false;
+        startAutoplay();
+    }, ms);
+}
+
+function resetAutoplay() {
+    if (state.pauseTimeout) clearTimeout(state.pauseTimeout);
+    if (!state.autoplayPaused) {
+        startAutoplay();
+    }
+}
+
+// Вспомогательные функции
+function getColumnsPerView() {
+    return window.innerWidth <= CAROUSEL_CONFIG.MOBILE_BREAKPOINT ? 1 : 3;
+}
+
+function getRandomDate() {
+    const start = new Date(2021, 0, 1).getTime();
+    const end = new Date().getTime();
+    const date = new Date(start + Math.random() * (end - start));
+    return `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}.${date.getFullYear()}`;
+}
+
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+function handleResize() {
+    const newColumnsPerView = getColumnsPerView();
+    if (newColumnsPerView !== state.columnsPerView) {
+        state.columnsPerView = newColumnsPerView;
+        createColumns(state.cards);
+        renderColumns();
+        updateButtons();
+    }
+} 
