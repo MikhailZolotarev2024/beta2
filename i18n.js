@@ -87,8 +87,9 @@ async function updateTranslations() {
   });
 
   // Обновляем карусель новостей
-  if (typeof updateNewsCarousel === 'function') {
+  if (typeof updateNewsCarousel === 'function' && !window.carouselInitialized) {
     await updateNewsCarousel();
+    window.carouselInitialized = true;
   }
 
   // Инициализируем карусель новостей

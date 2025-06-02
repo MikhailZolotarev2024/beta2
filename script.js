@@ -77,8 +77,9 @@ async function applyLang(lang) {
     updateLangToggleBtnText(lang);
     document.documentElement.lang = lang;
     
-    if (typeof updateNewsCarousel === 'function') {
-      updateNewsCarousel();
+    if (typeof updateNewsCarousel === 'function' && typeof initNews === 'function' && !window.carouselInitialized) {
+      await updateNewsCarousel();
+      window.carouselInitialized = true;
     }
     
     // Оптимизированная анимация элементов
