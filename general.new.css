@@ -70,11 +70,11 @@ p {
 /* --- МЕДИА ЗАПРОСЫ --- */
 @media (max-width: 1440px) {
   .navbar { padding: 0 20px; }
-  .navbar ul { gap: 20px; }
+  .navbar ul { gap: 20px; display: flex; } /* Десктоп: горизонтальное меню */
 }
 
 @media (max-width: 1024px) {
-  .navbar ul { gap: 15px; }
+  .navbar ul { gap: 15px; display: flex; } /* Десктоп: горизонтальное меню */
   .logo-text { font-size: 0.9rem; }
 }
 
@@ -84,8 +84,8 @@ p {
   .offer-benefits li { padding: 0 15px; }
   .cta a { width: 100%; text-align: center; }
   .navbar { padding: 10px; }
-  .navbar ul { display: none; }
-  .menu-icon { display: block; }
+  .navbar ul { display: none; } /* Скрыто на мобильных */
+  .menu-icon { display: block; } /* Видно на мобильных */
   .logo-img { width: 30px; }
   .logo-text { font-size: 0.8rem; }
   .nav-right { gap: 10px; }
@@ -128,11 +128,11 @@ p {
   .navbar { padding: 5px; }
   .logo-img { width: 25px; }
   .logo-text { font-size: 0.7rem; }
-  .menu-icon div { width: 20px; }
+  .menu-icon { display: block; } /* Видно на мобильных */
   .lang-btn { padding: 4px 8px; font-size: 0.8rem; }
   .news-carousel-wrapper { padding: 0 5px; }
   .news-section .carousel-btn { width: 25px; height: 25px; }
-  .comparison-grid { gap: 10px; }
+  .comparison-grid { grid-template-columns: 1fr; }
   .region-block { padding: 10px; }
   .region-block h3 { font-size: 1rem; }
   .contact-form { padding: 15px; }
@@ -148,6 +148,7 @@ p {
   .navbar { padding: 3px; }
   .logo-text { font-size: 0.6rem; }
   .lang-btn { padding: 3px 6px; font-size: 0.7rem; }
+  .menu-icon { display: block; } /* Видно на очень маленьких экранах */
 }
 
 @media (max-height: 700px) {
@@ -1481,35 +1482,29 @@ footer, .site-footer {
 /* Адаптация для блоков регионов */
 @media (max-width: 768px) {
   .comparison-grid {
-    display: flex; /* Используем flexbox для столбца */
-    flex-direction: column;
-    gap: 15px;
+    grid-template-columns: 1fr; /* Одна колонка на мобильных */
+    gap: 15px; /* Отступ между блоками */
     padding: 15px;
-    width: 100%;
     margin: 0 auto 30px;
   }
-
+  
   .region-block {
-    width: 100%; /* Занимаем всю ширину */
-    margin-bottom: 15px; /* Отступ между блоками */
     padding: 15px;
   }
 }
 
-@media (max-width: 480px) {
+@media (min-width: 769px) { /* Стили для десктопов и планшетов */
   .comparison-grid {
-    padding: 10px;
-    gap: 10px;
-    margin: 0 auto 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Три колонки на широких экранах */
+    gap: 30px; /* Отступ между блоками */
+    padding: 20px;
+    max-width: 1200px; /* Максимальная ширина контейнера */
+    margin: 0 auto 60px;
   }
   
   .region-block {
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .region-block h3 {
-    font-size: 1.1rem;
+    padding: 20px;
   }
 }
 
@@ -1717,4 +1712,10 @@ footer, .site-footer {
     max-width: 1400px; /* Или ваш желаемый максимальный размер */
     margin: 0 auto; /* Центрируем блок */
     box-sizing: border-box;
+}
+
+@media (min-width: 769px) { /* Стили для десктопов и планшетов */
+  .navbar ul { display: flex; } /* Десктоп: горизонтальное меню */
+  .menu-icon { display: none; } /* Десктоп: скрыть иконку */
+  .menu-dropdown { display: none; } /* Десктоп: скрыть мобильное меню */
 }
