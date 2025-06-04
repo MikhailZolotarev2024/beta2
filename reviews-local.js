@@ -39,7 +39,7 @@
       </div>
       <div class="review-text">${review.short}</div>
       <div class="review-date" style="margin-top:10px;opacity:0.7;font-size:13px;">${review.date}</div>
-      <button class="read-more">Подробнее</button>
+      <button class="read-more" data-i18n="review.more_details">Подробнее</button>
     `;
     // Модалка для полного отзыва
     card.querySelector('.read-more').onclick = function() {
