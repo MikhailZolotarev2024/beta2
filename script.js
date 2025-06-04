@@ -774,26 +774,27 @@ function getLocalReviews() {
 
 document.addEventListener('DOMContentLoaded', function() {
     const navbar = document.querySelector('.navbar');
-    let hasScrolled = false;
-    
-    // Проверяем, находимся ли мы на главной странице
-    const isHomePage = window.location.pathname.endsWith('index.html') || 
-                      window.location.pathname.endsWith('/') ||
-                      window.location.pathname.endsWith('index');
-    
-    // Если мы не на главной странице или уже прокрутили страницу, показываем навбар
-    if (!isHomePage || window.scrollY > 0) {
+
+    const isHomePage = window.location.pathname.endsWith('index.html') ||
+                       window.location.pathname === '/' ||
+                       window.location.pathname.endsWith('index');
+
+    if (!isHomePage) {
         navbar.classList.add('visible');
-        hasScrolled = true;
+        return;
     }
-    
-    // Добавляем обработчик скролла только на главной странице
-    if (isHomePage) {
-        window.addEventListener('scroll', function() {
-            if (!hasScrolled && window.scrollY > 0) {
-                navbar.classList.add('visible');
-                hasScrolled = true;
-            }
-        });
-    }
-}); 
+
+    // Обновляем состояние при каждом скролле
+    const handleScroll = () => {
+        if (window.scrollY === 0) {
+            navbar.classList.remove('visible');
+        } else {
+            navbar.classList.add('visible');
+        }
+    };
+
+    // Сразу вызываем при загрузке, чтобы скрыть, если находимся вверху
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+});
