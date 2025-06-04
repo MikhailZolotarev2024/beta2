@@ -811,14 +811,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    // Поведение при загрузке
+    // Если сразу не в самом верху
     if (window.scrollY > 0) {
         showNavbar();
     }
 
     // Слушатели событий
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', handleUserInteraction, { once: true });
-    window.addEventListener('keydown', handleUserInteraction, { once: true });
-    window.addEventListener('touchstart', handleUserInteraction, { once: true });
+    window.addEventListener('mousemove', handleUserInteraction);
+    window.addEventListener('keydown', handleUserInteraction);
+    window.addEventListener('touchstart', handleUserInteraction);
 });
