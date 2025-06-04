@@ -250,7 +250,7 @@ function createReviewCard(review) {
         </div>
         <div class="review-content">
             <span class="review-short">${review.short || ''}</span>
-            <button class="read-more">Подробнее</button>
+            <button class="read-more" data-i18n="review.more_details">Подробнее</button>
         </div>
     `;
     // Обработчик для кнопки "Подробнее"

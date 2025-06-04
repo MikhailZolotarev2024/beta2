@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             </div>
             <div class="review-content">
                 <span class="review-short">${review.short}</span>
-                <button class="expand-btn">Читать полностью</button>
+                <button class="expand-btn" data-i18n="review.more_details">Подробнее</button>
             </div>
         `;
         // Кнопка раскрытия — теперь открывает модалку
