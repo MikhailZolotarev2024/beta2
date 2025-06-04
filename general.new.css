@@ -953,8 +953,10 @@ header p {
   flex: 1;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 4; /* число строк */
+  -webkit-line-clamp: 4; /* Кол-во строк */
   -webkit-box-orient: vertical;
+  text-overflow: unset !important;
+  white-space: normal !important;
 }
 
 .news-card-more {
