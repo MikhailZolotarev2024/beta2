@@ -1,482 +1,542 @@
 [
-{
-    "name": "Grace C.",
+  {
+    "name": "jazzmaster_2023",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "J",
+    "short": "Quick response and resolution.",
+    "full": "Quick response and resolution.. These guys rock!",
+    "date": "2025-06-04"
+  },
+  {
+    "name": "kacper_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "K",
+    "short": "Trochę problemów na początku.",
+    "full": "Trochę problemów na początku ale obsługa klienta pomogła mi wszystko rozwiązać. Doceniam ich cierpliwość i profesjonalizm w trudnych sytuacjach. Polecam jeszcze raz",
+    "date": "2025-06-04"
+  },
+  {
+    "name": "gaming_wizard_42",
     "lang": "en",
     "flag": "GB",
     "letter": "G",
-    "short": "Really appreciated the constant updates. Got my refund quickly....",
-    "full": "I was initially skeptical about using this service, but I'm so glad I did. The process was smooth from start to finish. The team kept me informed at every step, and I received my refund much faster than expected. What impressed me most was their attention to detail and willingness to explain everything clearly. Highly recommend!"
-},
-{
-    "name": "Cheryl B.",
-    "lang": "ru",
-    "flag": "RU",
-    "letter": "C",
-    "short": "Была некоторая задержка с ответом, но в итоге всё решилось...",
-    "full": "Хочу поделиться своим опытом. Изначально была небольшая задержка с ответом от поддержки, что меня немного насторожило. Но когда они вышли на связь, я была приятно удивлена их профессионализмом. Они не только решили мою проблему, но и подробно объяснили, почему произошла задержка. В итоге всё решилось даже лучше, чем я ожидала. Особенно понравилось, что они не просто формально отписались, а действительно вникли в ситуацию."
-},
-{
-    "name": "Michael O.",
+    "short": "Very satisfied with the srv..",
+    "full": "Very satisfied with the service.. These guys rock!",
+    "date": "2025-05-31"
+  },
+  {
+    "name": "mikey_tech",
     "lang": "en",
     "flag": "GB",
     "letter": "M",
-    "short": "Quick and efficient service. Got my money back in 5 days.",
-    "full": "Quick and efficient service. Got my money back in 5 days."
-},
-{
-    "name": "Patricia G.",
+    "short": "Fast and efficient srv..",
+    "full": "Fast & efficient service..",
+    "date": "2025-05-30"
+  },
+  {
+    "name": "василий_игрок",
     "lang": "ru",
     "flag": "RU",
-    "letter": "P",
-    "short": "Сложно было разобраться вначале, но поддержка помогла...",
-    "full": "Сложно было разобраться вначале, не хватало инструкции, но поддержка помогла."
-},
-{
-    "name": "Stephen R.",
-    "lang": "en",
-    "flag": "GB",
-    "letter": "S",
-    "short": "Great support team, very responsive and helpful.",
-    "full": "Great support team, very responsive and helpful."
-},
-{
-    "name": "Autumn D.",
-    "lang": "en",
-    "flag": "GB",
-    "letter": "A",
-    "short": "Professional service, would use again.",
-    "full": "Professional service, would use again."
-},
-{
-    "name": "Joseph R.",
+    "letter": "В",
+    "short": "Спасибки огромное за помощь! Деньги вернули очень быстро.",
+    "full": "Спасибо огромное за помощь! Деньги вернули очень быстро всё прошло гладко. Спасибо ещё раз",
+    "date": "2025-05-30"
+  },
+  {
+    "name": "evgeniy_gamer",
     "lang": "ru",
     "flag": "RU",
-    "letter": "J",
-    "short": "Была некоторая задержка с ответом, но в итоге всё решилось...",
-    "full": "Была некоторая задержка с ответом, но в итоге всё решилось."
-},
-{
-    "name": "Mark H.",
-    "lang": "en",
-    "flag": "GB",
-    "letter": "M",
-    "short": "Excellent service, highly recommend!",
-    "full": "Excellent service, highly recommend!"
-},
-{
-    "name": "Ronald M.",
-    "lang": "ru",
-    "flag": "RU",
-    "letter": "R",
-    "short": "Сложно было разобраться вначале, но поддержка помогла...",
-    "full": "Сложно было разобраться вначале, не хватало инструкции, но поддержка помогла."
-},
-{
-    "name": "Sean G.",
-    "lang": "en",
-    "flag": "GB",
-    "letter": "S",
-    "short": "Fast and reliable service.",
-    "full": "Fast and reliable service."
-},
-{
-    "name": "Alyssa T.",
-    "lang": "ru",
-    "flag": "RU",
-    "letter": "A",
-    "short": "Была некоторая задержка с ответом, но в итоге всё решилось...",
-    "full": "Была некоторая задержка с ответом, но в итоге всё решилось."
-},
-{
-    "name": "Angela P.",
-    "lang": "en",
-    "flag": "GB",
-    "letter": "A",
-    "short": "Very satisfied with the service.",
-    "full": "Very satisfied with the service."
-},
-{
-    "name": "Jamie F.",
-    "lang": "ru",
-    "flag": "RU",
-    "letter": "J",
-    "short": "Вернули средства за неделю, я в восторге...",
-    "full": "Вернули средства за неделю, я в восторге. Уровень сервиса – на высоте."
-},
-{
-    "name": "Shannon P.",
-    "lang": "en",
-    "flag": "GB",
-    "letter": "S",
-    "short": "Great experience, will use again.",
-    "full": "Great experience, will use again."
-},
-{
-    "name": "Catherine R.",
-    "lang": "ru",
-    "flag": "RU",
-    "letter": "C",
-    "short": "Спасибо огромное за помощь! Деньги вернули очень быстро...",
-    "full": "Спасибо огромное за помощь! Деньги вернули очень быстро, всё прошло гладко."
-},
-{
-    "name": "Emily M.",
-    "lang": "en",
-    "flag": "GB",
     "letter": "E",
-    "short": "Quick response and resolution.",
-    "full": "Quick response and resolution."
-},
-{
-    "name": "Dave N.",
-    "lang": "ru",
-    "flag": "RU",
-    "letter": "D",
-    "short": "Вернули средства за неделю, я в восторге...",
-    "full": "Вернули средства за неделю, я в восторге. Уровень сервиса – на высоте."
-},
-{
-    "name": "Ryan P.",
-    "lang": "en",
-    "flag": "GB",
-    "letter": "R",
-    "short": "Excellent customer service.",
-    "full": "Excellent customer service."
-},
-{
-    "name": "Billy G.",
-    "lang": "ru",
-    "flag": "RU",
-    "letter": "B",
-    "short": "Спасибо огромное за помощь! Деньги вернули очень быстро...",
-    "full": "Спасибо огромное за помощь! Деньги вернули очень быстро, всё прошло гладко."
-},
-{
-    "name": "Anthony S.",
-    "lang": "en",
-    "flag": "GB",
-    "letter": "A",
-    "short": "Very professional team.",
-    "full": "Very professional team."
-},
-{
-    "name": "Tiffany R.",
-    "lang": "ru",
-    "flag": "RU",
-    "letter": "T",
-    "short": "Профессиональная команда, поддержка на связи...",
-    "full": "Профессиональная команда, поддержка на связи, всё понравилось!"
-},
-{
-    "name": "Kevin B.",
-    "lang": "en",
-    "flag": "GB",
-    "letter": "K",
-    "short": "Great support, fast resolution.",
-    "full": "Great support, fast resolution."
-},
-{
-    "name": "Amanda L.",
-    "lang": "ru",
-    "flag": "RU",
-    "letter": "A",
-    "short": "Профессиональная команда, поддержка на связи...",
-    "full": "Профессиональная команда, поддержка на связи, всё понравилось!"
-},
-{
-    "name": "Kevin W.",
-    "lang": "en",
-    "flag": "GB",
-    "letter": "K",
-    "short": "Very satisfied with the service.",
-    "full": "Very satisfied with the service."
-},
-{
-    "name": "Joanna J.",
-    "lang": "ru",
-    "flag": "RU",
-    "letter": "J",
-    "short": "Профессиональная команда, поддержка на связи...",
-    "full": "Профессиональная команда, поддержка на связи, всё понравилось!"
-},
-{
-    "name": "Blake C.",
-    "lang": "en",
-    "flag": "GB",
-    "letter": "B",
-    "short": "Fast and efficient service.",
-    "full": "Fast and efficient service."
-},
-{
-    "name": "Jamie S.",
-    "lang": "ru",
-    "flag": "RU",
-    "letter": "J",
-    "short": "Спасибо огромное за помощь! Деньги вернули очень быстро...",
-    "full": "Спасибо огромное за помощь! Деньги вернули очень быстро, всё прошло гладко."
-},
-{
-    "name": "Jeremy S.",
-    "lang": "en",
-    "flag": "GB",
-    "letter": "J",
-    "short": "Excellent experience overall.",
-    "full": "Excellent experience overall."
-},
-{
-    "name": "Kimberly W.",
-    "lang": "ru",
-    "flag": "RU",
-    "letter": "K",
-    "short": "Вернули средства за неделю, я в восторге...",
-    "full": "Вернули средства за неделю, я в восторге. Уровень сервиса – на высоте."
-},
-{
-    "name": "Nicholas M.",
-    "lang": "en",
-    "flag": "GB",
-    "letter": "N",
-    "short": "Very professional and helpful.",
-    "full": "Very professional and helpful."
-},
-{
-    "name": "Travis C.",
-    "lang": "ru",
-    "flag": "RU",
-    "letter": "T",
-    "short": "Вернули средства за неделю, я в восторге...",
-    "full": "Вернули средства за неделю, я в восторге. Уровень сервиса – на высоте."
-},
-{
-    "name": "Katarzyna W.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "K",
-    "short": "Świetna obsługa, szybki zwrot pieniędzy...",
-    "full": "Jestem pod ogromnym wrażeniem profesjonalizmu tej firmy. Początkowo miałam obawy, ale proces okazał się bardzo prosty i przejrzysty. Zespół wsparcia był zawsze dostępny i odpowiadał na wszystkie moje pytania. Zwrot środków otrzymałam w ciągu zaledwie 3 dni! Szczególnie doceniam ich cierpliwość i chęć pomocy. Na pewno skorzystam z ich usług ponownie w przyszłości."
-},
-{
-    "name": "Piotr K.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "P",
-    "short": "Szybko i sprawnie, polecam!",
-    "full": "Szybko i sprawnie, polecam!"
-},
-{
-    "name": "Anna M.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "A",
-    "short": "Trochę długo czekałam na odpowiedź, ale warto było...",
-    "full": "Trochę długo czekałam na odpowiedź, ale warto było. Wszystko zostało rozwiązane profesjonalnie i z należytą starannością. Szczególnie podobało mi się podejście do klienta - nie traktowali mnie jak kolejnego numeru w systemie. Mimo początkowych opóźnień, jestem bardzo zadowolona z końcowego rezultatu."
-},
-{
-    "name": "Marek D.",
+    "short": "Вернули средства за неделю, я в восторге.",
+    "full": "Вернули средства за неделю, я в восторге. Уровень сервиса – на высоте.",
+    "date": "2025-05-29"
+  },
+  {
+    "name": "marcin_gracz",
     "lang": "pl",
     "flag": "PL",
     "letter": "M",
-    "short": "Profesjonalna obsługa, szybki zwrot.",
-    "full": "Profesjonalna obsługa, szybki zwrot."
-},
-{
-    "name": "Agnieszka S.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "A",
-    "short": "Polecam z całego serca!...",
-    "full": "Polecam z całego serca! Przeszłam przez cały proces zwrotu środków i muszę przyznać, że byłam pod wrażeniem. Zespół wsparcia był niezwykle pomocny, odpowiadali na wszystkie moje pytania, nawet te najprostsze. Proces był przejrzysty, a komunikacja - wzorowa. Dostałam zwrot w ciągu tygodnia, co jest świetnym wynikiem. Szczególnie doceniam ich cierpliwość i profesjonalizm w trudnych sytuacjach."
-},
-{
-    "name": "Tomasz B.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "T",
-    "short": "Świetna firma, szybka obsługa.",
-    "full": "Świetna firma, szybka obsługa."
-},
-{
-    "name": "Magdalena K.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "M",
-    "short": "Trochę problemów na początku, ale...",
-    "full": "Trochę problemów na początku, ale obsługa klienta pomogła mi wszystko rozwiązać. Doceniam ich cierpliwość i profesjonalizm."
-},
-{
-    "name": "Jakub W.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "J",
-    "short": "Szybki zwrot pieniędzy, polecam!",
-    "full": "Szybki zwrot pieniędzy, polecam!"
-},
-{
-    "name": "Karolina P.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "K",
-    "short": "Profesjonalna obsługa, szybka reakcja...",
-    "full": "Profesjonalna obsługa, szybka reakcja na wszystkie moje pytania. Szczególnie podobało mi się, że nie musiałam długo czekać na odpowiedzi. Proces zwrotu środków był przejrzysty i szybki. Na pewno skorzystam z ich usług ponownie!"
-},
-{
-    "name": "Łukasz M.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "Ł",
-    "short": "Dobra firma, polecam.",
-    "full": "Dobra firma, polecam."
-},
-{
-    "name": "Natalia S.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "N",
-    "short": "Świetna obsługa, szybki zwrot pieniędzy...",
-    "full": "Świetna obsługa, szybki zwrot pieniędzy. Początkowo miałam obawy, ale proces okazał się bardzo prosty. Zespół wsparcia był zawsze dostępny i odpowiadał na wszystkie moje pytania. Szczególnie doceniam ich cierpliwość i chęć pomocy."
-},
-{
-    "name": "Paweł K.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "P",
-    "short": "Szybko i sprawnie.",
-    "full": "Szybko i sprawnie."
-},
-{
-    "name": "Monika W.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "M",
-    "short": "Trochę długo czekałam na odpowiedź...",
-    "full": "Trochę długo czekałam na odpowiedź, ale warto było. Wszystko zostało rozwiązane profesjonalnie i z należytą starannością. Szczególnie podobało mi się podejście do klienta - nie traktowali mnie jak kolejnego numeru w systemie."
-},
-{
-    "name": "Adam D.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "A",
-    "short": "Profesjonalna obsługa.",
-    "full": "Profesjonalna obsługa."
-},
-{
-    "name": "Ewa M.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "E",
-    "short": "Polecam z całego serca!...",
-    "full": "Polecam z całego serca! Przeszłam przez cały proces zwrotu środków i muszę przyznać, że byłam pod wrażeniem. Zespół wsparcia był niezwykle pomocny, odpowiadali na wszystkie moje pytania, nawet te najprostsze. Proces był przejrzysty, a komunikacja - wzorowa."
-},
-{
-    "name": "Michał K.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "M",
-    "short": "Świetna firma.",
-    "full": "Świetna firma."
-},
-{
-    "name": "Aleksandra P.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "A",
-    "short": "Trochę problemów na początku...",
-    "full": "Trochę problemów na początku, ale obsługa klienta pomogła mi wszystko rozwiązać. Doceniam ich cierpliwość i profesjonalizm w trudnych sytuacjach."
-},
-{
-    "name": "Krzysztof W.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "K",
-    "short": "Szybki zwrot.",
-    "full": "Szybki zwrot."
-},
-{
-    "name": "Joanna S.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "J",
-    "short": "Profesjonalna obsługa, szybka reakcja...",
-    "full": "Profesjonalna obsługa, szybka reakcja na wszystkie moje pytania. Szczególnie podobało mi się, że nie musiałam długo czekać na odpowiedzi. Proces zwrotu środków był przejrzysty i szybki."
-},
-{
-    "name": "Robert M.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "R",
-    "short": "Dobra firma.",
-    "full": "Dobra firma."
-},
-{
-    "name": "Patrycja K.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "P",
-    "short": "Świetna obsługa, szybki zwrot pieniędzy...",
-    "full": "Świetna obsługa, szybki zwrot pieniędzy. Początkowo miałam obawy, ale proces okazał się bardzo prosty. Zespół wsparcia był zawsze dostępny i odpowiadał na wszystkie moje pytania. Szczególnie doceniam ich cierpliwość i chęć pomocy w każdej sytuacji."
-},
-{
-    "name": "Daniel W.",
-    "lang": "pl",
-    "flag": "PL",
-    "letter": "D",
-    "short": "Szybko i sprawnie.",
-    "full": "Szybko i sprawnie."
-},
-{
-    "name": "Sylwia P.",
+    "short": "Polecam z całego serca!.",
+    "full": "Polecam z calego serca! Przeszlam przez caly proces zwrotu środków i musze przyznać, że bylam pod wrażeniem. Zespól wsparcia byl niezwykle pomocny, odpowiadali na wszystkie moje pytania, nawet te najprostsze. Proces byl przejrzysty, a komunikacja - wzorowa. Dzieki wielkie!",
+    "date": "2025-05-27"
+  },
+  {
+    "name": "sara_pl",
     "lang": "pl",
     "flag": "PL",
     "letter": "S",
-    "short": "Trochę długo czekałam na odpowiedź...",
-    "full": "Trochę długo czekałam na odpowiedź, ale warto było. Wszystko zostało rozwiązane profesjonalnie i z należytą starannością. Szczególnie podobało mi się podejście do klienta - nie traktowali mnie jak kolejnego numeru w systemie."
-},
-{
-    "name": "Marcin D.",
+    "short": "Profesjonalna obsluga.",
+    "full": "Profesjonalna obsluga. Dzieki wielkie!",
+    "date": "2025-05-26"
+  },
+  {
+    "name": "чернов_игрок",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "Ч",
+    "short": "Профессиональная команда, саппорт на связи.",
+    "full": "Профессиональная команда, поддержка на связи, всё понравилось! Ребята молодцы!",
+    "date": "2025-05-23"
+  },
+  {
+    "name": "lukasz_gamer",
     "lang": "pl",
     "flag": "PL",
-    "letter": "M",
-    "short": "Profesjonalna obsługa.",
-    "full": "Profesjonalna obsługa."
-},
-{
-    "name": "Dominika M.",
+    "letter": "L",
+    "short": "Profesjonalna obsluga, szybka reakcja.",
+    "full": "Profesjonalna obsluga szybka reakcja na wszystkie moje pytania. Szczególnie podobalo mi się że nie musialam dlugo czekać na odpowiedzi. Proces zwrotu środków byl przejrzysty i szybki. Dzieki wielkie!",
+    "date": "2025-05-21"
+  },
+  {
+    "name": "будимир_игрок",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "Б",
+    "short": "Профессиональная команда, саппорт на связи.",
+    "full": "Профессиональная команда, поддержка на связи, всё понравилось! Спасибо ещё раз",
+    "date": "2025-05-19"
+  },
+  {
+    "name": "rodion_gamer",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "R",
+    "short": "Вернули средства за неделю, я в восторге.",
+    "full": "Вернули средства за неделю, я в восторге. Уровень сервиса – на высоте.",
+    "date": "2025-05-19"
+  },
+  {
+    "name": "эмилия_игрок",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "Э",
+    "short": "Сложно было разобраться вначале, но саппорт помогла.",
+    "full": "Сложно было разобраться вначале не хватало инструкции но поддержка помогла.",
+    "date": "2025-05-18"
+  },
+  {
+    "name": "julian_pl",
     "lang": "pl",
     "flag": "PL",
-    "letter": "D",
-    "short": "Polecam z całego serca!...",
-    "full": "Polecam z całego serca! Przeszłam przez cały proces zwrotu środków i muszę przyznać, że byłam pod wrażeniem. Zespół wsparcia był niezwykle pomocny, odpowiadali na wszystkie moje pytania, nawet te najprostsze. Proces był przejrzysty, a komunikacja - wzorowa."
-},
-{
-    "name": "Bartosz K.",
+    "letter": "J",
+    "short": "Polecam z całego serca!.",
+    "full": "Polecam z calego serca! Przeszlam przez caly proces zwrotu środków i muszę przyznać, że bylam pod wrażeniem. Zespól wsparcia byl niezwykle pomocny, odpowiadali na wszystkie moje pytania, nawet te najprostsze. Proces byl przejrzysty, a komunikacja - wzorowa. Dzieki wielkie!",
+    "date": "2025-05-17"
+  },
+  {
+    "name": "adrianna_pl",
     "lang": "pl",
     "flag": "PL",
-    "letter": "B",
-    "short": "Świetna firma.",
-    "full": "Świetna firma."
-},
-{
-    "name": "Weronika P.",
+    "letter": "A",
+    "short": "Trochę problemów na początku.",
+    "full": "Trochę problemów na poczatku, ale obsluga klienta pomogla mi wszystko rozwiazać. Doceniam ich cierpliwość i profesjonalizm w trudnych sytuacjach. Polecam jeszcze raz",
+    "date": "2025-05-13"
+  },
+  {
+    "name": "noskov_gamer",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "N",
+    "short": "Профессиональная команда, саппорт на связи.",
+    "full": "Профессиональная команда, поддержка на связи, всё понравилось!",
+    "date": "2025-05-12"
+  },
+  {
+    "name": "wilmak_pl",
     "lang": "pl",
     "flag": "PL",
     "letter": "W",
-    "short": "Trochę problemów na początku...",
-    "full": "Trochę problemów na początku, ale obsługa klienta pomogła mi wszystko rozwiązać. Doceniam ich cierpliwość i profesjonalizm w trudnych sytuacjach."
-},
-{
-    "name": "Tomasz D.",
+    "short": "Polecam z całego serca!.",
+    "full": "Polecam z calego serca! Przeszlam przez caly proces zwrotu środków i muszę przyznać, że bylam pod wrażeniem. Zespól wsparcia byl niezwykle pomocny, odpowiadali na wszystkie moje pytania, nawet te najprostsze. Proces byl przejrzysty, a komunikacja - wzorowa. Polecam jeszcze raz",
+    "date": "2025-05-12"
+  },
+  {
+    "name": "marvin_tech",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "M",
+    "short": "Very professional and helpful.",
+    "full": "Very professional & helpful.. These guys rock!",
+    "date": "2025-05-11"
+  },
+  {
+    "name": "красильникова_игрок",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "К",
+    "short": "Вернули средства за неделю, я в восторге.",
+    "full": "Вернули средства за неделю я в восторге. Уровень сервиса – на высоте. Спасибо ещё раз",
+    "date": "2025-05-10"
+  },
+  {
+    "name": "waclawsara_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "W",
+    "short": "Profesjonalna obsluga.",
+    "full": "Profesjonalna obsluga. Polecam jeszcze raz",
+    "date": "2025-05-08"
+  },
+  {
+    "name": "austin_gamer",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "A",
+    "short": "Really appreciated the constant updates. Got my refund quickly..",
+    "full": "I was initially skeptical about using this service, but I'm so glad I did.. The process was smooth from start to finish.. The team kept me informed at every step, and I received my refund much faster than expected.. What impressed me most was their attention to detail and willingness to explain everything clearly.. Highly recommend!",
+    "date": "2025-05-04"
+  },
+  {
+    "name": "wojaczek_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "W",
+    "short": "Trochę problemów na początku, ale.",
+    "full": "Troche problemów na poczatku ale obsługa klienta pomogła mi wszystko rozwiazać. Doceniam ich cierpliwość i profesjonalizm. Polecam jeszcze raz",
+    "date": "2025-05-04"
+  },
+  {
+    "name": "тимофей_игрок",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "Т",
+    "short": "Спасибки огромное за помощь! Деньги вернули очень быстро.",
+    "full": "Спасибо огромное за помощь! Деньги вернули очень быстро всё прошло гладко. Ребята молодцы!",
+    "date": "2025-05-03"
+  },
+  {
+    "name": "adam_tech",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "A",
+    "short": "Fast and reliable srv..",
+    "full": "Fast & reliable service. Thank you again!",
+    "date": "2025-05-02"
+  },
+  {
+    "name": "charles_gamer",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "C",
+    "short": "Quick and efficient srv.. Got my money back in 5 days.",
+    "full": "Quick and efficient service. Got my money back in 5 days. These guys rock!",
+    "date": "2025-05-01"
+  },
+  {
+    "name": "jill_tech",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "J",
+    "short": "Excellent srv., highly recommend!",
+    "full": "Excellent service, highly recommend! These guys rock!",
+    "date": "2025-05-01"
+  },
+  {
+    "name": "ffurgal_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "F",
+    "short": "Szybki zwrot pieniędzy, polecam!",
+    "full": "Szybki zwrot pieniedzy, polecam! Dzieki wielkie!",
+    "date": "2025-05-01"
+  },
+  {
+    "name": "gabriel_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "G",
+    "short": "Profesjonalna obsluga, szybka reakcja.",
+    "full": "Profesjonalna obsluga szybka reakcja na wszystkie moje pytania. Szczególnie podobalo mi sie że nie musialam dlugo czekać na odpowiedzi. Proces zwrotu środków byl przejrzysty i szybki. Na pewno skorzystam z ich uslug ponownie! Dzieki wielkie!",
+    "date": "2025-04-28"
+  },
+  {
+    "name": "borys_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "B",
+    "short": "Szybko i sprawnie.",
+    "full": "Szybko i sprawnie.",
+    "date": "2025-04-28"
+  },
+  {
+    "name": "julita_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "J",
+    "short": "Super firma.",
+    "full": "Świetna firma. Dzieki wielkie!",
+    "date": "2025-04-28"
+  },
+  {
+    "name": "kristin_tech",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "K",
+    "short": "Very satisfied with the srv..",
+    "full": "Very satisfied with the service. These guys rock!",
+    "date": "2025-04-27"
+  },
+  {
+    "name": "elizabeth_gamer",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "E",
+    "short": "Gr8 support team, very responsive and helpful.",
+    "full": "Great support team, very responsive & helpful..",
+    "date": "2025-04-22"
+  },
+  {
+    "name": "tomasz_pl",
     "lang": "pl",
     "flag": "PL",
     "letter": "T",
-    "short": "Profesjonalna obsługa.",
-    "full": "Profesjonalna obsługa."
-},
-{
-    "name": "Karolina M.",
+    "short": "Trochę długo czekałam na odpowiedź.",
+    "full": "Troche długo czekałam na odpowiedź, ale warto było. Wszystko zostało rozwiazane profesjonalnie i z należyta starannościa. Szczególnie podobało mi sie podejście do klienta - nie traktowali mnie jak kolejnego numeru w systemie. Polecam jeszcze raz",
+    "date": "2025-04-22"
+  },
+  {
+    "name": "натан_игрок",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "Н",
+    "short": "Спасибки огромное за помощь! Деньги вернули очень быстро.",
+    "full": "Спасибо огромное за помощь! Деньги вернули очень быстро, все прошло гладко. Ребята молодцы!",
+    "date": "2025-04-21"
+  },
+  {
+    "name": "larionov_игрок",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "L",
+    "short": "Вернули средства за неделю, я в восторге.",
+    "full": "Вернули средства за неделю я в восторге. Уровень сервиса – на высоте. Спасибо ещё раз",
+    "date": "2025-04-20"
+  },
+  {
+    "name": "apolonia_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "A",
+    "short": "Trochę długo czekałam na odpowiedź.",
+    "full": "Troche dlugo czekalam na odpowiedź, ale warto bylo. Wszystko zostalo rozwiazane profesjonalnie i z należyta starannościa. Szczególnie podobalo mi sie podejście do klienta - nie traktowali mnie jak kolejnego numeru w systemie. Dzieki wielkie!",
+    "date": "2025-04-18"
+  },
+  {
+    "name": "courtney_tech",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "C",
+    "short": "Excellent experience overall.",
+    "full": "Excellent experience overall. These guys rock!",
+    "date": "2025-04-17"
+  },
+  {
+    "name": "ignacy_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "I",
+    "short": "Super obsluga, szybki zwrot pieniędzy.",
+    "full": "Jestem pod ogromnym wrażeniem profesjonalizmu tej firmy. Poczatkowo miałam obawy, ale proces okazał sie bardzo prosty i przejrzysty. Zespół wsparcia był zawsze dostepny i odpowiadał na wszystkie moje pytania. Zwrot środków otrzymałam w ciagu zaledwie 3 dni! Szczególnie doceniam ich cierpliwość i cheć pomocy. Na pewno skorzystam z ich usług ponownie w przyszłości. Polecam jeszcze raz",
+    "date": "2025-04-17"
+  },
+  {
+    "name": "buglak_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "B",
+    "short": "Szybko i sprawnie.",
+    "full": "Szybko i sprawnie. Polecam jeszcze raz",
+    "date": "2025-04-16"
+  },
+  {
+    "name": "michael_gamer",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "M",
+    "short": "Excellent customer srv..",
+    "full": "Excellent customer service.",
+    "date": "2025-04-14"
+  },
+  {
+    "name": "фотий_игрок",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "Ф",
+    "short": "Была некоторая задержка с ответом, но в итоге всё решилось.",
+    "full": "Хочу поделиться своим опытом. Изначально была небольшая задержка с ответом от поддержки, что меня немного насторожило. Но когда они вышли на связь, я была приятно удивлена их профессионализмом. Они не только решили мою проблему, но и подробно объяснили, почему произошла задержка. В итоге всё решилось даже лучше, чем я ожидала. Особенно понравилось, что они не просто формально отписались, а действительно вникли в ситуацию. Спасибо ещё раз",
+    "date": "2025-04-13"
+  },
+  {
+    "name": "ewelina_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "E",
+    "short": "Dobra firma.",
+    "full": "Dobra firma. Polecam jeszcze raz",
+    "date": "2025-04-11"
+  },
+  {
+    "name": "абрамова_игрок",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "А",
+    "short": "Была некоторая задержка с ответом, но в итоге всё решилось.",
+    "full": "Была некоторая задержка с ответом, но в итоге всё решилось. Спасибо ещё раз",
+    "date": "2025-04-10"
+  },
+  {
+    "name": "julian_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "J",
+    "short": "Polecam z całego serca!.",
+    "full": "Polecam z całego serca! Przeszłam przez cały proces zwrotu środków i muszę przyznać że byłam pod wrażeniem. Zespół wsparcia był niezwykle pomocny odpowiadali na wszystkie moje pytania nawet te najprostsze. Proces był przejrzysty a komunikacja - wzorowa. Dostałam zwrot w ciągu tygodnia co jest świetnym wynikiem. Szczególnie doceniam ich cierpliwość i profesjonalizm w trudnych sytuacjach. Dzieki wielkie!",
+    "date": "2025-04-09"
+  },
+  {
+    "name": "kazimierz_pl",
     "lang": "pl",
     "flag": "PL",
     "letter": "K",
-    "short": "Polecam z całego serca!...",
-    "full": "Polecam z całego serca! Przeszłam przez cały proces zwrotu środków i muszę przyznać, że byłam pod wrażeniem. Zespół wsparcia był niezwykle pomocny, odpowiadali na wszystkie moje pytania, nawet te najprostsze. Proces był przejrzysty, a komunikacja - wzorowa."
-}
+    "short": "Profesjonalna obsluga.",
+    "full": "Profesjonalna obsługa.",
+    "date": "2025-04-08"
+  },
+  {
+    "name": "jason_tech",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "J",
+    "short": "Gr8 experience, will use again.",
+    "full": "Great experience, will use again.",
+    "date": "2025-04-07"
+  },
+  {
+    "name": "timothy_gamer",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "T",
+    "short": "Very professional team.",
+    "full": "Very professional team. These guys rock!",
+    "date": "2025-04-06"
+  },
+  {
+    "name": "melania_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "M",
+    "short": "Profesjonalna obsluga, szybki zwrot.",
+    "full": "Profesjonalna obsluga, szybki zwrot.",
+    "date": "2025-04-05"
+  },
+  {
+    "name": "tolamak_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "T",
+    "short": "Super obsluga, szybki zwrot pieniędzy.",
+    "full": "Świetna obsluga, szybki zwrot pieniędzy. Poczatkowo mialam obawy, ale proces okazal się bardzo prosty. Zespól wsparcia byl zawsze dostępny i odpowiadal na wszystkie moje pytania. Szczególnie doceniam ich cierpliwość i chęć pomocy. Dzieki wielkie!",
+    "date": "2025-04-03"
+  },
+  {
+    "name": "arkadiusz_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "A",
+    "short": "Szybki zwrot.",
+    "full": "Szybki zwrot. Dzieki wielkie!",
+    "date": "2025-03-28"
+  },
+  {
+    "name": "юрий_игрок",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "Ю",
+    "short": "Сложно было разобраться вначале, но саппорт помогла.",
+    "full": "Сложно было разобраться вначале, не хватало инструкции, но поддержка помогла. Спасибо ещё раз",
+    "date": "2025-03-27"
+  },
+  {
+    "name": "liu_tech",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "L",
+    "short": "Gr8 support, fast resolution.",
+    "full": "Great support, fast resolution. These guys rock!",
+    "date": "2025-03-23"
+  },
+  {
+    "name": "николай_игрок",
+    "lang": "ru",
+    "flag": "RU",
+    "letter": "Н",
+    "short": "Была некоторая задержка с ответом, но в итоге всё решилось.",
+    "full": "Была некоторая задержка с ответом, но в итоге всё решилось.",
+    "date": "2025-03-20"
+  },
+  {
+    "name": "wwawrzenczyk_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "W",
+    "short": "Super firma, szybka obsluga.",
+    "full": "Świetna firma, szybka obsługa. Dzieki wielkie!",
+    "date": "2025-03-13"
+  },
+  {
+    "name": "antonisterna_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "A",
+    "short": "Dobra firma, polecam.",
+    "full": "Dobra firma, polecam. Polecam jeszcze raz",
+    "date": "2025-03-13"
+  },
+  {
+    "name": "julianna_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "J",
+    "short": "Szybko i sprawnie, polecam!",
+    "full": "Szybko i sprawnie, polecam! Polecam jeszcze raz",
+    "date": "2025-03-12"
+  },
+  {
+    "name": "hailey_tech",
+    "lang": "en",
+    "flag": "GB",
+    "letter": "H",
+    "short": "Professional srv., would use again.",
+    "full": "Professional service would use again.... Thank you again!",
+    "date": "2025-03-11"
+  },
+  {
+    "name": "achtelik_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "A",
+    "short": "Trochę długo czekałam na odpowiedź, ale warto było.",
+    "full": "Troche długo czekałam na odpowiedź, ale warto było. Wszystko zostało rozwiązane profesjonalnie i z należytą starannością. Szczególnie podobało mi sie podejście do klienta - nie traktowali mnie jak kolejnego numeru w systemie. Mimo początkowych opóźnień, jestem bardzo zadowolona z końcowego rezultatu. Polecam jeszcze raz",
+    "date": "2025-03-11"
+  },
+  {
+    "name": "aurelia_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "A",
+    "short": "Super firma.",
+    "full": "Świetna firma. Polecam jeszcze raz",
+    "date": "2025-03-08"
+  },
+  {
+    "name": "llatko_pl",
+    "lang": "pl",
+    "flag": "PL",
+    "letter": "L",
+    "short": "Super obsluga, szybki zwrot pieniędzy.",
+    "full": "Świetna obsluga szybki zwrot pieniędzy. Początkowo mialam obawy ale proces okazal się bardzo prosty. Zespól wsparcia byl zawsze dostępny i odpowiadal na wszystkie moje pytania. Szczególnie doceniam ich cierpliwość i chęć pomocy w każdej sytuacji.",
+    "date": "2025-03-08"
+  }
 ]
