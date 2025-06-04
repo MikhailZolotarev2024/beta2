@@ -118,7 +118,6 @@
       fullTextarea.value = '';
       submitBtn.textContent = 'Спасибо!';
       setTimeout(() => submitBtn.textContent = '📩 Отправить отзыв', 1500);
-      renderLocalReviews();
       // Вызываем обновление отображения пагинации после добавления нового отзыва
       if (typeof updateReviewsDisplay === 'function') {
         updateReviewsDisplay();

@@ -713,7 +713,7 @@ async function initializeApp() {
     const localReviews = getLocalReviews(); // Функция из reviews-local.js
     
     // 3. Объединяем все отзывы и добавляем их в DOM
-    allReviews = generatedReviews.concat(localReviews); // Объединяем данные для пагинации
+    allReviews = localReviews.concat(generatedReviews); // Объединяем данные для пагинации, локальные отзывы первыми
     
     const reviewsContainer = document.querySelector('.reviews-carousel');
     if (reviewsContainer) {
