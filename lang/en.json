@@ -40,7 +40,7 @@
   "form-country-question": "🌍 Which country are you from?",
   "form-short-review": "💬 Briefly describe your experience",
   "form-full-review": "📖 Want to tell more?",
-  "send-review-btn": "📩 Send review",
+  "send-review-btn": "📩 Send Review",
 
   "footer-company-title": "Company",
   "footer-about": "About us",
@@ -244,5 +244,6 @@
   "legal-security": "Transaction Security",
   "legal-support": "Legal Support",
   "legal-abuse": "Unacceptable Abuse",
-  "legal-loading": "Loading..."
+  "legal-loading": "Loading...",
+  "review.more_details": "Read More"
 }
