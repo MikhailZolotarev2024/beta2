@@ -952,8 +952,9 @@ header p {
   color: #eee;
   flex: 1;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* число строк */
+  -webkit-box-orient: vertical;
 }
 
 .news-card-more {

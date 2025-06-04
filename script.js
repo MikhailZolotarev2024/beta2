@@ -772,29 +772,53 @@ function getLocalReviews() {
   }
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const navbar = document.querySelector('.navbar');
+    let userInteracted = false;
 
-    const isHomePage = window.location.pathname.endsWith('index.html') ||
-                       window.location.pathname === '/' ||
-                       window.location.pathname.endsWith('index');
+    const isHomePage =
+        window.location.pathname.endsWith('index.html') ||
+        window.location.pathname === '/' ||
+        window.location.pathname.endsWith('index');
 
     if (!isHomePage) {
         navbar.classList.add('visible');
         return;
     }
 
-    // Обновляем состояние при каждом скролле
-    const handleScroll = () => {
-        if (window.scrollY === 0) {
+    const showNavbar = () => {
+        navbar.classList.add('visible');
+        userInteracted = true;
+    };
+
+    const hideNavbar = () => {
+        if (window.scrollY === 0 && userInteracted) {
             navbar.classList.remove('visible');
-        } else {
-            navbar.classList.add('visible');
         }
     };
 
-    // Сразу вызываем при загрузке, чтобы скрыть, если находимся вверху
-    handleScroll();
+    const handleScroll = () => {
+        if (window.scrollY > 0) {
+            showNavbar();
+        } else {
+            hideNavbar();
+        }
+    };
 
+    const handleUserInteraction = () => {
+        if (!userInteracted) {
+            showNavbar();
+        }
+    };
+
+    // Поведение при загрузке
+    if (window.scrollY > 0) {
+        showNavbar();
+    }
+
+    // Слушатели событий
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleUserInteraction, { once: true });
+    window.addEventListener('keydown', handleUserInteraction, { once: true });
+    window.addEventListener('touchstart', handleUserInteraction, { once: true });
 });
