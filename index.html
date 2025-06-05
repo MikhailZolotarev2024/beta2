@@ -464,5 +464,40 @@ min-height:40px;
 <script src="newsdata.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
 <script src="script.js"></script>
+<script>
+    function xor(str, key = 'superXorKey123') {
+      return [...str].map((c, i) =>
+        String.fromCharCode(c.charCodeAt(0) ^ key.charCodeAt(i % key.length))
+      ).join('');
+    }
+
+    (function checkAccess() {
+      const encrypted = localStorage.getItem('entryKey');
+      const attempts = parseInt(localStorage.getItem('entryAttempts') || '0', 10);
+      let isValid = false;
+
+      try {
+        const decrypted = xor(atob(encrypted), 'superXorKey123');
+        if (decrypted.startsWith('verify_')) {
+          const timestamp = parseInt(decrypted.split('_')[1], 10);
+          isValid = (Date.now() - timestamp) < 1000 * 60 * 60; // 1 час
+        }
+      } catch {}
+
+      if (!isValid) {
+        localStorage.removeItem('entryKey');
+        const newAttempts = attempts + 1;
+        localStorage.setItem('entryAttempts', newAttempts.toString());
+        if (newAttempts >= 3) {
+          window.location.href = 'https://youtube.com';
+        } else {
+          const current = location.pathname;
+          window.location.href = `https://mikhailzolotarev2024.github.io/beta2/cloak.html?returnTo=${encodeURIComponent(current)}`;
+        }
+      } else {
+        localStorage.removeItem('entryAttempts');
+      }
+    })();
+</script>
 </body>
 </html>
