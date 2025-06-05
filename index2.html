@@ -188,7 +188,7 @@
             ).join('');
         }
 
-        (function checkAccess() {
+        document.addEventListener('DOMContentLoaded', function() {
             const encrypted = localStorage.getItem('entryKey');
             const attempts = parseInt(localStorage.getItem('entryAttempts') || '0', 10);
             let isValid = false;
@@ -214,7 +214,7 @@
             } else {
                 localStorage.removeItem('entryAttempts');
             }
-        })();
+        });
     </script>
 </head>
 <body>

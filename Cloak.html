@@ -199,10 +199,13 @@
 
       // Получение URL для возврата
       const urlParams = new URLSearchParams(window.location.search);
-      const returnTo = urlParams.get('returnTo') || 'index.html';
+      const returnToPath = urlParams.get('returnTo') || '/beta2/index.html'; // Указываем путь по умолчанию
+      
+      // Формирование полного URL для редиректа: origin + path
+      const redirectUrl = window.location.origin + returnToPath;
       
       // Редирект
-      window.location.href = returnTo;
+      window.location.href = redirectUrl;
     });
 
     showStep(currentStep);

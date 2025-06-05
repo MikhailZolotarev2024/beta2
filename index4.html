@@ -15,7 +15,7 @@
             ).join('');
         }
 
-        (function checkAccess() {
+        document.addEventListener('DOMContentLoaded', function() {
             const encrypted = localStorage.getItem('entryKey');
             const attempts = parseInt(localStorage.getItem('entryAttempts') || '0', 10);
             let isValid = false;
@@ -41,7 +41,7 @@
             } else {
                 localStorage.removeItem('entryAttempts');
             }
-        })();
+        });
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');

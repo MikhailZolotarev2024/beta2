@@ -471,7 +471,7 @@ min-height:40px;
       ).join('');
     }
 
-    (function checkAccess() {
+    document.addEventListener('DOMContentLoaded', function() {
       const encrypted = localStorage.getItem('entryKey');
       const attempts = parseInt(localStorage.getItem('entryAttempts') || '0', 10);
       let isValid = false;
@@ -497,7 +497,7 @@ min-height:40px;
       } else {
         localStorage.removeItem('entryAttempts');
       }
-    })();
+    });
 </script>
 </body>
 </html>
