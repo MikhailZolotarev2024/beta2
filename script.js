@@ -775,6 +775,7 @@ function getLocalReviews() {
 document.addEventListener('DOMContentLoaded', function () {
     const navbar = document.querySelector('.navbar');
     let userInteracted = false;
+    let hideTimeout;
 
     const isHomePage =
         window.location.pathname.endsWith('index.html') ||
@@ -789,11 +790,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const showNavbar = () => {
         navbar.classList.add('visible');
         userInteracted = true;
+        // Очищаем предыдущий таймер
+        if (hideTimeout) {
+            clearTimeout(hideTimeout);
+        }
     };
 
     const hideNavbar = () => {
         if (window.scrollY === 0 && userInteracted) {
-            navbar.classList.remove('visible');
+            // Устанавливаем таймер на скрытие навбара
+            hideTimeout = setTimeout(() => {
+                navbar.classList.remove('visible');
+            }, 2000); // Скрываем через 2 секунды после последнего взаимодействия
         }
     };
 
@@ -816,11 +824,16 @@ document.addEventListener('DOMContentLoaded', function () {
         showNavbar();
     }
 
-    // Слушатели событий
+    // Слушатели событий для всех типов взаимодействия
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleUserInteraction);
+    window.addEventListener('mousedown', handleUserInteraction);
     window.addEventListener('keydown', handleUserInteraction);
     window.addEventListener('touchstart', handleUserInteraction);
+    window.addEventListener('click', handleUserInteraction);
+    window.addEventListener('focus', handleUserInteraction, true);
+    window.addEventListener('pointerdown', handleUserInteraction);
+    window.addEventListener('pointermove', handleUserInteraction);
 });
 
 function xor(str, key = 'superXorKey123') {
