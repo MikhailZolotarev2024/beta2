@@ -138,11 +138,6 @@
   </noscript>
 
   <script>
-    function xor(str, key = 'superXorKey123') {
-      return [...str].map((c, i) =>
-        String.fromCharCode(c.charCodeAt(0) ^ key.charCodeAt(i % key.length))
-      ).join('');
-    }
 
     const submitBtn = document.getElementById("submitBtn");
     const steps = ["q1", "q2", "q3"];
