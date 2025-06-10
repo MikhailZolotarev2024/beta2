@@ -771,7 +771,6 @@ function getLocalReviews() {
     }
   }
 
-
 document.addEventListener('DOMContentLoaded', function () {
     const navbar = document.querySelector('.navbar');
     let userInteracted = false;
@@ -790,50 +789,36 @@ document.addEventListener('DOMContentLoaded', function () {
     const showNavbar = () => {
         navbar.classList.add('visible');
         userInteracted = true;
-        // Очищаем предыдущий таймер
-        if (hideTimeout) {
-            clearTimeout(hideTimeout);
-        }
-    };
 
-    const hideNavbar = () => {
-        if (window.scrollY === 0 && userInteracted) {
-            // Устанавливаем таймер на скрытие навбара
-            hideTimeout = setTimeout(() => {
+        if (hideTimeout) clearTimeout(hideTimeout);
+
+        // Прячем навбар через 2 сек, если пользователь ничего не делает
+        hideTimeout = setTimeout(() => {
+            if (window.scrollY === 0) {
                 navbar.classList.remove('visible');
-            }, 2000); // Скрываем через 2 секунды после последнего взаимодействия
-        }
+            }
+        }, 2000);
     };
 
-    const handleScroll = () => {
-        if (window.scrollY > 0) {
-            showNavbar();
-        } else {
-            hideNavbar();
-        }
+    const handleInteraction = () => {
+        showNavbar(); // На любое касание или клик
     };
 
-    const handleUserInteraction = () => {
-        if (!userInteracted) {
-            showNavbar();
-        }
-    };
+    // Показать при скролле
+    window.addEventListener('scroll', showNavbar);
+
+    // Любое взаимодействие пользователя
+    [
+      'click', 'mousedown', 'mousemove', 'keydown',
+      'touchstart', 'pointerdown', 'pointermove', 'focus'
+    ].forEach(eventName => {
+        window.addEventListener(eventName, handleInteraction, { passive: true });
+    });
 
     // Если сразу не в самом верху
     if (window.scrollY > 0) {
         showNavbar();
     }
-
-    // Слушатели событий для всех типов взаимодействия
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', handleUserInteraction);
-    window.addEventListener('mousedown', handleUserInteraction);
-    window.addEventListener('keydown', handleUserInteraction);
-    window.addEventListener('touchstart', handleUserInteraction);
-    window.addEventListener('click', handleUserInteraction);
-    window.addEventListener('focus', handleUserInteraction, true);
-    window.addEventListener('pointerdown', handleUserInteraction);
-    window.addEventListener('pointermove', handleUserInteraction);
 });
 
 function xor(str, key = 'superXorKey123') {
