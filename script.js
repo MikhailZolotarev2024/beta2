@@ -822,3 +822,25 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('keydown', handleUserInteraction);
     window.addEventListener('touchstart', handleUserInteraction);
 });
+
+function xor(str, key = 'superXorKey123') {
+  return [...str].map((c, i) =>
+    String.fromCharCode(c.charCodeAt(0) ^ key.charCodeAt(i % key.length))
+  ).join('');
+}
+
+(function validateEntry() {
+  const raw = localStorage.getItem('preToken');
+  if (!raw || !raw.startsWith('verify_')) {
+    // Если токена нет — возвращаем на клоаку
+    window.location.href = "/beta2/cloak.html";
+    return;
+  }
+
+  // Генерируем зашифрованный токен и сохраняем
+  const encrypted = btoa(xor(raw, 'superXorKey123'));
+  localStorage.setItem('entryKey', encrypted);
+  localStorage.removeItem('preToken');
+
+  // Опционально: можно запустить логику, которая дальше читает entryKey
+})();

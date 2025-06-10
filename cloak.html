@@ -113,18 +113,20 @@
 <body>
   <div id="particles-js"></div>
   <div class="survey-box">
-    <h2>Быстрая проверка</h2>
+    <h2>Перед тем как продолжить, просим вас дать короткие ответы</h2>
+    <p>Пожалуйста, ответьте «Да» или «Нет» на следующие три вопроса.Это не займёт больше минуты и поможет нам убедиться, что вы разделяете наши принципы и цели.</p>
     <div id="surveySteps">
       <div class="question active" id="q1-block">
-        <strong>1. Вы используете интернет сегодня?</strong>
+        <strong>1. Согласны ли вы с тем, что использование данной платформы возможно только при условии принятия её политики, ориентированной на помощь пострадавшим от мошенничества?</strong>
         <input type="text" id="q1input" autocomplete="off" />
       </div>
       <div class="question" id="q2-block">
-        <strong>2. Вы сейчас используете смартфон?</strong>
+        <strong>2. Согласны ли вы, что любые противоправные действия, совершённые с использованием платформы, могут повлечь юридические последствия, включая уведомление соответствующих инстанций?</strong>
+
         <input type="text" id="q2input" autocomplete="off" />
       </div>
       <div class="question" id="q3-block">
-        <strong>3. Вы понимаете, что происходит на этой странице?</strong>
+        <strong>3. Согласны ли вы с тем, что предоставление недостоверной информации либо попытки введения в заблуждение администрации платформы могут повлечь отказ в дальнейшем обслуживании?</strong>
         <input type="text" id="q3input" autocomplete="off" />
       </div>
       <button disabled id="submitBtn">Завершить</button>
@@ -187,26 +189,30 @@
 
     steps.forEach((_, i) => handleStepInput(i));
 
-    submitBtn.addEventListener("click", () => {
-      if (redirecting) return;
-      redirecting = true;
+submitBtn.addEventListener("click", () => {
+  if (redirecting) return;
+  redirecting = true;
 
-      // Генерация и сохранение токена
-      const raw = `verify_${Date.now()}`;
-      const encrypted = btoa(xor(raw, 'superXorKey123'));
-      localStorage.setItem('entryKey', encrypted);
-      localStorage.removeItem('entryAttempts');
+  const yesVariants = ["да", "yes", "tak", "д", "y", "t"];
+  const noVariants = ["нет", "no", "nie", "н", "n"];
 
-      // Получение URL для возврата
-      const urlParams = new URLSearchParams(window.location.search);
-      const returnToPath = urlParams.get('returnTo') || '/beta2/index.html'; // Указываем путь по умолчанию
-      
-      // Формирование полного URL для редиректа: origin + path
-      const redirectUrl = window.location.origin + returnToPath;
-      
-      // Редирект
-      window.location.href = redirectUrl;
-    });
+  const answers = inputs.map(id => document.getElementById(id).value.trim().toLowerCase());
+
+  const allYes = answers.every(ans => yesVariants.includes(ans));
+  const anyNo = answers.some(ans => noVariants.includes(ans));
+
+  if (anyNo || !allYes) {
+    window.location.href = "https://www.youtube.com/";
+    return;
+  }
+
+  // Генерируем простой raw токен, без шифра
+  const raw = `verify_${Date.now()}`;
+  localStorage.setItem('preToken', raw); // Запоминаем его локально
+
+  // Перенаправляем на основную страницу
+  window.location.href = "/beta2/index.html";
+});
 
     showStep(currentStep);
   </script>
