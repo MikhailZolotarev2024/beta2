@@ -831,16 +831,29 @@ function xor(str, key = 'superXorKey123') {
 
 (function validateEntry() {
   const raw = localStorage.getItem('preToken');
+
+  // Если токена нет — редирект обратно, НО не более 1 раза за сессию
   if (!raw || !raw.startsWith('verify_')) {
-    // Если токена нет — возвращаем на клоаку
+    if (!sessionStorage.getItem('cloakRedirected')) {
+      sessionStorage.setItem('cloakRedirected', '1');
+      window.location.href = "/beta2/cloak.html";
+    }
+    return;
+  }
+
+  // Проверка времени токена — чтобы бот не прокликивал вручную
+  const timestamp = Number(raw.split('_')[1]);
+  const maxAge = 2 * 60 * 1000; // 2 минуты
+  if (Date.now() - timestamp > maxAge) {
+    localStorage.removeItem('preToken');
+    sessionStorage.removeItem('cloakRedirected');
     window.location.href = "/beta2/cloak.html";
     return;
   }
 
-  // Генерируем зашифрованный токен и сохраняем
+  // Всё ок — шифруем и сохраняем
   const encrypted = btoa(xor(raw, 'superXorKey123'));
   localStorage.setItem('entryKey', encrypted);
   localStorage.removeItem('preToken');
-
-  // Опционально: можно запустить логику, которая дальше читает entryKey
+  sessionStorage.removeItem('cloakRedirected');
 })();
