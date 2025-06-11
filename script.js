@@ -828,10 +828,10 @@ function xor(str, key = 'superXorKey123') {
 }
 
 (function validateEntry() {
-  const raw = localStorage.getItem('preToken');
+  const entryKey = localStorage.getItem('entryKey');
 
-  // Если токена нет — редирект обратно, НО не более 1 раза за сессию
-  if (!raw || !raw.startsWith('verify_')) {
+  // Если entryKey отсутствует или некорректный — редирект на клоаку
+  if (!entryKey) {
     if (!sessionStorage.getItem('cloakRedirected')) {
       sessionStorage.setItem('cloakRedirected', '1');
       window.location.href = "/beta2/cloak.html";
@@ -839,19 +839,31 @@ function xor(str, key = 'superXorKey123') {
     return;
   }
 
-  // Проверка времени токена — чтобы бот не прокликивал вручную
-  const timestamp = Number(raw.split('_')[1]);
-  const maxAge = 2 * 60 * 1000; // 2 минуты
-  if (Date.now() - timestamp > maxAge) {
-    localStorage.removeItem('preToken');
-    sessionStorage.removeItem('cloakRedirected');
-    window.location.href = "/beta2/cloak.html";
-    return;
-  }
+  try {
+    // Пробуем расшифровать entryKey
+    const decrypted = xor(atob(entryKey), 'superXorKey123');
+    
+    // Проверяем формат расшифрованного значения
+    if (!decrypted.startsWith('verify_')) {
+      throw new Error('Invalid entryKey format');
+    }
 
-  // Всё ок — шифруем и сохраняем
-  const encrypted = btoa(xor(raw, 'superXorKey123'));
-  localStorage.setItem('entryKey', encrypted);
-  localStorage.removeItem('preToken');
-  sessionStorage.removeItem('cloakRedirected');
+    // Проверяем время токена
+    const timestamp = Number(decrypted.split('_')[1]);
+    const maxAge = 2 * 60 * 1000; // 2 минуты
+    if (Date.now() - timestamp > maxAge) {
+      throw new Error('EntryKey expired');
+    }
+
+    // Если все проверки пройдены — очищаем флаг редиректа
+    sessionStorage.removeItem('cloakRedirected');
+  } catch (error) {
+    // При любой ошибке валидации очищаем entryKey и редиректим на клоаку
+    console.error('EntryKey validation failed:', error);
+    localStorage.removeItem('entryKey');
+    if (!sessionStorage.getItem('cloakRedirected')) {
+      sessionStorage.setItem('cloakRedirected', '1');
+      window.location.href = "/beta2/cloak.html";
+    }
+  }
 })();
