@@ -29,22 +29,39 @@
   function createReviewCard(review) {
     const card = document.createElement('div');
     card.className = 'review-card';
-    card.innerHTML = `
-      <div class="review-header">
-        <div class="avatar">${review.name[0] || '?'}</div>
-        <div>
-          <div class="review-name">${review.name}</div>
-          <div class="review-lang">${review.flag ? '🇬🇧🇷🇺🇵🇱🇪🇸🇩🇪🇫🇷'.includes(review.flag) ? review.flag : review.flag : ''} ${review.lang || ''}</div>
-        </div>
-      </div>
-      <div class="review-text">${review.short}</div>
-      <div class="review-date" style="margin-top:10px;opacity:0.7;font-size:13px;">${review.date}</div>
-      <button class="read-more" data-i18n="review.more_details">Подробнее</button>
-    `;
-    // Модалка для полного отзыва
-    card.querySelector('.read-more').onclick = function() {
-      showModal(review.full);
-    };
+    
+    const header = document.createElement('div');
+    header.className = 'review-header';
+    
+    const avatar = document.createElement('div');
+    avatar.className = 'avatar';
+    avatar.textContent = review.name.charAt(0).toUpperCase();
+    
+    const name = document.createElement('div');
+    name.className = 'review-name';
+    name.textContent = review.name;
+    
+    const date = document.createElement('div');
+    date.className = 'review-date';
+    date.textContent = review.date;
+    
+    header.appendChild(avatar);
+    header.appendChild(name);
+    header.appendChild(date);
+    
+    const text = document.createElement('div');
+    text.className = 'review-text';
+    text.textContent = review.short;
+    
+    const readMore = document.createElement('button');
+    readMore.className = 'read-more';
+    readMore.textContent = 'Читать далее';
+    readMore.onclick = () => showModal(review.full);
+    
+    card.appendChild(header);
+    card.appendChild(text);
+    card.appendChild(readMore);
+    
     return card;
   }
 
@@ -86,54 +103,10 @@
     const form = document.querySelector('.chat-style-form');
     if (!form) return;
 
-    // Получаем все поля формы
     const nameInput = form.querySelector('input[placeholder="Введите имя..."]');
-    const flagInput = form.querySelector('input.chat-flag');
-    const langInput = form.querySelector('input[placeholder="UA"]');
     const shortTextarea = form.querySelector('textarea[placeholder="Краткий отзыв..."]');
     const fullTextarea = form.querySelector('textarea[placeholder="Полный отзыв..."]');
     const submitBtn = form.querySelector('.chat-submit');
-
-    // Настройка выпадающего списка стран
-    const countryBtn = form.querySelector('.country-btn');
-    const countryDropdown = form.querySelector('.country-dropdown');
-    const countryOptions = form.querySelectorAll('.country-option');
-
-    // Обработчик клика по кнопке выбора страны
-    countryBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      countryDropdown.classList.toggle('active');
-    });
-
-    // Обработчик клика по опциям
-    countryOptions.forEach(option => {
-      option.addEventListener('click', function() {
-        const flag = this.dataset.flag;
-        const lang = this.dataset.lang;
-        
-        // Обновляем текст кнопки
-        countryBtn.textContent = `${flag} ${lang}`;
-        
-        // Обновляем скрытое поле с флагом
-        flagInput.value = flag;
-        
-        // Обновляем поле с языком
-        langInput.value = lang;
-        
-        // Закрываем выпадающий список
-        countryDropdown.classList.remove('active');
-        
-        // Убираем подсветку с поля языка
-        clearHighlight(langInput);
-      });
-    });
-
-    // Закрытие выпадающего списка при клике вне его
-    document.addEventListener('click', function(e) {
-      if (!countryBtn.contains(e.target) && !countryDropdown.contains(e.target)) {
-        countryDropdown.classList.remove('active');
-      }
-    });
 
     // Создаем элемент для сообщения об ошибке
     const errorMessage = document.createElement('div');
@@ -149,7 +122,7 @@
 
     // Функция для подсветки пустых полей
     function highlightEmptyFields() {
-      const fields = [nameInput, langInput, shortTextarea];
+      const fields = [nameInput, shortTextarea];
       fields.forEach(field => {
         if (!field.value.trim()) {
           field.style.border = '1px solid #ff5555';
@@ -168,7 +141,7 @@
     }
 
     // Добавляем обработчики для очистки подсветки при вводе
-    [nameInput, langInput, shortTextarea].forEach(field => {
+    [nameInput, shortTextarea].forEach(field => {
       field.addEventListener('input', () => clearHighlight(field));
     });
 
@@ -176,13 +149,11 @@
       e.preventDefault();
       
       const name = nameInput.value.trim();
-      const flag = flagInput.value.trim();
-      const lang = langInput.value.trim();
       const short = shortTextarea.value.trim();
       const full = fullTextarea.value.trim();
 
-      // Проверяем все обязательные поля
-      if (!name || !flag || !lang || !short) {
+      // Проверяем обязательные поля
+      if (!name || !short) {
         // Подсвечиваем пустые поля
         highlightEmptyFields();
         
@@ -202,8 +173,6 @@
       const review = {
         id: randomId(),
         name,
-        flag,
-        lang,
         short,
         full,
         date: getCurrentDate()
@@ -215,11 +184,8 @@
 
       // Очищаем форму
       nameInput.value = '';
-      flagInput.value = '🇷🇺';
-      langInput.value = '';
       shortTextarea.value = '';
       fullTextarea.value = '';
-      countryBtn.textContent = '🇷🇺 RU';
 
       // Показываем сообщение об успехе
       submitBtn.textContent = 'Спасибо!';
