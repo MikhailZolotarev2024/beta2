@@ -85,19 +85,79 @@
   function setupForm() {
     const form = document.querySelector('.chat-style-form');
     if (!form) return;
-    const [nameInput, flagInput, langInput, shortTextarea, fullTextarea, submitBtn] = form.querySelectorAll('input, textarea, button');
+
+    // Получаем все поля формы
+    const nameInput = form.querySelector('input[placeholder="Введите имя..."]');
+    const flagInput = form.querySelector('input[placeholder="🇺🇦"]');
+    const langInput = form.querySelector('input[placeholder="UA"]');
+    const shortTextarea = form.querySelector('textarea[placeholder="Краткий отзыв..."]');
+    const fullTextarea = form.querySelector('textarea[placeholder="Полный отзыв..."]');
+    const submitBtn = form.querySelector('.chat-submit');
+
+    // Создаем элемент для сообщения об ошибке
+    const errorMessage = document.createElement('div');
+    errorMessage.style.cssText = `
+      color: #ff5555;
+      font-size: 14px;
+      margin-left: 10px;
+      display: inline-block;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    `;
+    submitBtn.parentNode.insertBefore(errorMessage, submitBtn);
+
+    // Функция для подсветки пустых полей
+    function highlightEmptyFields() {
+      const fields = [nameInput, flagInput, langInput, shortTextarea];
+      fields.forEach(field => {
+        if (!field.value.trim()) {
+          field.style.border = '1px solid #ff5555';
+          field.style.background = 'rgba(255, 0, 0, 0.1)';
+        } else {
+          field.style.border = '';
+          field.style.background = '';
+        }
+      });
+    }
+
+    // Функция для очистки подсветки
+    function clearHighlight(field) {
+      field.style.border = '';
+      field.style.background = '';
+    }
+
+    // Добавляем обработчики для очистки подсветки при вводе
+    [nameInput, flagInput, langInput, shortTextarea].forEach(field => {
+      field.addEventListener('input', () => clearHighlight(field));
+    });
+
     submitBtn.addEventListener('click', function(e) {
       e.preventDefault();
+      
       const name = nameInput.value.trim();
       const flag = flagInput.value.trim();
       const lang = langInput.value.trim();
       const short = shortTextarea.value.trim();
       const full = fullTextarea.value.trim();
+
+      // Проверяем все обязательные поля
       if (!name || !flag || !lang || !short) {
-        submitBtn.textContent = 'Заполните все поля';
-        setTimeout(() => submitBtn.textContent = '📩 Отправить отзыв', 1500);
+        // Подсвечиваем пустые поля
+        highlightEmptyFields();
+        
+        // Показываем сообщение об ошибке
+        errorMessage.textContent = 'Заполните все поля';
+        errorMessage.style.opacity = '1';
+        
+        // Скрываем сообщение через 2 секунды
+        setTimeout(() => {
+          errorMessage.style.opacity = '0';
+        }, 2000);
+        
         return;
       }
+
+      // Если все поля заполнены, создаем отзыв
       const review = {
         id: randomId(),
         name,
@@ -107,18 +167,23 @@
         full,
         date: getCurrentDate()
       };
+
       const reviews = getLocalReviews();
       reviews.push(review);
       saveLocalReviews(reviews);
-      // Очистить форму
+
+      // Очищаем форму
       nameInput.value = '';
       flagInput.value = '';
       langInput.value = '';
       shortTextarea.value = '';
       fullTextarea.value = '';
+
+      // Показываем сообщение об успехе
       submitBtn.textContent = 'Спасибо!';
       setTimeout(() => submitBtn.textContent = '📩 Отправить отзыв', 1500);
-      // Вызываем обновление отображения пагинации после добавления нового отзыва
+
+      // Обновляем отображение
       if (typeof updateReviewsDisplay === 'function') {
         updateReviewsDisplay();
       }
