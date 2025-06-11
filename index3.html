@@ -287,7 +287,15 @@
 
   <div class="chat-question" data-i18n="form-country-question">🌍 Из какой вы страны?</div>
   <div class="chat-row">
-    <input type="text" placeholder="🇺🇦" maxlength="2" class="chat-flag" data-i18n-placeholder="form-flag-placeholder" required>
+    <div class="country-select">
+      <button class="country-btn">🇷🇺 RU</button>
+      <div class="country-dropdown">
+        <div class="country-option" data-flag="🇷🇺" data-lang="RU">🇷🇺 RU</div>
+        <div class="country-option" data-flag="🇬🇧" data-lang="EN">🇬🇧 EN</div>
+        <div class="country-option" data-flag="🇵🇱" data-lang="PL">🇵🇱 PL</div>
+      </div>
+    </div>
+    <input type="hidden" class="chat-flag" value="🇷🇺">
     <input type="text" placeholder="UA" maxlength="3" class="chat-lang" data-i18n-placeholder="form-lang-placeholder" required>
   </div>
 

@@ -88,11 +88,52 @@
 
     // Получаем все поля формы
     const nameInput = form.querySelector('input[placeholder="Введите имя..."]');
-    const flagInput = form.querySelector('input[placeholder="🇺🇦"]');
+    const flagInput = form.querySelector('input.chat-flag');
     const langInput = form.querySelector('input[placeholder="UA"]');
     const shortTextarea = form.querySelector('textarea[placeholder="Краткий отзыв..."]');
     const fullTextarea = form.querySelector('textarea[placeholder="Полный отзыв..."]');
     const submitBtn = form.querySelector('.chat-submit');
+
+    // Настройка выпадающего списка стран
+    const countryBtn = form.querySelector('.country-btn');
+    const countryDropdown = form.querySelector('.country-dropdown');
+    const countryOptions = form.querySelectorAll('.country-option');
+
+    // Обработчик клика по кнопке выбора страны
+    countryBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      countryDropdown.classList.toggle('active');
+    });
+
+    // Обработчик клика по опциям
+    countryOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const flag = this.dataset.flag;
+        const lang = this.dataset.lang;
+        
+        // Обновляем текст кнопки
+        countryBtn.textContent = `${flag} ${lang}`;
+        
+        // Обновляем скрытое поле с флагом
+        flagInput.value = flag;
+        
+        // Обновляем поле с языком
+        langInput.value = lang;
+        
+        // Закрываем выпадающий список
+        countryDropdown.classList.remove('active');
+        
+        // Убираем подсветку с поля языка
+        clearHighlight(langInput);
+      });
+    });
+
+    // Закрытие выпадающего списка при клике вне его
+    document.addEventListener('click', function(e) {
+      if (!countryBtn.contains(e.target) && !countryDropdown.contains(e.target)) {
+        countryDropdown.classList.remove('active');
+      }
+    });
 
     // Создаем элемент для сообщения об ошибке
     const errorMessage = document.createElement('div');
@@ -108,7 +149,7 @@
 
     // Функция для подсветки пустых полей
     function highlightEmptyFields() {
-      const fields = [nameInput, flagInput, langInput, shortTextarea];
+      const fields = [nameInput, langInput, shortTextarea];
       fields.forEach(field => {
         if (!field.value.trim()) {
           field.style.border = '1px solid #ff5555';
@@ -127,7 +168,7 @@
     }
 
     // Добавляем обработчики для очистки подсветки при вводе
-    [nameInput, flagInput, langInput, shortTextarea].forEach(field => {
+    [nameInput, langInput, shortTextarea].forEach(field => {
       field.addEventListener('input', () => clearHighlight(field));
     });
 
@@ -174,10 +215,11 @@
 
       // Очищаем форму
       nameInput.value = '';
-      flagInput.value = '';
+      flagInput.value = '🇷🇺';
       langInput.value = '';
       shortTextarea.value = '';
       fullTextarea.value = '';
+      countryBtn.textContent = '🇷🇺 RU';
 
       // Показываем сообщение об успехе
       submitBtn.textContent = 'Спасибо!';
