@@ -83,7 +83,13 @@ async function applyLang(lang) {
     
     // Загружаем переводы
     await loadLang(lang);
-    
+    // Если страница юридического раздела — обновим markdown
+if (window.location.pathname.includes('index4.html')) {
+    // Вызываем заново загрузку текущего выбранного блока
+    const activeButton = document.querySelector('.nav-links button.active');
+    const activePointId = activeButton?.getAttribute('onclick')?.match(/loadMarkdown\('([^']+)'\)/)?.[1] || 'point1';
+    loadMarkdown(activePointId);
+}
     // Обновляем текст кнопки
     updateLangToggleBtnText(lang);
     
