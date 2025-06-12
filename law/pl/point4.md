@@ -1,0 +1,3 @@
+# Nadużycia
+
+Wprowadzenie: Firma stosuje politykę zerowej tolerancji wobec nadużyć jej usług. Niniejszy rozdział opisuje obowiązki Klienta w zakresie dostarczania prawdziwych informacji...

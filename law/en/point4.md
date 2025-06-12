@@ -1,0 +1,3 @@
+# Abuse Policy
+
+Introduction: The Company adheres to a zero-tolerance policy towards the abuse of its services. This section describes the Client's responsibilities in providing truthful information...

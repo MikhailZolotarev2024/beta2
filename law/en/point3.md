@@ -1,0 +1,3 @@
+# Legal Support
+
+Introduction: This section describes the scope and limits of legal support provided by the Company to the Client...

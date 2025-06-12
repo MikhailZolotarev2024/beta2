@@ -1,0 +1,3 @@
+# Bezpieczeństwo Transakcji
+
+Wprowadzenie: Niniejsza Polityka Bezpieczeństwa Transakcji określa metody zapewniające przejrzystość i wiarygodność wszystkich operacji finansowych...
