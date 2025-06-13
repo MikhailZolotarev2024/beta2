@@ -87,3 +87,61 @@
 7.2. Changes to the Policy are made by mutual agreement.
 
 7.3. The applicable law is the legislation of [jurisdiction].
+
+# Prohibitions and Restrictions
+
+## 1. Asset Verification Prohibitions
+
+1.1. Prohibited actions during verification:
+- Providing false information about asset status
+- Using forged or outdated documents
+- Concealing information about risks and liabilities
+- Attempting to bypass the asset verification procedure
+
+1.2. Risk level restrictions:
+- Cooperation is prohibited with risk levels above 4 points
+- Data manipulation to reduce risk assessment is not allowed
+- Providing incomplete risk information is prohibited
+- Resubmission of applications after rejection due to high risk is not allowed
+
+## 2. Documentation Prohibitions
+
+2.1. Document restrictions:
+- Using documents older than 30 days is prohibited
+- Submitting documents without required details is not allowed
+- Using documents with illegible signatures is prohibited
+- Submitting documents on unofficial letterheads is not allowed
+
+2.2. Processing prohibitions:
+- Making corrections to official documents is prohibited
+- Using documents with obscured data is not allowed
+- Submitting documents without issue date is prohibited
+- Using documents without organization seal is not allowed
+
+## 3. Information Exchange Prohibitions
+
+3.1. Confidentiality restrictions:
+- Disclosing verification results to third parties is prohibited
+- Publishing information about the verification process is not allowed
+- Using confidential data for personal purposes is prohibited
+- Transferring verification data to other organizations is not allowed
+
+3.2. Communication prohibitions:
+- Using insecure communication channels is prohibited
+- Transmitting data through public networks is not allowed
+- Storing confidential data on public servers is prohibited
+- Using personal email addresses for business correspondence is not allowed
+
+## 4. Financial Operations Prohibitions
+
+4.1. Transaction restrictions:
+- Using unverified payment details is prohibited
+- Conducting transactions without preliminary verification is not allowed
+- Using unofficial payment systems is prohibited
+- Conducting transactions through intermediaries is not allowed
+
+4.2. Settlement prohibitions:
+- Changing payment terms without written agreement is prohibited
+- Conducting cash settlements is not allowed
+- Using unverified cryptocurrency wallets is prohibited
+- Conducting transactions through third parties is not allowed
