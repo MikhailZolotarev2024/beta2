@@ -27,7 +27,7 @@ async function loadAndConvertMarkdown(mdFilePath, targetElementId) {
 
 // Функция для загрузки нужного раздела
 async function loadMarkdown(pointId) {
-    const currentLang = localStorage.getItem('lang') || 'ru';
+    const currentLang = localStorage.getItem('preferredLang') || 'en';
     const filePath = `law/${currentLang}/${pointId}.md`;
     await loadAndConvertMarkdown(filePath, 'content');
 

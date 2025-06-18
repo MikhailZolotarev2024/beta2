@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Проверка доступа</title>
+  <title data-i18n="cloak-title">Проверка доступа</title>
   <link rel="stylesheet" href="general.new.css">
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <style>
@@ -113,23 +113,22 @@
 <body>
   <div id="particles-js"></div>
   <div class="survey-box">
-    <h2>Перед тем как продолжить, просим вас дать короткие ответы</h2>
-    <p>Пожалуйста, ответьте «Да» или «Нет» на следующие три вопроса.Это не займёт больше минуты и поможет нам убедиться, что вы разделяете наши принципы и цели.</p>
+    <h2 data-i18n="cloak-header">Перед тем как продолжить, просим вас дать короткие ответы</h2>
+    <p data-i18n="cloak-description">Пожалуйста, ответьте «Да» или «Нет» на следующие три вопроса. Это не займёт больше минуты и поможет нам убедиться, что вы разделяете наши принципы и цели.</p>
     <div id="surveySteps">
       <div class="question active" id="q1-block">
-        <strong>1. Согласны ли вы с тем, что использование данной платформы возможно только при условии принятия её политики, ориентированной на помощь пострадавшим от мошенничества?</strong>
+        <strong data-i18n="cloak-question-1">1. Согласны ли вы с тем, что использование данной платформы возможно только при условии принятия её политики, ориентированной на помощь пострадавшим от мошенничества?</strong>
         <input type="text" id="q1input" autocomplete="off" />
       </div>
       <div class="question" id="q2-block">
-        <strong>2. Согласны ли вы, что любые противоправные действия, совершённые с использованием платформы, могут повлечь юридические последствия, включая уведомление соответствующих инстанций?</strong>
-
+        <strong data-i18n="cloak-question-2">2. Согласны ли вы, что любые противоправные действия, совершённые с использованием платформы, могут повлечь юридические последствия, включая уведомление соответствующих инстанций?</strong>
         <input type="text" id="q2input" autocomplete="off" />
       </div>
       <div class="question" id="q3-block">
-        <strong>3. Согласны ли вы с тем, что предоставление недостоверной информации либо попытки введения в заблуждение администрации платформы могут повлечь отказ в дальнейшем обслуживании?</strong>
+        <strong data-i18n="cloak-question-3">3. Согласны ли вы с тем, что предоставление недостоверной информации либо попытки введения в заблуждение администрации платформы могут повлечь отказ в дальнейшем обслуживании?</strong>
         <input type="text" id="q3input" autocomplete="off" />
       </div>
-      <button disabled id="submitBtn">Завершить</button>
+      <button disabled id="submitBtn" data-i18n="cloak-submit">Завершить</button>
     </div>
   </div>
 
@@ -137,7 +136,77 @@
     <meta http-equiv="refresh" content="0; url=https://example.com/fail" />
   </noscript>
 
+  <script src="i18n.js"></script>
   <script>
+    // Инициализация языковой системы для клоаки
+    document.addEventListener('DOMContentLoaded', async function() {
+      try {
+        // Инициализируем языковую систему
+        await initLanguage();
+        
+        // Инициализируем particles.js
+        if (window.particlesJS) {
+          particlesJS('particles-js', {
+            particles: {
+              number: {
+                value: 80,
+                density: {
+                  enable: true,
+                  value_area: 800
+                }
+              },
+              color: {
+                value: '#ffffff'
+              },
+              shape: {
+                type: 'circle'
+              },
+              opacity: {
+                value: 0.5,
+                random: false
+              },
+              size: {
+                value: 3,
+                random: true
+              },
+              line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#ffffff',
+                opacity: 0.4,
+                width: 1
+              },
+              move: {
+                enable: true,
+                speed: 2,
+                direction: 'none',
+                random: false,
+                straight: false,
+                out_mode: 'out',
+                bounce: false
+              }
+            },
+            interactivity: {
+              detect_on: 'canvas',
+              events: {
+                onhover: {
+                  enable: true,
+                  mode: 'grab'
+                },
+                onclick: {
+                  enable: true,
+                  mode: 'push'
+                },
+                resize: true
+              }
+            },
+            retina_detect: true
+          });
+        }
+      } catch (error) {
+        console.error('Error initializing cloak:', error);
+      }
+    });
 
     const submitBtn = document.getElementById("submitBtn");
     const steps = ["q1", "q2", "q3"];
@@ -155,7 +224,9 @@
     function validateInput(value) {
       if (!value) return false;
       const answer = value.trim().toLowerCase();
-      return answer.includes("да") || answer.includes("нет");
+      return answer.includes("да") || answer.includes("нет") || 
+             answer.includes("yes") || answer.includes("no") ||
+             answer.includes("tak") || answer.includes("nie");
     }
 
     function handleStepInput(index) {
@@ -184,91 +255,35 @@
 
     steps.forEach((_, i) => handleStepInput(i));
 
-submitBtn.addEventListener("click", () => {
-  if (redirecting) return;
-  redirecting = true;
+    submitBtn.addEventListener("click", () => {
+      if (redirecting) return;
+      redirecting = true;
 
-  const yesVariants = ["да", "yes", "tak", "д", "y", "t"];
-  const noVariants = ["нет", "no", "nie", "н", "n"];
+      const yesVariants = ["да", "yes", "tak", "д", "y", "t"];
+      const noVariants = ["нет", "no", "nie", "н", "n"];
 
-  const answers = inputs.map(id => document.getElementById(id).value.trim().toLowerCase());
+      const answers = inputs.map(id => document.getElementById(id).value.trim().toLowerCase());
 
-  const allYes = answers.every(ans => yesVariants.includes(ans));
-  const anyNo = answers.some(ans => noVariants.includes(ans));
+      const allYes = answers.every(ans => yesVariants.includes(ans));
+      const anyNo = answers.some(ans => noVariants.includes(ans));
 
-  if (anyNo || !allYes) {
-    window.location.href = "https://www.youtube.com/";
-    return;
-  }
+      if (anyNo || !allYes) {
+        window.location.href = "https://www.youtube.com/";
+        return;
+      }
 
-  // Генерируем простой raw токен, без шифра
-  const raw = `verify_${Date.now()}`;
-  localStorage.setItem('preToken', raw); // Запоминаем его локально
+      // Генерируем токен и сразу шифруем его
+      const raw = `verify_${Date.now()}`;
+      const encrypted = btoa([...raw].map((c, i) => 
+        String.fromCharCode(c.charCodeAt(0) ^ 'superXorKey123'.charCodeAt(i % 'superXorKey123'.length))
+      ).join(''));
+      localStorage.setItem('entryKey', encrypted);
 
-  // Перенаправляем на основную страницу
-  window.location.href = "/beta2/index.html";
-});
+      // Перенаправляем на основную страницу
+      window.location.href = "/beta2/index.html";
+    });
 
     showStep(currentStep);
   </script>
-  <script>
-    particlesJS('particles-js', {
-      particles: {
-        number: {
-          value: 80,
-          density: {
-            enable: true,
-            value_area: 800
-          }
-        },
-        color: {
-          value: '#ffffff'
-        },
-        shape: {
-          type: 'circle'
-        },
-        opacity: {
-          value: 0.5,
-          random: false
-        },
-        size: {
-          value: 3,
-          random: true
-        },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: '#ffffff',
-          opacity: 0.4,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 2,
-          direction: 'none',
-          random: false,
-          straight: false,
-          out_mode: 'out',
-          bounce: false
-        }
-      },
-      interactivity: {
-        detect_on: 'canvas',
-        events: {
-          onhover: {
-            enable: true,
-            mode: 'grab'
-          },
-          onclick: {
-            enable: true,
-            mode: 'push'
-          },
-          resize: true
-        }
-      },
-      retina_detect: true
-    });
-  </script>
-  <script src="script.js"></script>
 </body>
 </html>

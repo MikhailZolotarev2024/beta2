@@ -1,6 +1,57 @@
-// Сделаем currentLang глобальной
-window.currentLang = 'ru';
+// Глобальные переменные
+window.currentLang = 'en'; // По умолчанию английский
 let translations = {};
+
+// Доступные языки
+const AVAILABLE_LANGUAGES = ['pl', 'ru', 'en'];
+const LANGUAGE_NAMES = {
+  'pl': 'Polski',
+  'ru': 'Русский', 
+  'en': 'English'
+};
+
+// Функция для определения языка пользователя
+function detectUserLanguage() {
+  // Сначала проверяем localStorage
+  const savedLang = localStorage.getItem('preferredLang');
+  if (savedLang && AVAILABLE_LANGUAGES.includes(savedLang)) {
+    console.log('🌍 Using saved language from localStorage:', savedLang);
+    return savedLang;
+  }
+
+  // Определяем язык браузера
+  const browserLang = navigator.language || navigator.userLanguage || 'en';
+  const primaryLang = browserLang.split('-')[0].toLowerCase();
+  
+  console.log('🌍 Browser language detected:', browserLang, 'Primary:', primaryLang);
+  
+  // Проверяем, поддерживается ли основной язык
+  if (AVAILABLE_LANGUAGES.includes(primaryLang)) {
+    console.log('✅ Using detected language:', primaryLang);
+    return primaryLang;
+  }
+  
+  // Проверяем все языки браузера
+  if (navigator.languages) {
+    for (const lang of navigator.languages) {
+      const langCode = lang.split('-')[0].toLowerCase();
+      if (AVAILABLE_LANGUAGES.includes(langCode)) {
+        console.log('✅ Using language from navigator.languages:', langCode);
+        return langCode;
+      }
+    }
+  }
+  
+  // По умолчанию английский
+  console.log('🌍 Using default language: en');
+  return 'en';
+}
+
+// Функция для сохранения языка в localStorage
+function saveLanguage(lang) {
+  localStorage.setItem('preferredLang', lang);
+  console.log('💾 Language saved to localStorage:', lang);
+}
 
 function getBasePath() {
   const parts = window.location.pathname.split('/').filter(Boolean);
@@ -9,6 +60,90 @@ function getBasePath() {
     return `/${parts[0]}`;
   }
   return '';
+}
+
+// Функция для создания переключателя языков
+function createLanguageSwitcher() {
+  // Проверяем, есть ли уже переключатель
+  if (document.querySelector('.language-switcher')) {
+    return;
+  }
+
+  const switcher = document.createElement('div');
+  switcher.className = 'language-switcher';
+  switcher.innerHTML = `
+    <select class="lang-select">
+      ${AVAILABLE_LANGUAGES.map(lang => 
+        `<option value="${lang}" ${lang === window.currentLang ? 'selected' : ''}>
+          ${LANGUAGE_NAMES[lang]}
+        </option>`
+      ).join('')}
+    </select>
+  `;
+
+  // Добавляем стили
+  const style = document.createElement('style');
+  style.textContent = `
+    .language-switcher {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    
+    .lang-select {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: #fff;
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .lang-select:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(118, 199, 192, 0.5);
+    }
+    
+    .lang-select:focus {
+      outline: none;
+      border-color: rgba(118, 199, 192, 0.8);
+      box-shadow: 0 0 10px rgba(118, 199, 192, 0.3);
+    }
+    
+    .lang-select option {
+      background: #1a1a1a;
+      color: #fff;
+    }
+    
+    /* Адаптивность для мобильных */
+    @media (max-width: 768px) {
+      .language-switcher {
+        top: 10px;
+        right: 10px;
+      }
+      
+      .lang-select {
+        font-size: 12px;
+        padding: 6px 8px;
+      }
+    }
+  `;
+  
+  document.head.appendChild(style);
+  document.body.appendChild(switcher);
+
+  // Обработчик изменения языка
+  const select = switcher.querySelector('.lang-select');
+  select.addEventListener('change', async (e) => {
+    const newLang = e.target.value;
+    await applyLanguage(newLang);
+  });
+
+  console.log('✅ Language switcher created');
 }
 
 async function loadLang(lang) {
@@ -122,6 +257,20 @@ async function loadLang(lang) {
       }
     }
 
+    // Обновляем переключатель языков
+    const langSelect = document.querySelector('.lang-select');
+    if (langSelect) {
+      langSelect.value = lang;
+    }
+
+    // Обновляем юридический раздел при смене языка
+    if (window.location.pathname.includes('index4.html') && typeof loadMarkdown === 'function') {
+      // Вызываем заново загрузку текущего выбранного блока
+      const activeButton = document.querySelector('.nav-links button.active');
+      const activePointId = activeButton?.getAttribute('onclick')?.match(/loadMarkdown\('([^']+)'\)/)?.[1] || 'point1';
+      loadMarkdown(activePointId);
+    }
+
     return translations;
   } catch (error) {
     console.error('❌ Error loading translations:', {
@@ -130,6 +279,42 @@ async function loadLang(lang) {
       cause: error.cause
     });
     throw error;
+  }
+}
+
+// Функция для применения языка
+async function applyLanguage(lang) {
+  try {
+    console.log('🔄 Applying language:', lang);
+    await loadLang(lang);
+    saveLanguage(lang);
+    
+    // Обновляем атрибут lang у html
+    document.documentElement.lang = lang;
+    
+    console.log('✅ Language applied successfully:', lang);
+  } catch (error) {
+    console.error('❌ Error applying language:', error);
+  }
+}
+
+// Функция инициализации языка
+async function initLanguage() {
+  try {
+    console.log('🚀 Initializing language system...');
+    
+    // Определяем язык пользователя
+    const userLang = detectUserLanguage();
+    
+    // Применяем язык
+    await applyLanguage(userLang);
+    
+    // Создаем переключатель языков
+    createLanguageSwitcher();
+    
+    console.log('✅ Language system initialized');
+  } catch (error) {
+    console.error('❌ Error initializing language system:', error);
   }
 }
 
@@ -149,8 +334,11 @@ function t(key, params = {}) {
   return text;
 }
 
-// Делаем функцию t глобальной
+// Делаем функции глобальными
 window.t = t;
+window.applyLanguage = applyLanguage;
+window.initLanguage = initLanguage;
+window.detectUserLanguage = detectUserLanguage;
 
 // Функция для форматирования чисел
 function formatNumber(number, decimals = 6) {
