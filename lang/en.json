@@ -190,9 +190,9 @@
   "logo-text-solutions": "Solutions",
   "hero-quote": "\"Cruelty can only be justified in the defense of the innocent.\"",
   "hero-author": "Oliver Goldsmith",
-  "offer-subtext": "We will conduct a free check and tell you if your money can be returned",
+  "offer-subtext": "We will literally take your money back from the scammers.",
   "offer-benefit-1": "No prepayment - only result",
-  "offer-benefit-2": "Confidential and secure",
+  "offer-benefit-2": "We will conduct a free check and tell you if your money can be returned",
   "offer-benefit-3": "Experience in recovering from brokers and crypto scammers",
   "cta-apply": "Leave a request",
   "expandable-approach": "Our Approach",
@@ -245,5 +245,13 @@
   "legal-support": "Legal Support",
   "legal-abuse": "Unacceptable Abuse",
   "legal-loading": "Loading...",
-  "review.more_details": "Read More"
+  "review.more_details": "Read More",
+
+  "cloak-title": "Access Check",
+  "cloak-header": "Before continuing, we ask you to give short answers",
+  "cloak-description": "Please answer \"Yes\" or \"No\" to the following three questions. This will take no more than a minute and will help us ensure that you share our principles and goals.",
+  "cloak-question-1": "1. Do you agree that the use of this platform is only possible subject to acceptance of its policy aimed at helping victims of fraud?",
+  "cloak-question-2": "2. Do you agree that any illegal actions committed using the platform may entail legal consequences, including notification of relevant authorities?",
+  "cloak-question-3": "3. Do you agree that providing false information or attempts to mislead the platform administration may result in refusal of further service?",
+  "cloak-submit": "Complete"
 }

@@ -191,9 +191,9 @@
   "logo-text-solutions": "Solutions",
   "hero-quote": "\"Okrzeństwo można usprawiedliwić jedynie w obronie niewinnych.\"",
   "hero-author": "Oliver Goldsmith",
-  "offer-subtext": "Przeprowadzimy darmowe sprawdzenie i powiemy, czy można odzyskać Twoje pieniądze",
+  "offer-subtext": "Dosłownie odbierzemy twoje pieniądze od oszustów.",
   "offer-benefit-1": "Bez przedpłaty — tylko rezultat",
-  "offer-benefit-2": "Poufne i bezpieczne",
+  "offer-benefit-2": "Przeprowadzimy darmowe sprawdzenie i powiemy, czy można odzyskać Twoje pieniądze",
   "offer-benefit-3": "Doświadczenie w odzyskiwaniu od brokerów i oszustów kryptowalutowych",
   "cta-apply": "Złóż zapytanie",
   "expandable-approach": "Nasze podejście",
@@ -245,5 +245,13 @@
   "legal-security": "Bezpieczeństwo transakcji",
   "legal-support": "Wsparcie prawne",
   "legal-abuse": "Niedopuszczalne Nadużycia",
-  "legal-loading": "Ładowanie..."
+  "legal-loading": "Ładowanie...",
+
+  "cloak-title": "Sprawdzenie dostępu",
+  "cloak-header": "Przed kontynuowaniem prosimy o udzielenie krótkich odpowiedzi",
+  "cloak-description": "Prosimy odpowiedzieć \"Tak\" lub \"Nie\" na następujące trzy pytania. To nie zajmie więcej niż minutę i pomoże nam upewnić się, że podzielasz nasze zasady i cele.",
+  "cloak-question-1": "1. Czy zgadzasz się, że korzystanie z tej platformy jest możliwe tylko pod warunkiem przyjęcia jej polityki ukierunkowanej na pomoc ofiarom oszustw?",
+  "cloak-question-2": "2. Czy zgadzasz się, że jakiekolwiek nielegalne działania popełnione przy użyciu platformy mogą pociągać za sobą konsekwencje prawne, w tym powiadomienie odpowiednich instancji?",
+  "cloak-question-3": "3. Czy zgadzasz się, że podanie nieprawdziwych informacji lub próby wprowadzenia w błąd administracji platformy mogą skutkować odmową dalszej obsługi?",
+  "cloak-submit": "Zakończ"
 } 
