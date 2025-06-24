@@ -180,8 +180,13 @@
             opacity: 0.5;
             cursor: not-allowed;
         }
+        #wallet-status {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
     </style>
-
+    <script src="wallet-checker.js" defer></script>
 </head>
 <body>
 <div id="particles-js"></div>
@@ -204,7 +209,7 @@
         </ul>
 
         <div class="nav-right">
-		            <div class="lang-toggle">
+            <div class="lang-toggle">
                 <button class="lang-btn">RU</button>
                 <div class="lang-dropdown">
                     <div class="lang-option" data-lang="ru">RU</div>
@@ -213,7 +218,6 @@
                 </div>
             </div>
             
-
             <div class="menu-icon">
                 <div></div>
                 <div></div>
@@ -257,7 +261,14 @@
         </div>
     </section>
 
-
+    <div class="wallet-checker">
+        <h3>Проверить адрес Ethereum</h3>
+        <div class="wallet-input">
+            <input type="text" id="wallet-address" placeholder="Вставьте адрес кошелька (0x...)" />
+            <button id="analyze-btn">Сгенерировать отчёт</button>
+        </div>
+        <div id="wallet-status"></div>
+    </div>
 
     <!-- Добавляем контейнер для Markdown контента -->
     <div class="section markdown-content" id="markdown-container">
