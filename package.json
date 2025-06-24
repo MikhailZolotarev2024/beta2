@@ -1,0 +1,16 @@
+{
+  "name": "wallet-server",
+  "version": "1.0.0",
+  "description": "Криптоанализатор на Node.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2",
+    "pdf-lib": "^1.17.1",
+    "dotenv": "^16.3.1"
+  }
+}
