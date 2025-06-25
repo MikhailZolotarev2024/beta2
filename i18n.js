@@ -128,18 +128,9 @@ function getBasePath() {
     }
   `;
   
-  document.head.appendChild(style);
-  document.body.appendChild(switcher);
 
-  // Обработчик изменения языка
-  const select = switcher.querySelector('.lang-select');
-  select.addEventListener('change', async (e) => {
-    const newLang = e.target.value;
-    await applyLanguage(newLang);
-  });
 
-  console.log('✅ Language switcher created');
-}
+
 
 async function loadLang(lang) {
   const base = getBasePath();
