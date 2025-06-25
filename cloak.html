@@ -155,18 +155,18 @@
   <script src="i18n.js"></script>
   <script>
     // Инициализация языковой системы для клоаки
-    document.addEventListener('DOMContentLoaded', async function() {
-      try {
-        // Инициализируем языковую систему
-        await initLanguage();
-document.querySelectorAll('.lang-option').forEach(option => {
-  option.addEventListener('click', (e) => {
-    const newLang = e.target.getAttribute('data-lang');
-    applyLanguage(newLang).then(() => {
-      location.reload(); // безопасно, всё подтягивается заново
-    });
-  });
-});
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      await initLanguage(); // подтянет язык из localStorage
+
+      document.querySelectorAll('.lang-option').forEach(option => {
+        option.addEventListener('click', async (e) => {
+          const newLang = e.target.getAttribute('data-lang');
+          await applyLanguage(newLang);
+          saveLanguage(newLang); // сохранили
+          updateTexts(translations[newLang]); // обновили тексты без перезагрузки
+        });
+      });
         // Инициализируем particles.js
         if (window.particlesJS) {
           particlesJS('particles-js', {
