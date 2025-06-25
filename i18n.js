@@ -54,12 +54,7 @@ function saveLanguage(lang) {
 }
 
 function getBasePath() {
-  const parts = window.location.pathname.split('/').filter(Boolean);
-  // Если сайт работает в подпапке (GitHub Pages), вернём её как basePath
-  if (parts.length > 0) {
-    return `/${parts[0]}`;
-  }
-  return '';
+  return window.location.origin.includes('github.io') ? `/${window.location.pathname.split('/')[1]}` : '';
 }
 
 // Функция для создания переключателя языков
