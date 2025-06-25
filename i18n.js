@@ -58,11 +58,11 @@ function getBasePath() {
 }
 
 // Функция для создания переключателя языков
-function createLanguageSwitcher() {
+//function createLanguageSwitcher() {
   // Проверяем, есть ли уже переключатель
-  if (document.querySelector('.language-switcher')) {
-    return;
-  }
+  //if (document.querySelector('.language-switcher')) {
+  //  return;
+//  }
 
   const switcher = document.createElement('div');
   switcher.className = 'language-switcher';
@@ -305,7 +305,7 @@ async function initLanguage() {
     await applyLanguage(userLang);
     
     // Создаем переключатель языков
-    createLanguageSwitcher();
+    //createLanguageSwitcher();
     
     console.log('✅ Language system initialized');
   } catch (error) {
