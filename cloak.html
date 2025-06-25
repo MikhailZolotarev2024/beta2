@@ -162,7 +162,9 @@
 document.querySelectorAll('.lang-option').forEach(option => {
   option.addEventListener('click', (e) => {
     const newLang = e.target.getAttribute('data-lang');
-    setLanguage(newLang);
+    applyLanguage(newLang).then(() => {
+      location.reload(); // безопасно, всё подтягивается заново
+    });
   });
 });
         // Инициализируем particles.js
