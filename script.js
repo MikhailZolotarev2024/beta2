@@ -840,7 +840,7 @@ function xor(str, key = 'superXorKey123') {
   if (!entryKey) {
     if (!sessionStorage.getItem('cloakRedirected')) {
       sessionStorage.setItem('cloakRedirected', '1');
-      window.location.href = "/beta2/cloak.html";
+      window.location.href = "/cloak.html";
     }
     return;
   }
@@ -869,7 +869,7 @@ function xor(str, key = 'superXorKey123') {
     localStorage.removeItem('entryKey');
     if (!sessionStorage.getItem('cloakRedirected')) {
       sessionStorage.setItem('cloakRedirected', '1');
-      window.location.href = "/beta2/cloak.html";
+      window.location.href = "/cloak.html";
     }
   }
 })();
