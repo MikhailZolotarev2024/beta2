@@ -159,12 +159,10 @@
       try {
         // Инициализируем языковую систему
         await initLanguage();
-        document.querySelectorAll('.lang-option').forEach(option => {
-  option.addEventListener('click', async (e) => {
+document.querySelectorAll('.lang-option').forEach(option => {
+  option.addEventListener('click', (e) => {
     const newLang = e.target.getAttribute('data-lang');
-    await applyLanguage(newLang);
-    saveLanguage(newLang);
-    location.reload(); // чтобы всё корректно подтянулось
+    setLanguage(newLang);
   });
 });
         // Инициализируем particles.js
