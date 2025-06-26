@@ -1961,7 +1961,12 @@ footer, .site-footer {
   padding: 18px 0 10px 0;
   font-size: 0.95rem;
 }
-
+.footer-bottom p {
+  max-width: none;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
 @media (max-width: 900px) {
   .footer-grid {
     grid-template-columns: 1fr;
