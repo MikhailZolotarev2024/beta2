@@ -1952,6 +1952,7 @@ footer, .site-footer {
 
 .footer-bottom {
   text-align: center;
+  display: block;
   color: #777;
   padding: 18px 0 10px 0;
   font-size: 0.95rem;
