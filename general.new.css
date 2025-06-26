@@ -1920,9 +1920,10 @@ footer, .site-footer {
 }
 
 .footer-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
   margin-bottom: 30px;
 }
 
