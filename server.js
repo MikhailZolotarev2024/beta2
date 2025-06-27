@@ -106,6 +106,33 @@ app.post('/check', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
+app.post('/api/contact', async (req, res) => {
+  const { name, email, message } = req.body;
+
+  const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
+  const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+  const text = `
+📬 Новое сообщение с формы:
+👤 Имя: ${name}
+📧 Email: ${email}
+💬 Сообщение: ${message}
+  `;
+
+  try {
+    const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: CHAT_ID, text })
+    });
+
+    if (!response.ok) throw new Error('Ошибка отправки в Telegram');
+    res.sendStatus(200);
+  } catch (err) {
+    console.error('Ошибка Telegram формы:', err);
+    res.status(500).json({ error: 'Ошибка отправки' });
+  }
+});
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 }); 
