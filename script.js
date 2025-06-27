@@ -776,7 +776,31 @@ function getLocalReviews() {
       return [];
     }
   }
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
 
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message })
+      });
+
+      if (res.ok) {
+        alert('Сообщение успешно отправлено!');
+        form.reset();
+      } else {
+        alert('Ошибка при отправке. Попробуйте позже.');
+      }
+    });
+  }
+});
 document.addEventListener('DOMContentLoaded', function () {
     const navbar = document.querySelector('.navbar');
     let userInteracted = false;
